@@ -13,7 +13,7 @@ class ClusterFacadeService with ClusterLogic {
     return repository.fetchClusters();
   }
 
-  Future<Cluster> getProduct(String id) async {
+  Future<Cluster> getCluster(String id) async {
     return repository.getCluster(id);
   }
 }

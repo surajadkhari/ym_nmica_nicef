@@ -5,7 +5,7 @@ class ClusterRemoteDataProvider {
     return null;
   }
 
-  Future<ClusterModel>? getCluster(String id) {
+  Future<ClusterModel>? getCluster(String? id) {
     return null;
   }
 }

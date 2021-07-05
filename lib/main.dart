@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:unicef/cluster/presentation/splash/splash_screen.dart';
 import 'package:unicef/common/utils/theme.dart';
-import 'package:unicef/unicef/presentation/splash/splash_screen.dart';
 
 void main() {
   runApp(MyApp());

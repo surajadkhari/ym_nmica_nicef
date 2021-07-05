@@ -5,7 +5,8 @@ class ClusterLocalDataProvider {
     return null;
   }
 
-  Future<ClusterModel>? getCluster(String id) {
+  Future<ClusterModel>? getCluster(String? id) {
+    //todo: cache model
     return null;
   }
 

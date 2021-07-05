@@ -15,8 +15,6 @@ class ClusterRepository implements ClusterInterface {
     this.clutserLocalDataProvider,
     this.clutserRemoteDataProvider, {
     required this.connectivity,
-    required this.productLocalDataProvider,
-    required this.productRemoteDataProvider,
   });
 
   final Connectivity connectivity;
@@ -29,30 +27,33 @@ class ClusterRepository implements ClusterInterface {
       try {
         final List<ClusterModel>? clusters =
             await clutserRemoteDataProvider.fetchCluster();
-        clutserLocalDataProvider.cacheCluster(null);
-        return clusters!;
-      } catch (e) {
-        print(e);
-      }
-    } else {
-      return clutserLocalDataProvider.fetchCluster();
-    }
-  }
-
-  @override
-  Future<Cluster> getCluster(String id) async {
-    if (connectivity.isConnected) {
-      try {
-        final Clutser product = await clutserRemoteDataProvider.getProduct(id);
-        // cache product
-        clutserLocalDataProvider.cacheProduct(product);
-        return product;
+        clutserLocalDataProvider.cacheClusters(clusters!);
+        return clusters;
       } catch (e) {
         print(e);
         return ServerException()();
       }
     } else {
-      return productLocalDataProvider.getProduct(id);
+      return [];
+    }
+  }
+
+  @override
+  Future<Cluster> getCluster(String? id) async {
+    if (connectivity.isConnected) {
+      try {
+        final ClusterModel? cluster =
+            await clutserRemoteDataProvider.getCluster(id!);
+        // cache product
+        clutserLocalDataProvider.cacheCluster(cluster!);
+        return cluster;
+      } catch (e) {
+        print(e);
+        return ServerException()();
+      }
+    } else {
+      ClusterModel? cluster = await clutserLocalDataProvider.getCluster(id!);
+      return cluster!;
     }
   }
 }
