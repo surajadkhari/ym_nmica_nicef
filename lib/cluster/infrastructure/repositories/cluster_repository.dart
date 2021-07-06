@@ -7,10 +7,6 @@ import 'package:unicef/common/exceptions/exceptions.dart';
 import 'package:unicef/common/platform/connectivity.dart';
 
 class ClusterRepository implements ClusterInterface {
-  var productLocalDataProvider;
-
-  var productRemoteDataProvider;
-
   ClusterRepository(
     this.clutserLocalDataProvider,
     this.clutserRemoteDataProvider, {
@@ -26,8 +22,11 @@ class ClusterRepository implements ClusterInterface {
     if (connectivity.isConnected) {
       try {
         final List<ClusterModel>? clusters =
-            await clutserRemoteDataProvider.fetchCluster();
+            await clutserRemoteDataProvider.fetchClusters();
         clutserLocalDataProvider.cacheClusters(clusters!);
+
+        print(clusters);
+
         return clusters;
       } catch (e) {
         print(e);
@@ -44,7 +43,6 @@ class ClusterRepository implements ClusterInterface {
       try {
         final ClusterModel? cluster =
             await clutserRemoteDataProvider.getCluster(id!);
-        // cache product
         clutserLocalDataProvider.cacheCluster(cluster!);
         return cluster;
       } catch (e) {

@@ -1,5 +1,5 @@
 import 'package:unicef/cluster/domain/entities/cluster.dart';
-import 'package:unicef/cluster/domain/logics/unicef_logic.dart';
+import 'package:unicef/cluster/domain/logics/cluster_logic.dart';
 import 'package:unicef/cluster/infrastructure/repositories/cluster_repository.dart';
 
 class ClusterFacadeService with ClusterLogic {

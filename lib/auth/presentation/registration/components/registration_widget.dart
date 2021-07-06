@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unicef/unicef/presentation/auth/login/login_screen.dart';
+import 'package:unicef/auth/presentation/login/login_screen.dart';
 
 class RegistrationWidget extends StatefulWidget {
   const RegistrationWidget({Key? key}) : super(key: key);

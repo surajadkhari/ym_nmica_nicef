@@ -1,7 +1,7 @@
 import 'package:unicef/cluster/infrastructure/models/cluster_model.dart';
 
 class ClusterLocalDataProvider {
-  Future<List<ClusterModel>>? fetchCluster() {
+  Future<List<ClusterModel>>? fetchClusters() {
     return null;
   }
 

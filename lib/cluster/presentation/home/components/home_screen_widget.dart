@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:unicef/unicef/presentation/filter/filter_screen.dart';
-import 'package:unicef/unicef/presentation/home/components/card_componet.dart';
-import 'package:unicef/unicef/presentation/home/components/search.dart';
+import 'package:unicef/cluster/infrastructure/repositories/cluster_repository.dart';
+
+import 'search.dart';
 
 class HomeScreenWidget extends StatefulWidget {
   final String? id;
@@ -13,6 +13,14 @@ class HomeScreenWidget extends StatefulWidget {
 }
 
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
+  ClusterRepository? clusterRepository;
+
+  @override
+  void initState() {
+    super.initState();
+    clusterRepository!.fetchClusters();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

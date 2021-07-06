@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:unicef/unicef/presentation/auth/login/login_screen.dart';
+import 'package:unicef/auth/presentation/login/login_screen.dart';
 
 class SplashWidget extends StatefulWidget {
   const SplashWidget({Key? key}) : super(key: key);
