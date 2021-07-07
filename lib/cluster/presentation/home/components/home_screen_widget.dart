@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:unicef/cluster/infrastructure/data_sources/cluster_local_data_provider.dart';
+import 'package:unicef/cluster/infrastructure/data_sources/cluster_remote_data_provider.dart';
 import 'package:unicef/cluster/infrastructure/repositories/cluster_repository.dart';
+import 'package:unicef/common/platform/connectivity.dart';
 
 import 'search.dart';
 
@@ -13,12 +16,20 @@ class HomeScreenWidget extends StatefulWidget {
 }
 
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
-  ClusterRepository? clusterRepository;
+  ClusterRepository _clusterRepository = ClusterRepository(
+      clutserLocalDataProvider, clutserRemoteDataProvider,
+      connectivity: connectivity);
 
-  @override
+  static ClusterLocalDataProvider clutserLocalDataProvider =
+      ClusterLocalDataProvider();
+
+  static ClusterRemoteDataProvider clutserRemoteDataProvider =
+      ClusterRemoteDataProvider();
+
+  static var connectivity = Connectivity();
   void initState() {
     super.initState();
-    clusterRepository!.fetchClusters();
+    _clusterRepository.fetchClusters();
   }
 
   @override

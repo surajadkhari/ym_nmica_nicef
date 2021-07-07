@@ -19,21 +19,13 @@ class ClusterRepository implements ClusterInterface {
 
   @override
   Future<List<Cluster>> fetchClusters() async {
-    if (connectivity.isConnected) {
-      try {
-        final List<ClusterModel>? clusters =
-            await clutserRemoteDataProvider.fetchClusters();
-        clutserLocalDataProvider.cacheClusters(clusters!);
-
-        print(clusters);
-
-        return clusters;
-      } catch (e) {
-        print(e);
-        return ServerException()();
-      }
-    } else {
-      return [];
+    if (true) {
+      final List<ClusterModel>? clusters =
+          (await clutserRemoteDataProvider.fetchClusters())
+              .cast<ClusterModel>();
+      clutserLocalDataProvider.cacheClusters(clusters!);
+      print(clusters);
+      return clusters;
     }
   }
 
