@@ -16,11 +16,11 @@ class ClusterRemoteDataProvider {
     Response response = await _api!.httpGet('allclutsers');
     if (response.statusCode == 200) {
       print(response.body);
-      Map<String, dynamic> data = json.decode(response.body);
+      var data = json.decode(response.body);
       print(data);
 
       List<ClusterModel> clusterData =
-          ClusterModel.fromJson(data) as List<ClusterModel>;
+          ClusterModel.fromJson(data[0]) as List<ClusterModel>;
       print('..................................');
       print(clusterData);
       return clusterData;

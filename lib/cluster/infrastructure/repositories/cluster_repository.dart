@@ -24,7 +24,7 @@ class ClusterRepository implements ClusterInterface {
           (await clutserRemoteDataProvider.fetchClusters())
               .cast<ClusterModel>();
       clutserLocalDataProvider.cacheClusters(clusters!);
-      print(clusters);
+
       return clusters;
     }
   }
