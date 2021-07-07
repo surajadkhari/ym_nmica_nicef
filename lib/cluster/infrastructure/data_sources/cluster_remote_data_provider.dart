@@ -13,17 +13,12 @@ class ClusterRemoteDataProvider {
   }
 
   Future<List<ClusterModel>> fetchClusters() async {
-    Response response = await _api!.httpGet('allclutsers');
+    Response response = await _api!.httpGet('posts');
     if (response.statusCode == 200) {
       print(response.body);
-      Map<String, dynamic> data = json.decode(response.body);
+      List data = json.decode(response.body);
       print(data);
-
-      List<ClusterModel> clusterData =
-          ClusterModel.fromJson(data) as List<ClusterModel>;
-      print('..................................');
-      print(clusterData);
-      return clusterData;
+      return data.map((cluster) => ClusterModel.fromJson(cluster)).toList();
     } else {
       return ServerException()();
     }
