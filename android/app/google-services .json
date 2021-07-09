@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "588741111611",
+    "project_id": "unicef-e8cfd",
+    "storage_bucket": "unicef-e8cfd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588741111611:android:47cc6f1a938abbe5ee911e",
+        "android_client_info": {
+          "package_name": "nepal.unicef.nmics.unicef"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "588741111611-rhmd3nhbb7632hgg3aikj9uh3g0cd0u6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nepal.unicef.nmics.unicef",
+            "certificate_hash": "5d47dabf4807ce263722cd407ae77f0caa625ef3"
+          }
+        },
+        {
+          "client_id": "588741111611-00tuu2nk4p3ut262p9e7jpf369i2bii4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4CGPzTBi_gP7cpL10gMS6yxNd0BG6hTc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "588741111611-00tuu2nk4p3ut262p9e7jpf369i2bii4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -16,29 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$AuthFailureTearOff {
   const _$AuthFailureTearOff();
 
-  CancelledByUser<T> canceledByUser<T>({required T failedValue}) {
-    return CancelledByUser<T>(
-      failedValue: failedValue,
-    );
+  CancelledByUser<T> canceledByUser<T>() {
+    return CancelledByUser<T>();
   }
 
-  ServerError<T> serverError<T>({required T failedValue}) {
-    return ServerError<T>(
-      failedValue: failedValue,
-    );
+  ServerError<T> serverError<T>() {
+    return ServerError<T>();
   }
 
-  EmailAlreadyInUse<T> emailAlreadyInUse<T>({required T failedValue}) {
-    return EmailAlreadyInUse<T>(
-      failedValue: failedValue,
-    );
+  EmailAlreadyInUse<T> emailAlreadyInUse<T>() {
+    return EmailAlreadyInUse<T>();
   }
 
-  InvalidEmailAndPasswordComination<T> invalidEmailAndPasswordComination<T>(
-      {required T failedValue}) {
-    return InvalidEmailAndPasswordComination<T>(
-      failedValue: failedValue,
-    );
+  InvalidEmailAndPasswordComination<T> invalidEmailAndPasswordCominatio<T>() {
+    return InvalidEmailAndPasswordComination<T>();
   }
 }
 
@@ -47,22 +38,20 @@ const $AuthFailure = _$AuthFailureTearOff();
 
 /// @nodoc
 mixin _$AuthFailure<T> {
-  T get failedValue => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) canceledByUser,
-    required TResult Function(T failedValue) serverError,
-    required TResult Function(T failedValue) emailAlreadyInUse,
-    required TResult Function(T failedValue) invalidEmailAndPasswordComination,
+    required TResult Function() canceledByUser,
+    required TResult Function() serverError,
+    required TResult Function() emailAlreadyInUse,
+    required TResult Function() invalidEmailAndPasswordCominatio,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? canceledByUser,
-    TResult Function(T failedValue)? serverError,
-    TResult Function(T failedValue)? emailAlreadyInUse,
-    TResult Function(T failedValue)? invalidEmailAndPasswordComination,
+    TResult Function()? canceledByUser,
+    TResult Function()? serverError,
+    TResult Function()? emailAlreadyInUse,
+    TResult Function()? invalidEmailAndPasswordCominatio,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -72,7 +61,7 @@ mixin _$AuthFailure<T> {
     required TResult Function(ServerError<T> value) serverError,
     required TResult Function(EmailAlreadyInUse<T> value) emailAlreadyInUse,
     required TResult Function(InvalidEmailAndPasswordComination<T> value)
-        invalidEmailAndPasswordComination,
+        invalidEmailAndPasswordCominatio,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,13 +70,9 @@ mixin _$AuthFailure<T> {
     TResult Function(ServerError<T> value)? serverError,
     TResult Function(EmailAlreadyInUse<T> value)? emailAlreadyInUse,
     TResult Function(InvalidEmailAndPasswordComination<T> value)?
-        invalidEmailAndPasswordComination,
+        invalidEmailAndPasswordCominatio,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $AuthFailureCopyWith<T, AuthFailure<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -96,7 +81,6 @@ abstract class $AuthFailureCopyWith<T, $Res> {
   factory $AuthFailureCopyWith(
           AuthFailure<T> value, $Res Function(AuthFailure<T>) then) =
       _$AuthFailureCopyWithImpl<T, $Res>;
-  $Res call({T failedValue});
 }
 
 /// @nodoc
@@ -107,28 +91,13 @@ class _$AuthFailureCopyWithImpl<T, $Res>
   final AuthFailure<T> _value;
   // ignore: unused_field
   final $Res Function(AuthFailure<T>) _then;
-
-  @override
-  $Res call({
-    Object? failedValue = freezed,
-  }) {
-    return _then(_value.copyWith(
-      failedValue: failedValue == freezed
-          ? _value.failedValue
-          : failedValue // ignore: cast_nullable_to_non_nullable
-              as T,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class $CancelledByUserCopyWith<T, $Res>
-    implements $AuthFailureCopyWith<T, $Res> {
+abstract class $CancelledByUserCopyWith<T, $Res> {
   factory $CancelledByUserCopyWith(
           CancelledByUser<T> value, $Res Function(CancelledByUser<T>) then) =
       _$CancelledByUserCopyWithImpl<T, $Res>;
-  @override
-  $Res call({T failedValue});
 }
 
 /// @nodoc
@@ -141,73 +110,48 @@ class _$CancelledByUserCopyWithImpl<T, $Res>
 
   @override
   CancelledByUser<T> get _value => super._value as CancelledByUser<T>;
-
-  @override
-  $Res call({
-    Object? failedValue = freezed,
-  }) {
-    return _then(CancelledByUser<T>(
-      failedValue: failedValue == freezed
-          ? _value.failedValue
-          : failedValue // ignore: cast_nullable_to_non_nullable
-              as T,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$CancelledByUser<T> implements CancelledByUser<T> {
-  const _$CancelledByUser({required this.failedValue});
-
-  @override
-  final T failedValue;
+  const _$CancelledByUser();
 
   @override
   String toString() {
-    return 'AuthFailure<$T>.canceledByUser(failedValue: $failedValue)';
+    return 'AuthFailure<$T>.canceledByUser()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is CancelledByUser<T> &&
-            (identical(other.failedValue, failedValue) ||
-                const DeepCollectionEquality()
-                    .equals(other.failedValue, failedValue)));
+    return identical(this, other) || (other is CancelledByUser<T>);
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(failedValue);
-
-  @JsonKey(ignore: true)
-  @override
-  $CancelledByUserCopyWith<T, CancelledByUser<T>> get copyWith =>
-      _$CancelledByUserCopyWithImpl<T, CancelledByUser<T>>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) canceledByUser,
-    required TResult Function(T failedValue) serverError,
-    required TResult Function(T failedValue) emailAlreadyInUse,
-    required TResult Function(T failedValue) invalidEmailAndPasswordComination,
+    required TResult Function() canceledByUser,
+    required TResult Function() serverError,
+    required TResult Function() emailAlreadyInUse,
+    required TResult Function() invalidEmailAndPasswordCominatio,
   }) {
-    return canceledByUser(failedValue);
+    return canceledByUser();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? canceledByUser,
-    TResult Function(T failedValue)? serverError,
-    TResult Function(T failedValue)? emailAlreadyInUse,
-    TResult Function(T failedValue)? invalidEmailAndPasswordComination,
+    TResult Function()? canceledByUser,
+    TResult Function()? serverError,
+    TResult Function()? emailAlreadyInUse,
+    TResult Function()? invalidEmailAndPasswordCominatio,
     required TResult orElse(),
   }) {
     if (canceledByUser != null) {
-      return canceledByUser(failedValue);
+      return canceledByUser();
     }
     return orElse();
   }
@@ -219,7 +163,7 @@ class _$CancelledByUser<T> implements CancelledByUser<T> {
     required TResult Function(ServerError<T> value) serverError,
     required TResult Function(EmailAlreadyInUse<T> value) emailAlreadyInUse,
     required TResult Function(InvalidEmailAndPasswordComination<T> value)
-        invalidEmailAndPasswordComination,
+        invalidEmailAndPasswordCominatio,
   }) {
     return canceledByUser(this);
   }
@@ -231,7 +175,7 @@ class _$CancelledByUser<T> implements CancelledByUser<T> {
     TResult Function(ServerError<T> value)? serverError,
     TResult Function(EmailAlreadyInUse<T> value)? emailAlreadyInUse,
     TResult Function(InvalidEmailAndPasswordComination<T> value)?
-        invalidEmailAndPasswordComination,
+        invalidEmailAndPasswordCominatio,
     required TResult orElse(),
   }) {
     if (canceledByUser != null) {
@@ -242,25 +186,14 @@ class _$CancelledByUser<T> implements CancelledByUser<T> {
 }
 
 abstract class CancelledByUser<T> implements AuthFailure<T> {
-  const factory CancelledByUser({required T failedValue}) =
-      _$CancelledByUser<T>;
-
-  @override
-  T get failedValue => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  $CancelledByUserCopyWith<T, CancelledByUser<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory CancelledByUser() = _$CancelledByUser<T>;
 }
 
 /// @nodoc
-abstract class $ServerErrorCopyWith<T, $Res>
-    implements $AuthFailureCopyWith<T, $Res> {
+abstract class $ServerErrorCopyWith<T, $Res> {
   factory $ServerErrorCopyWith(
           ServerError<T> value, $Res Function(ServerError<T>) then) =
       _$ServerErrorCopyWithImpl<T, $Res>;
-  @override
-  $Res call({T failedValue});
 }
 
 /// @nodoc
@@ -273,73 +206,48 @@ class _$ServerErrorCopyWithImpl<T, $Res>
 
   @override
   ServerError<T> get _value => super._value as ServerError<T>;
-
-  @override
-  $Res call({
-    Object? failedValue = freezed,
-  }) {
-    return _then(ServerError<T>(
-      failedValue: failedValue == freezed
-          ? _value.failedValue
-          : failedValue // ignore: cast_nullable_to_non_nullable
-              as T,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$ServerError<T> implements ServerError<T> {
-  const _$ServerError({required this.failedValue});
-
-  @override
-  final T failedValue;
+  const _$ServerError();
 
   @override
   String toString() {
-    return 'AuthFailure<$T>.serverError(failedValue: $failedValue)';
+    return 'AuthFailure<$T>.serverError()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is ServerError<T> &&
-            (identical(other.failedValue, failedValue) ||
-                const DeepCollectionEquality()
-                    .equals(other.failedValue, failedValue)));
+    return identical(this, other) || (other is ServerError<T>);
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(failedValue);
-
-  @JsonKey(ignore: true)
-  @override
-  $ServerErrorCopyWith<T, ServerError<T>> get copyWith =>
-      _$ServerErrorCopyWithImpl<T, ServerError<T>>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) canceledByUser,
-    required TResult Function(T failedValue) serverError,
-    required TResult Function(T failedValue) emailAlreadyInUse,
-    required TResult Function(T failedValue) invalidEmailAndPasswordComination,
+    required TResult Function() canceledByUser,
+    required TResult Function() serverError,
+    required TResult Function() emailAlreadyInUse,
+    required TResult Function() invalidEmailAndPasswordCominatio,
   }) {
-    return serverError(failedValue);
+    return serverError();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? canceledByUser,
-    TResult Function(T failedValue)? serverError,
-    TResult Function(T failedValue)? emailAlreadyInUse,
-    TResult Function(T failedValue)? invalidEmailAndPasswordComination,
+    TResult Function()? canceledByUser,
+    TResult Function()? serverError,
+    TResult Function()? emailAlreadyInUse,
+    TResult Function()? invalidEmailAndPasswordCominatio,
     required TResult orElse(),
   }) {
     if (serverError != null) {
-      return serverError(failedValue);
+      return serverError();
     }
     return orElse();
   }
@@ -351,7 +259,7 @@ class _$ServerError<T> implements ServerError<T> {
     required TResult Function(ServerError<T> value) serverError,
     required TResult Function(EmailAlreadyInUse<T> value) emailAlreadyInUse,
     required TResult Function(InvalidEmailAndPasswordComination<T> value)
-        invalidEmailAndPasswordComination,
+        invalidEmailAndPasswordCominatio,
   }) {
     return serverError(this);
   }
@@ -363,7 +271,7 @@ class _$ServerError<T> implements ServerError<T> {
     TResult Function(ServerError<T> value)? serverError,
     TResult Function(EmailAlreadyInUse<T> value)? emailAlreadyInUse,
     TResult Function(InvalidEmailAndPasswordComination<T> value)?
-        invalidEmailAndPasswordComination,
+        invalidEmailAndPasswordCominatio,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -374,24 +282,14 @@ class _$ServerError<T> implements ServerError<T> {
 }
 
 abstract class ServerError<T> implements AuthFailure<T> {
-  const factory ServerError({required T failedValue}) = _$ServerError<T>;
-
-  @override
-  T get failedValue => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  $ServerErrorCopyWith<T, ServerError<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory ServerError() = _$ServerError<T>;
 }
 
 /// @nodoc
-abstract class $EmailAlreadyInUseCopyWith<T, $Res>
-    implements $AuthFailureCopyWith<T, $Res> {
+abstract class $EmailAlreadyInUseCopyWith<T, $Res> {
   factory $EmailAlreadyInUseCopyWith(EmailAlreadyInUse<T> value,
           $Res Function(EmailAlreadyInUse<T>) then) =
       _$EmailAlreadyInUseCopyWithImpl<T, $Res>;
-  @override
-  $Res call({T failedValue});
 }
 
 /// @nodoc
@@ -404,74 +302,48 @@ class _$EmailAlreadyInUseCopyWithImpl<T, $Res>
 
   @override
   EmailAlreadyInUse<T> get _value => super._value as EmailAlreadyInUse<T>;
-
-  @override
-  $Res call({
-    Object? failedValue = freezed,
-  }) {
-    return _then(EmailAlreadyInUse<T>(
-      failedValue: failedValue == freezed
-          ? _value.failedValue
-          : failedValue // ignore: cast_nullable_to_non_nullable
-              as T,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$EmailAlreadyInUse<T> implements EmailAlreadyInUse<T> {
-  const _$EmailAlreadyInUse({required this.failedValue});
-
-  @override
-  final T failedValue;
+  const _$EmailAlreadyInUse();
 
   @override
   String toString() {
-    return 'AuthFailure<$T>.emailAlreadyInUse(failedValue: $failedValue)';
+    return 'AuthFailure<$T>.emailAlreadyInUse()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is EmailAlreadyInUse<T> &&
-            (identical(other.failedValue, failedValue) ||
-                const DeepCollectionEquality()
-                    .equals(other.failedValue, failedValue)));
+    return identical(this, other) || (other is EmailAlreadyInUse<T>);
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(failedValue);
-
-  @JsonKey(ignore: true)
-  @override
-  $EmailAlreadyInUseCopyWith<T, EmailAlreadyInUse<T>> get copyWith =>
-      _$EmailAlreadyInUseCopyWithImpl<T, EmailAlreadyInUse<T>>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) canceledByUser,
-    required TResult Function(T failedValue) serverError,
-    required TResult Function(T failedValue) emailAlreadyInUse,
-    required TResult Function(T failedValue) invalidEmailAndPasswordComination,
+    required TResult Function() canceledByUser,
+    required TResult Function() serverError,
+    required TResult Function() emailAlreadyInUse,
+    required TResult Function() invalidEmailAndPasswordCominatio,
   }) {
-    return emailAlreadyInUse(failedValue);
+    return emailAlreadyInUse();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? canceledByUser,
-    TResult Function(T failedValue)? serverError,
-    TResult Function(T failedValue)? emailAlreadyInUse,
-    TResult Function(T failedValue)? invalidEmailAndPasswordComination,
+    TResult Function()? canceledByUser,
+    TResult Function()? serverError,
+    TResult Function()? emailAlreadyInUse,
+    TResult Function()? invalidEmailAndPasswordCominatio,
     required TResult orElse(),
   }) {
     if (emailAlreadyInUse != null) {
-      return emailAlreadyInUse(failedValue);
+      return emailAlreadyInUse();
     }
     return orElse();
   }
@@ -483,7 +355,7 @@ class _$EmailAlreadyInUse<T> implements EmailAlreadyInUse<T> {
     required TResult Function(ServerError<T> value) serverError,
     required TResult Function(EmailAlreadyInUse<T> value) emailAlreadyInUse,
     required TResult Function(InvalidEmailAndPasswordComination<T> value)
-        invalidEmailAndPasswordComination,
+        invalidEmailAndPasswordCominatio,
   }) {
     return emailAlreadyInUse(this);
   }
@@ -495,7 +367,7 @@ class _$EmailAlreadyInUse<T> implements EmailAlreadyInUse<T> {
     TResult Function(ServerError<T> value)? serverError,
     TResult Function(EmailAlreadyInUse<T> value)? emailAlreadyInUse,
     TResult Function(InvalidEmailAndPasswordComination<T> value)?
-        invalidEmailAndPasswordComination,
+        invalidEmailAndPasswordCominatio,
     required TResult orElse(),
   }) {
     if (emailAlreadyInUse != null) {
@@ -506,26 +378,15 @@ class _$EmailAlreadyInUse<T> implements EmailAlreadyInUse<T> {
 }
 
 abstract class EmailAlreadyInUse<T> implements AuthFailure<T> {
-  const factory EmailAlreadyInUse({required T failedValue}) =
-      _$EmailAlreadyInUse<T>;
-
-  @override
-  T get failedValue => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  $EmailAlreadyInUseCopyWith<T, EmailAlreadyInUse<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory EmailAlreadyInUse() = _$EmailAlreadyInUse<T>;
 }
 
 /// @nodoc
-abstract class $InvalidEmailAndPasswordCominationCopyWith<T, $Res>
-    implements $AuthFailureCopyWith<T, $Res> {
+abstract class $InvalidEmailAndPasswordCominationCopyWith<T, $Res> {
   factory $InvalidEmailAndPasswordCominationCopyWith(
           InvalidEmailAndPasswordComination<T> value,
           $Res Function(InvalidEmailAndPasswordComination<T>) then) =
       _$InvalidEmailAndPasswordCominationCopyWithImpl<T, $Res>;
-  @override
-  $Res call({T failedValue});
 }
 
 /// @nodoc
@@ -540,76 +401,50 @@ class _$InvalidEmailAndPasswordCominationCopyWithImpl<T, $Res>
   @override
   InvalidEmailAndPasswordComination<T> get _value =>
       super._value as InvalidEmailAndPasswordComination<T>;
-
-  @override
-  $Res call({
-    Object? failedValue = freezed,
-  }) {
-    return _then(InvalidEmailAndPasswordComination<T>(
-      failedValue: failedValue == freezed
-          ? _value.failedValue
-          : failedValue // ignore: cast_nullable_to_non_nullable
-              as T,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$InvalidEmailAndPasswordComination<T>
     implements InvalidEmailAndPasswordComination<T> {
-  const _$InvalidEmailAndPasswordComination({required this.failedValue});
-
-  @override
-  final T failedValue;
+  const _$InvalidEmailAndPasswordComination();
 
   @override
   String toString() {
-    return 'AuthFailure<$T>.invalidEmailAndPasswordComination(failedValue: $failedValue)';
+    return 'AuthFailure<$T>.invalidEmailAndPasswordCominatio()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is InvalidEmailAndPasswordComination<T> &&
-            (identical(other.failedValue, failedValue) ||
-                const DeepCollectionEquality()
-                    .equals(other.failedValue, failedValue)));
+        (other is InvalidEmailAndPasswordComination<T>);
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(failedValue);
-
-  @JsonKey(ignore: true)
-  @override
-  $InvalidEmailAndPasswordCominationCopyWith<T,
-          InvalidEmailAndPasswordComination<T>>
-      get copyWith => _$InvalidEmailAndPasswordCominationCopyWithImpl<T,
-          InvalidEmailAndPasswordComination<T>>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T failedValue) canceledByUser,
-    required TResult Function(T failedValue) serverError,
-    required TResult Function(T failedValue) emailAlreadyInUse,
-    required TResult Function(T failedValue) invalidEmailAndPasswordComination,
+    required TResult Function() canceledByUser,
+    required TResult Function() serverError,
+    required TResult Function() emailAlreadyInUse,
+    required TResult Function() invalidEmailAndPasswordCominatio,
   }) {
-    return invalidEmailAndPasswordComination(failedValue);
+    return invalidEmailAndPasswordCominatio();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T failedValue)? canceledByUser,
-    TResult Function(T failedValue)? serverError,
-    TResult Function(T failedValue)? emailAlreadyInUse,
-    TResult Function(T failedValue)? invalidEmailAndPasswordComination,
+    TResult Function()? canceledByUser,
+    TResult Function()? serverError,
+    TResult Function()? emailAlreadyInUse,
+    TResult Function()? invalidEmailAndPasswordCominatio,
     required TResult orElse(),
   }) {
-    if (invalidEmailAndPasswordComination != null) {
-      return invalidEmailAndPasswordComination(failedValue);
+    if (invalidEmailAndPasswordCominatio != null) {
+      return invalidEmailAndPasswordCominatio();
     }
     return orElse();
   }
@@ -621,9 +456,9 @@ class _$InvalidEmailAndPasswordComination<T>
     required TResult Function(ServerError<T> value) serverError,
     required TResult Function(EmailAlreadyInUse<T> value) emailAlreadyInUse,
     required TResult Function(InvalidEmailAndPasswordComination<T> value)
-        invalidEmailAndPasswordComination,
+        invalidEmailAndPasswordCominatio,
   }) {
-    return invalidEmailAndPasswordComination(this);
+    return invalidEmailAndPasswordCominatio(this);
   }
 
   @override
@@ -633,25 +468,17 @@ class _$InvalidEmailAndPasswordComination<T>
     TResult Function(ServerError<T> value)? serverError,
     TResult Function(EmailAlreadyInUse<T> value)? emailAlreadyInUse,
     TResult Function(InvalidEmailAndPasswordComination<T> value)?
-        invalidEmailAndPasswordComination,
+        invalidEmailAndPasswordCominatio,
     required TResult orElse(),
   }) {
-    if (invalidEmailAndPasswordComination != null) {
-      return invalidEmailAndPasswordComination(this);
+    if (invalidEmailAndPasswordCominatio != null) {
+      return invalidEmailAndPasswordCominatio(this);
     }
     return orElse();
   }
 }
 
 abstract class InvalidEmailAndPasswordComination<T> implements AuthFailure<T> {
-  const factory InvalidEmailAndPasswordComination({required T failedValue}) =
+  const factory InvalidEmailAndPasswordComination() =
       _$InvalidEmailAndPasswordComination<T>;
-
-  @override
-  T get failedValue => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  $InvalidEmailAndPasswordCominationCopyWith<T,
-          InvalidEmailAndPasswordComination<T>>
-      get copyWith => throw _privateConstructorUsedError;
 }
