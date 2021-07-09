@@ -20,6 +20,6 @@ class SignupFormBloc extends Bloc<SignupFormEvent, SignupFormState> {
   Stream<SignupFormState> mapEventToState(
     SignupFormEvent event,
   ) async* {
-    //yield* event.
+    yield* event.
   }
 }
