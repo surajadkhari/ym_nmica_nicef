@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart';
 import 'package:unicef/api/api.dart';
 import 'package:unicef/cluster/infrastructure/models/cluster_model.dart';
@@ -15,15 +14,9 @@ class ClusterRemoteDataProvider {
   Future<List<ClusterModel>> fetchClusters() async {
     Response response = await _api!.httpGet('allclutsers');
     if (response.statusCode == 200) {
-      print(response.body);
-      var data = json.decode(response.body);
+      List data = json.decode(response.body);
       print(data);
-
-      List<ClusterModel> clusterData =
-          ClusterModel.fromJson(data[0]) as List<ClusterModel>;
-      print('..................................');
-      print(clusterData);
-      return clusterData;
+      return data.map((cluster) => ClusterModel.fromJson(cluster)).toList();
     } else {
       return ServerException()();
     }
