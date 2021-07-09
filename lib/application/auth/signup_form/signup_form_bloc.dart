@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:unicef/domain/auth/auth_failure.dart';
 import 'package:unicef/domain/auth/i_auth_facade.dart';
 import 'package:unicef/domain/auth/value_objects.dart';
@@ -20,6 +21,8 @@ class SignupFormBloc extends Bloc<SignupFormEvent, SignupFormState> {
   Stream<SignupFormState> mapEventToState(
     SignupFormEvent event,
   ) async* {
-    yield* event.
+    yield* event.map(emailChanged: (e) async*{
+      
+    }, passwordChanged: passwordChanged, signUpWithEmailAndPasswordPressed: signUpWithEmailAndPasswordPressed)
   }
 }
