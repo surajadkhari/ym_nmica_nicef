@@ -48,6 +48,17 @@ class SigninFormBloc extends Bloc<SigninFormEvent, SigninFormState> {
             isSubmitting: false,
             authFailOrSuccessOption: some(failureOrSuccess));
       },
+      signInWithFacebookPressed: (e) async* {
+        yield state.copyWith(
+          isSubmitting: true,
+          authFailOrSuccessOption: none(),
+        );
+        final failureOrSuccess = await _authFacade.signInFacebook();
+        yield state.copyWith(
+          isSubmitting: false,
+          authFailOrSuccessOption: some(failureOrSuccess),
+        );
+      },
     );
   }
 
