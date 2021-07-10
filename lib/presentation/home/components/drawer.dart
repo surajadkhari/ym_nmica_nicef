@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../home_screen.dart';
 
 class DrawerNavigation extends StatefulWidget {
@@ -18,173 +17,174 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
       child: ListView(
         children: <Widget>[
           UserAccountsDrawerHeader(
-            accountName: Text("Padam Ghimire"),
-            accountEmail: Text("padamghimire75@gmail.com"),
+            accountName: const Text("Padam Ghimire"),
+            accountEmail: const Text("padamghimire75@gmail.com"),
             currentAccountPicture: GestureDetector(
-              child: CircleAvatar(
+              child: const CircleAvatar(
                 backgroundColor: Colors.black54,
                 child: Icon(Icons.filter_list, color: Colors.white),
               ),
             ),
-            decoration: BoxDecoration(color: Colors.blue),
+            decoration: const BoxDecoration(color: Colors.blue),
           ),
           ListTile(
-            title: Text("Home"),
-            leading: Icon(
+            title: const Text("Home"),
+            leading: const Icon(
               Icons.home,
               color: Colors.blue,
             ),
             onTap: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) => new HomeScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
             },
           ),
           ListTile(
-            title: Text("Introduction"),
-            leading: Icon(
+            title: const Text("Introduction"),
+            leading: const Icon(
               FontAwesomeIcons.greaterThan,
               color: Colors.blue,
             ),
             onTap: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) => new HomeScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
             },
           ),
           ListTile(
-            title: Text("Survery Methodology"),
-            leading: Icon(
+            title: const Text("Survery Methodology"),
+            leading: const Icon(
               FontAwesomeIcons.greaterThan,
               color: Colors.blue,
             ),
             onTap: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) => new HomeScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
             },
           ),
           ListTile(
-            title: Text("Demography"),
-            leading: Icon(
+            title: const Text("Demography"),
+            leading: const Icon(
               FontAwesomeIcons.greaterThan,
               color: Colors.blue,
             ),
             onTap: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) => new HomeScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
             },
           ),
           ListTile(
-            title: Text("Characteristics of househollds and the respondents"),
-            leading: Icon(
+            title: const Text(
+                "Characteristics of househollds and the respondents"),
+            leading: const Icon(
               FontAwesomeIcons.greaterThan,
               color: Colors.blue,
             ),
             onTap: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) => new HomeScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
             },
           ),
           ListTile(
-            title: Text("Survive"),
-            leading: Icon(
+            title: const Text("Survive"),
+            leading: const Icon(
               FontAwesomeIcons.greaterThan,
               color: Colors.blue,
             ),
             onTap: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) => new HomeScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
             },
           ),
           ListTile(
-            title: Text("Thrive- Reproductive and maternal Health"),
-            leading: Icon(
+            title: const Text("Thrive- Reproductive and maternal Health"),
+            leading: const Icon(
               FontAwesomeIcons.greaterThan,
               color: Colors.blue,
             ),
             onTap: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) => new HomeScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
             },
           ),
           ListTile(
-            title: Text("Thrive- Child Health,Nutrition and Development"),
-            leading: Icon(
+            title: const Text("Thrive- Child Health,Nutrition and Development"),
+            leading: const Icon(
               FontAwesomeIcons.greaterThan,
               color: Colors.blue,
             ),
             onTap: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) => new HomeScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
             },
           ),
           ListTile(
-            title: Text("Learn"),
-            leading: Icon(
+            title: const Text("Learn"),
+            leading: const Icon(
               FontAwesomeIcons.greaterThan,
               color: Colors.blue,
             ),
             onTap: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) => new HomeScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
             },
           ),
           ListTile(
-            title: Text("Protected from voilence and exploitation"),
-            leading: Icon(
+            title: const Text("Protected from voilence and exploitation"),
+            leading: const Icon(
               FontAwesomeIcons.greaterThan,
               color: Colors.blue,
             ),
             onTap: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) => new HomeScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
             },
           ),
           ListTile(
-            title: Text("Live in a safe and clean environment"),
-            leading: Icon(
+            title: const Text("Live in a safe and clean environment"),
+            leading: const Icon(
               FontAwesomeIcons.greaterThan,
               color: Colors.blue,
             ),
             onTap: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) => new HomeScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
             },
           ),
           ListTile(
-            title: Text("Equitable chance in life"),
-            leading: Icon(
+            title: const Text("Equitable chance in life"),
+            leading: const Icon(
               FontAwesomeIcons.greaterThan,
               color: Colors.blue,
             ),
             onTap: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) => new HomeScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
             },
           ),
           ListTile(
-            title: Text("Credits"),
-            leading: Icon(
+            title: const Text("Credits"),
+            leading: const Icon(
               FontAwesomeIcons.greaterThan,
               color: Colors.blue,
             ),
             onTap: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) => new HomeScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()));
             },
           ),
           Divider(),
-          Center(child: Text("Visit us at")),
+          const Center(child: Text("Visit us at")),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.facebook,
                   color: Colors.blue,
                 ),
               ),
               IconButton(
-                icon: FaIcon(
+                icon: const FaIcon(
                   FontAwesomeIcons.instagram,
                   size: 25,
                   color: Colors.blue,
@@ -192,7 +192,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                 onPressed: () {},
               ),
               IconButton(
-                icon: FaIcon(
+                icon: const FaIcon(
                   FontAwesomeIcons.twitter,
                   size: 25,
                   color: Colors.blue,

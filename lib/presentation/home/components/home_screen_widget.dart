@@ -16,7 +16,7 @@ class HomeScreenWidget extends StatefulWidget {
 }
 
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
-  ClusterRepository _clusterRepository = ClusterRepository(
+  final ClusterRepository _clusterRepository = ClusterRepository(
       clutserLocalDataProvider, clutserRemoteDataProvider,
       connectivity: connectivity);
 
@@ -26,7 +26,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   static ClusterRemoteDataProvider clutserRemoteDataProvider =
       ClusterRemoteDataProvider();
 
-  static var connectivity = Connectivity();
+  static Connectivity connectivity = Connectivity();
+  @override
   void initState() {
     super.initState();
     _clusterRepository.fetchClusters();
@@ -38,12 +39,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SearchComponent(),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
+          const SearchComponent(),
+          const Padding(
+            padding: EdgeInsets.all(20.0),
             child: Text("Choose Indicator"),
           ),
-          SizedBox(height: 2),
+          const SizedBox(height: 2),
           Expanded(
             child: GridView.count(
               crossAxisCount: 2,

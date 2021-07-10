@@ -13,16 +13,16 @@ class SearchComponent extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: TextField(
               decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search),
+                prefixIcon: const Icon(Icons.search),
                 suffixIcon: IconButton(
-                  icon: Icon(Icons.clear),
+                  icon: const Icon(Icons.clear),
                   onPressed: () {},
                 ),
                 hintText: "Search Indicator",
-                border: OutlineInputBorder(
+                border: const OutlineInputBorder(
                   borderSide: BorderSide(width: 0.8),
                 ),
-                enabledBorder: OutlineInputBorder(
+                enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(width: 0.8, color: Colors.blue),
                 ),
               ),

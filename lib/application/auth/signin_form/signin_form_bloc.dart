@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:unicef/domain/auth/auth_failure.dart';
 import 'package:unicef/domain/auth/i_auth_facade.dart';
 import 'package:unicef/domain/auth/value_objects.dart';
@@ -11,6 +12,7 @@ part 'signin_form_event.dart';
 part 'signin_form_state.dart';
 part 'signin_form_bloc.freezed.dart';
 
+@injectable
 class SigninFormBloc extends Bloc<SigninFormEvent, SigninFormState> {
   final IauthFacade _authFacade;
 

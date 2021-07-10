@@ -5,14 +5,14 @@ import 'package:unicef/cluster/infrastructure/models/cluster_model.dart';
 import 'package:unicef/common/exceptions/exceptions.dart';
 
 class ClusterRemoteDataProvider {
-  Api? _api;
+  late Api? _api;
 
   ClusterRemoteDataProvider() {
     _api = Api();
   }
 
-  Future<List<ClusterModel>> fetchClusters() async {
-    Response response = await _api!.httpGet('allclutsers');
+  Future<List<ClusterModel>>? fetchClusters() async {
+    final Response? response = await _api!.httpGet('allclutsers');
     if (response.statusCode == 200) {
       List data = json.decode(response.body);
       print(data);
