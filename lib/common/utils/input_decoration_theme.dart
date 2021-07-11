@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 InputDecorationTheme inputDecorationTheme() {
-  OutlineInputBorder outlineInputBorder = OutlineInputBorder(
+  final OutlineInputBorder outlineInputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(10),
-    borderSide: BorderSide(color: Colors.grey),
+    borderSide: const BorderSide(color: Colors.grey),
     gapPadding: 10,
   );
 

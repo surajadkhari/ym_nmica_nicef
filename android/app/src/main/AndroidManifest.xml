@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="nepal.unicef.nmics.unicef">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="unicef"
         android:icon="@mipmap/ic_launcher">

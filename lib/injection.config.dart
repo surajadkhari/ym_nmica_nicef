@@ -9,12 +9,13 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:google_sign_in/google_sign_in.dart' as _i4;
 import 'package:injectable/injectable.dart' as _i2;
 
+import 'application/auth/auth_bloc.dart' as _i9;
 import 'application/auth/signin_form/signin_form_bloc.dart' as _i7;
 import 'application/auth/signup_form/signup_form_bloc.dart' as _i8;
 import 'domain/auth/i_auth_facade.dart' as _i5;
 import 'infrastructure/auth/firebase_auth_facade.dart' as _i6;
 import 'infrastructure/core/firebase_injectable_module.dart'
-    as _i9; // ignore_for_file: unnecessary_lambdas
+    as _i10; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -32,7 +33,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i7.SigninFormBloc(get<_i5.IauthFacade>()));
   gh.factory<_i8.SignupFormBloc>(
       () => _i8.SignupFormBloc(get<_i5.IauthFacade>()));
+  gh.factory<_i9.AuthBloc>(() => _i9.AuthBloc(get<_i5.IauthFacade>()));
   return get;
 }
 
-class _$FirebaseInjectableModule extends _i9.FirebaseInjectableModule {}
+class _$FirebaseInjectableModule extends _i10.FirebaseInjectableModule {}

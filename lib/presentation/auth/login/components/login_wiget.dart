@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicef/application/auth/signin_form/signin_form_bloc.dart';
+import 'package:unicef/domain/auth/auth_failure.dart';
 import 'package:unicef/presentation/auth/registration/registration_screen.dart';
 
 class LoginWidget extends StatefulWidget {
@@ -19,7 +20,29 @@ class _LoginWidgetState extends State<LoginWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SigninFormBloc, SigninFormState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        state.authFailOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+                  (failure) {
+                    SnackBar(
+                      content: Text(
+                        failure.map(
+                          canceledByUser: (_) => 'Cancelled',
+                          serverError: (_) => 'Server Error',
+                          invalidEmailAndPasswordCominatio: (_) =>
+                              'Email or password does not match to oyr records!',
+                          emailAlreadyInUse:
+                              (EmailAlreadyInUse<dynamic> value) {
+                            return "";
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                  (_) {},
+                ));
+      },
       builder: (context, state) {
         return Scaffold(
           backgroundColor: Colors.white,

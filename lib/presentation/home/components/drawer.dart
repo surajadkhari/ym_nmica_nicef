@@ -171,7 +171,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                   MaterialPageRoute(builder: (context) => const HomeScreen()));
             },
           ),
-          Divider(),
+          const Divider(),
           const Center(child: Text("Visit us at")),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

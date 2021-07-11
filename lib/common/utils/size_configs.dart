@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SizeConfig {
+  // ignore: use_late_for_private_fields_and_variables
   static MediaQueryData? _mediaQueryData;
 
   static double? screenHeight;
@@ -17,11 +18,11 @@ class SizeConfig {
 }
 
 double getProportionateScreenHeight(double inputHeight) {
-  var screenHeight = SizeConfig.screenHeight;
+  final screenHeight = SizeConfig.screenHeight;
   return (inputHeight / 812.0) * screenHeight!;
 }
 
 double getProportionateScreenWidth(double inputWidth) {
-  var screenWidth = SizeConfig.screenWidth;
+  final screenWidth = SizeConfig.screenWidth;
   return (inputWidth / 375.0) * screenWidth!;
 }
