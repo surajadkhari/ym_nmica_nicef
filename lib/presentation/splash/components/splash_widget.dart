@@ -1,7 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:unicef/auth/presentation/login/login_screen.dart';
+import 'package:unicef/presentation/auth/login/login_screen.dart';
 
 class SplashWidget extends StatefulWidget {
   const SplashWidget({Key? key}) : super(key: key);
@@ -17,10 +16,11 @@ class _SplashWidgetState extends State<SplashWidget> {
     _displaySplash();
   }
 
+  // ignore: always_declare_return_types
   _displaySplash() {
-    Timer(Duration(seconds: 5), () {
-      Route route =
-          MaterialPageRoute(builder: (BuildContext context) => LoginScreen());
+    Timer(const Duration(seconds: 5), () {
+      final Route route = MaterialPageRoute(
+          builder: (BuildContext context) => const LoginScreen());
       Navigator.pushReplacement(context, route);
     });
   }
@@ -29,8 +29,8 @@ class _SplashWidgetState extends State<SplashWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: new BoxDecoration(
-          borderRadius: new BorderRadius.circular(16.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16.0),
           color: Colors.white,
         ),
         child: Column(
@@ -47,16 +47,16 @@ class _SplashWidgetState extends State<SplashWidget> {
                           'assets/images/gov_logo.png',
                           height: 100.0,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
+                        const Padding(
+                          padding: EdgeInsets.all(3.0),
                           child: Text(
                             "Government of Nepal",
                             style:
                                 TextStyle(fontSize: 10.0, color: Colors.grey),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(2.0),
+                        const Padding(
+                          padding: EdgeInsets.all(2.0),
                           child: Text(
                             "Central Bureau of Statistics ",
                             style:
@@ -75,8 +75,8 @@ class _SplashWidgetState extends State<SplashWidget> {
                           'assets/images/unicef_logo.png',
                           height: 90.0,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
+                        const Padding(
+                          padding: EdgeInsets.all(3.0),
                           child: Text(
                             "UNICEF",
                             style:
@@ -92,14 +92,14 @@ class _SplashWidgetState extends State<SplashWidget> {
             Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 30),
+                  padding: const EdgeInsets.only(top: 30),
                   child: Image.asset(
                     'assets/images/mic_logo.png',
                     width: 150.0,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 10.0),
                   child: Text(
                     "Nepal Multiple Indicator Cluster",
                     style: TextStyle(fontSize: 18.0, color: Colors.grey),
@@ -108,8 +108,9 @@ class _SplashWidgetState extends State<SplashWidget> {
               ],
             ),
             Column(
+              // ignore: prefer_const_literals_to_create_immutables
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(top: 10.0),
                   child: Text(
                     "NMICS v1.0 2021",

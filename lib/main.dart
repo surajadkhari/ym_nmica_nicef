@@ -1,20 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:unicef/cluster/presentation/splash/splash_screen.dart';
-import 'package:unicef/common/utils/theme.dart';
+import 'package:injectable/injectable.dart';
+import 'package:unicef/injection.dart';
+import 'package:unicef/presentation/core/app_widget.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'NMICS',
-      theme: theme(),
-      home: SplashScreen(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
+// ignore: avoid_void_async
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  configureInjection(Environment.prod);
+  await Firebase.initializeApp();
+  runApp(AppWidget());
 }

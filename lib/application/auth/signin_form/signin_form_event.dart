@@ -12,6 +12,6 @@ class SigninFormEvent with _$SigninFormEvent {
   const factory SigninFormEvent.signInWithGooglePressed() =
       SignInWithGooglePressed;
 
-  const factory SigninFormEvent.signInWithFacebookPressed() =
-      SignInWithFacebookPressed;
+  // const factory SigninFormEvent.signInWithFacebookPressed() =
+  //     SignInWithFacebookPressed;
 }

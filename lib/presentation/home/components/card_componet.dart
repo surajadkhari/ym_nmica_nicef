@@ -29,11 +29,11 @@ class CardComponent extends StatelessWidget {
           child: GestureDetector(
             onTap: press,
             child: Container(
+              decoration: const BoxDecoration(border: Border()),
               child: Padding(
                 padding: const EdgeInsets.all(1.0),
                 child: Text(title),
               ),
-              decoration: BoxDecoration(border: Border()),
             ),
           ),
         ),

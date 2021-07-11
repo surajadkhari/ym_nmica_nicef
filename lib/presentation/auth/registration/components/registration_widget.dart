@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unicef/auth/presentation/login/login_screen.dart';
+import 'package:unicef/presentation/auth/login/login_screen.dart';
 
 class RegistrationWidget extends StatefulWidget {
   const RegistrationWidget({Key? key}) : super(key: key);
@@ -23,29 +23,30 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              SizedBox(height: 35.0),
-              Image(
+              const SizedBox(height: 35.0),
+              const Image(
                 image: AssetImage('assets/images/mic_logo.png'),
                 width: 200.0,
                 height: 250.0,
+                // ignore: avoid_redundant_argument_values
                 alignment: Alignment.center,
               ),
-              SizedBox(height: 1.0),
-              Text(
+              const SizedBox(height: 1.0),
+              const Text(
                 "Register",
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.blue, fontSize: 24.0),
               ),
               Padding(
-                padding: EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Form(
                   key: _formKey,
                   child: Column(
                     children: [
-                      SizedBox(height: 1.0),
+                      const SizedBox(height: 1.0),
                       TextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -55,15 +56,15 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
                         },
                         controller: emailTextEditingController,
                         keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: "Full Name",
                           labelStyle: TextStyle(fontSize: 14.0, fontFamily: ""),
                           hintStyle:
                               TextStyle(color: Colors.grey, fontSize: 10.0),
                         ),
-                        style: TextStyle(fontSize: 14.0),
+                        style: const TextStyle(fontSize: 14.0),
                       ),
-                      SizedBox(height: 1.0),
+                      const SizedBox(height: 1.0),
                       TextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -77,15 +78,15 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
                         },
                         controller: emailTextEditingController,
                         keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: "Email",
                           labelStyle: TextStyle(fontSize: 14.0, fontFamily: ""),
                           hintStyle:
                               TextStyle(color: Colors.grey, fontSize: 10.0),
                         ),
-                        style: TextStyle(fontSize: 14.0),
+                        style: const TextStyle(fontSize: 14.0),
                       ),
-                      SizedBox(height: 1.0),
+                      const SizedBox(height: 1.0),
                       TextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -99,7 +100,7 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
                         },
                         controller: passwordTextEditingController,
                         obscureText: true,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: "Password",
                           labelStyle: TextStyle(
                             fontSize: 14.0,
@@ -107,9 +108,9 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
                           hintStyle:
                               TextStyle(color: Colors.grey, fontSize: 10.0),
                         ),
-                        style: TextStyle(fontSize: 14.0),
+                        style: const TextStyle(fontSize: 14.0),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 1.0,
                       ),
                       ElevatedButton(
@@ -117,7 +118,7 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
                           primary: Colors.blue,
                         ),
                         onPressed: () async {},
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             "Login",
                             style: TextStyle(
@@ -125,22 +126,22 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 1.0),
-                      Text(
+                      const SizedBox(height: 1.0),
+                      const Text(
                         'or Login with',
                         style: TextStyle(color: Colors.grey),
                       ),
-                      SizedBox(height: 1.0),
+                      const SizedBox(height: 1.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           IconButton(
-                            icon: Icon(Icons.email, color: Colors.blue),
+                            icon: const Icon(Icons.email, color: Colors.blue),
                             onPressed: () {},
                           ),
                           IconButton(
                             onPressed: () {},
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.facebook,
                               color: Colors.blue,
                             ),
@@ -153,10 +154,12 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()));
                 },
-                child: Text("Already have an account? Login in"),
+                child: const Text("Already have an account? Login in"),
               ),
             ],
           ),
