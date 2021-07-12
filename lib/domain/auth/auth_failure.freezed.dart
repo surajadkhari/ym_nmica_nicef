@@ -28,7 +28,7 @@ class _$AuthFailureTearOff {
     return EmailAlreadyInUse<T>();
   }
 
-  InvalidEmailAndPasswordComination<T> invalidEmailAndPasswordCominatio<T>() {
+  InvalidEmailAndPasswordComination<T> invalidEmailAndPasswordComination<T>() {
     return InvalidEmailAndPasswordComination<T>();
   }
 }
@@ -43,7 +43,7 @@ mixin _$AuthFailure<T> {
     required TResult Function() canceledByUser,
     required TResult Function() serverError,
     required TResult Function() emailAlreadyInUse,
-    required TResult Function() invalidEmailAndPasswordCominatio,
+    required TResult Function() invalidEmailAndPasswordComination,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,7 +51,7 @@ mixin _$AuthFailure<T> {
     TResult Function()? canceledByUser,
     TResult Function()? serverError,
     TResult Function()? emailAlreadyInUse,
-    TResult Function()? invalidEmailAndPasswordCominatio,
+    TResult Function()? invalidEmailAndPasswordComination,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ mixin _$AuthFailure<T> {
     required TResult Function(ServerError<T> value) serverError,
     required TResult Function(EmailAlreadyInUse<T> value) emailAlreadyInUse,
     required TResult Function(InvalidEmailAndPasswordComination<T> value)
-        invalidEmailAndPasswordCominatio,
+        invalidEmailAndPasswordComination,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,7 +70,7 @@ mixin _$AuthFailure<T> {
     TResult Function(ServerError<T> value)? serverError,
     TResult Function(EmailAlreadyInUse<T> value)? emailAlreadyInUse,
     TResult Function(InvalidEmailAndPasswordComination<T> value)?
-        invalidEmailAndPasswordCominatio,
+        invalidEmailAndPasswordComination,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -136,7 +136,7 @@ class _$CancelledByUser<T> implements CancelledByUser<T> {
     required TResult Function() canceledByUser,
     required TResult Function() serverError,
     required TResult Function() emailAlreadyInUse,
-    required TResult Function() invalidEmailAndPasswordCominatio,
+    required TResult Function() invalidEmailAndPasswordComination,
   }) {
     return canceledByUser();
   }
@@ -147,7 +147,7 @@ class _$CancelledByUser<T> implements CancelledByUser<T> {
     TResult Function()? canceledByUser,
     TResult Function()? serverError,
     TResult Function()? emailAlreadyInUse,
-    TResult Function()? invalidEmailAndPasswordCominatio,
+    TResult Function()? invalidEmailAndPasswordComination,
     required TResult orElse(),
   }) {
     if (canceledByUser != null) {
@@ -163,7 +163,7 @@ class _$CancelledByUser<T> implements CancelledByUser<T> {
     required TResult Function(ServerError<T> value) serverError,
     required TResult Function(EmailAlreadyInUse<T> value) emailAlreadyInUse,
     required TResult Function(InvalidEmailAndPasswordComination<T> value)
-        invalidEmailAndPasswordCominatio,
+        invalidEmailAndPasswordComination,
   }) {
     return canceledByUser(this);
   }
@@ -175,7 +175,7 @@ class _$CancelledByUser<T> implements CancelledByUser<T> {
     TResult Function(ServerError<T> value)? serverError,
     TResult Function(EmailAlreadyInUse<T> value)? emailAlreadyInUse,
     TResult Function(InvalidEmailAndPasswordComination<T> value)?
-        invalidEmailAndPasswordCominatio,
+        invalidEmailAndPasswordComination,
     required TResult orElse(),
   }) {
     if (canceledByUser != null) {
@@ -232,7 +232,7 @@ class _$ServerError<T> implements ServerError<T> {
     required TResult Function() canceledByUser,
     required TResult Function() serverError,
     required TResult Function() emailAlreadyInUse,
-    required TResult Function() invalidEmailAndPasswordCominatio,
+    required TResult Function() invalidEmailAndPasswordComination,
   }) {
     return serverError();
   }
@@ -243,7 +243,7 @@ class _$ServerError<T> implements ServerError<T> {
     TResult Function()? canceledByUser,
     TResult Function()? serverError,
     TResult Function()? emailAlreadyInUse,
-    TResult Function()? invalidEmailAndPasswordCominatio,
+    TResult Function()? invalidEmailAndPasswordComination,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -259,7 +259,7 @@ class _$ServerError<T> implements ServerError<T> {
     required TResult Function(ServerError<T> value) serverError,
     required TResult Function(EmailAlreadyInUse<T> value) emailAlreadyInUse,
     required TResult Function(InvalidEmailAndPasswordComination<T> value)
-        invalidEmailAndPasswordCominatio,
+        invalidEmailAndPasswordComination,
   }) {
     return serverError(this);
   }
@@ -271,7 +271,7 @@ class _$ServerError<T> implements ServerError<T> {
     TResult Function(ServerError<T> value)? serverError,
     TResult Function(EmailAlreadyInUse<T> value)? emailAlreadyInUse,
     TResult Function(InvalidEmailAndPasswordComination<T> value)?
-        invalidEmailAndPasswordCominatio,
+        invalidEmailAndPasswordComination,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -328,7 +328,7 @@ class _$EmailAlreadyInUse<T> implements EmailAlreadyInUse<T> {
     required TResult Function() canceledByUser,
     required TResult Function() serverError,
     required TResult Function() emailAlreadyInUse,
-    required TResult Function() invalidEmailAndPasswordCominatio,
+    required TResult Function() invalidEmailAndPasswordComination,
   }) {
     return emailAlreadyInUse();
   }
@@ -339,7 +339,7 @@ class _$EmailAlreadyInUse<T> implements EmailAlreadyInUse<T> {
     TResult Function()? canceledByUser,
     TResult Function()? serverError,
     TResult Function()? emailAlreadyInUse,
-    TResult Function()? invalidEmailAndPasswordCominatio,
+    TResult Function()? invalidEmailAndPasswordComination,
     required TResult orElse(),
   }) {
     if (emailAlreadyInUse != null) {
@@ -355,7 +355,7 @@ class _$EmailAlreadyInUse<T> implements EmailAlreadyInUse<T> {
     required TResult Function(ServerError<T> value) serverError,
     required TResult Function(EmailAlreadyInUse<T> value) emailAlreadyInUse,
     required TResult Function(InvalidEmailAndPasswordComination<T> value)
-        invalidEmailAndPasswordCominatio,
+        invalidEmailAndPasswordComination,
   }) {
     return emailAlreadyInUse(this);
   }
@@ -367,7 +367,7 @@ class _$EmailAlreadyInUse<T> implements EmailAlreadyInUse<T> {
     TResult Function(ServerError<T> value)? serverError,
     TResult Function(EmailAlreadyInUse<T> value)? emailAlreadyInUse,
     TResult Function(InvalidEmailAndPasswordComination<T> value)?
-        invalidEmailAndPasswordCominatio,
+        invalidEmailAndPasswordComination,
     required TResult orElse(),
   }) {
     if (emailAlreadyInUse != null) {
@@ -411,7 +411,7 @@ class _$InvalidEmailAndPasswordComination<T>
 
   @override
   String toString() {
-    return 'AuthFailure<$T>.invalidEmailAndPasswordCominatio()';
+    return 'AuthFailure<$T>.invalidEmailAndPasswordComination()';
   }
 
   @override
@@ -429,9 +429,9 @@ class _$InvalidEmailAndPasswordComination<T>
     required TResult Function() canceledByUser,
     required TResult Function() serverError,
     required TResult Function() emailAlreadyInUse,
-    required TResult Function() invalidEmailAndPasswordCominatio,
+    required TResult Function() invalidEmailAndPasswordComination,
   }) {
-    return invalidEmailAndPasswordCominatio();
+    return invalidEmailAndPasswordComination();
   }
 
   @override
@@ -440,11 +440,11 @@ class _$InvalidEmailAndPasswordComination<T>
     TResult Function()? canceledByUser,
     TResult Function()? serverError,
     TResult Function()? emailAlreadyInUse,
-    TResult Function()? invalidEmailAndPasswordCominatio,
+    TResult Function()? invalidEmailAndPasswordComination,
     required TResult orElse(),
   }) {
-    if (invalidEmailAndPasswordCominatio != null) {
-      return invalidEmailAndPasswordCominatio();
+    if (invalidEmailAndPasswordComination != null) {
+      return invalidEmailAndPasswordComination();
     }
     return orElse();
   }
@@ -456,9 +456,9 @@ class _$InvalidEmailAndPasswordComination<T>
     required TResult Function(ServerError<T> value) serverError,
     required TResult Function(EmailAlreadyInUse<T> value) emailAlreadyInUse,
     required TResult Function(InvalidEmailAndPasswordComination<T> value)
-        invalidEmailAndPasswordCominatio,
+        invalidEmailAndPasswordComination,
   }) {
-    return invalidEmailAndPasswordCominatio(this);
+    return invalidEmailAndPasswordComination(this);
   }
 
   @override
@@ -468,11 +468,11 @@ class _$InvalidEmailAndPasswordComination<T>
     TResult Function(ServerError<T> value)? serverError,
     TResult Function(EmailAlreadyInUse<T> value)? emailAlreadyInUse,
     TResult Function(InvalidEmailAndPasswordComination<T> value)?
-        invalidEmailAndPasswordCominatio,
+        invalidEmailAndPasswordComination,
     required TResult orElse(),
   }) {
-    if (invalidEmailAndPasswordCominatio != null) {
-      return invalidEmailAndPasswordCominatio(this);
+    if (invalidEmailAndPasswordComination != null) {
+      return invalidEmailAndPasswordComination(this);
     }
     return orElse();
   }

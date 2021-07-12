@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart' hide Router;
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicef/application/auth/auth_bloc.dart';
 import 'package:unicef/injection.dart';
 import 'package:unicef/common/utils/theme.dart';
-import 'package:unicef/presentation/routes/router.gr.dart' as app_router;
+import 'package:unicef/presentation/routes/router.gr.dart';
 
 class AppWidget extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final _appRouter = app_router.Router();
+    final _appRouter = AppRouter();
 
     return MultiBlocProvider(
       providers: [
@@ -21,11 +22,11 @@ class AppWidget extends StatelessWidget {
       child: MaterialApp(
         title: 'NMICS',
         theme: theme(),
+        debugShowCheckedModeBanner: false,
         home: MaterialApp.router(
           routerDelegate: _appRouter.delegate(),
           routeInformationParser: _appRouter.defaultRouteParser(),
         ),
-        debugShowCheckedModeBanner: false,
       ),
     );
   }

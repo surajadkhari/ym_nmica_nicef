@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:unicef/cluster/infrastructure/data_sources/cluster_local_data_provider.dart';
-import 'package:unicef/cluster/infrastructure/data_sources/cluster_remote_data_provider.dart';
-import 'package:unicef/cluster/infrastructure/repositories/cluster_repository.dart';
 import 'package:unicef/common/platform/connectivity.dart';
+import 'package:unicef/infrastructure/cluster/data_sources/cluster_local_data_provider.dart';
+import 'package:unicef/infrastructure/cluster/data_sources/cluster_remote_data_provider.dart';
+import 'package:unicef/infrastructure/cluster/repositories/cluster_repository.dart';
 
 import 'search.dart';
 
@@ -30,7 +30,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   @override
   void initState() {
     super.initState();
-    _clusterRepository.fetchClusters();
   }
 
   @override

@@ -1,8 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicef/application/auth/auth_bloc.dart';
 import 'package:unicef/common/utils/size_configs.dart';
-import 'package:unicef/presentation/auth/login/login_screen.dart';
+import 'package:unicef/presentation/routes/router.gr.dart';
 import 'package:unicef/presentation/splash/components/splash_widget.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -15,10 +16,11 @@ class SplashScreen extends StatelessWidget {
       listener: (context, state) {
         state.map(
           initial: (_) {},
-          authenticated: (_) => {},
+          authenticated: (_) => {
+            AutoRouter.of(context).navigate(const HomeScreen()),
+          },
           unauthenticated: (_) {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => const LoginScreen()));
+            AutoRouter.of(context).navigate(const LoginScreen());
           },
         );
       },

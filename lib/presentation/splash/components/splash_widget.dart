@@ -11,19 +11,19 @@ class SplashWidget extends StatefulWidget {
 
 class _SplashWidgetState extends State<SplashWidget> {
   @override
-  void initState() {
-    super.initState();
-    _displaySplash();
-  }
+  // void initState() {
+  //   super.initState();
+  //   _displaySplash();
+  // }
 
-  // ignore: always_declare_return_types
-  _displaySplash() {
-    Timer(const Duration(seconds: 5), () {
-      final Route route = MaterialPageRoute(
-          builder: (BuildContext context) => const LoginScreen());
-      Navigator.pushReplacement(context, route);
-    });
-  }
+  // // ignore: always_declare_return_types
+  // _displaySplash() {
+  //   Timer(const Duration(seconds: 5), () {
+  //     final Route route = MaterialPageRoute(
+  //         builder: (BuildContext context) => const LoginScreen());
+  //     Navigator.pushReplacement(context, route);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {

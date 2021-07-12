@@ -4,6 +4,8 @@ part 'failures.freezed.dart';
 
 @freezed
 abstract class ValueFailure<T> with _$ValueFailure<T> {
+  const factory ValueFailure.chooseAtleaseOneIndicator(
+      {required T failedValue}) = ChooseAtleaseOneIndicator<T>;
   const factory ValueFailure.invalidEmail({
     required T failedValue,
   }) = InvalidEmail<T>;
@@ -11,4 +13,10 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.shortPassword({
     required T failedValue,
   }) = ShortPassword<T>;
+  const factory ValueFailure.empty({
+    required T failedValue,
+  }) = Empty<T>;
+  const factory ValueFailure.multiline({
+    required T failedValue,
+  }) = Multiline<T>;
 }

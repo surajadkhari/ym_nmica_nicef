@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/services.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:unicef/domain/auth/auth_failure.dart';
@@ -70,22 +71,21 @@ class FirebasAuthFacade implements IauthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword(
-      {required EmailAddress emailAddress, required Password password}) async {
-    final emailAddressStr = emailAddress.getOrCrash();
-    final emailPasswordStr = emailAddress.getOrCrash();
-
+  Future<Either<AuthFailure, Unit>> signInWithEmailAndPassword({
+    required EmailAddress emailAddress,
+    required Password password,
+  }) async {
+    final emailAddressStr = emailAddress.value.getOrElse(() => 'INVALID EMAIL');
+    final passwordStr = password.value.getOrElse(() => 'INVALID PASSWORD');
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
-          email: emailAddressStr, password: emailPasswordStr);
+          email: emailAddressStr, password: passwordStr);
       return right(unit);
     } on PlatformException catch (e) {
-      if (e.code == 'ERROR_WRONG_PASSWORD' ||
-          e.code == 'ERROR_USER_NOT_FOUND') {
-        return left(const AuthFailure.invalidEmailAndPasswordCominatio());
-      } else {
-        return left(const AuthFailure.serverError());
+      if (e.code == "INVALID_EMAIL" || e.code == "USER-NOT-FOUND") {
+        return left(const AuthFailure.invalidEmailAndPasswordComination());
       }
+      return left(const AuthFailure.serverError());
     }
   }
 

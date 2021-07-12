@@ -10,6 +10,6 @@ abstract class AuthFailure<T> with _$AuthFailure<T> {
 
   const factory AuthFailure.emailAlreadyInUse() = EmailAlreadyInUse<T>;
 
-  const factory AuthFailure.invalidEmailAndPasswordCominatio() =
+  const factory AuthFailure.invalidEmailAndPasswordComination() =
       InvalidEmailAndPasswordComination<T>;
 }

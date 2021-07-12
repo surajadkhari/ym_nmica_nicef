@@ -1,8 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicef/application/auth/auth_bloc.dart';
 import 'package:unicef/application/auth/signin_form/signin_form_bloc.dart';
 import 'package:unicef/domain/auth/auth_failure.dart';
 import 'package:unicef/presentation/auth/registration/registration_screen.dart';
+import 'package:unicef/presentation/routes/router.gr.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({Key? key}) : super(key: key);
@@ -12,11 +15,6 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-  final TextEditingController emailTextEditingController =
-      TextEditingController();
-  final TextEditingController passwordTextEditingController =
-      TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SigninFormBloc, SigninFormState>(
@@ -25,13 +23,14 @@ class _LoginWidgetState extends State<LoginWidget> {
             () {},
             (either) => either.fold(
                   (failure) {
-                    SnackBar(
+                    final snackbar = SnackBar(
                       content: Text(
                         failure.map(
-                          canceledByUser: (_) => 'Cancelled',
+                          canceledByUser: (_) =>
+                              'You cancelled your Social Medial Login!',
                           serverError: (_) => 'Server Error',
-                          invalidEmailAndPasswordCominatio: (_) =>
-                              'Email or password does not match to oyr records!',
+                          invalidEmailAndPasswordComination: (_) =>
+                              'Email or password does not match to our records!',
                           emailAlreadyInUse:
                               (EmailAlreadyInUse<dynamic> value) {
                             return "";
@@ -39,8 +38,19 @@ class _LoginWidgetState extends State<LoginWidget> {
                         ),
                       ),
                     );
+                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
                   },
-                  (_) {},
+                  (_) {
+                    AutoRouter.of(context).navigate(const HomeScreen());
+                    context
+                        .read<AuthBloc>()
+                        .add(const AuthEvent.authCheckRequested());
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Welcome back"),
+                      ),
+                    );
+                  },
                 ));
       },
       builder: (context, state) {
@@ -74,7 +84,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                         children: [
                           const SizedBox(height: 1.0),
                           TextFormField(
-                            controller: emailTextEditingController,
                             keyboardType: TextInputType.emailAddress,
                             decoration: const InputDecoration(
                               labelText: "Email",
@@ -103,7 +112,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                           ),
                           const SizedBox(height: 1.0),
                           TextFormField(
-                            controller: passwordTextEditingController,
                             obscureText: true,
                             decoration: const InputDecoration(
                               labelText: "Password",
