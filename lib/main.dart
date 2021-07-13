@@ -13,13 +13,6 @@ void main() async {
   configureInjection(Environment.prod);
   await Firebase.initializeApp();
   runApp(
-    MultiBlocProvider(
-      providers: [
-        BlocProvider<ClusterListBloc>(
-          create: (context) => getIt<ClusterListBloc>(),
-        )
-      ],
-      child: AppWidget(),
-    ),
+    AppWidget(),
   );
 }
