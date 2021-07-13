@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 
 class Api {
-  final String _baseUrl = 'https://60e2ca9a9103bd0017b47567.mockapi.io/api';
+  final String _baseUrl = 'http://teamym.com/projects/unicef/public/api';
 
   // ignore: type_annotate_public_apis
 
