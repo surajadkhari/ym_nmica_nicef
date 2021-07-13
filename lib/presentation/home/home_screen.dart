@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:unicef/presentation/home/components/drawer.dart';
+import 'package:unicef/presentation/home/components/home_screen_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -9,7 +11,8 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: HomeScreen(),
+      body: HomeScreenWidget(),
+      drawer: DrawerNavigation(),
     );
   }
 }

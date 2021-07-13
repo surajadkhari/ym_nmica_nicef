@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
-part of 'clusterl_list_bloc.dart';
+part of 'cluster_list_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,89 +13,106 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$ClusterlListEventTearOff {
-  const _$ClusterlListEventTearOff();
+class _$ClusterListEventTearOff {
+  const _$ClusterListEventTearOff();
 
-  _Started started() {
-    return const _Started();
+  _FetchClusterListEvent watchAllStarted() {
+    return const _FetchClusterListEvent();
+  }
+
+  _ClustersReceived clustersReceived(
+      Either<ClusterFailure, List<Cluster>> failureOrClusters) {
+    return _ClustersReceived(
+      failureOrClusters,
+    );
   }
 }
 
 /// @nodoc
-const $ClusterlListEvent = _$ClusterlListEventTearOff();
+const $ClusterListEvent = _$ClusterListEventTearOff();
 
 /// @nodoc
-mixin _$ClusterlListEvent {
+mixin _$ClusterListEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() watchAllStarted,
+    required TResult Function(
+            Either<ClusterFailure, List<Cluster>> failureOrClusters)
+        clustersReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? watchAllStarted,
+    TResult Function(Either<ClusterFailure, List<Cluster>> failureOrClusters)?
+        clustersReceived,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_FetchClusterListEvent value) watchAllStarted,
+    required TResult Function(_ClustersReceived value) clustersReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_FetchClusterListEvent value)? watchAllStarted,
+    TResult Function(_ClustersReceived value)? clustersReceived,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ClusterlListEventCopyWith<$Res> {
-  factory $ClusterlListEventCopyWith(
-          ClusterlListEvent value, $Res Function(ClusterlListEvent) then) =
-      _$ClusterlListEventCopyWithImpl<$Res>;
+abstract class $ClusterListEventCopyWith<$Res> {
+  factory $ClusterListEventCopyWith(
+          ClusterListEvent value, $Res Function(ClusterListEvent) then) =
+      _$ClusterListEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$ClusterlListEventCopyWithImpl<$Res>
-    implements $ClusterlListEventCopyWith<$Res> {
-  _$ClusterlListEventCopyWithImpl(this._value, this._then);
+class _$ClusterListEventCopyWithImpl<$Res>
+    implements $ClusterListEventCopyWith<$Res> {
+  _$ClusterListEventCopyWithImpl(this._value, this._then);
 
-  final ClusterlListEvent _value;
+  final ClusterListEvent _value;
   // ignore: unused_field
-  final $Res Function(ClusterlListEvent) _then;
+  final $Res Function(ClusterListEvent) _then;
 }
 
 /// @nodoc
-abstract class _$StartedCopyWith<$Res> {
-  factory _$StartedCopyWith(_Started value, $Res Function(_Started) then) =
-      __$StartedCopyWithImpl<$Res>;
+abstract class _$FetchClusterListEventCopyWith<$Res> {
+  factory _$FetchClusterListEventCopyWith(_FetchClusterListEvent value,
+          $Res Function(_FetchClusterListEvent) then) =
+      __$FetchClusterListEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$StartedCopyWithImpl<$Res> extends _$ClusterlListEventCopyWithImpl<$Res>
-    implements _$StartedCopyWith<$Res> {
-  __$StartedCopyWithImpl(_Started _value, $Res Function(_Started) _then)
-      : super(_value, (v) => _then(v as _Started));
+class __$FetchClusterListEventCopyWithImpl<$Res>
+    extends _$ClusterListEventCopyWithImpl<$Res>
+    implements _$FetchClusterListEventCopyWith<$Res> {
+  __$FetchClusterListEventCopyWithImpl(_FetchClusterListEvent _value,
+      $Res Function(_FetchClusterListEvent) _then)
+      : super(_value, (v) => _then(v as _FetchClusterListEvent));
 
   @override
-  _Started get _value => super._value as _Started;
+  _FetchClusterListEvent get _value => super._value as _FetchClusterListEvent;
 }
 
 /// @nodoc
 
-class _$_Started implements _Started {
-  const _$_Started();
+class _$_FetchClusterListEvent implements _FetchClusterListEvent {
+  const _$_FetchClusterListEvent();
 
   @override
   String toString() {
-    return 'ClusterlListEvent.started()';
+    return 'ClusterListEvent.watchAllStarted()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Started);
+    return identical(this, other) || (other is _FetchClusterListEvent);
   }
 
   @override
@@ -104,19 +121,24 @@ class _$_Started implements _Started {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() watchAllStarted,
+    required TResult Function(
+            Either<ClusterFailure, List<Cluster>> failureOrClusters)
+        clustersReceived,
   }) {
-    return started();
+    return watchAllStarted();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? watchAllStarted,
+    TResult Function(Either<ClusterFailure, List<Cluster>> failureOrClusters)?
+        clustersReceived,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started();
+    if (watchAllStarted != null) {
+      return watchAllStarted();
     }
     return orElse();
   }
@@ -124,31 +146,157 @@ class _$_Started implements _Started {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_FetchClusterListEvent value) watchAllStarted,
+    required TResult Function(_ClustersReceived value) clustersReceived,
   }) {
-    return started(this);
+    return watchAllStarted(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_FetchClusterListEvent value)? watchAllStarted,
+    TResult Function(_ClustersReceived value)? clustersReceived,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started(this);
+    if (watchAllStarted != null) {
+      return watchAllStarted(this);
     }
     return orElse();
   }
 }
 
-abstract class _Started implements ClusterlListEvent {
-  const factory _Started() = _$_Started;
+abstract class _FetchClusterListEvent implements ClusterListEvent {
+  const factory _FetchClusterListEvent() = _$_FetchClusterListEvent;
 }
 
 /// @nodoc
-class _$ClusterlListStateTearOff {
-  const _$ClusterlListStateTearOff();
+abstract class _$ClustersReceivedCopyWith<$Res> {
+  factory _$ClustersReceivedCopyWith(
+          _ClustersReceived value, $Res Function(_ClustersReceived) then) =
+      __$ClustersReceivedCopyWithImpl<$Res>;
+  $Res call({Either<ClusterFailure, List<Cluster>> failureOrClusters});
+}
+
+/// @nodoc
+class __$ClustersReceivedCopyWithImpl<$Res>
+    extends _$ClusterListEventCopyWithImpl<$Res>
+    implements _$ClustersReceivedCopyWith<$Res> {
+  __$ClustersReceivedCopyWithImpl(
+      _ClustersReceived _value, $Res Function(_ClustersReceived) _then)
+      : super(_value, (v) => _then(v as _ClustersReceived));
+
+  @override
+  _ClustersReceived get _value => super._value as _ClustersReceived;
+
+  @override
+  $Res call({
+    Object? failureOrClusters = freezed,
+  }) {
+    return _then(_ClustersReceived(
+      failureOrClusters == freezed
+          ? _value.failureOrClusters
+          : failureOrClusters // ignore: cast_nullable_to_non_nullable
+              as Either<ClusterFailure, List<Cluster>>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ClustersReceived implements _ClustersReceived {
+  const _$_ClustersReceived(this.failureOrClusters);
+
+  @override
+  final Either<ClusterFailure, List<Cluster>> failureOrClusters;
+
+  @override
+  String toString() {
+    return 'ClusterListEvent.clustersReceived(failureOrClusters: $failureOrClusters)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ClustersReceived &&
+            (identical(other.failureOrClusters, failureOrClusters) ||
+                const DeepCollectionEquality()
+                    .equals(other.failureOrClusters, failureOrClusters)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(failureOrClusters);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ClustersReceivedCopyWith<_ClustersReceived> get copyWith =>
+      __$ClustersReceivedCopyWithImpl<_ClustersReceived>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() watchAllStarted,
+    required TResult Function(
+            Either<ClusterFailure, List<Cluster>> failureOrClusters)
+        clustersReceived,
+  }) {
+    return clustersReceived(failureOrClusters);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? watchAllStarted,
+    TResult Function(Either<ClusterFailure, List<Cluster>> failureOrClusters)?
+        clustersReceived,
+    required TResult orElse(),
+  }) {
+    if (clustersReceived != null) {
+      return clustersReceived(failureOrClusters);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FetchClusterListEvent value) watchAllStarted,
+    required TResult Function(_ClustersReceived value) clustersReceived,
+  }) {
+    return clustersReceived(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FetchClusterListEvent value)? watchAllStarted,
+    TResult Function(_ClustersReceived value)? clustersReceived,
+    required TResult orElse(),
+  }) {
+    if (clustersReceived != null) {
+      return clustersReceived(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClustersReceived implements ClusterListEvent {
+  const factory _ClustersReceived(
+          Either<ClusterFailure, List<Cluster>> failureOrClusters) =
+      _$_ClustersReceived;
+
+  Either<ClusterFailure, List<Cluster>> get failureOrClusters =>
+      throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$ClustersReceivedCopyWith<_ClustersReceived> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$ClusterListStateTearOff {
+  const _$ClusterListStateTearOff();
 
   Initial initial() {
     return const Initial();
@@ -158,7 +306,7 @@ class _$ClusterlListStateTearOff {
     return const DataTransferInProgress();
   }
 
-  LoadSuccess loadSuccess(KtList<Cluster> clusters) {
+  LoadSuccess loadSuccess(List<Cluster> clusters) {
     return LoadSuccess(
       clusters,
     );
@@ -172,15 +320,15 @@ class _$ClusterlListStateTearOff {
 }
 
 /// @nodoc
-const $ClusterlListState = _$ClusterlListStateTearOff();
+const $ClusterListState = _$ClusterListStateTearOff();
 
 /// @nodoc
-mixin _$ClusterlListState {
+mixin _$ClusterListState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(KtList<Cluster> clusters) loadSuccess,
+    required TResult Function(List<Cluster> clusters) loadSuccess,
     required TResult Function(ClusterFailure clusterFailure) loadFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -188,7 +336,7 @@ mixin _$ClusterlListState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(KtList<Cluster> clusters)? loadSuccess,
+    TResult Function(List<Cluster> clusters)? loadSuccess,
     TResult Function(ClusterFailure clusterFailure)? loadFailure,
     required TResult orElse(),
   }) =>
@@ -213,20 +361,20 @@ mixin _$ClusterlListState {
 }
 
 /// @nodoc
-abstract class $ClusterlListStateCopyWith<$Res> {
-  factory $ClusterlListStateCopyWith(
-          ClusterlListState value, $Res Function(ClusterlListState) then) =
-      _$ClusterlListStateCopyWithImpl<$Res>;
+abstract class $ClusterListStateCopyWith<$Res> {
+  factory $ClusterListStateCopyWith(
+          ClusterListState value, $Res Function(ClusterListState) then) =
+      _$ClusterListStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$ClusterlListStateCopyWithImpl<$Res>
-    implements $ClusterlListStateCopyWith<$Res> {
-  _$ClusterlListStateCopyWithImpl(this._value, this._then);
+class _$ClusterListStateCopyWithImpl<$Res>
+    implements $ClusterListStateCopyWith<$Res> {
+  _$ClusterListStateCopyWithImpl(this._value, this._then);
 
-  final ClusterlListState _value;
+  final ClusterListState _value;
   // ignore: unused_field
-  final $Res Function(ClusterlListState) _then;
+  final $Res Function(ClusterListState) _then;
 }
 
 /// @nodoc
@@ -236,7 +384,7 @@ abstract class $InitialCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$InitialCopyWithImpl<$Res> extends _$ClusterlListStateCopyWithImpl<$Res>
+class _$InitialCopyWithImpl<$Res> extends _$ClusterListStateCopyWithImpl<$Res>
     implements $InitialCopyWith<$Res> {
   _$InitialCopyWithImpl(Initial _value, $Res Function(Initial) _then)
       : super(_value, (v) => _then(v as Initial));
@@ -252,7 +400,7 @@ class _$Initial implements Initial {
 
   @override
   String toString() {
-    return 'ClusterlListState.initial()';
+    return 'ClusterListState.initial()';
   }
 
   @override
@@ -268,7 +416,7 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(KtList<Cluster> clusters) loadSuccess,
+    required TResult Function(List<Cluster> clusters) loadSuccess,
     required TResult Function(ClusterFailure clusterFailure) loadFailure,
   }) {
     return initial();
@@ -279,7 +427,7 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(KtList<Cluster> clusters)? loadSuccess,
+    TResult Function(List<Cluster> clusters)? loadSuccess,
     TResult Function(ClusterFailure clusterFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -316,7 +464,7 @@ class _$Initial implements Initial {
   }
 }
 
-abstract class Initial implements ClusterlListState {
+abstract class Initial implements ClusterListState {
   const factory Initial() = _$Initial;
 }
 
@@ -329,7 +477,7 @@ abstract class $DataTransferInProgressCopyWith<$Res> {
 
 /// @nodoc
 class _$DataTransferInProgressCopyWithImpl<$Res>
-    extends _$ClusterlListStateCopyWithImpl<$Res>
+    extends _$ClusterListStateCopyWithImpl<$Res>
     implements $DataTransferInProgressCopyWith<$Res> {
   _$DataTransferInProgressCopyWithImpl(DataTransferInProgress _value,
       $Res Function(DataTransferInProgress) _then)
@@ -346,7 +494,7 @@ class _$DataTransferInProgress implements DataTransferInProgress {
 
   @override
   String toString() {
-    return 'ClusterlListState.loadInProgress()';
+    return 'ClusterListState.loadInProgress()';
   }
 
   @override
@@ -362,7 +510,7 @@ class _$DataTransferInProgress implements DataTransferInProgress {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(KtList<Cluster> clusters) loadSuccess,
+    required TResult Function(List<Cluster> clusters) loadSuccess,
     required TResult Function(ClusterFailure clusterFailure) loadFailure,
   }) {
     return loadInProgress();
@@ -373,7 +521,7 @@ class _$DataTransferInProgress implements DataTransferInProgress {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(KtList<Cluster> clusters)? loadSuccess,
+    TResult Function(List<Cluster> clusters)? loadSuccess,
     TResult Function(ClusterFailure clusterFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -410,7 +558,7 @@ class _$DataTransferInProgress implements DataTransferInProgress {
   }
 }
 
-abstract class DataTransferInProgress implements ClusterlListState {
+abstract class DataTransferInProgress implements ClusterListState {
   const factory DataTransferInProgress() = _$DataTransferInProgress;
 }
 
@@ -419,12 +567,12 @@ abstract class $LoadSuccessCopyWith<$Res> {
   factory $LoadSuccessCopyWith(
           LoadSuccess value, $Res Function(LoadSuccess) then) =
       _$LoadSuccessCopyWithImpl<$Res>;
-  $Res call({KtList<Cluster> clusters});
+  $Res call({List<Cluster> clusters});
 }
 
 /// @nodoc
 class _$LoadSuccessCopyWithImpl<$Res>
-    extends _$ClusterlListStateCopyWithImpl<$Res>
+    extends _$ClusterListStateCopyWithImpl<$Res>
     implements $LoadSuccessCopyWith<$Res> {
   _$LoadSuccessCopyWithImpl(
       LoadSuccess _value, $Res Function(LoadSuccess) _then)
@@ -441,7 +589,7 @@ class _$LoadSuccessCopyWithImpl<$Res>
       clusters == freezed
           ? _value.clusters
           : clusters // ignore: cast_nullable_to_non_nullable
-              as KtList<Cluster>,
+              as List<Cluster>,
     ));
   }
 }
@@ -452,11 +600,11 @@ class _$LoadSuccess implements LoadSuccess {
   const _$LoadSuccess(this.clusters);
 
   @override
-  final KtList<Cluster> clusters;
+  final List<Cluster> clusters;
 
   @override
   String toString() {
-    return 'ClusterlListState.loadSuccess(clusters: $clusters)';
+    return 'ClusterListState.loadSuccess(clusters: $clusters)';
   }
 
   @override
@@ -482,7 +630,7 @@ class _$LoadSuccess implements LoadSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(KtList<Cluster> clusters) loadSuccess,
+    required TResult Function(List<Cluster> clusters) loadSuccess,
     required TResult Function(ClusterFailure clusterFailure) loadFailure,
   }) {
     return loadSuccess(clusters);
@@ -493,7 +641,7 @@ class _$LoadSuccess implements LoadSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(KtList<Cluster> clusters)? loadSuccess,
+    TResult Function(List<Cluster> clusters)? loadSuccess,
     TResult Function(ClusterFailure clusterFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -530,10 +678,10 @@ class _$LoadSuccess implements LoadSuccess {
   }
 }
 
-abstract class LoadSuccess implements ClusterlListState {
-  const factory LoadSuccess(KtList<Cluster> clusters) = _$LoadSuccess;
+abstract class LoadSuccess implements ClusterListState {
+  const factory LoadSuccess(List<Cluster> clusters) = _$LoadSuccess;
 
-  KtList<Cluster> get clusters => throw _privateConstructorUsedError;
+  List<Cluster> get clusters => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $LoadSuccessCopyWith<LoadSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -551,7 +699,7 @@ abstract class $LoadFailureCopyWith<$Res> {
 
 /// @nodoc
 class _$LoadFailureCopyWithImpl<$Res>
-    extends _$ClusterlListStateCopyWithImpl<$Res>
+    extends _$ClusterListStateCopyWithImpl<$Res>
     implements $LoadFailureCopyWith<$Res> {
   _$LoadFailureCopyWithImpl(
       LoadFailure _value, $Res Function(LoadFailure) _then)
@@ -590,7 +738,7 @@ class _$LoadFailure implements LoadFailure {
 
   @override
   String toString() {
-    return 'ClusterlListState.loadFailure(clusterFailure: $clusterFailure)';
+    return 'ClusterListState.loadFailure(clusterFailure: $clusterFailure)';
   }
 
   @override
@@ -617,7 +765,7 @@ class _$LoadFailure implements LoadFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loadInProgress,
-    required TResult Function(KtList<Cluster> clusters) loadSuccess,
+    required TResult Function(List<Cluster> clusters) loadSuccess,
     required TResult Function(ClusterFailure clusterFailure) loadFailure,
   }) {
     return loadFailure(clusterFailure);
@@ -628,7 +776,7 @@ class _$LoadFailure implements LoadFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loadInProgress,
-    TResult Function(KtList<Cluster> clusters)? loadSuccess,
+    TResult Function(List<Cluster> clusters)? loadSuccess,
     TResult Function(ClusterFailure clusterFailure)? loadFailure,
     required TResult orElse(),
   }) {
@@ -665,7 +813,7 @@ class _$LoadFailure implements LoadFailure {
   }
 }
 
-abstract class LoadFailure implements ClusterlListState {
+abstract class LoadFailure implements ClusterListState {
   const factory LoadFailure(ClusterFailure clusterFailure) = _$LoadFailure;
 
   ClusterFailure get clusterFailure => throw _privateConstructorUsedError;

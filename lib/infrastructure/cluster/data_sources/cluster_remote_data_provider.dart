@@ -11,7 +11,7 @@ class ClusterRemoteDataProvider {
   }
 
   Future<List<Cluster>> fetchClusters() async {
-    final response = _api!.httpGet('indicator-cluster');
+    final response = _api!.httpGet('clusters');
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
 

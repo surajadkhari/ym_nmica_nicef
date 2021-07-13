@@ -1,10 +1,10 @@
 import 'package:unicef/common/platform/connectivity.dart';
+import 'package:unicef/domain/cluster/i_cluster_repository.dart';
 import 'package:unicef/infrastructure/cluster/data_sources/cluster_local_data_provider.dart';
 import 'package:unicef/infrastructure/cluster/data_sources/cluster_remote_data_provider.dart';
 import 'package:unicef/infrastructure/cluster/entities/cluster.dart';
-import 'package:unicef/infrastructure/cluster/interfaces/clutser_interface.dart';
 
-class ClusterRepository implements ClusterInterface {
+class ClusterRepository implements IClusterRepository {
   ClusterRepository(
     this.clutserLocalDataProvider,
     this.clutserRemoteDataProvider, {
@@ -20,7 +20,7 @@ class ClusterRepository implements ClusterInterface {
     if (connectivity.isConnected) {
       final clusters = await clutserRemoteDataProvider.fetchClusters();
       clutserLocalDataProvider.cacheClusters(clusters);
-
+      print(clusters);
       return clusters;
     } else {
       final clusters = await clutserLocalDataProvider.fetchClusters();

@@ -1,34 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:unicef/common/platform/connectivity.dart';
-import 'package:unicef/infrastructure/cluster/data_sources/cluster_local_data_provider.dart';
-import 'package:unicef/infrastructure/cluster/data_sources/cluster_remote_data_provider.dart';
-import 'package:unicef/infrastructure/cluster/repositories/cluster_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:unicef/application/cluster_list/cluster_list_bloc.dart';
 
-import 'search.dart';
+import 'package:unicef/presentation/home/components/card_componet.dart';
+import 'package:unicef/presentation/home/components/search.dart';
 
 class HomeScreenWidget extends StatefulWidget {
   final String? id;
 
-  const HomeScreenWidget({Key? key, this.id}) : super(key: key);
+  const HomeScreenWidget({
+    Key? key,
+    this.id,
+  }) : super(key: key);
 
   @override
   _HomeScreenWidgetState createState() => _HomeScreenWidgetState();
 }
 
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
-  final ClusterRepository _clusterRepository = ClusterRepository(
-      clutserLocalDataProvider, clutserRemoteDataProvider,
-      connectivity: connectivity);
+  late ClusterListBloc clutserListBloc;
 
-  static ClusterLocalDataProvider clutserLocalDataProvider =
-      ClusterLocalDataProvider();
-
-  static ClusterRemoteDataProvider clutserRemoteDataProvider =
-      ClusterRemoteDataProvider();
-
-  static Connectivity connectivity = Connectivity();
   @override
   void initState() {
+    clutserListBloc = BlocProvider.of<ClusterListBloc>(context);
+    clutserListBloc.add(ClusterListEvent.watchAllStarted());
     super.initState();
   }
 
@@ -45,9 +40,25 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           ),
           const SizedBox(height: 2),
           Expanded(
-            child: GridView.count(
-              crossAxisCount: 2,
-              children: [],
+            child: BlocBuilder<ClusterListBloc, ClusterListState>(
+              builder: (context, state) {
+                print(state);
+                if (state is Initial) {
+                  return CircularProgressIndicator();
+                } else if (state is DataTransferInProgress) {
+                  return CircularProgressIndicator();
+                } else if (state is LoadSuccess) {
+                  Expanded(
+                    child: GridView.count(
+                      crossAxisCount: 2,
+                      children: [
+                        CardComponent(title: "bdjsb", press: () {}, id: "1")
+                      ],
+                    ),
+                  );
+                }
+                return Text("Something went wrong!");
+              },
             ),
           )
         ],

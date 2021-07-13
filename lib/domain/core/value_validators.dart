@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:unicef/domain/core/failures.dart';
-import 'package:kt_dart/collection.dart';
 
 Either<ValueFailure<String>, String> validateEmailAddress(String input) {
   const emailRegex =
@@ -36,9 +35,9 @@ Either<ValueFailure<String>, String> validateSingleLine(String input) {
   }
 }
 
-Either<ValueFailure<KtList<T>>, KtList<T>> validateMinListLength<T>(
-    KtList<T> input, int minLength) {
-  if (input.size <= 0) {
+Either<ValueFailure<List<T>>, List<T>> validateMinListLength<T>(
+    List<T> input, int minLength) {
+  if (input.length <= 0) {
     return right(input);
   } else {
     return left(ValueFailure.chooseAtleaseOneIndicator(failedValue: input));
