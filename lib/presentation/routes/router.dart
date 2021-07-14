@@ -1,7 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:unicef/presentation/auth/login/login_screen.dart';
-import 'package:unicef/presentation/home/home_screen.dart';
 import 'package:unicef/presentation/splash/splash_screen.dart';
+import 'package:unicef/unicef/screens/home_screen.dart';
 
 // @CupertinoAutoRouter
 // @AdaptiveAutoRouter

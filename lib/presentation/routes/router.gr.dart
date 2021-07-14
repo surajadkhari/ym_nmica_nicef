@@ -7,8 +7,8 @@
 import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
 
+import '../../unicef/screens/home_screen.dart' as _i5;
 import '../auth/login/login_screen.dart' as _i4;
-import '../home/home_screen.dart' as _i5;
 import '../splash/splash_screen.dart' as _i3;
 
 class AppRouter extends _i1.RootStackRouter {
