@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unicef/unicef/screens/chart_screen.dart';
 import 'package:unicef/unicef/services/indicator_services.dart';
 import 'package:unicef/unicef/widgets/CheckBoxState.dart';
 
@@ -76,7 +77,24 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
           ),
           Padding(
             padding: EdgeInsets.all(10),
-            child: ButtonBar(),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                    builder: (context) => ChartScreen(
+                      ids: _checkBoxList,
+                    ),
+                  ),
+                );
+              },
+              child: const Center(
+                child: Text(
+                  "View Profile",
+                  style: TextStyle(fontSize: 18.0, fontFamily: "Brand-Bold"),
+                ),
+              ),
+            ),
           )
         ],
       ),

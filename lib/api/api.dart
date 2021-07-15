@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
 class Api {
@@ -11,5 +13,16 @@ class Api {
       "Content-type": "application/json",
       "Accept": "application/json",
     });
+  }
+
+  httpPost(dynamic api, Map<String, dynamic> data) async {
+    // ignore: prefer_interpolation_to_compose_strings
+    var resopones = await http.post(Uri.parse(_baseUrl + '/' + api),
+        body: json.encode(data),
+        headers: {
+          "Content-type": "application/json",
+          "Accept": "application/json",
+        });
+    return resopones;
   }
 }
