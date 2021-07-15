@@ -1,9 +1,4 @@
-import 'dart:convert';
-
-import 'package:api_cache_manager/api_cache_manager.dart';
-import 'package:api_cache_manager/models/cache_db_model.dart';
 import 'package:flutter/material.dart';
-import 'package:unicef/unicef/models/Indicators.dart';
 import 'package:unicef/unicef/services/indicator_services.dart';
 import 'package:unicef/unicef/widgets/CheckBoxState.dart';
 
@@ -28,49 +23,10 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
   @override
   void initState() {
     super.initState();
-    futureData = _indicatorService.fetchCheckBoxState();
-    //  getAllClusterIndicators();
+    futureData = _indicatorService.fetchCheckBoxState(this.widget.id!);
   }
 
-  //var _indicatorList = [];
   List<int> _checkBoxList = [];
-
-  // getAllClusterIndicators() async {
-  //   var isCacheExist =
-  //       await APICacheManager().isAPICacheKeyExist(this.widget.name!);
-  //   if (!isCacheExist) {
-  //     print("Api Hit");
-  //     var clusters =
-  //         await _indicatorService.getClusterIndicators(this.widget.id);
-  //     var result = json.decode(clusters.body);
-  //     APICacheDBModel cacheDBModel =
-  //         new APICacheDBModel(key: this.widget.name!, syncData: clusters.body);
-  //     await APICacheManager().addCacheData(cacheDBModel);
-  //     result['data'].forEach((data) {
-  //       var model = Indicator();
-  //       model.id = data['id'];
-  //       model.name = data['name'];
-  //       setState(() {
-  //         _indicatorList.add(model);
-  //       });
-  //       _checkBoxList.add(CheckBoxState(data: data));
-  //     });
-  //   } else {
-  //     print("cache Hit");
-  //     var cachedData = await APICacheManager().getCacheData(this.widget.name!);
-  //     var result = json.decode(cachedData.syncData);
-  //     result['data'].forEach((data) {
-  //       var model = Indicator();
-  //       model.id = data['id'];
-  //       model.name = data['name'];
-  //       setState(() {
-  //         _indicatorList.add(model);
-  //       });
-  //       _checkBoxList.add(CheckBoxState(name: data['name'], id: data['id']));
-  //     });
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,29 +62,16 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
                             } else {
                               _checkBoxList.remove(id!);
                             }
-                            print(_checkBoxList);
                           });
                         },
                       );
-                      // return Container(
-                      //   height: 75,
-                      //   color: Colors.white,
-                      //   child: Center(
-                      //     child: Text(data[index].name!),
-                      //   ),
-                      // );
                     },
                   );
                 } else if (snapshot.hasError) {
                   return Text("${snapshot.error}");
                 }
-                // By default show a loading spinner.
                 return Center(child: CircularProgressIndicator());
               },
-
-              // child: ListView(
-              //     // children: [..._checkBoxList.map(buildingDingleCheckBox).toList()],
-              //     ),
             ),
           ),
           Padding(
@@ -139,15 +82,4 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
       ),
     );
   }
-
-  // Widget buildingDingleCheckBox(CheckBoxState checkBoxState) =>
-  //     CheckboxListTile(
-  //       value: checkBoxState.data,
-  //       title: Text(checkBoxState.name!),
-  //       onChanged: (value) => setState(
-  //         () {
-  //           checkBoxState.value = value!;
-  //         },
-  //       ),
-  //     );
 }

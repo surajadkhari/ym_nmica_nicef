@@ -3,6 +3,8 @@ import 'package:unicef/unicef/components/drawer.dart';
 import 'package:unicef/unicef/components/home_screen_widget.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const screenId = "home";
+
   const HomeScreen({Key? key}) : super(key: key);
 
   @override

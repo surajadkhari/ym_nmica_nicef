@@ -5,6 +5,8 @@ import 'package:unicef/injection.dart';
 import 'components/login_wiget.dart';
 
 class LoginScreen extends StatelessWidget {
+  static const screenId = "login";
+
   const LoginScreen({Key? key}) : super(key: key);
 
   @override

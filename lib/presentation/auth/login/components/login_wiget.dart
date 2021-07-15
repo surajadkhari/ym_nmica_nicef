@@ -1,11 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicef/application/auth/auth_bloc.dart';
 import 'package:unicef/application/auth/signin_form/signin_form_bloc.dart';
 import 'package:unicef/domain/auth/auth_failure.dart';
 import 'package:unicef/presentation/auth/registration/registration_screen.dart';
-import 'package:unicef/presentation/routes/router.gr.dart';
+import 'package:unicef/unicef/screens/home_screen.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({Key? key}) : super(key: key);
@@ -41,7 +40,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                     ScaffoldMessenger.of(context).showSnackBar(snackbar);
                   },
                   (_) {
-                    AutoRouter.of(context).navigate(const HomeScreen());
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, HomeScreen.screenId, (route) => false);
                     context
                         .read<AuthBloc>()
                         .add(const AuthEvent.authCheckRequested());
@@ -179,18 +179,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                       );
                                 },
                               ),
-                              // IconButton(
-                              //   onPressed: () {
-                              //     context.read<SigninFormBloc>().add(
-                              //           const SigninFormEvent
-                              //               .signInWithFacebookPressed(),
-                              //         );
-                              //   },
-                              //   icon: const Icon(
-                              //     Icons.facebook,
-                              //     color: Colors.blue,
-                              //   ),
-                              // )
                             ],
                           )
                         ],

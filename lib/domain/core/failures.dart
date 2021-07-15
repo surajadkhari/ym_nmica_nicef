@@ -19,4 +19,10 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.multiline({
     required T failedValue,
   }) = Multiline<T>;
+  const factory ValueFailure.invalidPhone({
+    required T failedValue,
+  }) = InvalidPhone<T>;
+  const factory ValueFailure.shortName({
+    required T failedValue,
+  }) = ShortName<T>;
 }

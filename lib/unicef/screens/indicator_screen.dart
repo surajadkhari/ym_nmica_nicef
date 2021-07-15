@@ -5,6 +5,8 @@ import 'package:unicef/unicef/components/indicator_widget_screen.dart';
 
 // ignore: must_be_immutable
 class IndicatorScreen extends StatelessWidget {
+  static const screenId = "indicator";
+
   String name;
   int id;
   IndicatorScreen({

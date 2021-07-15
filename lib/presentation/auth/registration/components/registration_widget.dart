@@ -1,5 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:unicef/main.dart';
 import 'package:unicef/presentation/auth/login/login_screen.dart';
+import 'package:unicef/unicef/screens/home_screen.dart';
+import 'package:unicef/unicef/widgets/Progress.dart';
 
 class RegistrationWidget extends StatefulWidget {
   const RegistrationWidget({Key? key}) : super(key: key);
@@ -9,12 +13,17 @@ class RegistrationWidget extends StatefulWidget {
 }
 
 class _RegistrationWidgetState extends State<RegistrationWidget> {
+  final TextEditingController nameTextEditingController =
+      TextEditingController();
   final TextEditingController emailTextEditingController =
+      TextEditingController();
+  final TextEditingController phoneTextEditingController =
       TextEditingController();
   final TextEditingController passwordTextEditingController =
       TextEditingController();
-  final TextEditingController fullNameTextEditingController =
+  final TextEditingController genderTextEditingController =
       TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -54,8 +63,8 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
                           }
                           return null;
                         },
-                        controller: emailTextEditingController,
-                        keyboardType: TextInputType.emailAddress,
+                        controller: nameTextEditingController,
+                        keyboardType: TextInputType.text,
                         decoration: const InputDecoration(
                           labelText: "Full Name",
                           labelStyle: TextStyle(fontSize: 14.0, fontFamily: ""),
@@ -80,6 +89,27 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
                         keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
                           labelText: "Email",
+                          labelStyle: TextStyle(fontSize: 14.0, fontFamily: ""),
+                          hintStyle:
+                              TextStyle(color: Colors.grey, fontSize: 10.0),
+                        ),
+                        style: const TextStyle(fontSize: 14.0),
+                      ),
+                      TextFormField(
+                        validator: (value) {
+                          String patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+                          RegExp regExp = new RegExp(patttern);
+                          if (value!.isEmpty == 0) {
+                            return 'Please enter mobile number';
+                          } else if (!regExp.hasMatch(value)) {
+                            return 'Please enter valid mobile number';
+                          }
+                          return null;
+                        },
+                        controller: phoneTextEditingController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: const InputDecoration(
+                          labelText: "Phone",
                           labelStyle: TextStyle(fontSize: 14.0, fontFamily: ""),
                           hintStyle:
                               TextStyle(color: Colors.grey, fontSize: 10.0),
@@ -117,37 +147,22 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
                         style: ElevatedButton.styleFrom(
                           primary: Colors.blue,
                         ),
-                        onPressed: () async {},
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Processing Data')));
+                            registerUser(context);
+                          }
+                        },
                         child: const Center(
                           child: Text(
-                            "Login",
+                            "Sign Up",
                             style: TextStyle(
                                 fontSize: 18.0, fontFamily: "Brand-Bold"),
                           ),
                         ),
                       ),
                       const SizedBox(height: 1.0),
-                      const Text(
-                        'or Login with',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      const SizedBox(height: 1.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.email, color: Colors.blue),
-                            onPressed: () {},
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.facebook,
-                              color: Colors.blue,
-                            ),
-                          )
-                        ],
-                      )
                     ],
                   ),
                 ),
@@ -166,5 +181,54 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
         ),
       ),
     );
+  }
+
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  void registerUser(BuildContext context) async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Progress(
+            message: "Signing up!..",
+          );
+        });
+    try {
+      final User? firebaseUser = (await auth.createUserWithEmailAndPassword(
+              email: emailTextEditingController.text,
+              password: passwordTextEditingController.text))
+          .user;
+      if (firebaseUser != null) {
+        userRefs.child(firebaseUser.uid);
+        Map userMap = {
+          "name": nameTextEditingController.text.trim(),
+          "email": emailTextEditingController.text.trim(),
+          "phone": phoneTextEditingController.text.trim(),
+        };
+        userRefs.child(firebaseUser.uid).set(userMap);
+        Navigator.pushNamedAndRemoveUntil(
+            context, HomeScreen.screenId, (route) => false);
+
+        displayMessage("Your account has been created!", context);
+      } else {
+        Navigator.pop(context);
+        displayMessage("New user cannot be created!", context);
+      }
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  displayMessage(String message, BuildContext context) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
   }
 }

@@ -11,11 +11,29 @@ Either<ValueFailure<String>, String> validateEmailAddress(String input) {
   }
 }
 
+Either<ValueFailure<String>, String> validatePhone(String input) {
+  const phoneRegex = r"""^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$""";
+  if (RegExp(phoneRegex).hasMatch(input)) {
+    return right(input);
+  } else {
+    return left(ValueFailure.invalidPhone(failedValue: input));
+  }
+}
+
 Either<ValueFailure<String>, String> validatePassword(String input) {
   if (input.length >= 6) {
     return right(input);
   } else {
     return left(ValueFailure.shortPassword(failedValue: input));
+  }
+}
+// ^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$
+
+Either<ValueFailure<String>, String> validateName(String input) {
+  if (input.isNotEmpty) {
+    return right(input);
+  } else {
+    return left(ValueFailure.shortName(failedValue: input));
   }
 }
 

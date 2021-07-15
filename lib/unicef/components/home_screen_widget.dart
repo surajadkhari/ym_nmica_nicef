@@ -79,22 +79,31 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
             child: GridView.builder(
               gridDelegate:
                   SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-              itemBuilder: (_, index) => CardComponent(
-                  title: _clusterList[index].name,
-                  press: () {
-                    Navigator.push(
-                        context,
-                        new MaterialPageRoute(
-                          builder: (context) => IndicatorScreen(
-                            name: _clusterList[index].name,
-                            id: _clusterList[index].id,
+              itemBuilder: (_, index) {
+                if (_clusterList.isNotEmpty) {
+                  return CardComponent(
+                      title: _clusterList[index].name,
+                      press: () {
+                        Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                            builder: (context) => IndicatorScreen(
+                              name: _clusterList[index].name,
+                              id: _clusterList[index].id,
+                            ),
                           ),
-                        ));
-                  },
-                  id: _clusterList[index].id),
+                        );
+                      },
+                      id: _clusterList[index].id);
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
               itemCount: _clusterList.length,
             ),
-          )
+          ),
         ],
       ),
     );

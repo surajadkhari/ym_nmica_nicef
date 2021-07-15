@@ -4,14 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicef/application/auth/auth_bloc.dart';
 import 'package:unicef/injection.dart';
 import 'package:unicef/common/utils/theme.dart';
-import 'package:unicef/presentation/routes/router.gr.dart';
+import 'package:unicef/presentation/auth/login/login_screen.dart';
+import 'package:unicef/presentation/auth/registration/registration_screen.dart';
+import 'package:unicef/presentation/splash/splash_screen.dart';
+import 'package:unicef/unicef/screens/home_screen.dart';
 
 class AppWidget extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final _appRouter = AppRouter();
-
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -23,10 +24,12 @@ class AppWidget extends StatelessWidget {
         title: 'NMICS',
         theme: theme(),
         debugShowCheckedModeBanner: false,
-        home: MaterialApp.router(
-          routerDelegate: _appRouter.delegate(),
-          routeInformationParser: _appRouter.defaultRouteParser(),
-        ),
+        home: SplashScreen(),
+        routes: {
+          RegistrationScreen.screenId: (context) => RegistrationScreen(),
+          LoginScreen.screenId: (context) => LoginScreen(),
+          HomeScreen.screenId: (context) => HomeScreen(),
+        },
       ),
     );
   }
