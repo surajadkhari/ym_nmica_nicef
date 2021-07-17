@@ -1,4 +1,6 @@
 import 'package:charts_flutter/flutter.dart';
+import 'package:draw_graph/draw_graph.dart';
+import 'package:draw_graph/models/feature.dart';
 import 'package:flutter/material.dart';
 import 'package:unicef/unicef/models/chart.dart';
 import 'package:unicef/unicef/services/chart2_service.dart';
@@ -36,6 +38,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
   //ChartService _chartService = ChartService();
   Chart2Service _chart2service = Chart2Service();
   Future<List<Chart>>? futureChart;
+  List<Feature> features = [];
   @override
   void initState() {
     super.initState();
@@ -69,19 +72,68 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                   return ListView.builder(
                     itemCount: snapshot.data!.length,
                     itemBuilder: (BuildContext context, int index) {
-                      List chartsData = [];
-                      if (snapshot.data![index].chartType == "bar_graph") {
+                      List<LineChart> linesData = [];
+                      List<double> chartsData = [];
+                      List<String> keys = [];
+
+                      // List<String> colors = ["red", "green", "yellow"];
+                      if (snapshot.data![index].chartType == "line_graph") {
                         var jsom =
                             snapshot.data![index].charts![index].toJson();
                         jsom.forEach((key, value) {
-                          chartsData.add(jsom);
+                          if (key != 'label') {
+                            // keys['color'] =  "red";
+                            chartsData.add(double.parse(value) / 100);
+
+                            var parsedKey = value;
+                            print(parsedKey);
+                          }
                         });
                         chartsData.forEach((element) {
-                          element.label
-                        });
+                          // chartsData.removeAt(0);
 
-                        return Text(snapshot.data![index].charts![index].nepal
-                            .toString());
+                          features.add(Feature(
+                            title: "Nepal",
+                            color: Colors.blue,
+                            data: chartsData,
+                          ));
+                        });
+                        print(chartsData);
+
+                        return Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 500,
+                              width: 500,
+                              child: Center(
+                                child: Column(
+                                  children: <Widget>[
+                                    LineGraph(
+                                      features: features,
+                                      size: Size(420, 450),
+                                      labelX: [
+                                        'Day 1',
+                                        'Day 2',
+                                        'Day 3',
+                                        'Day 4',
+                                        'Day 5',
+                                        'Day 6'
+                                      ],
+                                      labelY: [
+                                        '25%',
+                                        '45%',
+                                        '65%',
+                                        '75%',
+                                        '85%',
+                                        '100%'
+                                      ],
+                                      showDescription: true,
+                                      graphColor: Colors.black87,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ));
                       } else if (snapshot.data![index].chartType ==
                           "bar_graph") {
                         var chart = snapshot.data![index].charts;
