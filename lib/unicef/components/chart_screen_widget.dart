@@ -34,17 +34,20 @@ class ChartScreenWidget extends StatefulWidget {
 }
 
 class _ChartScreenWidgetState extends State<ChartScreenWidget> {
-  List<Series<LineChart, int>> _seriesLineData = [];
-  //ChartService _chartService = ChartService();
+  List<charts.Series<dynamic, String>>? _seriesLineData;
+  List<charts.Series<BarGraph, String>>? _barSeriesData;
+
   Chart2Service _chart2service = Chart2Service();
   Future<List<Chart>>? futureChart;
   List<Feature> features = [];
+  List<LineChart> lineChart = [];
   @override
   void initState() {
     super.initState();
     futureChart = _chart2service.fetchCharts(this.widget.ids!);
     // ignore: deprecated_member_usec
-    _seriesLineData = <charts.Series<LineChart, int>>[];
+    _seriesLineData = <charts.Series<dynamic, String>>[];
+    _barSeriesData = <charts.Series<BarGraph, String>>[];
   }
 
   @override
@@ -73,31 +76,40 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                     itemCount: snapshot.data!.length,
                     itemBuilder: (BuildContext context, int index) {
                       List<LineChart> linesData = [];
-                      List<double> chartsData = [];
-                      List<String> keys = [];
+                      List<LineChart> chartsData = [];
+                      List<BarGraph> chartsBarData = [];
 
-                      // List<String> colors = ["red", "green", "yellow"];
-                      if (snapshot.data![index].chartType == "line_graph") {
+                      List<String> keys = [];
+                      List chartElements = [];
+                      List chartTypes = [];
+
+                      Chart datar = snapshot.data![index];
+
+                      if (datar.chartType == "bar_graph") {
                         var jsom =
                             snapshot.data![index].charts![index].toJson();
                         jsom.forEach((key, value) {
                           if (key != 'label') {
-                            // keys['color'] =  "red";
-                            chartsData.add(double.parse(value) / 100);
+                            // keys['color'] =  "red";'
 
+                            chartsBarData
+                                .add(BarGraph(key, double.parse(value)));
+
+                            _barSeriesData!.add(
+                              charts.Series(
+                                domainFn: (BarGraph pollution, _) =>
+                                    pollution.type.toString(),
+                                measureFn: (BarGraph pollution, _) =>
+                                    pollution.value,
+                                id: '1',
+                                data: chartsBarData,
+                              ),
+                            );
                             var parsedKey = value;
                             print(parsedKey);
                           }
                         });
-                        chartsData.forEach((element) {
-                          // chartsData.removeAt(0);
-
-                          features.add(Feature(
-                            title: "Nepal",
-                            color: Colors.blue,
-                            data: chartsData,
-                          ));
-                        });
+                        chartsData.forEach((element) {});
                         print(chartsData);
 
                         return Padding(
@@ -108,27 +120,12 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                               child: Center(
                                 child: Column(
                                   children: <Widget>[
-                                    LineGraph(
-                                      features: features,
-                                      size: Size(420, 450),
-                                      labelX: [
-                                        'Day 1',
-                                        'Day 2',
-                                        'Day 3',
-                                        'Day 4',
-                                        'Day 5',
-                                        'Day 6'
-                                      ],
-                                      labelY: [
-                                        '25%',
-                                        '45%',
-                                        '65%',
-                                        '75%',
-                                        '85%',
-                                        '100%'
-                                      ],
-                                      showDescription: true,
-                                      graphColor: Colors.black87,
+                                    Expanded(
+                                      child: charts.BarChart(
+                                        _barSeriesData!,
+                                        animate: true,
+                                        animationDuration: Duration(seconds: 5),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -252,9 +249,19 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
 
 class LineChart {
   String? type;
-  int? value;
+  double? value;
 
   LineChart(
+    this.type,
+    this.value,
+  );
+}
+
+class BarGraph {
+  String? type;
+  double? value;
+
+  BarGraph(
     this.type,
     this.value,
   );
