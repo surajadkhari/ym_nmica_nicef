@@ -8,77 +8,82 @@ String chartToJson(List<Chart> data) =>
 
 class Chart {
   Chart({
-    required this.id,
-    required this.indicatorClusterId,
-    required this.indicatorCode,
-    required this.chartType,
-    required this.name,
-    required this.description,
-    required this.module,
-    required this.charts,
+    this.id,
+    this.indicatorClusterId,
+    this.indicatorCode,
+    this.chartType,
+    this.name,
+    this.description,
+    this.module,
+    this.status,
+    this.displayOrder,
+    this.charts,
   });
 
   int? id;
   int? indicatorClusterId;
   String? indicatorCode;
-  ChartType? chartType;
+  String? chartType;
   String? name;
   String? description;
   String? module;
-  Map<String, ChartValue> charts;
+  String? status;
+  int? displayOrder;
+  List<ChartElement>? charts;
 
   factory Chart.fromJson(Map<String, dynamic> json) => Chart(
         id: json["id"],
         indicatorClusterId: json["indicator_cluster_id"],
         indicatorCode: json["indicator_code"],
-        chartType: chartTypeValues.map[json["chart_type"]],
+        chartType: json["chart_type"],
         name: json["name"],
         description: json["description"],
         module: json["module"],
-        charts: Map.from(json["charts"]).map(
-            (k, v) => MapEntry<String, ChartValue>(k, ChartValue.fromJson(v))),
+        status: json["status"],
+        displayOrder: json["display_order"],
+        charts: List<ChartElement>.from(
+            json["charts"].map((x) => ChartElement.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "indicator_cluster_id": indicatorClusterId,
         "indicator_code": indicatorCode,
-        "chart_type": chartTypeValues.reverse![chartType],
+        "chart_type": chartType,
         "name": name,
         "description": description,
         "module": module,
-        "charts": Map.from(charts)
-            .map((k, v) => MapEntry<String, dynamic>(k, v.toJson())),
+        "status": status,
+        "display_order": displayOrder,
+        "charts": List<dynamic>.from(charts!.map((x) => x.toJson())),
       };
 }
 
-enum ChartType { LINE_GRAPH, BAR_GRAPH }
-
-final chartTypeValues = EnumValues(
-    {"bar_graph": ChartType.BAR_GRAPH, "line_graph": ChartType.LINE_GRAPH});
-
-class ChartValue {
-  ChartValue({
-    required this.nepal,
-    required this.province1,
-    required this.province2,
-    required this.bagmati,
-    required this.gandaki,
-    required this.lumbini,
-    required this.karnali,
-    required this.sudurpashchim,
+class ChartElement {
+  ChartElement({
+    this.label,
+    this.nepal,
+    this.province1,
+    this.province2,
+    this.bagmati,
+    this.gandaki,
+    this.lumbini,
+    this.karnali,
+    this.sudurpashchim,
   });
 
-  String nepal;
-  String province1;
-  String province2;
-  String bagmati;
-  String gandaki;
-  String lumbini;
-  String karnali;
-  String sudurpashchim;
+  String? label;
+  String? nepal;
+  String? province1;
+  String? province2;
+  String? bagmati;
+  String? gandaki;
+  String? lumbini;
+  String? karnali;
+  String? sudurpashchim;
 
-  factory ChartValue.fromJson(Map<String, dynamic> json) => ChartValue(
+  factory ChartElement.fromJson(Map<String, dynamic> json) => ChartElement(
+        label: json["label"],
         nepal: json["Nepal"],
         province1: json["Province 1"],
         province2: json["Province 2"],
@@ -90,6 +95,7 @@ class ChartValue {
       );
 
   Map<String, dynamic> toJson() => {
+        "label": label,
         "Nepal": nepal,
         "Province 1": province1,
         "Province 2": province2,
@@ -99,19 +105,4 @@ class ChartValue {
         "Karnali": karnali,
         "Sudurpashchim": sudurpashchim,
       };
-}
-
-enum Status { ACTIVE }
-
-final statusValues = EnumValues({"active": Status.ACTIVE});
-
-class EnumValues<T> {
-  Map<String, T> map;
-  Map<T, String>? reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String>? get reverse {
-    return reverseMap;
-  }
 }

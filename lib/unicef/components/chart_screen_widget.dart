@@ -1,8 +1,7 @@
 import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
-
 import 'package:unicef/unicef/models/chart.dart';
-import 'package:unicef/unicef/services/chart_service.dart';
+import 'package:unicef/unicef/services/chart2_service.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 // ignore: must_be_immutable
@@ -14,7 +13,7 @@ class ChartScreenWidget extends StatefulWidget {
   String? name;
   String? description;
   String? module;
-  String? charts;
+  List? charts;
 
   ChartScreenWidget({
     Key? key,
@@ -33,15 +32,16 @@ class ChartScreenWidget extends StatefulWidget {
 }
 
 class _ChartScreenWidgetState extends State<ChartScreenWidget> {
-  List<Series<LineChart, num>> _seriesLineData = [];
-  ChartService _chartService = ChartService();
+  List<Series<LineChart, int>> _seriesLineData = [];
+  //ChartService _chartService = ChartService();
+  Chart2Service _chart2service = Chart2Service();
   Future<List<Chart>>? futureChart;
   @override
   void initState() {
     super.initState();
-    futureChart = _chartService.fetchCharts(this.widget.ids!);
-    // ignore: deprecated_member_use
-    _seriesLineData = <charts.Series<LineChart, num>>[];
+    futureChart = _chart2service.fetchCharts(this.widget.ids!);
+    // ignore: deprecated_member_usec
+    _seriesLineData = <charts.Series<LineChart, int>>[];
   }
 
   @override
@@ -54,48 +54,144 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
             padding: EdgeInsets.all(20.0),
           ),
           const SizedBox(height: 2),
+          // MaterialButton(
+          //   onPressed: () {
+          //     _chart2service.getChartsData(this.widget.ids!);
+          //   },
+          //   color: Colors.blue,
+          //   child: Text('Fetch Chart'),
+          // ),
           Expanded(
             child: FutureBuilder<List<Chart>>(
               future: futureChart,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  // List<Chart>? data = snapshot.data;
                   return ListView.builder(
                     itemCount: snapshot.data!.length,
                     itemBuilder: (BuildContext context, int index) {
-                      print(
-                          ".....................................................");
+                      List chartsData = [];
+                      if (snapshot.data![index].chartType == "bar_graph") {
+                        var jsom =
+                            snapshot.data![index].charts![index].toJson();
+                        jsom.forEach((key, value) {
+                          chartsData.add(jsom);
+                        });
+                        chartsData.forEach((element) {
+                          element.label
+                        });
 
-                      print(snapshot.data![index].charts.keys.elementAt(index));
-                      if (snapshot.data![index].chartType.toString() ==
-                          "ChartType.LINE_GRAPH") {
-                        List<LineChart> data = [];
-                        data.add(LineChart(snapshot.data![index].name, 1));
-                        _seriesLineData.add(
-                          charts.Series(
-                            colorFn: (__, _) =>
-                                charts.ColorUtil.fromDartColor(Colors.black),
-                            id: '1',
-                            data: data,
-                            domainFn: (LineChart lineChart, _) =>
-                                lineChart.value!,
-                            measureFn: (LineChart lineChart, _) =>
-                                lineChart.value,
-                          ),
-                        );
-                        return Text(snapshot.data![index].chartType.toString());
+                        return Text(snapshot.data![index].charts![index].nepal
+                            .toString());
+                      } else if (snapshot.data![index].chartType ==
+                          "bar_graph") {
+                        var chart = snapshot.data![index].charts;
+                        chart!.map((e) => {print(e)});
+                        return Text(
+                            snapshot.data![index].charts![0].nepal.toString());
                       } else {
-                        return Text("hello");
+                        return Center(child: CircularProgressIndicator());
                       }
                     },
                   );
-                } else if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
+                } else {
+                  return Center(child: CircularProgressIndicator());
                 }
-                return Center(child: CircularProgressIndicator());
               },
             ),
           ),
+          // Expanded(
+          //   child: FutureBuilder<List<Chart>>(
+          //       future: futureChart,
+          //       builder: (context, snapshot) {
+          //         if (snapshot.hasData) {
+          //           // List<Chart>? data = snapshot.data;
+          //           return ListView.builder(
+          //               itemCount: snapshot.data!.length,
+          //               itemBuilder: (BuildContext context, int index) {
+          //                 List<LineChart> linesData = [];
+          //                 linesData.add(LineChart(
+          //                     snapshot.data![index].charts![index].bagmati, 1));
+          //                 print(snapshot.data![index].chartType);
+          //                 if (snapshot.data![index].chartType.toString() ==
+          //                     'line_graph') {
+          //                   // setState(
+          //                   //   () {
+          //                   //     _seriesLineData.add(
+          //                   //       charts.Series(
+          //                   //         colorFn: (__, _) =>
+          //                   //             charts.ColorUtil.fromDartColor(
+          //                   //                 Colors.black),
+          //                   //         id: '1',
+          //                   //         data: linesData,
+          //                   //         domainFn: (LineChart lineChart, _) =>
+          //                   //             lineChart.value!,
+          //                   //         measureFn: (LineChart lineChart, _) =>
+          //                   //             lineChart.value,
+          //                   //       ),
+          //                   //     );
+          //                   //   },
+          //                   // );
+          //                   return Container(
+          //                     child: SingleChildScrollView(
+          //                       child: Padding(
+          //                         padding: EdgeInsets.all(8.0),
+          //                         child: Container(
+          //                           child: Center(
+          //                             child: Column(
+          //                               children: <Widget>[
+          //                                 Text('Sales for the first 5 years'),
+          //                                 Expanded(
+          //                                     child: charts.LineChart(
+          //                                         _seriesLineData,
+          //                                         defaultRenderer: new charts
+          //                                                 .LineRendererConfig(
+          //                                             includeArea: true,
+          //                                             stacked: true),
+          //                                         animate: true,
+          //                                         animationDuration:
+          //                                             Duration(seconds: 5),
+          //                                         behaviors: [
+          //                                       new charts.ChartTitle('Years',
+          //                                           behaviorPosition: charts
+          //                                               .BehaviorPosition
+          //                                               .bottom,
+          //                                           titleOutsideJustification:
+          //                                               charts
+          //                                                   .OutsideJustification
+          //                                                   .middleDrawArea),
+          //                                       new charts.ChartTitle('Sales',
+          //                                           behaviorPosition: charts
+          //                                               .BehaviorPosition.start,
+          //                                           titleOutsideJustification:
+          //                                               charts
+          //                                                   .OutsideJustification
+          //                                                   .middleDrawArea),
+          //                                       new charts.ChartTitle(
+          //                                         'Departments',
+          //                                         behaviorPosition: charts
+          //                                             .BehaviorPosition.end,
+          //                                         titleOutsideJustification:
+          //                                             charts
+          //                                                 .OutsideJustification
+          //                                                 .middleDrawArea,
+          //                                       )
+          //                                     ]))
+          //                               ],
+          //                             ),
+          //                           ),
+          //                         ),
+          //                       ),
+          //                     ),
+          //                   );
+          //                 } else {
+          //                   return Text(("Unsppurted chart type"));
+          //                 }
+          //               });
+          //         } else {
+          //           return Center(child: CircularProgressIndicator());
+          //         }
+          //       }),
+          // )
         ],
       ),
     );
@@ -104,7 +200,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
 
 class LineChart {
   String? type;
-  num? value;
+  int? value;
 
   LineChart(
     this.type,
