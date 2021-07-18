@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:unicef/unicef/models/chart.dart';
 import 'package:unicef/unicef/services/chart_facade_service.dart';
 
+// ignore: must_be_immutable
 class ChartComp extends StatefulWidget {
   List<int>? ids;
   int? id;

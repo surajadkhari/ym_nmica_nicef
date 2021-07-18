@@ -1,7 +1,6 @@
-import 'package:charts_flutter/flutter.dart';
-import 'package:draw_graph/draw_graph.dart';
 import 'package:draw_graph/models/feature.dart';
 import 'package:flutter/material.dart';
+import 'package:unicef/common/utils/size_configs.dart';
 import 'package:unicef/unicef/models/chart.dart';
 import 'package:unicef/unicef/services/chart2_service.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -34,7 +33,7 @@ class ChartScreenWidget extends StatefulWidget {
 }
 
 class _ChartScreenWidgetState extends State<ChartScreenWidget> {
-  List<charts.Series<dynamic, String>>? _seriesLineData;
+  List<charts.Series>? _seriesLineData;
   List<charts.Series<BarGraph, String>>? _barSeriesData;
 
   Chart2Service _chart2service = Chart2Service();
@@ -46,202 +45,269 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
     super.initState();
     futureChart = _chart2service.fetchCharts(this.widget.ids!);
     // ignore: deprecated_member_usec
-    _seriesLineData = <charts.Series<dynamic, String>>[];
-    _barSeriesData = <charts.Series<BarGraph, String>>[];
+    // _seriesLineData = <charts.Series<LineChart, String>>[];
+    // _barSeriesData = <charts.Series<BarGraph, String>>[];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(20.0),
-          ),
-          const SizedBox(height: 2),
-          // MaterialButton(
-          //   onPressed: () {
-          //     _chart2service.getChartsData(this.widget.ids!);
-          //   },
-          //   color: Colors.blue,
-          //   child: Text('Fetch Chart'),
-          // ),
-          Expanded(
-            child: FutureBuilder<List<Chart>>(
-              future: futureChart,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      List<LineChart> linesData = [];
-                      List<LineChart> chartsData = [];
-                      List<BarGraph> chartsBarData = [];
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 2),
+                FutureBuilder<List<Chart>>(
+                  future: futureChart,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Container(
+                        height: getProportionateScreenHeight(700),
+                        width: double.infinity,
+                        child: ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            _barSeriesData =
+                                <charts.Series<BarGraph, String>>[];
+                            _seriesLineData = <charts.Series>[];
+                            // List<LineChart> linesData = [];
+                            List<LineChart> chartsData =
+                                []; //yaha bhitra add garne ho
+                            List<BarGraph> chartsBarData = [];
+                            List<LineChart> chartsLineData = [];
+                            List<List<BarGraph>> allData = [];
+                            List<List<LineChart>> allLineData = [];
+                            List<Color> colors = [Colors.red, Colors.green];
+                            // List<String> keys = [];
+                            // List chartElements = [];
+                            // List chartTypes = [];
 
-                      List<String> keys = [];
-                      List chartElements = [];
-                      List chartTypes = [];
+                            Chart datar = snapshot.data![index];
 
-                      Chart datar = snapshot.data![index];
+                            if (datar.chartType == "bar_graph") {
+                              List<ChartElement>? datas =
+                                  snapshot.data![index].charts;
 
-                      if (datar.chartType == "bar_graph") {
-                        var jsom =
-                            snapshot.data![index].charts![index].toJson();
-                        jsom.forEach((key, value) {
-                          if (key != 'label') {
-                            // keys['color'] =  "red";'
+                              var count = 0;
 
-                            chartsBarData
-                                .add(BarGraph(key, double.parse(value)));
+                              while (count <
+                                  snapshot.data![index].charts!.length) {
+                                var jsom = snapshot.data![index].charts![count]
+                                    .toJson();
+                                var label = "";
 
-                            _barSeriesData!.add(
-                              charts.Series(
-                                domainFn: (BarGraph pollution, _) =>
-                                    pollution.type.toString(),
-                                measureFn: (BarGraph pollution, _) =>
-                                    pollution.value,
-                                id: '1',
-                                data: chartsBarData,
-                              ),
-                            );
-                            var parsedKey = value;
-                            print(parsedKey);
-                          }
-                        });
-                        chartsData.forEach((element) {});
-                        print(chartsData);
+                                jsom.forEach((key, value) {
+                                  if (key != 'label') {
+                                    // keys['color'] =  "red";'
 
-                        return Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Container(
-                              height: 500,
-                              width: 500,
-                              child: Center(
-                                child: Column(
-                                  children: <Widget>[
-                                    Expanded(
-                                      child: charts.BarChart(
-                                        _barSeriesData!,
-                                        animate: true,
-                                        animationDuration: Duration(seconds: 5),
+                                    chartsBarData.add(BarGraph(colors[count],
+                                        key, double.parse(value)));
+                                  } else {
+                                    label = value;
+                                  }
+                                });
+                                allData.add(chartsBarData.toList());
+
+                                _barSeriesData!.add(
+                                  charts.Series(
+                                    colorFn: (BarGraph barGraph, _) =>
+                                        charts.ColorUtil.fromDartColor(
+                                            barGraph.color!),
+                                    domainFn: (BarGraph barGraph, _) =>
+                                        barGraph.type.toString(),
+                                    measureFn: (BarGraph barGraph, _) =>
+                                        barGraph.value,
+                                    id: label + index.toString(),
+                                    data: allData[count],
+                                  ),
+                                );
+
+                                count++;
+                              }
+                              chartsData.forEach((element) {});
+                              return Column(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      border: Border.all(color: Colors.blue),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.1),
+                                          spreadRadius: 5,
+                                          blurRadius: 7,
+                                          offset: Offset(0,
+                                              3), // changes position of shadow
+                                        ),
+                                      ],
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(20.0),
+                                      child: SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(snapshot.data![index].name!),
+                                            Container(
+                                              height:
+                                                  getProportionateScreenHeight(
+                                                      300),
+                                              width:
+                                                  getProportionateScreenWidth(
+                                                      500),
+                                              child: charts.BarChart(
+                                                _barSeriesData!,
+                                                animate: true,
+                                                animationDuration:
+                                                    Duration(seconds: 5),
+                                                barGroupingType: charts
+                                                    .BarGroupingType.grouped,
+                                                behaviors: [
+                                                  new charts.SeriesLegend(
+                                                    position: charts
+                                                        .BehaviorPosition.end,
+                                                    horizontalFirst: false,
+                                                    cellPadding:
+                                                        new EdgeInsets.only(
+                                                            right: 4.0,
+                                                            bottom: 4.0),
+                                                    showMeasures: false,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Text(snapshot
+                                                .data![index].description!),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                            ));
-                      } else if (snapshot.data![index].chartType ==
-                          "bar_graph") {
-                        var chart = snapshot.data![index].charts;
-                        chart!.map((e) => {print(e)});
-                        return Text(
-                            snapshot.data![index].charts![0].nepal.toString());
-                      } else {
-                        return Center(child: CircularProgressIndicator());
-                      }
-                    },
-                  );
-                } else {
-                  return Center(child: CircularProgressIndicator());
-                }
-              },
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                ],
+                              );
+                            } else if (datar.chartType == "line_graph") {
+                              List<ChartElement>? datas =
+                                  snapshot.data![index].charts;
+
+                              var count = 0;
+
+                              while (count <
+                                  snapshot.data![index].charts!.length) {
+                                var jsom = snapshot.data![index].charts![count]
+                                    .toJson();
+                                var label = "";
+
+                                jsom.forEach((key, value) {
+                                  if (key != 'label') {
+                                    // keys['color'] =  "red";'
+
+                                    chartsLineData.add(
+                                        LineChart(key, double.parse(value)));
+                                  } else {
+                                    label = value;
+                                  }
+                                });
+                                allLineData.add(chartsLineData.toList());
+
+                                _seriesLineData!.add(
+                                  charts.Series(
+                                    domainFn: (LineChart lineChart, _) =>
+                                        lineChart.value.toInt()!,
+                                    measureFn: (LineChart barGraph, _) =>
+                                        barGraph.value,
+                                    id: label + index.toString(),
+                                    data: allLineData[count],
+                                  ),
+                                );
+
+                                count++;
+                              }
+                              chartsData.forEach((element) {});
+                              return Column(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      border: Border.all(color: Colors.blue),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.1),
+                                          spreadRadius: 5,
+                                          blurRadius: 7,
+                                          offset: Offset(0,
+                                              3), // changes position of shadow
+                                        ),
+                                      ],
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(20.0),
+                                      child: SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(snapshot.data![index].name!),
+                                            Container(
+                                              height:
+                                                  getProportionateScreenHeight(
+                                                      300),
+                                              width:
+                                                  getProportionateScreenWidth(
+                                                      500),
+                                              child: charts.LineChart(
+                                                domainFn:
+                                                    (LineChart lineChart, _) =>
+                                                        lineChart.type,
+                                                measureFn:
+                                                    (LineChart lineChart, _) =>
+                                                        lineChart.value,
+                                                data: _seriesLineData,
+                                              ),
+                                            ),
+                                            Text(snapshot
+                                                .data![index].description!),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                ],
+                              );
+                            } else {
+                              return Center(child: CircularProgressIndicator());
+                            }
+                          },
+                        ),
+                      );
+                    } else {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  },
+                )
+              ],
             ),
           ),
-          // Expanded(
-          //   child: FutureBuilder<List<Chart>>(
-          //       future: futureChart,
-          //       builder: (context, snapshot) {
-          //         if (snapshot.hasData) {
-          //           // List<Chart>? data = snapshot.data;
-          //           return ListView.builder(
-          //               itemCount: snapshot.data!.length,
-          //               itemBuilder: (BuildContext context, int index) {
-          //                 List<LineChart> linesData = [];
-          //                 linesData.add(LineChart(
-          //                     snapshot.data![index].charts![index].bagmati, 1));
-          //                 print(snapshot.data![index].chartType);
-          //                 if (snapshot.data![index].chartType.toString() ==
-          //                     'line_graph') {
-          //                   // setState(
-          //                   //   () {
-          //                   //     _seriesLineData.add(
-          //                   //       charts.Series(
-          //                   //         colorFn: (__, _) =>
-          //                   //             charts.ColorUtil.fromDartColor(
-          //                   //                 Colors.black),
-          //                   //         id: '1',
-          //                   //         data: linesData,
-          //                   //         domainFn: (LineChart lineChart, _) =>
-          //                   //             lineChart.value!,
-          //                   //         measureFn: (LineChart lineChart, _) =>
-          //                   //             lineChart.value,
-          //                   //       ),
-          //                   //     );
-          //                   //   },
-          //                   // );
-          //                   return Container(
-          //                     child: SingleChildScrollView(
-          //                       child: Padding(
-          //                         padding: EdgeInsets.all(8.0),
-          //                         child: Container(
-          //                           child: Center(
-          //                             child: Column(
-          //                               children: <Widget>[
-          //                                 Text('Sales for the first 5 years'),
-          //                                 Expanded(
-          //                                     child: charts.LineChart(
-          //                                         _seriesLineData,
-          //                                         defaultRenderer: new charts
-          //                                                 .LineRendererConfig(
-          //                                             includeArea: true,
-          //                                             stacked: true),
-          //                                         animate: true,
-          //                                         animationDuration:
-          //                                             Duration(seconds: 5),
-          //                                         behaviors: [
-          //                                       new charts.ChartTitle('Years',
-          //                                           behaviorPosition: charts
-          //                                               .BehaviorPosition
-          //                                               .bottom,
-          //                                           titleOutsideJustification:
-          //                                               charts
-          //                                                   .OutsideJustification
-          //                                                   .middleDrawArea),
-          //                                       new charts.ChartTitle('Sales',
-          //                                           behaviorPosition: charts
-          //                                               .BehaviorPosition.start,
-          //                                           titleOutsideJustification:
-          //                                               charts
-          //                                                   .OutsideJustification
-          //                                                   .middleDrawArea),
-          //                                       new charts.ChartTitle(
-          //                                         'Departments',
-          //                                         behaviorPosition: charts
-          //                                             .BehaviorPosition.end,
-          //                                         titleOutsideJustification:
-          //                                             charts
-          //                                                 .OutsideJustification
-          //                                                 .middleDrawArea,
-          //                                       )
-          //                                     ]))
-          //                               ],
-          //                             ),
-          //                           ),
-          //                         ),
-          //                       ),
-          //                     ),
-          //                   );
-          //                 } else {
-          //                   return Text(("Unsppurted chart type"));
-          //                 }
-          //               });
-          //         } else {
-          //           return Center(child: CircularProgressIndicator());
-          //         }
-          //       }),
-          // )
-        ],
+        ),
       ),
     );
   }
@@ -258,10 +324,12 @@ class LineChart {
 }
 
 class BarGraph {
+  Color? color;
   String? type;
   double? value;
 
   BarGraph(
+    this.color,
     this.type,
     this.value,
   );
