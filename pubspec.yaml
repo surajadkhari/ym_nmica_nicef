@@ -51,8 +51,7 @@ dependencies:
   path: ^1.8.0
   firebase_database: ^7.1.0
   charts_flutter: ^0.11.0
-  draw_graph: ^1.0.0
-  line_chart: ^1.1.11
+  syncfusion_flutter_charts: ^19.2.47+1
 
 dev_dependencies:
   injectable_generator: ^1.4.1

@@ -5,7 +5,6 @@ import 'package:api_cache_manager/utils/cache_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:unicef/common/utils/size_configs.dart';
-import 'package:unicef/unicef/models/chart.dart';
 import 'package:unicef/unicef/models/clusters.dart';
 import 'package:unicef/unicef/screens/home_screen.dart';
 import 'package:unicef/unicef/screens/indicator_screen.dart';
@@ -126,12 +125,6 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => const HomeScreen()));
           },
-        ),
-        const Divider(
-          color: Colors.black,
-        ),
-        const Divider(
-          color: Colors.black,
         ),
         Container(
           height: getProportionateScreenHeight(400),

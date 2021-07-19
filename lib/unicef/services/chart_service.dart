@@ -18,13 +18,14 @@ class ChartService {
     var isCacheExist = await APICacheManager().isAPICacheKeyExist('chart$ids');
     print(isCacheExist);
 
-    if (isCacheExist) {
-      print("up..........................");
+    if (!isCacheExist) {
       Response response = await _api!.httpPost('indicator/charts', data);
+
       APICacheDBModel cacheDBModel =
           new APICacheDBModel(key: 'chart$ids', syncData: response.body);
 
       await APICacheManager().addCacheData(cacheDBModel);
+      print(cacheDBModel);
       if (response.statusCode == 200) {
         List jsonResponse = json.decode(response.body);
 
@@ -36,27 +37,11 @@ class ChartService {
         throw Exception('Unexpected error occured!');
       }
     } else {
-      // print("Cache hit");
-      // var cachedData = await APICacheManager().getCacheData('chart$ids');
-      // print(cachedData.syncData);
-      // Map<String, dynamic> jsonResponse = json.decode(cachedData.syncData);
-      // List<dynamic> data = jsonResponse["data"];
-      // return data.map((chart) => new Chart.fromJson(chart)).toList();
-      print("doen.............................................");
-      Response response = await _api!.httpPost('indicator/charts', data);
-      APICacheDBModel cacheDBModel =
-          new APICacheDBModel(key: 'chart$ids', syncData: response.body);
+      var cachedData = await APICacheManager().getCacheData('indicator$ids');
 
-      await APICacheManager().addCacheData(cacheDBModel);
-      if (response.statusCode == 200) {
-        List jsonResponse = json.decode(response.body);
-        print("jsonResponse: $jsonResponse");
+      List jsonResponse = json.decode(cachedData.syncData);
 
-        print("Data: $data");
-        return jsonResponse.map((chart) => new Chart.fromJson(chart)).toList();
-      } else {
-        throw Exception('Unexpected error occured!');
-      }
+      return jsonResponse.map((chart) => new Chart.fromJson(chart)).toList();
     }
   }
 }
