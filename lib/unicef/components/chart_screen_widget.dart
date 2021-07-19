@@ -5,7 +5,6 @@ import 'package:unicef/unicef/services/chart2_service.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 // ignore: must_be_immutable
 class ChartScreenWidget extends StatefulWidget {
@@ -84,11 +83,6 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                             List<List<PieChart>> allPieData = [];
                             // List<List<charts.PieChart>> allPieData = [];
                             // List<List<LineChartDraw>> allLineData = [];
-                            List<Color> colors = [
-                              Colors.red,
-                              Colors.green,
-                              Colors.yellow
-                            ];
 
                             Chart datar = snapshot.data![index];
 
@@ -387,8 +381,11 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                               }
                               chartsPieData.forEach((element) {});
                               return Column(
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Container(
+                                    height: getProportionateScreenHeight(500),
+                                    width: getProportionateScreenHeight(500),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius:
@@ -405,7 +402,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                       ],
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
+                                      padding: const EdgeInsets.all(5.0),
                                       child: SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
                                         child: Column(
@@ -421,44 +418,13 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                       400),
                                               width:
                                                   getProportionateScreenWidth(
-                                                      900),
+                                                      180),
                                               child: charts.PieChart(
-                                                  _pieSeriesData!,
-                                                  animate: true,
-                                                  animationDuration:
-                                                      Duration(seconds: 5),
-                                                  behaviors: [
-                                                    new charts.DatumLegend(
-                                                      outsideJustification: charts
-                                                          .OutsideJustification
-                                                          .endDrawArea,
-                                                      horizontalFirst: false,
-                                                      desiredMaxRows: 2,
-                                                      cellPadding:
-                                                          new EdgeInsets.only(
-                                                              right: 4.0,
-                                                              bottom: 4.0),
-                                                      entryTextStyle:
-                                                          charts.TextStyleSpec(
-                                                              color: charts
-                                                                  .MaterialPalette
-                                                                  .purple
-                                                                  .shadeDefault,
-                                                              fontFamily:
-                                                                  'Georgia',
-                                                              fontSize: 11),
-                                                    )
-                                                  ],
-                                                  defaultRenderer: new charts
-                                                          .ArcRendererConfig(
-                                                      arcWidth: 100,
-                                                      arcRendererDecorators: [
-                                                        new charts
-                                                                .ArcLabelDecorator(
-                                                            labelPosition: charts
-                                                                .ArcLabelPosition
-                                                                .inside)
-                                                      ])),
+                                                _pieSeriesData!,
+                                                animate: true,
+                                                animationDuration:
+                                                    Duration(seconds: 5),
+                                              ),
                                             ),
                                             Text(snapshot
                                                 .data![index].description!),
