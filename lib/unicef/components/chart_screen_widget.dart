@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:unicef/common/utils/size_configs.dart';
 import 'package:unicef/unicef/models/chart.dart';
 import 'package:unicef/unicef/services/chart2_service.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-
+import 'package:screenshot/screenshot.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 // ignore: must_be_immutable
@@ -43,6 +44,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
   @override
   void initState() {
     super.initState();
+
     futureChart = _chart2service.fetchCharts(this.widget.ids!);
   }
 
@@ -87,6 +89,8 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                             Chart datar = snapshot.data![index];
 
                             if (datar.chartType == "bar_graph") {
+                              ScreenshotController screenshotController =
+                                  ScreenshotController();
                               // List<ChartElement>? datas =
                               //     snapshot.data![index].charts;
 
@@ -146,43 +150,46 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                       padding: const EdgeInsets.all(20.0),
                                       child: SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(snapshot.data![index].name!),
-                                            Container(
-                                              height:
-                                                  getProportionateScreenHeight(
-                                                      300),
-                                              width:
-                                                  getProportionateScreenWidth(
-                                                      500),
-                                              child: charts.BarChart(
-                                                _barSeriesData!,
-                                                animate: true,
-                                                animationDuration:
-                                                    Duration(seconds: 5),
-                                                barGroupingType: charts
-                                                    .BarGroupingType.grouped,
-                                                behaviors: [
-                                                  new charts.SeriesLegend(
-                                                    position: charts
-                                                        .BehaviorPosition.end,
-                                                    outsideJustification: charts
-                                                        .OutsideJustification
-                                                        .startDrawArea,
-                                                    horizontalFirst: false,
-                                                    desiredMaxRows: 2,
-                                                  )
-                                                ],
+                                        child: Screenshot(
+                                          controller: screenshotController,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(snapshot.data![index].name!),
+                                              Container(
+                                                height:
+                                                    getProportionateScreenHeight(
+                                                        300),
+                                                width:
+                                                    getProportionateScreenWidth(
+                                                        500),
+                                                child: charts.BarChart(
+                                                  _barSeriesData!,
+                                                  animate: true,
+                                                  animationDuration:
+                                                      Duration(seconds: 5),
+                                                  barGroupingType: charts
+                                                      .BarGroupingType.grouped,
+                                                  behaviors: [
+                                                    new charts.SeriesLegend(
+                                                      position: charts
+                                                          .BehaviorPosition.end,
+                                                      outsideJustification: charts
+                                                          .OutsideJustification
+                                                          .startDrawArea,
+                                                      horizontalFirst: false,
+                                                      desiredMaxRows: 2,
+                                                    )
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                            Text(snapshot
-                                                .data![index].description!),
-                                          ],
+                                              Text(snapshot
+                                                  .data![index].description!),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -193,6 +200,8 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                 ],
                               );
                             } else if (datar.chartType == "line_graph") {
+                              ScreenshotController screenshotController =
+                                  ScreenshotController();
                               var count = 0;
 
                               while (count <
@@ -222,7 +231,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                               }
                               chartsData.forEach((element) {});
                               return Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(2.0),
                                 child: SingleChildScrollView(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -256,83 +265,63 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                               SingleChildScrollView(
                                                 scrollDirection:
                                                     Axis.horizontal,
-                                                child: Container(
-                                                  height: 300,
-                                                  width:
-                                                      getProportionateScreenWidth(
-                                                          900),
-                                                  child: SfCartesianChart(
-                                                    primaryXAxis:
-                                                        CategoryAxis(),
-                                                    // Chart title
-                                                    title: ChartTitle(
-                                                        text: snapshot
-                                                            .data![index]
-                                                            .name!),
-                                                    // Enable legend
+                                                child: Screenshot(
+                                                  controller:
+                                                      screenshotController,
+                                                  child: Container(
+                                                    height: 300,
+                                                    width:
+                                                        getProportionateScreenWidth(
+                                                            900),
+                                                    child: SfCartesianChart(
+                                                      primaryXAxis:
+                                                          CategoryAxis(),
+                                                      // Chart title
+                                                      title: ChartTitle(
+                                                          text: snapshot
+                                                              .data![index]
+                                                              .name!),
+                                                      // Enable legend
 
-                                                    // Enable tooltip
-                                                    tooltipBehavior:
-                                                        TooltipBehavior(
-                                                            enable: true),
-                                                    series: <
-                                                        ChartSeries<
+                                                      // Enable tooltip
+                                                      tooltipBehavior:
+                                                          TooltipBehavior(
+                                                              enable: true),
+                                                      series: <
+                                                          ChartSeries<
+                                                              LineChartDraw,
+                                                              String>>[
+                                                        LineSeries<
                                                             LineChartDraw,
-                                                            String>>[
-                                                      LineSeries<LineChartDraw,
-                                                          String>(
-                                                        dataSource: _lineChart,
-                                                        xValueMapper:
-                                                            (LineChartDraw
-                                                                        sales,
-                                                                    _) =>
-                                                                sales.type,
-                                                        yValueMapper:
-                                                            (LineChartDraw
-                                                                        sales,
-                                                                    _) =>
-                                                                sales.value,
-                                                        name: "data",
-                                                        // Enable data label
-                                                        dataLabelSettings:
-                                                            DataLabelSettings(
-                                                                isVisible:
-                                                                    true),
-                                                      )
-                                                    ],
+                                                            String>(
+                                                          dataSource:
+                                                              _lineChart,
+                                                          xValueMapper:
+                                                              (LineChartDraw
+                                                                          sales,
+                                                                      _) =>
+                                                                  sales.type,
+                                                          yValueMapper:
+                                                              (LineChartDraw
+                                                                          sales,
+                                                                      _) =>
+                                                                  sales.value,
+                                                          name: snapshot
+                                                              .data![index]
+                                                              .name!,
+                                                          // Enable data label
+                                                          dataLabelSettings:
+                                                              DataLabelSettings(
+                                                                  isVisible:
+                                                                      true),
+                                                        )
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                              // Expanded(
-                                              //   child: Padding(
-                                              //     padding:
-                                              //         const EdgeInsets.all(8.0),
-                                              //     //Initialize the spark charts widget
-                                              //     child:
-                                              //         SfSparkLineChart.custom(
-                                              //       //Enable the trackball
-                                              //       trackball: SparkChartTrackball(
-                                              //           activationMode:
-                                              //               SparkChartActivationMode
-                                              //                   .tap),
-                                              //       //Enable marker
-                                              //       marker: SparkChartMarker(
-                                              //           displayMode:
-                                              //               SparkChartMarkerDisplayMode
-                                              //                   .all),
-                                              //       //Enable data label
-                                              //       labelDisplayMode:
-                                              //           SparkChartLabelDisplayMode
-                                              //               .all,
-                                              //       xValueMapper: (int index) =>
-                                              //           _lineChart[index].type,
-                                              //       yValueMapper: (int index) =>
-                                              //           _lineChart[index]
-                                              //               .value!,
-                                              //       dataCount: 5,
-                                              //     ),
-                                              //   ),
-                                              // )
+                                              Text(snapshot
+                                                  .data![index].description!)
                                             ],
                                           )),
                                       SizedBox(
@@ -345,6 +334,8 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                             } else if (datar.chartType == "pie_chart") {
                               // List<ChartElement>? datas =
                               //     snapshot.data![index].charts;
+                              ScreenshotController screenshotController =
+                                  ScreenshotController();
 
                               var count = 0;
 
@@ -405,30 +396,33 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                       padding: const EdgeInsets.all(5.0),
                                       child: SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(snapshot.data![index].name!),
-                                            Container(
-                                              height:
-                                                  getProportionateScreenHeight(
-                                                      400),
-                                              width:
-                                                  getProportionateScreenWidth(
-                                                      180),
-                                              child: charts.PieChart(
-                                                _pieSeriesData!,
-                                                animate: true,
-                                                animationDuration:
-                                                    Duration(seconds: 5),
+                                        child: Screenshot(
+                                          controller: screenshotController,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(snapshot.data![index].name!),
+                                              Container(
+                                                height:
+                                                    getProportionateScreenHeight(
+                                                        400),
+                                                width:
+                                                    getProportionateScreenWidth(
+                                                        180),
+                                                child: charts.PieChart(
+                                                  _pieSeriesData!,
+                                                  animate: true,
+                                                  animationDuration:
+                                                      Duration(seconds: 5),
+                                                ),
                                               ),
-                                            ),
-                                            Text(snapshot
-                                                .data![index].description!),
-                                          ],
+                                              Text(snapshot
+                                                  .data![index].description!),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -439,7 +433,8 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                 ],
                               );
                             } else {
-                              return Center(child: CircularProgressIndicator());
+                              return Center(
+                                  child: Text("Un supported Chart type"));
                             }
                           },
                         ),
