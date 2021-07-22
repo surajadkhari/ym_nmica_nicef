@@ -17,7 +17,7 @@ class ChartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Select Indicators'),
+        title: const Text('Data Charts'),
       ),
       body: ChartScreenWidget(
         ids: ids,
