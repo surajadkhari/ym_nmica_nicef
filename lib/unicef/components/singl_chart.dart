@@ -5,7 +5,6 @@ import 'package:screenshot/screenshot.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:unicef/common/utils/size_configs.dart';
 import 'package:unicef/unicef/models/chart.dart';
-import 'package:unicef/unicef/services/chart2_service.dart';
 import 'package:unicef/unicef/services/serach_indicators.dart';
 
 // ignore: must_be_immutable
@@ -23,7 +22,7 @@ class _SingleChartState extends State<SingleChart> {
   List<charts.Series<BarGraph, String>>? _barSeriesData;
   List<charts.Series<PieChart, String>>? _pieSeriesData;
 
-  Chart2Service _chart2service = Chart2Service();
+  // Chart2Service _chart2service = Chart2Service();
   SearchIndicator _chartService = SearchIndicator();
   Future<Chart>? futureChart;
   @override
@@ -53,6 +52,7 @@ class _SingleChartState extends State<SingleChart> {
                         height: getProportionateScreenHeight(700),
                         width: double.infinity,
                         child: ListView.builder(
+                          itemCount: 1,
                           itemBuilder: (BuildContext context, int index) {
                             _barSeriesData =
                                 <charts.Series<BarGraph, String>>[];
