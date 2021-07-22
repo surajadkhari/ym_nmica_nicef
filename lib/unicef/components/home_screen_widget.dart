@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:api_cache_manager/api_cache_manager.dart';
 import 'package:api_cache_manager/models/cache_db_model.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import 'package:unicef/unicef/components/card_componet.dart';
 import 'package:unicef/unicef/components/search.dart';
 import 'package:unicef/unicef/models/clusters.dart';
 import 'package:unicef/unicef/screens/indicator_screen.dart';
-
 import 'package:unicef/unicef/services/cluster_service.dart';
 
 class HomeScreenWidget extends StatefulWidget {
@@ -69,7 +67,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SearchComponent(),
+          SearchWidget(),
           const Padding(
             padding: EdgeInsets.all(20.0),
             child: Text("Choose Indicator"),

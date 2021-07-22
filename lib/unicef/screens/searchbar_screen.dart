@@ -30,27 +30,3 @@ class _SearchBarScreenState extends State<SearchBarScreen> {
     );
   }
 }
-
-class DataSearch extends SearchDelegate<String> {
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return [IconButton(onPressed: null, icon: Icon(Icons.clear))];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(icon: AnimatedIcon(icon: AnimatedIcons.arrow_menu ,progress: ,), onPressed: () {  },);
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
-    throw UnimplementedError();
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
-    throw UnimplementedError();
-  }
-}

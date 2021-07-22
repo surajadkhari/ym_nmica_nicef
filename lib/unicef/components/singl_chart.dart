@@ -1,52 +1,36 @@
 import 'package:flutter/material.dart';
-
-import 'package:unicef/common/utils/size_configs.dart';
-import 'package:unicef/unicef/models/chart.dart';
-import 'package:unicef/unicef/services/chart2_service.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:screenshot/screenshot.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:unicef/common/utils/size_configs.dart';
+import 'package:unicef/unicef/models/chart.dart';
+import 'package:unicef/unicef/services/chart2_service.dart';
+import 'package:unicef/unicef/services/serach_indicators.dart';
 
 // ignore: must_be_immutable
-class ChartScreenWidget extends StatefulWidget {
-  List<int>? ids;
-  int? id;
-  int? indicatorClusterId;
-  String? indicatorCode;
-  String? name;
-  String? description;
-  String? module;
-  List? charts;
+class SingleChart extends StatefulWidget {
+  final int? id;
 
-  ChartScreenWidget({
-    Key? key,
-    this.ids,
-    this.id,
-    this.indicatorClusterId,
-    this.indicatorCode,
-    this.name,
-    this.description,
-    this.module,
-    this.charts,
-  }) : super(key: key);
+  SingleChart({Key? key, this.id}) : super(key: key);
 
   @override
-  _ChartScreenWidgetState createState() => _ChartScreenWidgetState();
+  _SingleChartState createState() => _SingleChartState();
 }
 
-class _ChartScreenWidgetState extends State<ChartScreenWidget> {
+class _SingleChartState extends State<SingleChart> {
   // List<charts.Series<dynamic, num>>? _seriesLineData;
   List<charts.Series<BarGraph, String>>? _barSeriesData;
   List<charts.Series<PieChart, String>>? _pieSeriesData;
 
   Chart2Service _chart2service = Chart2Service();
-  Future<List<Chart>>? futureChart;
+  SearchIndicator _chartService = SearchIndicator();
+  Future<Chart>? futureChart;
   @override
   void initState() {
     super.initState();
 
-    futureChart = _chart2service.fetchCharts(this.widget.ids!);
+    futureChart = _chartService.getIndividual(id: this.widget.id!);
   }
 
   @override
@@ -60,15 +44,15 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 2),
-                FutureBuilder<List<Chart>>(
+                FutureBuilder<Chart>(
                   future: futureChart,
                   builder: (context, snapshot) {
+                    print(snapshot.data);
                     if (snapshot.hasData) {
                       return Container(
                         height: getProportionateScreenHeight(700),
                         width: double.infinity,
                         child: ListView.builder(
-                          itemCount: snapshot.data!.length,
                           itemBuilder: (BuildContext context, int index) {
                             _barSeriesData =
                                 <charts.Series<BarGraph, String>>[];
@@ -87,7 +71,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                             // List<List<charts.PieChart>> allPieData = [];
                             // List<List<LineChartDraw>> allLineData = [];
 
-                            Chart datar = snapshot.data![index];
+                            Chart datar = snapshot.data!;
 
                             if (datar.chartType == "bar_graph") {
                               ScreenshotController screenshotController =
@@ -97,11 +81,10 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
 
                               var count = 0;
 
-                              while (count <
-                                  snapshot.data![index].charts!.length) {
+                              while (count < snapshot.data!.charts!.length) {
                                 var label = "";
-                                var jsom = snapshot.data![index].charts![count]
-                                    .toJson();
+                                var jsom =
+                                    snapshot.data!.charts![count].toJson();
 
                                 jsom.forEach((key, value) {
                                   if (key != 'label') {
@@ -159,7 +142,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(snapshot.data![index].name!),
+                                              Text(snapshot.data!.name!),
                                               Container(
                                                 height:
                                                     getProportionateScreenHeight(
@@ -187,8 +170,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                   ],
                                                 ),
                                               ),
-                                              Text(snapshot
-                                                  .data![index].description!),
+                                              Text(snapshot.data!.description!),
                                             ],
                                           ),
                                         ),
@@ -205,11 +187,10 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                   ScreenshotController();
                               var count = 0;
 
-                              while (count <
-                                  snapshot.data![index].charts!.length) {
+                              while (count < snapshot.data!.charts!.length) {
                                 var label = "";
-                                var jsom = snapshot.data![index].charts![count]
-                                    .toJson();
+                                var jsom =
+                                    snapshot.data!.charts![count].toJson();
 
                                 jsom.forEach(
                                   (key, value) {
@@ -280,8 +261,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                       // Chart title
                                                       title: ChartTitle(
                                                           text: snapshot
-                                                              .data![index]
-                                                              .name!),
+                                                              .data!.name!),
                                                       // Enable legend
 
                                                       // Enable tooltip
@@ -308,8 +288,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                       _) =>
                                                                   sales.value,
                                                           name: snapshot
-                                                              .data![index]
-                                                              .name!,
+                                                              .data!.name!,
                                                           // Enable data label
                                                           dataLabelSettings:
                                                               DataLabelSettings(
@@ -321,8 +300,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                   ),
                                                 ),
                                               ),
-                                              Text(snapshot
-                                                  .data![index].description!)
+                                              Text(snapshot.data!.description!)
                                             ],
                                           )),
                                       SizedBox(
@@ -340,11 +318,10 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
 
                               var count = 0;
 
-                              while (count <
-                                  snapshot.data![index].charts!.length) {
+                              while (count < snapshot.data!.charts!.length) {
                                 var label = "";
-                                var jsom = snapshot.data![index].charts![count]
-                                    .toJson();
+                                var jsom =
+                                    snapshot.data!.charts![count].toJson();
 
                                 jsom.forEach((key, chartper) {
                                   if (key != 'label') {
@@ -416,8 +393,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Text(snapshot
-                                                      .data![index].name!),
+                                                  Text(snapshot.data!.name!),
                                                   SingleChildScrollView(
                                                     scrollDirection:
                                                         Axis.horizontal,
@@ -480,8 +456,8 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                   ]))),
                                                     ),
                                                   ),
-                                                  Text(snapshot.data![index]
-                                                      .description!),
+                                                  Text(snapshot
+                                                      .data!.description!),
                                                 ],
                                               ),
                                             ),
