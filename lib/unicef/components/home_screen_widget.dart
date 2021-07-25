@@ -1,12 +1,15 @@
 import 'dart:convert';
 import 'package:api_cache_manager/api_cache_manager.dart';
 import 'package:api_cache_manager/models/cache_db_model.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:unicef/unicef/components/card_componet.dart';
 import 'package:unicef/unicef/components/search.dart';
 import 'package:unicef/unicef/models/clusters.dart';
 import 'package:unicef/unicef/screens/indicator_screen.dart';
+import 'package:unicef/unicef/screens/notifications.dart';
 import 'package:unicef/unicef/services/cluster_service.dart';
+import 'package:unicef/unicef/services/notification_service.dart';
 
 class HomeScreenWidget extends StatefulWidget {
   final String? id;
@@ -25,8 +28,38 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   @override
   void initState() {
     super.initState();
+    NoificationService.initialize(context);
+    FirebaseMessaging.instance.getInitialMessage().then((message) {
+      if (message != null) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => NotificationScreen(),
+          ),
+        );
+      }
+    });
+
+    ///forground work
+    FirebaseMessaging.onMessage.listen((message) {
+      if (message.notification != null) {
+        print(message.notification!.body);
+        print(message.notification!.title);
+      }
+
+      NoificationService.display(message);
+    });
 
     getAllClusters();
+
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (event) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => NotificationScreen(),
+          ),
+        );
+      },
+    );
   }
 
   var _clusterList = [];
