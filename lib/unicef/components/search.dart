@@ -118,7 +118,7 @@ class DataSearch extends SearchDelegate<String> {
               },
             );
           } else
-            return Center(child: CircularProgressIndicator());
+            return Center(child: Text("Type Something"));
         },
       );
 }

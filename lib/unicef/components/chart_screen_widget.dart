@@ -385,8 +385,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                       child: Container(
                                         height:
                                             getProportionateScreenHeight(400),
-                                        width:
-                                            getProportionateScreenHeight(400),
+                                        width: getProportionateScreenWidth(500),
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius: BorderRadius.all(
@@ -476,7 +475,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                             .ArcLabelDecorator(
                                                                         labelPosition: charts
                                                                             .ArcLabelPosition
-                                                                            .outside)
+                                                                            .inside)
                                                                   ]))),
                                                     ),
                                                   ),

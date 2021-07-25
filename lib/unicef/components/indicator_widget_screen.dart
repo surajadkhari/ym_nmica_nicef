@@ -83,6 +83,7 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
                   context,
                   new MaterialPageRoute(
                     builder: (context) => ChartScreen(
+                      clutser: this.widget.name,
                       ids: _checkBoxList,
                     ),
                   ),

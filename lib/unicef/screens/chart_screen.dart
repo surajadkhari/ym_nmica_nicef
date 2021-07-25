@@ -6,18 +6,20 @@ import 'package:unicef/unicef/components/drawer.dart';
 // ignore: must_be_immutable
 class ChartScreen extends StatelessWidget {
   static const screenId = "chart";
+  final clutser;
 
   List<int> ids;
   ChartScreen({
     Key? key,
     required this.ids,
+    required this.clutser,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Data Charts'),
+        title: Text(clutser),
       ),
       body: ChartScreenWidget(
         ids: ids,

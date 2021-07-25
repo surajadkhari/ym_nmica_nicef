@@ -25,6 +25,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   @override
   void initState() {
     super.initState();
+
     getAllClusters();
   }
 
