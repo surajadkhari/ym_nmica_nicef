@@ -46,7 +46,6 @@ class _SingleChartState extends State<SingleChart> {
                 FutureBuilder<Chart>(
                   future: futureChart,
                   builder: (context, snapshot) {
-                    print(snapshot.data);
                     if (snapshot.hasData) {
                       return Container(
                         height: getProportionateScreenHeight(700),
