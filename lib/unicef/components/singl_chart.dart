@@ -35,6 +35,7 @@ class _SingleChartState extends State<SingleChart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -200,7 +201,6 @@ class _SingleChartState extends State<SingleChart> {
                                           double.parse(value),
                                         ),
                                       );
-                                      print(key);
                                     } else {
                                       label = value;
                                       //  print(label);
@@ -451,7 +451,7 @@ class _SingleChartState extends State<SingleChart> {
                                                                             .ArcLabelDecorator(
                                                                         labelPosition: charts
                                                                             .ArcLabelPosition
-                                                                            .outside)
+                                                                            .inside)
                                                                   ]))),
                                                     ),
                                                   ),

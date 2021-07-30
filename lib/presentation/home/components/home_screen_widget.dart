@@ -42,7 +42,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           Expanded(
             child: BlocBuilder<ClusterListBloc, ClusterListState>(
               builder: (context, state) {
-                print(state);
                 if (state is Initial) {
                   return CircularProgressIndicator();
                 } else if (state is DataTransferInProgress) {

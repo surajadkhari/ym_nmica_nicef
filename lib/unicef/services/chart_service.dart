@@ -25,13 +25,11 @@ class ChartService {
           new APICacheDBModel(key: 'chart$ids', syncData: response.body);
 
       await APICacheManager().addCacheData(cacheDBModel);
-      print(cacheDBModel);
       if (response.statusCode == 200) {
         List jsonResponse = json.decode(response.body);
 
         var mapped =
             jsonResponse.map((chart) => new Chart.fromJson(chart)).toList();
-        print("Mapped: $mapped");
         return mapped;
       } else {
         throw Exception('Unexpected error occured!');

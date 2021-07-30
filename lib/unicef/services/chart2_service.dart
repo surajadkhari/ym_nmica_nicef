@@ -16,7 +16,6 @@ class Chart2Service {
   Future<List<Chart>>? fetchCharts(List<int> ids) async {
     Map<String, dynamic> data = {"ids": ids};
     var isCacheExist = await APICacheManager().isAPICacheKeyExist('chart$ids');
-    print(isCacheExist);
 
     if (!isCacheExist) {
       Response response = await _api!.httpPost('indicator/charts', data);

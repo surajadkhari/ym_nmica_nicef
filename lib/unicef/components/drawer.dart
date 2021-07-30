@@ -52,14 +52,29 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
   }
 
   getSurvey() async {
-    var data = await _informationService.getIntroduction();
+    var data = await _informationService.getSurvey();
     Map<String, dynamic> jsonResponse = json.decode(data.body);
-    var information = jsonResponse["survery"];
+    var information = jsonResponse["introduction"];
 
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => InfomationScreen(
-          title: "Survey",
+          title: "Survey Methodology",
+          information: information,
+        ),
+      ),
+    );
+  }
+
+  getDemography() async {
+    var data = await _informationService.getDemography();
+    Map<String, dynamic> jsonResponse = json.decode(data.body);
+    var information = jsonResponse["introduction"];
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => InfomationScreen(
+          title: "Demography",
           information: information,
         ),
       ),
@@ -159,12 +174,13 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
             color: Colors.blue,
           ),
           onTap: () {
-            getIntroduction();
+            getDemography();
           },
         ),
         Container(
           height: getProportionateScreenHeight(400),
           child: ListView.builder(
+            physics: ClampingScrollPhysics(),
             itemCount: _clusterList.length,
             itemBuilder: (BuildContext context, int index) {
               return ListTile(
@@ -175,11 +191,13 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                 ),
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => IndicatorScreen(
-                              name: _clusterList[index].name,
-                              id: _clusterList[index].id)));
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => IndicatorScreen(
+                          name: _clusterList[index].name,
+                          id: _clusterList[index].id),
+                    ),
+                  );
                 },
               );
             },

@@ -20,7 +20,7 @@ class ClusterRepository implements IClusterRepository {
     if (connectivity.isConnected) {
       final clusters = await clutserRemoteDataProvider.fetchClusters();
       clutserLocalDataProvider.cacheClusters(clusters);
-      print(clusters);
+
       return clusters;
     } else {
       final clusters = await clutserLocalDataProvider.fetchClusters();

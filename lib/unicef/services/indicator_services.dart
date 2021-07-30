@@ -16,7 +16,6 @@ class IndicatorServices {
   Future<List<CheckBoxState>>? fetchCheckBoxState(int id) async {
     var isCacheExist =
         await APICacheManager().isAPICacheKeyExist('indicator$id');
-    print(isCacheExist);
     if (!isCacheExist) {
       Response response = await _api!.httpGet('indicator-cluster/$id}');
       APICacheDBModel cacheDBModel =

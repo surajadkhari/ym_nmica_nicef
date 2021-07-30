@@ -11,9 +11,9 @@ class InfomationService {
     return await _api!.httpGet('introduction');
   }
    getSurvey() async {
-    return await _api!.httpGet('introduction');
+    return await _api!.httpGet('survey');
   }
    getDemography() async {
-    return await _api!.httpGet('introduction');
+    return await _api!.httpGet('demography');
   }
 }

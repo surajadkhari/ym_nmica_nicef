@@ -21,8 +21,11 @@ class _InfomationScreenWidgetState extends State<InfomationScreenWidget> {
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
-        child: Html(
-          data: this.widget.information,
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Html(
+            data: this.widget.information,
+          ),
         ),
       ),
     );

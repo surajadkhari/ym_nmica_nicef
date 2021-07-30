@@ -7,6 +7,7 @@ import 'package:unicef/unicef/components/drawer.dart';
 import 'package:unicef/unicef/components/home_screen_widget.dart';
 import 'package:unicef/unicef/models/cacheInDicator.dart';
 import 'package:unicef/unicef/models/chart.dart';
+import 'package:unicef/unicef/screens/notifications.dart';
 import 'package:unicef/unicef/services/all_indicators_service.dart';
 import 'package:api_cache_manager/api_cache_manager.dart';
 import 'package:unicef/unicef/widgets/Progress.dart';
@@ -28,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
+  List indicator = [];
   cacheAllData() async {
     showDialog(
         context: context,
@@ -37,9 +39,32 @@ class _HomeScreenState extends State<HomeScreen> {
             message: "Retriving Data",
           );
         });
-    cacheIndicators();
-    cacheCharts();
+
+    await Future.delayed(const Duration(seconds: 2), () {
+      cacheIndicators();
+      cacheCharts();
+      cacheClusterIndicators();
+    });
     Navigator.pop(context);
+  }
+
+  cacheClusterIndicators() async {
+    Response response = await _allIndicatorService.getAllIndicatorsForCache();
+    if (response.statusCode == 200) {
+      List jsonResponse = json.decode(response.body);
+      var jsonResponses = jsonResponse
+          .map((checkBoxState) => new CachIindicator.fromJson(checkBoxState))
+          .toList();
+
+      jsonResponses.forEach((element) async {
+        String? name = element.name;
+        APICacheDBModel cacheDBModel =
+            new APICacheDBModel(key: name!, syncData: name);
+        await APICacheManager().addCacheData(cacheDBModel);
+      });
+    } else {
+      throw Exception('Unexpected error occured!');
+    }
   }
 
   cacheIndicators() async {
@@ -51,9 +76,9 @@ class _HomeScreenState extends State<HomeScreen> {
           .toList();
 
       jsonResponses.forEach((element) async {
-        int? id = element.id;
-        APICacheDBModel cacheDBModel = new APICacheDBModel(
-            key: 'myIndicator$id', syncData: element.toString());
+        String? name = element.name;
+        APICacheDBModel cacheDBModel =
+            new APICacheDBModel(key: name!, syncData: name);
         await APICacheManager().addCacheData(cacheDBModel);
       });
     } else {
@@ -101,7 +126,12 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.black,
             ),
             onPressed: () {
-              // do something
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => NotificationScreen(),
+                ),
+              );
             },
           ),
         ],

@@ -1,8 +1,9 @@
 class CachIindicator {
   int? id;
   String? name;
+  bool? value;
 
-  CachIindicator({required this.id, required this.name});
+  CachIindicator({required this.id, required this.name, this.value = false});
 
   CachIindicator.fromJson(Map<String, dynamic> json) {
     id = json['id'];

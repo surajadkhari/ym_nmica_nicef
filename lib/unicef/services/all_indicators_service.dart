@@ -14,4 +14,8 @@ class AllIndicatorService {
   getAllCharts() async {
     return await _api!.httpGet('indicators/charts');
   }
+
+  getAllIndicatorsForCache() async {
+    return await _api!.httpGet('clusters-with-indicators');
+  }
 }

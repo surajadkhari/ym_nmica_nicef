@@ -41,10 +41,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
     ///forground work
     FirebaseMessaging.onMessage.listen((message) {
-      if (message.notification != null) {
-        print(message.notification!.body);
-        print(message.notification!.title);
-      }
+      if (message.notification != null) {}
 
       NoificationService.display(message);
     });

@@ -28,6 +28,7 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
   }
 
   List<int> _checkBoxList = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,6 +52,7 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
                   return ListView.builder(
                     itemCount: data!.length,
                     itemBuilder: (BuildContext context, int index) {
+                      // _checkBoxList.add(data[index].id!);
                       return CheckboxListTile(
                         title: Text(data[index].name!),
                         value: data[index].value,
