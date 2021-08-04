@@ -1,15 +1,8 @@
-import 'dart:convert';
-
-import 'package:api_cache_manager/models/cache_db_model.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:unicef/unicef/components/drawer.dart';
 import 'package:unicef/unicef/components/home_screen_widget.dart';
-import 'package:unicef/unicef/models/cacheInDicator.dart';
-import 'package:unicef/unicef/models/chart.dart';
 import 'package:unicef/unicef/screens/notifications.dart';
-import 'package:unicef/unicef/services/all_indicators_service.dart';
-import 'package:api_cache_manager/api_cache_manager.dart';
+
 import 'package:unicef/unicef/widgets/Progress.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,8 +15,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  AllIndicatorService _allIndicatorService = AllIndicatorService();
-
   @override
   void initState() {
     super.initState();
@@ -40,76 +31,24 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         });
 
-    await Future.delayed(const Duration(seconds: 2), () {
-      cacheIndicators();
-      cacheCharts();
-      cacheClusterIndicators();
-    });
+    await Future.delayed(const Duration(seconds: 2), () {});
     Navigator.pop(context);
-  }
-
-  cacheClusterIndicators() async {
-    Response response = await _allIndicatorService.getAllIndicatorsForCache();
-    if (response.statusCode == 200) {
-      List jsonResponse = json.decode(response.body);
-      var jsonResponses = jsonResponse
-          .map((checkBoxState) => new CachIindicator.fromJson(checkBoxState))
-          .toList();
-
-      jsonResponses.forEach((element) async {
-        String? name = element.name;
-        APICacheDBModel cacheDBModel =
-            new APICacheDBModel(key: name!, syncData: name);
-        await APICacheManager().addCacheData(cacheDBModel);
-      });
-    } else {
-      throw Exception('Unexpected error occured!');
-    }
-  }
-
-  cacheIndicators() async {
-    Response response = await _allIndicatorService.getAllIndicators();
-    if (response.statusCode == 200) {
-      List jsonResponse = json.decode(response.body);
-      var jsonResponses = jsonResponse
-          .map((checkBoxState) => new CachIindicator.fromJson(checkBoxState))
-          .toList();
-
-      jsonResponses.forEach((element) async {
-        String? name = element.name;
-        APICacheDBModel cacheDBModel =
-            new APICacheDBModel(key: name!, syncData: name);
-        await APICacheManager().addCacheData(cacheDBModel);
-      });
-    } else {
-      throw Exception('Unexpected error occured!');
-    }
-  }
-
-  cacheCharts() async {
-    Response response = await _allIndicatorService.getAllCharts();
-    if (response.statusCode == 200) {
-      List jsonResponse = json.decode(response.body);
-      var jsonResponses = jsonResponse
-          .map((checkBoxState) => new Chart.fromJson(checkBoxState))
-          .toList();
-
-      jsonResponses.forEach((element) async {
-        int? id = element.id;
-        APICacheDBModel cacheDBModel = new APICacheDBModel(
-            key: 'myChart$id', syncData: element.toString());
-        await APICacheManager().addCacheData(cacheDBModel);
-      });
-    } else {
-      throw Exception('Unexpected error occured!');
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.asset(
+              'assets/images/mic_logo.png',
+              fit: BoxFit.contain,
+              height: 20,
+            ),
+          ],
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(

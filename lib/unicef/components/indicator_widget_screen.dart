@@ -5,13 +5,10 @@ import 'package:unicef/unicef/widgets/CheckBoxState.dart';
 
 // ignore: must_be_immutable
 class IndicatorScreenWidget extends StatefulWidget {
-  int? id;
-  String? name;
+  int id;
+  String name;
 
-  IndicatorScreenWidget({
-    required this.id,
-    required this.name,
-  });
+  IndicatorScreenWidget({required this.id, required this.name});
 
   @override
   _IndicatorScreenWidgetState createState() => _IndicatorScreenWidgetState();
@@ -24,7 +21,7 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
   @override
   void initState() {
     super.initState();
-    futureData = _indicatorService.fetchCheckBoxState(this.widget.id!);
+    futureData = _indicatorService.fetchIndicators(this.widget.id);
   }
 
   List<int> _checkBoxList = [];
@@ -38,7 +35,7 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
           Padding(
             padding: EdgeInsets.all(20.0),
             child: Text(
-              this.widget.name!,
+              this.widget.name,
               style: TextStyle(color: Colors.blue, fontSize: 20.0),
             ),
           ),
@@ -48,13 +45,14 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
               future: futureData,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  List<CheckBoxState>? data = snapshot.data;
+                  List? data = snapshot.data;
+                  print(data![1].id);
                   return ListView.builder(
-                    itemCount: data!.length,
+                    itemCount: data.length,
                     itemBuilder: (BuildContext context, int index) {
-                      // _checkBoxList.add(data[index].id!);
+                      print(_checkBoxList);
                       return CheckboxListTile(
-                        title: Text(data[index].name!),
+                        title: Text(data[index].name),
                         value: data[index].value,
                         onChanged: (val) {
                           setState(() {
@@ -85,8 +83,8 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
                   context,
                   new MaterialPageRoute(
                     builder: (context) => ChartScreen(
-                      clutser: this.widget.name,
                       ids: _checkBoxList,
+                      name: this.widget.name,
                     ),
                   ),
                 );

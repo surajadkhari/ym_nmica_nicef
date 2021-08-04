@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CardComponent extends StatelessWidget {
-  final String title;
-  final String? id;
+  final String? title;
+  final int? id;
   final VoidCallback? press;
   const CardComponent({
     Key? key,
@@ -32,7 +32,7 @@ class CardComponent extends StatelessWidget {
               decoration: const BoxDecoration(border: Border()),
               child: Padding(
                 padding: const EdgeInsets.all(1.0),
-                child: Text(title),
+                child: Text(title!),
               ),
             ),
           ),

@@ -1,19 +1,55 @@
+import 'dart:convert';
+
 import 'package:unicef/api/api.dart';
+import 'package:unicef/unicef/repository/repository.dart';
 
 class InfomationService {
   Api? _api;
+  Repository? _repository;
 
   InfomationService() {
     _api = Api();
+    _repository = Repository();
   }
 
-  getIntroduction() async {
-    return await _api!.httpGet('introduction');
+  Future saveIntroduction() async {
+    final res = await _api!.httpGet('introduction');
+
+    var decodedJson = json.decode(res.body)['introduction'];
+    print(decodedJson);
+    await _repository!.save('introduction', {"introduction": decodedJson});
   }
-   getSurvey() async {
-    return await _api!.httpGet('survey');
+
+  Future saveSurvey() async {
+    final res = await _api!.httpGet('survey');
+
+    var decodedJson = json.decode(res.body)['introduction'];
+    await _repository!.save('survey', {"survey": decodedJson});
   }
-   getDemography() async {
-    return await _api!.httpGet('demography');
+
+  Future saveDemography() async {
+    final res = await _api!.httpGet('demography')['introduction'];
+
+    var decodedJson = json.decode(res.body);
+    await _repository!.save('demography', {"demography": decodedJson});
+  }
+
+  Future getIntroduction() async {
+    var res = await _repository!.getData('introduction');
+    print("RES:$res");
+
+    return res[0]!['introduction'];
+  }
+
+  Future getSurvey() async {
+    var res = await _repository!.getData('survey');
+
+    return res[0]!['survey'];
+  }
+
+  Future getDemography() async {
+    var res = await _repository!.getData('demography');
+
+    return res[0]!['demography'];
   }
 }

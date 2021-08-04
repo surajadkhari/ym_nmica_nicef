@@ -1,9 +1,12 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:unicef/application/cluster_list/cluster_list_bloc.dart';
-
-import 'package:unicef/presentation/home/components/card_componet.dart';
-import 'package:unicef/presentation/home/components/search.dart';
+import 'package:unicef/unicef/components/card_componet.dart';
+import 'package:unicef/unicef/components/search.dart';
+import 'package:unicef/unicef/models/clusters.dart';
+import 'package:unicef/unicef/screens/indicator_screen.dart';
+import 'package:unicef/unicef/screens/notifications.dart';
+import 'package:unicef/unicef/services/cluster_service.dart';
+import 'package:unicef/unicef/services/notification_service.dart';
 
 class HomeScreenWidget extends StatefulWidget {
   final String? id;
@@ -18,13 +21,56 @@ class HomeScreenWidget extends StatefulWidget {
 }
 
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
-  late ClusterListBloc clutserListBloc;
+  ClusterService _clusterService = ClusterService();
 
   @override
   void initState() {
-    clutserListBloc = BlocProvider.of<ClusterListBloc>(context);
-    clutserListBloc.add(ClusterListEvent.watchAllStarted());
     super.initState();
+
+    getClusters();
+    NoificationService.initialize(context);
+    FirebaseMessaging.instance.getInitialMessage().then((message) {
+      if (message != null) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => NotificationScreen(),
+          ),
+        );
+      }
+    });
+
+    ///forground work
+    FirebaseMessaging.onMessage.listen((message) {
+      if (message.notification != null) {}
+
+      NoificationService.display(message);
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (event) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => NotificationScreen(),
+          ),
+        );
+      },
+    );
+  }
+
+  List<Cluster> _clusterList = [];
+
+  getClusters() async {
+    var clusters = await _clusterService.getClusters();
+
+    clusters.forEach((data) {
+      var model = Cluster();
+      model.id = data['id'];
+      model.name = data['name'];
+      setState(() {
+        _clusterList.add(model);
+      });
+    });
+    print(_clusterList);
   }
 
   @override
@@ -33,31 +79,38 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SearchComponent(),
+          SearchWidget(),
           const Padding(
             padding: EdgeInsets.all(20.0),
             child: Text("Choose Indicator"),
           ),
           const SizedBox(height: 2),
           Expanded(
-            child: BlocBuilder<ClusterListBloc, ClusterListState>(
-              builder: (context, state) {
-                if (state is Initial) {
-                  return CircularProgressIndicator();
-                } else if (state is DataTransferInProgress) {
-                  return CircularProgressIndicator();
-                } else if (state is LoadSuccess) {
-                  Expanded(
-                    child: GridView.count(
-                      crossAxisCount: 2,
-                      children: [
-                        CardComponent(title: "bdjsb", press: () {}, id: "1")
-                      ],
-                    ),
+            child: GridView.builder(
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              itemBuilder: (_, index) {
+                if (_clusterList.isNotEmpty) {
+                  return CardComponent(
+                      title: _clusterList[index].name ?? 'nothing',
+                      press: () {
+                        Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                            builder: (context) => IndicatorScreen(
+                                id: _clusterList[index].id!,
+                                name: _clusterList[index].name!),
+                          ),
+                        );
+                      },
+                      id: _clusterList[index].id);
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
                   );
                 }
-                return Text("Something went wrong!");
               },
+              itemCount: _clusterList.length,
             ),
           )
         ],

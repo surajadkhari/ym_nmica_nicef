@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'package:api_cache_manager/api_cache_manager.dart';
-import 'package:api_cache_manager/models/cache_db_model.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:unicef/unicef/components/card_componet.dart';
@@ -25,9 +22,12 @@ class HomeScreenWidget extends StatefulWidget {
 
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   ClusterService _clusterService = ClusterService();
+
   @override
   void initState() {
     super.initState();
+
+    getClusters();
     NoificationService.initialize(context);
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null) {
@@ -46,8 +46,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       NoificationService.display(message);
     });
 
-    getAllClusters();
-
     FirebaseMessaging.onMessageOpenedApp.listen(
       (event) {
         Navigator.of(context).push(
@@ -59,37 +57,20 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     );
   }
 
-  var _clusterList = [];
+  List<Cluster> _clusterList = [];
 
-  getAllClusters() async {
-    var isCacheExist =
-        await APICacheManager().isAPICacheKeyExist('clusters_list');
-    if (!isCacheExist) {
-      var clusters = await _clusterService.getClusters();
-      var result = json.decode(clusters.body);
-      APICacheDBModel cacheDBModel =
-          new APICacheDBModel(key: "clusters_list", syncData: clusters.body);
-      await APICacheManager().addCacheData(cacheDBModel);
-      result.forEach((data) {
-        var model = Cluster();
-        model.id = data['id'];
-        model.name = data['name'];
-        setState(() {
-          _clusterList.add(model);
-        });
+  getClusters() async {
+    var clusters = await _clusterService.getClusters();
+
+    clusters.forEach((data) {
+      var model = Cluster();
+      model.id = data['id'];
+      model.name = data['name'];
+      setState(() {
+        _clusterList.add(model);
       });
-    } else {
-      var cachedData = await APICacheManager().getCacheData('clusters_list');
-      var result = json.decode(cachedData.syncData);
-      result.forEach((data) {
-        var model = Cluster();
-        model.id = data['id'];
-        model.name = data['name'];
-        setState(() {
-          _clusterList.add(model);
-        });
-      });
-    }
+    });
+    print(_clusterList);
   }
 
   @override
@@ -111,15 +92,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
               itemBuilder: (_, index) {
                 if (_clusterList.isNotEmpty) {
                   return CardComponent(
-                      title: _clusterList[index].name,
+                      title: _clusterList[index].name ?? 'nothing',
                       press: () {
                         Navigator.push(
                           context,
                           new MaterialPageRoute(
                             builder: (context) => IndicatorScreen(
-                              name: _clusterList[index].name,
-                              id: _clusterList[index].id,
-                            ),
+                                id: _clusterList[index].id!,
+                                name: _clusterList[index].name!),
                           ),
                         );
                       },
@@ -132,7 +112,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
               },
               itemCount: _clusterList.length,
             ),
-          ),
+          )
         ],
       ),
     );

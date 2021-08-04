@@ -1,4 +1,14 @@
+import 'dart:io';
+
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:unicef/unicef/services/chart_service.dart';
+import 'package:unicef/unicef/services/cluster_service.dart';
+import 'package:unicef/unicef/services/indicator_services.dart';
+import 'package:unicef/unicef/services/infomation_service.dart';
+import 'package:open_settings/open_settings.dart';
 
 class SplashWidget extends StatefulWidget {
   const SplashWidget({Key? key}) : super(key: key);
@@ -8,20 +18,57 @@ class SplashWidget extends StatefulWidget {
 }
 
 class _SplashWidgetState extends State<SplashWidget> {
-  @override
-  // void initState() {
-  //   super.initState();
-  //   _displaySplash();
-  // }
+  ClusterService _clusterService = ClusterService();
+  IndicatorServices _indicatorServices = IndicatorServices();
+  ChartService _chartService = ChartService();
+  InfomationService _infomationService = InfomationService();
 
-  // // ignore: always_declare_return_types
-  // _displaySplash() {
-  //   Timer(const Duration(seconds: 5), () {
-  //     final Route route = MaterialPageRoute(
-  //         builder: (BuildContext context) => const LoginScreen());
-  //     Navigator.pushReplacement(context, route);
-  //   });
-  // }
+  Future<bool> _getBoolFromSharedPref() async {
+    final prefs = await SharedPreferences.getInstance();
+    final isCached = prefs.getBool('isCached');
+    if (isCached == null) {
+      return false;
+    }
+    return true;
+  }
+
+  Future<void> checkIsCached() async {
+    var connection = await Connectivity().checkConnectivity();
+
+    print("Connection:$connection");
+
+    final prefs = await SharedPreferences.getInstance();
+
+    bool isCached = await _getBoolFromSharedPref();
+
+    if (!isCached) {
+      if (connection == ConnectivityResult.none) {
+        final snackBar = SnackBar(
+          content: Text('Turn on your internet connection!'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        await Future.delayed(const Duration(seconds: 2), () {
+          OpenSettings.openWIFISetting();
+          exit(0);
+        });
+      } else {
+        _clusterService.saveClusters();
+        _indicatorServices.saveIndicators();
+        _chartService.saveCharts();
+        _infomationService.saveIntroduction();
+
+        _infomationService.saveSurvey();
+        _infomationService.saveDemography();
+        await prefs.setBool('isCached', true);
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkIsCached();
+  }
 
   @override
   Widget build(BuildContext context) {
