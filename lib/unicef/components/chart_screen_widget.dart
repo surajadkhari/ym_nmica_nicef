@@ -73,6 +73,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
         body: TabBarView(
           children: [
             SingleChildScrollView(
+              scrollDirection: Axis.vertical,
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -547,6 +548,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                 ),
               ),
             ),
+
             // Tables Data
             SingleChildScrollView(
               child: Center(
