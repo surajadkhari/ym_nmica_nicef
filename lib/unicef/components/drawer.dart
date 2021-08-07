@@ -149,7 +149,6 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
             ),
             onTap: () {
               getDemography();
-              Navigator.pop(context);
             },
           ),
           Container(
@@ -174,7 +173,6 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                         ),
                       ),
                     );
-                    Navigator.pop(context);
                   },
                 );
               },

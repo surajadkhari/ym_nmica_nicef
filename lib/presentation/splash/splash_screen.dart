@@ -20,13 +20,13 @@ class SplashScreen extends StatelessWidget {
         state.map(
           initial: (_) {},
           authenticated: (_) async => {
-            await Future.delayed(const Duration(seconds: 3), () {
+            await Future.delayed(const Duration(seconds: 4), () {
               Navigator.pushNamedAndRemoveUntil(
                   context, HomeScreen.screenId, (route) => false);
             })
           },
           unauthenticated: (_) async {
-            await Future.delayed(const Duration(seconds: 3), () {
+            await Future.delayed(const Duration(seconds: 4), () {
               Navigator.pushNamedAndRemoveUntil(
                   context, LoginScreen.screenId, (route) => false);
             });

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class CardComponent extends StatelessWidget {
@@ -20,9 +22,9 @@ class CardComponent extends StatelessWidget {
         height: 120.0,
         padding: const EdgeInsets.all(20.0),
         decoration: BoxDecoration(
-          color: Colors.grey[100],
+          color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
           border: Border.all(
-            color: Colors.blueAccent,
+            color: Colors.black,
           ),
         ),
         child: Align(
@@ -32,7 +34,10 @@ class CardComponent extends StatelessWidget {
               decoration: const BoxDecoration(border: Border()),
               child: Padding(
                 padding: const EdgeInsets.all(1.0),
-                child: Text(title!),
+                child: Text(
+                  title!,
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
               ),
             ),
           ),

@@ -28,9 +28,9 @@ class InfomationService {
   }
 
   Future saveDemography() async {
-    final res = await _api!.httpGet('demography')['introduction'];
+    final res = await _api!.httpGet('demography');
 
-    var decodedJson = json.decode(res.body);
+    var decodedJson = json.decode(res.body)['introduction'];
     await _repository!.save('demography', {"demography": decodedJson});
   }
 

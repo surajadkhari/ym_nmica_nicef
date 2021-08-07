@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:unicef/infrastructure/cluster/entities/cluster.dart';
 import 'package:unicef/unicef/components/drawer.dart';
 import 'package:unicef/unicef/components/home_screen_widget.dart';
 import 'package:unicef/unicef/screens/notifications.dart';
+import 'package:unicef/unicef/services/chart_service.dart';
+import 'package:unicef/unicef/services/cluster_service.dart';
+import 'package:unicef/unicef/services/indicator_services.dart';
+import 'package:unicef/unicef/services/infomation_service.dart';
 
 import 'package:unicef/unicef/widgets/Progress.dart';
 
@@ -15,6 +20,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  IndicatorServices _indicatorServices = IndicatorServices();
+  ClusterService _clusterService = ClusterService();
+  ChartService _chartService = ChartService();
+  InfomationService _infomationService = InfomationService();
   @override
   void initState() {
     super.initState();
@@ -30,7 +39,13 @@ class _HomeScreenState extends State<HomeScreen> {
             message: "Retriving Data",
           );
         });
+    _clusterService.saveClusters();
+    _indicatorServices.saveIndicators();
+    _chartService.saveCharts();
+    _infomationService.saveIntroduction();
 
+    _infomationService.saveSurvey();
+    _infomationService.saveDemography();
     await Future.delayed(const Duration(seconds: 2), () {});
     Navigator.pop(context);
   }

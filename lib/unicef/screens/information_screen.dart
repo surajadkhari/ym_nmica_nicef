@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unicef/presentation/home/components/drawer.dart';
+import 'package:unicef/unicef/components/drawer.dart';
 import 'package:unicef/unicef/components/infomation_screen_widget.dart';
 
 class InfomationScreen extends StatelessWidget {
