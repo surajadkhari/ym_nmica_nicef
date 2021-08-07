@@ -86,8 +86,9 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             return Container(
-                              height: getProportionateScreenHeight(700),
+                              height: getProportionateScreenHeight(500),
                               width: double.infinity,
+                              // color: Colors.red,
                               child: ListView.builder(
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (BuildContext context, int index) {
@@ -563,7 +564,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             return Container(
-                              height: getProportionateScreenHeight(700),
+                              height: getProportionateScreenHeight(500),
                               width: double.infinity,
                               child: ListView.builder(
                                 itemCount: snapshot.data!.length,
@@ -636,6 +637,9 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                       chartsData.forEach((element) {});
                                       return Column(
                                         children: [
+                                          MaterialButton(onPressed: () {
+                                            downloadPieData();
+                                          }),
                                           Padding(
                                             padding: const EdgeInsets.all(20.0),
                                             child: Text(
@@ -644,51 +648,64 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                           Container(
                                             height:
                                                 getProportionateScreenHeight(
-                                                    400),
+                                                    500),
                                             width: getProportionateScreenWidth(
                                                 500),
-                                            child: DataTable(
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: Colors.purple,
-                                                        width: 2)),
-                                                columns: const <DataColumn>[
-                                                  DataColumn(
-                                                    label: Text(
-                                                      'Area',
-                                                      style: TextStyle(
-                                                          fontStyle:
-                                                              FontStyle.italic),
-                                                    ),
-                                                  ),
-                                                  DataColumn(
-                                                    label: Text(
-                                                      'Value',
-                                                      style: TextStyle(
-                                                          fontStyle:
-                                                              FontStyle.italic),
-                                                    ),
-                                                  ),
-                                                ],
-                                                rows: piechart
-                                                    .map(
-                                                      (name) => DataRow(
-                                                        cells: [
-                                                          DataCell(
-                                                            Text(name.name!),
-                                                            showEditIcon: false,
-                                                            placeholder: false,
-                                                          ),
-                                                          DataCell(
-                                                            Text(name.value
-                                                                .toString()),
-                                                            showEditIcon: false,
-                                                            placeholder: false,
-                                                          )
-                                                        ],
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.purple,
+                                                  width: 2),
+                                            ),
+                                            child: SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: Container(
+                                                child: DataTable(
+                                                    columns: const <DataColumn>[
+                                                      DataColumn(
+                                                        label: Text(
+                                                          'Area',
+                                                          style: TextStyle(
+                                                              fontStyle:
+                                                                  FontStyle
+                                                                      .italic),
+                                                        ),
                                                       ),
-                                                    )
-                                                    .toList()),
+                                                      DataColumn(
+                                                        label: Text(
+                                                          'Value',
+                                                          style: TextStyle(
+                                                              fontStyle:
+                                                                  FontStyle
+                                                                      .italic),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                    rows: piechart
+                                                        .map(
+                                                          (name) => DataRow(
+                                                            cells: [
+                                                              DataCell(
+                                                                Text(
+                                                                    name.name!),
+                                                                showEditIcon:
+                                                                    false,
+                                                                placeholder:
+                                                                    false,
+                                                              ),
+                                                              DataCell(
+                                                                Text(name.value
+                                                                    .toString()),
+                                                                showEditIcon:
+                                                                    false,
+                                                                placeholder:
+                                                                    false,
+                                                              )
+                                                            ],
+                                                          ),
+                                                        )
+                                                        .toList()),
+                                              ),
+                                            ),
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.all(20.0),
@@ -743,40 +760,44 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                           Container(
                                             height:
                                                 getProportionateScreenHeight(
-                                                    400),
+                                                    500),
                                             width: getProportionateScreenWidth(
                                                 500),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.purple,
+                                                  width: 2),
+                                            ),
                                             child: SingleChildScrollView(
                                               scrollDirection: Axis.horizontal,
-                                              child: DataTable(
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Colors.purple,
-                                                          width: 2)),
-                                                  columns: getColums(pieLabels),
-                                                  rows: linechart
-                                                      .map(
-                                                        (name) => DataRow(
-                                                          cells: [
-                                                            DataCell(
-                                                              Text(name.type),
-                                                              showEditIcon:
-                                                                  false,
-                                                              placeholder:
-                                                                  false,
-                                                            ),
-                                                            DataCell(
-                                                              Text(name.value
-                                                                  .toString()),
-                                                              showEditIcon:
-                                                                  false,
-                                                              placeholder:
-                                                                  false,
-                                                            )
-                                                          ],
-                                                        ),
-                                                      )
-                                                      .toList()),
+                                              child: Container(
+                                                child: DataTable(
+                                                    columns:
+                                                        getColums(pieLabels),
+                                                    rows: linechart
+                                                        .map(
+                                                          (name) => DataRow(
+                                                            cells: [
+                                                              DataCell(
+                                                                Text(name.type),
+                                                                showEditIcon:
+                                                                    false,
+                                                                placeholder:
+                                                                    false,
+                                                              ),
+                                                              DataCell(
+                                                                Text(name.value
+                                                                    .toString()),
+                                                                showEditIcon:
+                                                                    false,
+                                                                placeholder:
+                                                                    false,
+                                                              )
+                                                            ],
+                                                          ),
+                                                        )
+                                                        .toList()),
+                                              ),
                                             ),
                                           ),
                                           Padding(
@@ -831,35 +852,46 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                           Container(
                                             height:
                                                 getProportionateScreenHeight(
-                                                    400),
+                                                    500),
                                             width: getProportionateScreenWidth(
                                                 500),
-                                            child: DataTable(
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: Colors.purple,
-                                                        width: 2)),
-                                                columns: getBarColumns(
-                                                    barGraphLabels),
-                                                rows: listConverter(bargraph)
-                                                    .map(
-                                                      (singleItem) => DataRow(
-                                                          cells:
-                                                              singleItem.values
-                                                                  .map(
-                                                                    (value) =>
-                                                                        DataCell(
-                                                                      Text(value
-                                                                          .toString()),
-                                                                      showEditIcon:
-                                                                          false,
-                                                                      placeholder:
-                                                                          false,
-                                                                    ),
-                                                                  )
-                                                                  .toList()),
-                                                    )
-                                                    .toList()),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.purple,
+                                                  width: 2),
+                                              //  color: Colors.red,
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
+                                              child: SingleChildScrollView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                child: Container(
+                                                  child: DataTable(
+                                                      columns: getBarColumns(
+                                                          barGraphLabels),
+                                                      rows:
+                                                          listConverter(
+                                                                  bargraph)
+                                                              .map(
+                                                                (singleItem) =>
+                                                                    DataRow(
+                                                                        cells: singleItem
+                                                                            .values
+                                                                            .map(
+                                                                              (value) => DataCell(
+                                                                                Text(value.toString()),
+                                                                                showEditIcon: false,
+                                                                                placeholder: false,
+                                                                              ),
+                                                                            )
+                                                                            .toList()),
+                                                              )
+                                                              .toList()),
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.all(20.0),
@@ -936,6 +968,8 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
     }).toList();
     return my;
   }
+
+  void downloadPieData() {}
 }
 
 class MyGraph {
@@ -943,8 +977,6 @@ class MyGraph {
   List<String> values = [];
   MyGraph(this.type);
 }
-// error k ho bhanda
-// Area men women  tara yesko value pugena
 
 class LineChartDraw {
   String type;

@@ -3,20 +3,21 @@ class NotificationModel {
   String? notificationTitle;
   String? notificationText;
   String? notificationDate;
-  bool? isOpen;
+  bool? data;
 
   NotificationModel(
       {this.id,
       this.notificationTitle,
       this.notificationText,
       this.notificationDate,
-      this.isOpen = true});
+      this.data = false});
 
   NotificationModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     notificationTitle = json['notification_title'];
     notificationText = json['notification_text'];
     notificationDate = json['notification_date'];
+    data = false;
   }
 
   Map<String, dynamic> toJson() {
