@@ -1,4 +1,10 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_file_dialog/flutter_file_dialog.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'package:unicef/common/utils/size_configs.dart';
 import 'package:unicef/unicef/models/chart.dart';
@@ -6,6 +12,7 @@ import 'package:unicef/unicef/services/chart2_service.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class ChartScreenWidget extends StatefulWidget {
@@ -86,7 +93,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             return Container(
-                              height: getProportionateScreenHeight(500),
+                              height: getProportionateScreenHeight(650),
                               width: double.infinity,
                               // color: Colors.red,
                               child: ListView.builder(
@@ -182,7 +189,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                       Container(
                                                         height:
                                                             getProportionateScreenHeight(
-                                                                300),
+                                                                500),
                                                         width:
                                                             getProportionateScreenWidth(
                                                                 500),
@@ -244,7 +251,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                 double.parse(value),
                                               ),
                                             );
-                                            print(key);
+                                            // print(key);
                                           } else {
                                             label = value;
                                             //  print(label);
@@ -385,7 +392,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                               key, double.parse(chartper)));
                                         } else {
                                           label = chartper;
-                                          print(chartper);
+                                          // print(chartper);
                                         }
                                       });
                                       allPieData.add(chartsPieData.toList());
@@ -564,7 +571,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             return Container(
-                              height: getProportionateScreenHeight(500),
+                              height: getProportionateScreenHeight(640),
                               width: double.infinity,
                               child: ListView.builder(
                                 itemCount: snapshot.data!.length,
@@ -592,6 +599,83 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                   List<String> barLabels = ["Area"];
                                   List<String> barGraphLabels = ["Area"];
 
+                                  getCsv() async {
+                                    List<List<dynamic>> rows = [];
+
+                                    rows.add(pieLabels);
+
+                                    for (int i = 0; i < piechart.length; i++) {
+                                      List<dynamic> row = [];
+
+                                      row.add(piechart[i].name);
+                                      row.add(piechart[i].value);
+                                      rows.add(row);
+                                    }
+
+                                    String dir = '';
+                                    if (Platform.isAndroid)
+                                      dir =
+                                          (await getExternalStorageDirectory())!
+                                              .path;
+                                    else if (Platform.isIOS) {
+                                      dir =
+                                          (await getApplicationDocumentsDirectory())
+                                              .path;
+                                    }
+                                    var path = "$dir/" +
+                                        "nmics" +
+                                        DateTime.now()
+                                            .millisecondsSinceEpoch
+                                            .toString() +
+                                        ".csv";
+                                    File file = File(path);
+                                    String csv = const ListToCsvConverter()
+                                        .convert(rows);
+                                    file.writeAsString(csv);
+                                    final params = SaveFileDialogParams(
+                                        sourceFilePath: file.path);
+
+                                    final filePath =
+                                        await FlutterFileDialog.saveFile(
+                                            params: params);
+                                    print(filePath);
+                                  }
+
+                                  getBarCsv() async {
+                                    var li = listConverter(bargraph);
+
+                                    List<List<dynamic>> rows = [];
+
+                                    for (int i = 0; i < li.length; i++) {
+                                      List<dynamic> row = [];
+
+                                      row.add(bargraph[i].type);
+                                      row.add(bargraph[i].value);
+                                      rows.add(row);
+                                    }
+
+                                    String dir = '';
+                                    if (Platform.isAndroid)
+                                      dir =
+                                          (await getExternalStorageDirectory())!
+                                              .path;
+                                    else if (Platform.isIOS) {
+                                      dir =
+                                          (await getApplicationDocumentsDirectory())
+                                              .path;
+                                    }
+                                    File file = File("$dir/" +
+                                        "test" +
+                                        DateTime.now()
+                                            .millisecondsSinceEpoch
+                                            .toString() +
+                                        ".csv");
+                                    String csv = const ListToCsvConverter()
+                                        .convert(rows);
+                                    file.writeAsString(csv);
+                                    print(csv);
+                                  }
+
                                   Chart datar = snapshot.data![index];
                                   if (datar.chartType == "pie_chart" ||
                                       datar.chartType == "bar_graph" ||
@@ -617,6 +701,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                 key, double.parse(value)));
                                           } else {
                                             label = value;
+                                            pieLabels.add(label);
                                           }
                                         });
                                         allData.add(chartsBarData.toList());
@@ -637,18 +722,40 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                       chartsData.forEach((element) {});
                                       return Column(
                                         children: [
-                                          MaterialButton(onPressed: () {
-                                            downloadPieData();
-                                          }),
                                           Padding(
                                             padding: const EdgeInsets.all(20.0),
-                                            child: Text(
-                                                snapshot.data![index].name!),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Center(
+                                                  child: Text(snapshot
+                                                      .data![index].name!),
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 20),
+                                                      child: TextButton(
+                                                        onPressed: () {
+                                                          getCsv();
+                                                        },
+                                                        child: const Text(
+                                                            'Download'),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                           Container(
                                             height:
                                                 getProportionateScreenHeight(
-                                                    500),
+                                                    390),
                                             width: getProportionateScreenWidth(
                                                 500),
                                             decoration: BoxDecoration(
@@ -739,7 +846,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                   double.parse(value),
                                                 ),
                                               );
-                                              print(key);
+                                              // print(key);
                                             } else {
                                               label = value;
                                               pieLabels.add(label);
@@ -846,13 +953,30 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.all(20.0),
-                                            child: Text(
-                                                snapshot.data![index].name!),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(snapshot
+                                                    .data![index].name!),
+                                                Container(
+                                                  margin:
+                                                      EdgeInsets.only(left: 20),
+                                                  child: TextButton(
+                                                    onPressed: () {
+                                                      getBarCsv();
+                                                    },
+                                                    child:
+                                                        const Text('Download'),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                           Container(
                                             height:
                                                 getProportionateScreenHeight(
-                                                    500),
+                                                    450),
                                             width: getProportionateScreenWidth(
                                                 500),
                                             decoration: BoxDecoration(
@@ -867,18 +991,18 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                               child: SingleChildScrollView(
                                                 scrollDirection:
                                                     Axis.horizontal,
-                                                child: Container(
-                                                  child: DataTable(
-                                                      columns: getBarColumns(
-                                                          barGraphLabels),
-                                                      rows:
-                                                          listConverter(
-                                                                  bargraph)
-                                                              .map(
-                                                                (singleItem) =>
-                                                                    DataRow(
-                                                                        cells: singleItem
-                                                                            .values
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                      child: DataTable(
+                                                          columns: getBarColumns(
+                                                              barGraphLabels),
+                                                          rows:
+                                                              listConverter(
+                                                                      bargraph)
+                                                                  .map(
+                                                                    (singleItem) => DataRow(
+                                                                        cells: singleItem.values
                                                                             .map(
                                                                               (value) => DataCell(
                                                                                 Text(value.toString()),
@@ -887,8 +1011,10 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                               ),
                                                                             )
                                                                             .toList()),
-                                                              )
-                                                              .toList()),
+                                                                  )
+                                                                  .toList()),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ),
@@ -945,7 +1071,6 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
     List<DataColumn> columns = <DataColumn>[];
 
     barValueLabels.map((String column) {
-      print("colum" + column);
       columns.add(DataColumn(label: Text(column)));
     }).toList();
     return columns;

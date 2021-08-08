@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:unicef/infrastructure/cluster/entities/cluster.dart';
 import 'package:unicef/unicef/components/drawer.dart';
 import 'package:unicef/unicef/components/home_screen_widget.dart';
 import 'package:unicef/unicef/screens/notifications.dart';

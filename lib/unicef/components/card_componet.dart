@@ -36,7 +36,7 @@ class CardComponent extends StatelessWidget {
                 padding: const EdgeInsets.all(1.0),
                 child: Text(
                   title!,
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 15),
                 ),
               ),
             ),
