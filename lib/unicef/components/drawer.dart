@@ -151,33 +151,6 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
               getDemography();
             },
           ),
-          Container(
-            height: getProportionateScreenHeight(400),
-            child: ListView.builder(
-              itemCount: 8,
-              physics: ClampingScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text(_clusterList[index].name),
-                  leading: const Icon(
-                    FontAwesomeIcons.greaterThan,
-                    color: Colors.blue,
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      new MaterialPageRoute(
-                        builder: (context) => IndicatorScreen(
-                          id: _clusterList[index].id!,
-                          name: _clusterList[index].name,
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
-          ),
           ListTile(
             title: const Text("Credits"),
             leading: const Icon(
@@ -191,6 +164,44 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                       builder: (BuildContext context) => CreditScreen()));
               Navigator.pop(context);
             },
+          ),
+          ExpansionTile(
+            leading: const Icon(
+              FontAwesomeIcons.greaterThan,
+              color: Colors.blue,
+            ),
+            title: Text(
+              "Clusters",
+            ),
+            children: <Widget>[
+              Container(
+                height: getProportionateScreenHeight(600),
+                child: ListView.builder(
+                  itemCount: _clusterList.length,
+                  physics: ClampingScrollPhysics(),
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      title: Text(_clusterList[index].name),
+                      leading: const Icon(
+                        FontAwesomeIcons.greaterThan,
+                        color: Colors.blue,
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                            builder: (context) => IndicatorScreen(
+                              id: _clusterList[index].id!,
+                              name: _clusterList[index].name,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
           const Divider(
             color: Colors.black,

@@ -36,9 +36,6 @@ class _NotificationScreenWidgetState extends State<NotificationScreenWidget> {
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
-                              print('--------------');
-                              print(data[index].data);
-
                               return ExpansionPanelList(
                                 animationDuration: Duration(milliseconds: 500),
                                 dividerColor: Colors.red,

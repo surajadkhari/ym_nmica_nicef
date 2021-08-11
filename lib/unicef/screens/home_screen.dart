@@ -1,6 +1,9 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
+import 'package:open_settings/open_settings.dart';
 import 'package:unicef/unicef/components/drawer.dart';
 import 'package:unicef/unicef/components/home_screen_widget.dart';
+import 'package:unicef/unicef/repository/repository.dart';
 import 'package:unicef/unicef/screens/notifications.dart';
 import 'package:unicef/unicef/services/chart_service.dart';
 import 'package:unicef/unicef/services/cluster_service.dart';
@@ -23,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ClusterService _clusterService = ClusterService();
   ChartService _chartService = ChartService();
   InfomationService _infomationService = InfomationService();
+  Repository _repository = Repository();
   @override
   void initState() {
     super.initState();
@@ -30,23 +34,35 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List indicator = [];
   cacheAllData() async {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext contect) {
-          return Progress(
-            message: "Retriving Data",
-          );
-        });
-    _clusterService.saveClusters();
-    _indicatorServices.saveIndicators();
-    _chartService.saveCharts();
-    _infomationService.saveIntroduction();
-
-    _infomationService.saveSurvey();
-    _infomationService.saveDemography();
-    await Future.delayed(const Duration(seconds: 2), () {});
-    Navigator.pop(context);
+    var connection = await Connectivity().checkConnectivity();
+    if (connection == ConnectivityResult.none) {
+      final snackBar = SnackBar(
+        content: Text('Turn on your internet connection!'),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      await Future.delayed(const Duration(seconds: 2), () {
+        OpenSettings.openWIFISetting();
+      });
+    } else {
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext contect) {
+            return Progress(
+              message: "Retrieving Data",
+            );
+          });
+      _repository.deleteAllData();
+      _clusterService.saveClusters();
+      _indicatorServices.saveIndicators();
+      _chartService.saveCharts();
+      _infomationService.saveIntroduction();
+      _infomationService.saveSurvey();
+      _infomationService.saveDemography();
+      await Future.delayed(const Duration(seconds: 3), () {});
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) => super.widget));
+    }
   }
 
   @override

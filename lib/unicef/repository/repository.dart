@@ -58,4 +58,21 @@ class Repository {
 
     return li;
   }
+
+  deleteAllData() async {
+    try {
+      await _database!.transaction((txn) async {
+        var batch = txn.batch();
+        batch.delete("clusters");
+        batch.delete("indicators");
+        batch.delete("charts");
+        batch.delete("introduction");
+        batch.delete("survey");
+        batch.delete("demography");
+        await batch.commit();
+      });
+    } catch (error) {
+      throw Exception('DbBase.cleanDatabase: ' + error.toString());
+    }
+  }
 }
