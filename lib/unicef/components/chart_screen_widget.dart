@@ -1,18 +1,15 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_file_dialog/flutter_file_dialog.dart';
+import 'package:nmics/unicef/models/chart.dart';
+import 'package:nmics/unicef/services/chart2_service.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'package:unicef/common/utils/size_configs.dart';
-import 'package:unicef/unicef/models/chart.dart';
-import 'package:unicef/unicef/services/chart2_service.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class ChartScreenWidget extends StatefulWidget {
@@ -272,9 +269,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Container(
-                                                height:
-                                                    getProportionateScreenHeight(
-                                                        400),
+                                                height: 350,
                                                 width:
                                                     getProportionateScreenWidth(
                                                         500),
@@ -426,7 +421,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                             child: Container(
                                               height:
                                                   getProportionateScreenHeight(
-                                                      400),
+                                                      450),
                                               width:
                                                   getProportionateScreenWidth(
                                                       500),
@@ -478,7 +473,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                       .white,
                                                                   height:
                                                                       getProportionateScreenHeight(
-                                                                          280),
+                                                                          270),
                                                                   width:
                                                                       getProportionateScreenWidth(
                                                                           176),
@@ -495,7 +490,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                             .DatumLegend(
                                                                           outsideJustification: charts
                                                                               .OutsideJustification
-                                                                              .endDrawArea,
+                                                                              .startDrawArea,
                                                                           horizontalFirst:
                                                                               false,
                                                                           desiredMaxRows:
@@ -506,7 +501,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                           entryTextStyle: charts.TextStyleSpec(
                                                                               color: charts.MaterialPalette.black,
                                                                               fontFamily: 'Georgia',
-                                                                              fontSize: 11),
+                                                                              fontSize: 6),
                                                                         )
                                                                       ],
                                                                       defaultRenderer: new charts.ArcRendererConfig(
@@ -584,12 +579,8 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                   List<LineChartDraw> chartsData = [];
                                   List<BarGraph> chartsBarData = [];
                                   List<PieChart> chartsPieData = [];
-                                  // List<LineChartDraw> _lineChart = [];
 
                                   List<List<BarGraph>> allData = [];
-                                  // List<List<PieChart>> allPieData = [];
-
-                                  // List data = <BarGraph>[];
 
                                   var bargraph = <BarGraph2>[];
 
@@ -609,6 +600,48 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
 
                                       row.add(piechart[i].name);
                                       row.add(piechart[i].value);
+                                      rows.add(row);
+                                    }
+
+                                    String dir = '';
+                                    if (Platform.isAndroid)
+                                      dir =
+                                          (await getExternalStorageDirectory())!
+                                              .path;
+                                    else if (Platform.isIOS) {
+                                      dir =
+                                          (await getApplicationDocumentsDirectory())
+                                              .path;
+                                    }
+                                    var path = "$dir/" +
+                                        "nmics" +
+                                        DateTime.now()
+                                            .millisecondsSinceEpoch
+                                            .toString() +
+                                        ".csv";
+                                    File file = File(path);
+                                    String csv = const ListToCsvConverter()
+                                        .convert(rows);
+                                    file.writeAsString(csv);
+                                    final params = SaveFileDialogParams(
+                                        sourceFilePath: file.path);
+
+                                    final filePath =
+                                        await FlutterFileDialog.saveFile(
+                                            params: params);
+                                    print(filePath);
+                                  }
+
+                                  getLineCsv() async {
+                                    List<List<dynamic>> rows = [];
+
+                                    rows.add(pieLabels);
+
+                                    for (int i = 0; i < linechart.length; i++) {
+                                      List<dynamic> row = [];
+
+                                      row.add(linechart[i].type);
+                                      row.add(linechart[i].value);
                                       rows.add(row);
                                     }
 
@@ -753,9 +786,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                             ),
                                           ),
                                           Container(
-                                            height:
-                                                getProportionateScreenHeight(
-                                                    390),
+                                            height: 500,
                                             width: getProportionateScreenWidth(
                                                 500),
                                             decoration: BoxDecoration(
@@ -861,13 +892,30 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.all(20.0),
-                                            child: Text(
-                                                snapshot.data![index].name!),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(snapshot
+                                                    .data![index].name!),
+                                                Row(
+                                                  children: [
+                                                    Container(
+                                                      child: TextButton(
+                                                        onPressed: () {
+                                                          getLineCsv();
+                                                        },
+                                                        child: const Text(
+                                                            'Download'),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                           Container(
-                                            height:
-                                                getProportionateScreenHeight(
-                                                    500),
+                                            height: 500,
                                             width: getProportionateScreenWidth(
                                                 500),
                                             decoration: BoxDecoration(
@@ -919,9 +967,6 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                         ],
                                       );
                                     } else if (datar.chartType == "bar_graph") {
-                                      // List<ChartElement>? datas =
-                                      //     snapshot.data![index].charts; k ho erro?
-
                                       var count = 0;
 
                                       while (count <
@@ -952,7 +997,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                       return Column(
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.all(20.0),
+                                            padding: const EdgeInsets.all(00.0),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
@@ -960,8 +1005,8 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                 Text(snapshot
                                                     .data![index].name!),
                                                 Container(
-                                                  margin:
-                                                      EdgeInsets.only(left: 20),
+                                                  margin: EdgeInsets.only(
+                                                      left: 0.0),
                                                   child: TextButton(
                                                     onPressed: () {
                                                       getBarCsv();
@@ -974,9 +1019,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                             ),
                                           ),
                                           Container(
-                                            height:
-                                                getProportionateScreenHeight(
-                                                    450),
+                                            height: 500,
                                             width: getProportionateScreenWidth(
                                                 500),
                                             decoration: BoxDecoration(

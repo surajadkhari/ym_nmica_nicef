@@ -45,25 +45,28 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
               future: futureData,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  List? data = snapshot.data;
-                  print(data![1].id);
+                  var data = snapshot.data;
                   return ListView.builder(
-                    itemCount: data.length,
+                    itemCount: data!.length,
                     itemBuilder: (BuildContext context, int index) {
-                      print(_checkBoxList);
                       return CheckboxListTile(
-                        title: Text(data[index].name),
+                        title: Text(data[index].name!),
                         value: data[index].value,
                         onChanged: (val) {
-                          setState(() {
-                            data[index].value = val;
-                            var id = data[index].id;
-                            if (val!) {
-                              _checkBoxList.add(id!);
-                            } else {
-                              _checkBoxList.remove(id!);
-                            }
-                          });
+                          var id = data[index].id;
+                          if (val!) {
+                            _checkBoxList.add(id!);
+                            setState(() {
+                              data[index].value = val;
+                            });
+                            // _checkBoxList.removeAt(index);
+                          } else {
+                            _checkBoxList.remove(id!);
+                            setState(() {
+                              data[index].value = val;
+                            });
+                            print(_checkBoxList);
+                          }
                         },
                       );
                     },

@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:api_cache_manager/models/cache_db_model.dart';
 import 'package:api_cache_manager/utils/cache_manager.dart';
 import 'package:http/http.dart';
-import 'package:unicef/api/api.dart';
-import 'package:unicef/unicef/models/chart.dart';
+import 'package:nmics/api/api.dart';
+import 'package:nmics/unicef/models/chart.dart';
 
 class Chart2Service {
   Api? _api;

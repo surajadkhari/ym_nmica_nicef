@@ -201,7 +201,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
             children: [
               IconButton(
                 onPressed: () async {
-                  await launch('http::/facebook.com');
+                  await launch('https://www.facebook.com/unicefnepal');
                 },
                 icon: const Icon(
                   Icons.facebook,
@@ -215,7 +215,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                   color: Colors.blue,
                 ),
                 onPressed: () async {
-                  await launch('http::/instagram.com');
+                  await launch('https://www.instagram.com/unicefnepal/');
                 },
               ),
               IconButton(
@@ -225,7 +225,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                   color: Colors.blue,
                 ),
                 onPressed: () async {
-                  await launch('http::/twitter.com');
+                  await launch('https://twitter.com/unicef_nepal?lang=en');
                 },
               ),
             ],

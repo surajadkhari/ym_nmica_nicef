@@ -8,7 +8,7 @@
 
    <application
        
-        android:label="unicef"
+        android:label="NMICS"
         android:name=".Application"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">
