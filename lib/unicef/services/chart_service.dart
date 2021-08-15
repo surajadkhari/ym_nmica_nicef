@@ -19,7 +19,6 @@ class ChartService {
   Future<List<Chart>>? fetchCharts(List<int> ids) async {
     Map<String, dynamic> data = {"ids": ids};
     var isCacheExist = await APICacheManager().isAPICacheKeyExist('chart$ids');
-    print(isCacheExist);
 
     if (!isCacheExist) {
       Response response = await _api!.httpPost('indicator/charts', data);
@@ -43,34 +42,6 @@ class ChartService {
       List jsonResponse = json.decode(cachedData.syncData);
 
       return jsonResponse.map((chart) => new Chart.fromJson(chart)).toList();
-    }
-  }
-
-  Future? saveCharts() async {
-    Response response = await _api!.httpGet('charts');
-
-    if (response.statusCode == 200) {
-      List decodedJson = json.decode(response.body);
-      decodedJson.forEach((element) async {
-        await _repository!.save('charts', {
-          'id': element['id'],
-          'indicator_id': element['indicator_id'],
-          'label': element['label'],
-          'chart_type': element['indicator']['chart_type'],
-          'name': element['indicator']['name'],
-          'description': element['indicator']['description'],
-          "np": element['np'],
-          "p1": element['p1'],
-          "p2": element['p2'],
-          "p3": element['p3'],
-          "p4": element['p4'],
-          "p5": element['p5'],
-          "p6": element['p6'],
-          "p7": element['p7'],
-        });
-      });
-    } else {
-      throw Exception('Unexpected error occured!');
     }
   }
 

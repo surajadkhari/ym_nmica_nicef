@@ -81,7 +81,7 @@ dev_dependencies:
   freezed: ^0.14.2
   flutter_launcher_icons: "^0.9.1"
 flutter_icons:
-  image_path: "assets/images/mic_logo.png"
+  image_path: "assets/images/app_icon.png"
   android: true
   ios: true
 

@@ -55,7 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
       _repository.deleteAllData();
       _clusterService.saveClusters();
       _indicatorServices.saveIndicators();
-      _chartService.saveCharts();
       _infomationService.saveIntroduction();
       _infomationService.saveSurvey();
       _infomationService.saveDemography();
