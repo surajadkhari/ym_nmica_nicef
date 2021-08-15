@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:unicef/unicef/repository/repository.dart';
+import 'package:unicef/unicef/services/chart2_service.dart';
 import 'package:unicef/unicef/services/chart_service.dart';
 import 'package:unicef/unicef/services/cluster_service.dart';
 import 'package:unicef/unicef/services/indicator_services.dart';
@@ -19,8 +21,8 @@ class SplashWidget extends StatefulWidget {
 class _SplashWidgetState extends State<SplashWidget> {
   ClusterService _clusterService = ClusterService();
   IndicatorServices _indicatorServices = IndicatorServices();
-  ChartService _chartService = ChartService();
   InfomationService _infomationService = InfomationService();
+  Repository _repository = Repository();
 
   Future<bool> _getBoolFromSharedPref() async {
     final prefs = await SharedPreferences.getInstance();
@@ -53,13 +55,21 @@ class _SplashWidgetState extends State<SplashWidget> {
       } else {
         _clusterService.saveClusters();
         _indicatorServices.saveIndicators();
-        _chartService.saveCharts();
+        // _chartService.saveCharts();
         _infomationService.saveIntroduction();
-
         _infomationService.saveSurvey();
         _infomationService.saveDemography();
         await prefs.setBool('isCached', true);
       }
+    } else {
+      _repository.deleteAllData();
+      _clusterService.saveClusters();
+      _indicatorServices.saveIndicators();
+      // _chartService.saveCharts();
+      _infomationService.saveIntroduction();
+      _infomationService.saveSurvey();
+      _infomationService.saveDemography();
+      await prefs.setBool('isCached', true);
     }
   }
 

@@ -68,10 +68,10 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
             automaticIndicatorColorAdjustment: true,
             tabs: [
               Tab(
-                text: "Charts",
+                text: "Chart",
               ),
               Tab(
-                text: "Tables",
+                text: "Table",
               ),
             ],
           ),
@@ -271,7 +271,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Container(
-                                                height: 350,
+                                                height: 700,
                                                 width:
                                                     getProportionateScreenWidth(
                                                         500),
@@ -299,7 +299,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                       scrollDirection:
                                                           Axis.horizontal,
                                                       child: Container(
-                                                        height: 300,
+                                                        height: 540,
                                                         width:
                                                             getProportionateScreenWidth(
                                                                 900),
@@ -758,33 +758,36 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                       return Column(
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.all(20.0),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Center(
-                                                  child: Text(snapshot
-                                                      .data![index].name!),
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    Container(
-                                                      margin: EdgeInsets.only(
-                                                          left: 20),
-                                                      child: TextButton(
-                                                        onPressed: () {
-                                                          getCsv();
-                                                        },
-                                                        child: const Text(
-                                                            'Download'),
+                                            padding: const EdgeInsets.all(00.0),
+                                            child: SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Center(
+                                                    child: Text(snapshot
+                                                        .data![index].name!),
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Container(
+                                                        margin: EdgeInsets.only(
+                                                            left: 0),
+                                                        child: TextButton(
+                                                          onPressed: () {
+                                                            getCsv();
+                                                          },
+                                                          child: const Text(
+                                                              'Download'),
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                           Container(
@@ -848,7 +851,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                             ),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.all(20.0),
+                                            padding: const EdgeInsets.all(0.0),
                                             child: Text(snapshot
                                                 .data![index].description!),
                                           ),
@@ -893,27 +896,30 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                       return Column(
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.all(20.0),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(snapshot
-                                                    .data![index].name!),
-                                                Row(
-                                                  children: [
-                                                    Container(
-                                                      child: TextButton(
-                                                        onPressed: () {
-                                                          getLineCsv();
-                                                        },
-                                                        child: const Text(
-                                                            'Download'),
+                                            padding: const EdgeInsets.all(0.0),
+                                            child: SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(snapshot
+                                                      .data![index].name!),
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                        child: TextButton(
+                                                          onPressed: () {
+                                                            getLineCsv();
+                                                          },
+                                                          child: const Text(
+                                                              'Download'),
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                           Container(
@@ -1000,24 +1006,27 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.all(00.0),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(snapshot
-                                                    .data![index].name!),
-                                                Container(
-                                                  margin: EdgeInsets.only(
-                                                      left: 0.0),
-                                                  child: TextButton(
-                                                    onPressed: () {
-                                                      getBarCsv();
-                                                    },
-                                                    child:
-                                                        const Text('Download'),
+                                            child: SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(snapshot
+                                                      .data![index].name!),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 0.0),
+                                                    child: TextButton(
+                                                      onPressed: () {
+                                                        getBarCsv();
+                                                      },
+                                                      child: const Text(
+                                                          'Download'),
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                           ),
                                           Container(
@@ -1032,7 +1041,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                             ),
                                             child: Padding(
                                               padding:
-                                                  const EdgeInsets.all(10.0),
+                                                  const EdgeInsets.all(0.0),
                                               child: SingleChildScrollView(
                                                 scrollDirection:
                                                     Axis.horizontal,
@@ -1138,8 +1147,6 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
     }).toList();
     return my;
   }
-
-  void downloadPieData() {}
 }
 
 class MyGraph {

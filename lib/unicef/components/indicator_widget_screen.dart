@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:unicef/unicef/screens/chart_screen.dart';
 import 'package:unicef/unicef/services/indicator_services.dart';
@@ -17,14 +18,20 @@ class IndicatorScreenWidget extends StatefulWidget {
 class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
   IndicatorServices _indicatorService = IndicatorServices();
   Future<List<CheckBoxState>>? futureData;
+  ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
+    checkInternet();
     futureData = _indicatorService.fetchIndicators(this.widget.id);
   }
 
   List<int> _checkBoxList = [];
+  var r;
+  checkInternet() async {
+    r = await Connectivity().checkConnectivity();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,25 +54,38 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
                 if (snapshot.hasData) {
                   var data = snapshot.data;
                   return ListView.builder(
+                    controller: _scrollController,
+                    itemExtent: 40,
                     itemCount: data!.length,
                     itemBuilder: (BuildContext context, int index) {
+                      var ind = index + 1;
+                      var name = data[index].name!;
+                      if (r == ConnectivityResult.none) {
+                        data[index].value = true;
+                        _checkBoxList.add(data[index].id!);
+                        return ListTile(
+                          title: Text("$ind: $name"),
+                        );
+                      }
+
                       return CheckboxListTile(
-                        title: Text(data[index].name!),
+                        title: Text("$ind: $name"),
                         value: data[index].value,
                         onChanged: (val) {
-                          var id = data[index].id;
-                          if (val!) {
-                            _checkBoxList.add(id!);
-                            setState(() {
-                              data[index].value = val;
-                            });
-                            // _checkBoxList.removeAt(index);
+                          if (r == ConnectivityResult.none) {
                           } else {
-                            _checkBoxList.remove(id!);
-                            setState(() {
-                              data[index].value = val;
-                            });
-                            print(_checkBoxList);
+                            var id = data[index].id;
+                            if (val!) {
+                              _checkBoxList.add(id!);
+                              setState(() {
+                                data[index].value = val;
+                              });
+                            } else {
+                              _checkBoxList.remove(id!);
+                              setState(() {
+                                data[index].value = val;
+                              });
+                            }
                           }
                         },
                       );
@@ -82,15 +102,19 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
             padding: EdgeInsets.all(10),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  new MaterialPageRoute(
-                    builder: (context) => ChartScreen(
-                      ids: _checkBoxList,
-                      name: this.widget.name,
-                    ),
-                  ),
-                );
+                _scrollController
+                    .animateTo(_scrollController.position.maxScrollExtent,
+                        duration: Duration(milliseconds: 100),
+                        curve: Curves.bounceOut)
+                    .then((value) => Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                            builder: (context) => ChartScreen(
+                              ids: _checkBoxList,
+                              name: this.widget.name,
+                            ),
+                          ),
+                        ));
               },
               child: const Center(
                 child: Text(

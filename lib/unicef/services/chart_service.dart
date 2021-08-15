@@ -76,7 +76,6 @@ class ChartService {
 
   Future<List> getCharts(List<int> ids) async {
     var res = await _repository!.getCharts('charts', 'indicator_id', ids);
-
     return res;
   }
 }

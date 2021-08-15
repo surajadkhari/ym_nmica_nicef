@@ -18,7 +18,7 @@ void main() async {
 
   await Hive.initFlutter();
   await Firebase.initializeApp();
-  await FirebaseMessaging.instance.subscribeToTopic('all');
+  // await FirebaseMessaging.instance.subscribeToTopic('all');
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
   runApp(

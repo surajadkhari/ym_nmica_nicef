@@ -27,7 +27,6 @@ class Repository {
   Future getData(table) async {
     var conn = await database;
     var getData = await conn.query(table);
-    print(getData);
     return getData;
   }
 
@@ -53,7 +52,6 @@ class Repository {
           .query(table, where: '$column_name=?', whereArgs: [element]);
       var mapped = value.map((chart) => new Chart.fromJson(chart));
       li.add(mapped);
-      print("Value:$mapped");
     });
 
     return li;
