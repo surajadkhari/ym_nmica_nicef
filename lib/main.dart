@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -18,7 +19,10 @@ void main() async {
 
   await Hive.initFlutter();
   await Firebase.initializeApp();
-  // await FirebaseMessaging.instance.subscribeToTopic('all');
+  var connection = await Connectivity().checkConnectivity();
+  if (connection != ConnectivityResult.none) {
+    await FirebaseMessaging.instance.subscribeToTopic('all');
+  }
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
   runApp(

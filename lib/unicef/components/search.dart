@@ -1,4 +1,6 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
+import 'package:open_settings/open_settings.dart';
 import 'package:unicef/unicef/components/singl_chart.dart';
 import 'package:unicef/unicef/models/Indicators.dart';
 
@@ -30,8 +32,20 @@ class _SearchWidgetState extends State<SearchWidget> {
             padding: const EdgeInsets.all(20.0),
             child: Container(
               child: TextSelectionGestureDetector(
-                onTapDown: (bfm) {
-                  showSearch(context: context, delegate: DataSearch());
+                onTapDown: (bfm) async {
+                  var connection = await Connectivity().checkConnectivity();
+                  if (connection == ConnectivityResult.none) {
+                    final snackBar = SnackBar(
+                      content: Text(
+                          'Turn on your internet connection to use this feature!'),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    await Future.delayed(const Duration(seconds: 2), () {
+                      OpenSettings.openWIFISetting();
+                    });
+                  } else {
+                    showSearch(context: context, delegate: DataSearch());
+                  }
                 },
                 child: TextField(
                   readOnly: true,
