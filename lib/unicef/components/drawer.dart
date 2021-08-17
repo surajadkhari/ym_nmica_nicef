@@ -115,8 +115,8 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
               color: Colors.blue,
             ),
             onTap: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const HomeScreen()));
+              Navigator.pushNamedAndRemoveUntil(
+                  context, HomeScreen.screenId, (route) => false);
             },
           ),
           ListTile(

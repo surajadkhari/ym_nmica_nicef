@@ -20,7 +20,6 @@ class IndicatorServices {
     if (response.statusCode == 200) {
       List decodedJson = json.decode(response.body);
       decodedJson.forEach((element) async {
-        print(element['name']);
         await _repository!.save('indicators', {
           'id': element['id'],
           "cluster_id": element['indicator_cluster_id'],

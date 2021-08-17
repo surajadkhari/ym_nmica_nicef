@@ -1,11 +1,12 @@
 import 'package:connectivity/connectivity.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:open_settings/open_settings.dart';
+import 'package:unicef/presentation/auth/login/login_screen.dart';
 import 'package:unicef/unicef/components/drawer.dart';
 import 'package:unicef/unicef/components/home_screen_widget.dart';
 import 'package:unicef/unicef/repository/repository.dart';
 import 'package:unicef/unicef/screens/notifications.dart';
-import 'package:unicef/unicef/services/chart_service.dart';
 import 'package:unicef/unicef/services/cluster_service.dart';
 import 'package:unicef/unicef/services/indicator_services.dart';
 import 'package:unicef/unicef/services/infomation_service.dart';
@@ -24,7 +25,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   IndicatorServices _indicatorServices = IndicatorServices();
   ClusterService _clusterService = ClusterService();
-  ChartService _chartService = ChartService();
   InfomationService _infomationService = InfomationService();
   Repository _repository = Repository();
   @override
@@ -98,6 +98,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (BuildContext context) => NotificationScreen(),
+                ),
+              );
+            },
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.logout,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              final FirebaseAuth auth = FirebaseAuth.instance;
+              auth.signOut();
+              Navigator.pushNamedAndRemoveUntil(
+                  context, LoginScreen.screenId, (route) => false);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("See you next time!"),
                 ),
               );
             },

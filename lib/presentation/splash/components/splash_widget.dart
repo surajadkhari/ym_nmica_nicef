@@ -4,8 +4,6 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unicef/unicef/repository/repository.dart';
-import 'package:unicef/unicef/services/chart2_service.dart';
-import 'package:unicef/unicef/services/chart_service.dart';
 import 'package:unicef/unicef/services/cluster_service.dart';
 import 'package:unicef/unicef/services/indicator_services.dart';
 import 'package:unicef/unicef/services/infomation_service.dart';
@@ -36,8 +34,6 @@ class _SplashWidgetState extends State<SplashWidget> {
   Future<void> checkIsCached() async {
     var connection = await Connectivity().checkConnectivity();
 
-    print("Connection:$connection");
-
     final prefs = await SharedPreferences.getInstance();
 
     bool isCached = await _getBoolFromSharedPref();
@@ -59,6 +55,8 @@ class _SplashWidgetState extends State<SplashWidget> {
         _infomationService.saveIntroduction();
         _infomationService.saveSurvey();
         _infomationService.saveDemography();
+        _infomationService.saveTerms();
+        _infomationService.savePolicy();
         await prefs.setBool('isCached', true);
       }
     } else {
@@ -69,6 +67,9 @@ class _SplashWidgetState extends State<SplashWidget> {
       _infomationService.saveIntroduction();
       _infomationService.saveSurvey();
       _infomationService.saveDemography();
+      _infomationService.saveTerms();
+      _infomationService.savePolicy();
+      print("Hello");
       await prefs.setBool('isCached', true);
     }
   }

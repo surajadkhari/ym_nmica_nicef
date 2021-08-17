@@ -12,12 +12,7 @@ class InfomationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: InfomationScreenWidget(
-        information: information,
-      ),
+      body: InfomationScreenWidget(information: information, title: title),
       drawer: DrawerNavigation(),
     );
   }

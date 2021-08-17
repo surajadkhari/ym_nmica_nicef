@@ -30,6 +30,12 @@ class DataBaseConnecton {
     await db.execute(
       "CREATE TABLE demography(demography TEXT)",
     );
+    await db.execute(
+      "CREATE TABLE terms(terms TEXT)",
+    );
+    await db.execute(
+      "CREATE TABLE policy(policy TEXT)",
+    );
   }
 
   static Future _onConfigure(Database db) async {

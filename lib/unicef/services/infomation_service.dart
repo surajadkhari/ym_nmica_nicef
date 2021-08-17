@@ -20,6 +20,21 @@ class InfomationService {
     await _repository!.save('introduction', {"introduction": decodedJson});
   }
 
+  Future saveTerms() async {
+    final res = await _api!.httpGet('terms-and-conditions');
+
+    var decodedJson = json.decode(res.body)['introduction'];
+    print(decodedJson);
+    await _repository!.save('terms', {"terms": decodedJson});
+  }
+
+  Future savePolicy() async {
+    final res = await _api!.httpGet('terms-and-conditions');
+
+    var decodedJson = json.decode(res.body)['introduction'];
+    await _repository!.save('policy', {"policy": decodedJson});
+  }
+
   Future saveSurvey() async {
     final res = await _api!.httpGet('survey');
 
@@ -36,9 +51,20 @@ class InfomationService {
 
   Future getIntroduction() async {
     var res = await _repository!.getData('introduction');
-    print("RES:$res");
 
     return res[0]!['introduction'];
+  }
+
+  Future getTerms() async {
+    var res = await _repository!.getData('terms');
+
+    return res[0]!['terms'];
+  }
+
+  Future getPolicy() async {
+    var res = await _repository!.getData('policy');
+
+    return res[0]!['policy'];
   }
 
   Future getSurvey() async {

@@ -3,7 +3,9 @@ import 'package:flutter_html/flutter_html.dart';
 
 class InfomationScreenWidget extends StatefulWidget {
   final String information;
-  const InfomationScreenWidget({Key? key, required this.information})
+  final String title;
+  const InfomationScreenWidget(
+      {Key? key, required this.information, required this.title})
       : super(key: key);
 
   @override
@@ -19,7 +21,9 @@ class _InfomationScreenWidgetState extends State<InfomationScreenWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(15.0),

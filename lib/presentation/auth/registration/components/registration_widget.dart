@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:unicef/main.dart';
 import 'package:unicef/presentation/auth/login/login_screen.dart';
 import 'package:unicef/unicef/screens/home_screen.dart';
+import 'package:unicef/unicef/screens/information_screen.dart';
+import 'package:unicef/unicef/services/infomation_service.dart';
 import 'package:unicef/unicef/widgets/Progress.dart';
 
 class RegistrationWidget extends StatefulWidget {
@@ -25,6 +28,32 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
       TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  InfomationService _informationService = InfomationService();
+  getTerms() async {
+    var data = await _informationService.getTerms();
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => InfomationScreen(
+          title: "Terms And Conditions",
+          information: data,
+        ),
+      ),
+    );
+  }
+
+  getPolicy() async {
+    var data = await _informationService.getPolicy();
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => InfomationScreen(
+          title: "Policies",
+          information: data,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -143,24 +172,72 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
                       const SizedBox(
                         height: 1.0,
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.blue,
-                        ),
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Processing Data')));
-                            registerUser(context);
-                          }
-                        },
-                        child: const Center(
-                          child: Text(
-                            "Sign Up",
-                            style: TextStyle(
-                                fontSize: 18.0, fontFamily: "Brand-Bold"),
+                      Column(
+                        children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.blue,
+                            ),
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text('Processing Data')));
+                                registerUser(context);
+                              }
+                            },
+                            child: const Center(
+                              child: Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                    fontSize: 18.0, fontFamily: "Brand-Bold"),
+                              ),
+                            ),
                           ),
-                        ),
+                          Container(
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.all(10),
+                            child: Center(
+                              child: Text.rich(
+                                TextSpan(
+                                  text: 'By continuing, you agree to our ',
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.black),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: 'Terms of Service',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.blue,
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            getTerms();
+                                          }),
+                                    TextSpan(
+                                      text: ' and ',
+                                      style: TextStyle(
+                                          fontSize: 14, color: Colors.black),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                            text: 'Privacy Policy.',
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.blue,
+                                                decoration:
+                                                    TextDecoration.underline),
+                                            recognizer: TapGestureRecognizer()
+                                              ..onTap = () {
+                                                getPolicy();
+                                              })
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 1.0),
                     ],
