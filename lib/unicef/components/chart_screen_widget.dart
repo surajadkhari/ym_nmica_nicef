@@ -220,11 +220,21 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                     ],
                                                   ),
                                                 ),
-                                                Text(snapshot
-                                                    .data![index].description!)
                                               ],
                                             ),
                                           ),
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text(
+                                            snapshot.data![index].description!),
+                                        SizedBox(
+                                          height: 2,
+                                        ),
+                                        Divider(
+                                          height: 5,
+                                          color: Colors.black,
                                         ),
                                         SizedBox(
                                           height: 20,
@@ -271,96 +281,102 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Container(
-                                                height: 700,
-                                                width:
-                                                    getProportionateScreenWidth(
-                                                        500),
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  border: Border.all(
-                                                      color: Colors.blue),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey
-                                                          .withOpacity(0.1),
-                                                      spreadRadius: 5,
-                                                      blurRadius: 7,
-                                                      offset: Offset(0,
-                                                          3), // changes position of shadow
-                                                    ),
-                                                  ],
-                                                ),
-                                                child: Column(
-                                                  children: [
-                                                    SingleChildScrollView(
-                                                      scrollDirection:
-                                                          Axis.horizontal,
-                                                      child: Container(
-                                                        height: 540,
-                                                        width:
-                                                            getProportionateScreenWidth(
-                                                                900),
-                                                        child: SfCartesianChart(
-                                                          primaryXAxis:
-                                                              CategoryAxis(),
-                                                          // Chart title
-                                                          title: ChartTitle(
-                                                              text: snapshot
-                                                                  .data![index]
-                                                                  .name!),
-                                                          // Enable legend
+                                              height: 700,
+                                              width:
+                                                  getProportionateScreenWidth(
+                                                      500),
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10)),
+                                                border: Border.all(
+                                                    color: Colors.blue),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.1),
+                                                    spreadRadius: 5,
+                                                    blurRadius: 7,
+                                                    offset: Offset(0,
+                                                        3), // changes position of shadow
+                                                  ),
+                                                ],
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  SingleChildScrollView(
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    child: Container(
+                                                      height: 540,
+                                                      width:
+                                                          getProportionateScreenWidth(
+                                                              900),
+                                                      child: SfCartesianChart(
+                                                        primaryXAxis:
+                                                            CategoryAxis(),
+                                                        // Chart title
+                                                        title: ChartTitle(
+                                                            text: snapshot
+                                                                .data![index]
+                                                                .name!),
+                                                        // Enable legend
 
-                                                          // Enable tooltip
-                                                          tooltipBehavior:
-                                                              TooltipBehavior(
-                                                                  enable: true),
-                                                          series: <
-                                                              ChartSeries<
-                                                                  LineChartDraw,
-                                                                  String>>[
-                                                            LineSeries<
+                                                        // Enable tooltip
+                                                        tooltipBehavior:
+                                                            TooltipBehavior(
+                                                                enable: true),
+                                                        series: <
+                                                            ChartSeries<
                                                                 LineChartDraw,
-                                                                String>(
-                                                              dataSource:
-                                                                  _lineChart,
-                                                              xValueMapper:
-                                                                  (LineChartDraw
-                                                                              sales,
-                                                                          _) =>
-                                                                      sales
-                                                                          .type,
-                                                              yValueMapper:
-                                                                  (LineChartDraw
-                                                                              sales,
-                                                                          _) =>
-                                                                      sales
-                                                                          .value,
-                                                              name: snapshot
-                                                                  .data![index]
-                                                                  .name!,
-                                                              // Enable data label
-                                                              dataLabelSettings:
-                                                                  DataLabelSettings(
-                                                                      isVisible:
-                                                                          true),
-                                                            )
-                                                          ],
-                                                        ),
+                                                                String>>[
+                                                          LineSeries<
+                                                              LineChartDraw,
+                                                              String>(
+                                                            dataSource:
+                                                                _lineChart,
+                                                            xValueMapper:
+                                                                (LineChartDraw
+                                                                            sales,
+                                                                        _) =>
+                                                                    sales.type,
+                                                            yValueMapper:
+                                                                (LineChartDraw
+                                                                            sales,
+                                                                        _) =>
+                                                                    sales.value,
+                                                            name: snapshot
+                                                                .data![index]
+                                                                .name!,
+                                                            // Enable data label
+                                                            dataLabelSettings:
+                                                                DataLabelSettings(
+                                                                    isVisible:
+                                                                        true),
+                                                          )
+                                                        ],
                                                       ),
                                                     ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Text(snapshot
-                                                          .data![index]
-                                                          .description!),
-                                                    )
-                                                  ],
-                                                )),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(snapshot
+                                                  .data![index].description!),
+                                            ),
+                                            SizedBox(
+                                              height: 2,
+                                            ),
+                                            Divider(
+                                              height: 5,
+                                              color: Colors.black,
+                                            ),
                                             SizedBox(
                                               height: 20,
                                             ),
@@ -421,9 +437,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                         children: [
                                           Flexible(
                                             child: Container(
-                                              height:
-                                                  getProportionateScreenHeight(
-                                                      450),
+                                              height: 500,
                                               width:
                                                   getProportionateScreenWidth(
                                                       500),
@@ -473,9 +487,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                               child: Container(
                                                                   color: Colors
                                                                       .white,
-                                                                  height:
-                                                                      getProportionateScreenHeight(
-                                                                          270),
+                                                                  height: 400,
                                                                   width:
                                                                       getProportionateScreenWidth(
                                                                           176),
@@ -517,18 +529,25 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                         ],
                                                       ),
                                                     ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Text(snapshot
-                                                          .data![index]
-                                                          .description!),
-                                                    )
                                                   ],
                                                 ),
                                               ),
                                             ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(snapshot
+                                                .data![index].description!),
+                                          ),
+                                          SizedBox(
+                                            height: 2,
+                                          ),
+                                          Divider(
+                                            height: 5,
+                                            color: Colors.black,
                                           ),
                                           SizedBox(
                                             height: 20,
@@ -670,23 +689,18 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                     final params = SaveFileDialogParams(
                                         sourceFilePath: file.path);
 
-                                    final filePath =
-                                        await FlutterFileDialog.saveFile(
-                                            params: params);
-                                    print(filePath);
+                                    await FlutterFileDialog.saveFile(
+                                        params: params);
                                   }
 
                                   getBarCsv() async {
+                                    print(barGraphLabels);
                                     var li = listConverter(bargraph);
-
                                     List<List<dynamic>> rows = [];
+                                    rows.add(barGraphLabels);
 
                                     for (int i = 0; i < li.length; i++) {
-                                      List<dynamic> row = [];
-
-                                      row.add(bargraph[i].type);
-                                      row.add(bargraph[i].value);
-                                      rows.add(row);
+                                      rows.add(li[i].values);
                                     }
 
                                     String dir = '';
@@ -700,7 +714,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                               .path;
                                     }
                                     File file = File("$dir/" +
-                                        "test" +
+                                        "nmics" +
                                         DateTime.now()
                                             .millisecondsSinceEpoch
                                             .toString() +
@@ -708,7 +722,13 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                     String csv = const ListToCsvConverter()
                                         .convert(rows);
                                     file.writeAsString(csv);
-                                    print(csv);
+                                    final params = SaveFileDialogParams(
+                                        sourceFilePath: file.path);
+
+                                    final filePath =
+                                        await FlutterFileDialog.saveFile(
+                                            params: params);
+                                    print(filePath);
                                   }
 
                                   Chart datar = snapshot.data![index];

@@ -69,7 +69,11 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
                       }
 
                       return CheckboxListTile(
-                        title: Text("$ind: $name"),
+                        title: Text(
+                          "$ind: $name",
+                          style: TextStyle(
+                              fontSize: 15.0, fontFamily: "Brand-Bold"),
+                        ),
                         value: data[index].value,
                         onChanged: (val) {
                           if (r == ConnectivityResult.none) {
@@ -99,27 +103,30 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
-            child: ElevatedButton(
-              onPressed: () {
-                _scrollController
-                    .animateTo(_scrollController.position.maxScrollExtent,
-                        duration: Duration(milliseconds: 100),
-                        curve: Curves.bounceOut)
-                    .then((value) => Navigator.push(
-                          context,
-                          new MaterialPageRoute(
-                            builder: (context) => ChartScreen(
-                              ids: _checkBoxList,
-                              name: this.widget.name,
+            padding: EdgeInsets.all(5),
+            child: Container(
+              margin: EdgeInsets.only(top: 20),
+              child: ElevatedButton(
+                onPressed: () {
+                  _scrollController
+                      .animateTo(_scrollController.position.maxScrollExtent,
+                          duration: Duration(milliseconds: 100),
+                          curve: Curves.bounceOut)
+                      .then((value) => Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                              builder: (context) => ChartScreen(
+                                ids: _checkBoxList,
+                                name: this.widget.name,
+                              ),
                             ),
-                          ),
-                        ));
-              },
-              child: const Center(
-                child: Text(
-                  "View Profile",
-                  style: TextStyle(fontSize: 18.0, fontFamily: "Brand-Bold"),
+                          ));
+                },
+                child: const Center(
+                  child: Text(
+                    "View Profile",
+                    style: TextStyle(fontSize: 18.0, fontFamily: "Brand-Bold"),
+                  ),
                 ),
               ),
             ),

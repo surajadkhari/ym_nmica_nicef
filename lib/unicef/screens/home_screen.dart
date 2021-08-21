@@ -59,8 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
       _infomationService.saveSurvey();
       _infomationService.saveDemography();
       await Future.delayed(const Duration(seconds: 3), () {});
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => super.widget));
+      Navigator.pushNamedAndRemoveUntil(
+          context, HomeScreen.screenId, (route) => false);
     }
   }
 

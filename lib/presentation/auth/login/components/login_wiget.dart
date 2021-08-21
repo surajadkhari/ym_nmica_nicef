@@ -26,7 +26,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       content: Text(
                         failure.map(
                           canceledByUser: (_) =>
-                              'You cancelled your Social Medial Login!',
+                              'You cancelled your Social Media Login!',
                           serverError: (_) => 'Server Error',
                           invalidEmailAndPasswordComination: (_) =>
                               'Email or password does not match to our records!',
@@ -47,7 +47,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         .add(const AuthEvent.authCheckRequested());
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text("Welcome back"),
+                        content: Text("Logged in!"),
                       ),
                     );
                   },
