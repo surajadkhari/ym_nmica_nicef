@@ -96,7 +96,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
               "NMICS",
               style: TextStyle(color: Colors.white),
             ),
-            accountEmail: const Text("unicef@gmail.com"),
+            accountEmail: const Text("version 1.0"),
             currentAccountPicture: GestureDetector(
               child: CircleAvatar(
                 backgroundColor: Colors.white,
@@ -162,7 +162,6 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                   context,
                   MaterialPageRoute(
                       builder: (BuildContext context) => CreditScreen()));
-              Navigator.pop(context);
             },
           ),
           ExpansionTile(

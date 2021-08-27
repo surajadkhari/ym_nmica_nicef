@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:unicef/application/auth/auth_bloc.dart';
 import 'package:unicef/application/auth/signin_form/signin_form_bloc.dart';
 import 'package:unicef/domain/auth/auth_failure.dart';
@@ -179,6 +181,24 @@ class _LoginWidgetState extends State<LoginWidget> {
                                       );
                                 },
                               ),
+                              IconButton(
+                                icon: const Icon(Icons.facebook,
+                                    color: Colors.blue),
+                                onPressed: () {
+                                  signInWithFacebook()
+                                      .then((UserCredential value) {
+                                    Navigator.pushNamedAndRemoveUntil(context,
+                                        HomeScreen.screenId, (route) => false);
+                                    context.read<AuthBloc>().add(
+                                        const AuthEvent.authCheckRequested());
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text("Logged in!"),
+                                      ),
+                                    );
+                                  });
+                                },
+                              ),
                             ],
                           )
                         ],
@@ -203,5 +223,38 @@ class _LoginWidgetState extends State<LoginWidget> {
         );
       },
     );
+  }
+
+  // signInWithFacebook() async {
+  //   // Trigger the sign-in flow
+  //   final LoginResult loginResult = await FacebookAuth.instance.login();
+
+  //   // Create a credential from the access token
+  //   final OAuthCredential facebookAuthCredential =
+  //       FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+  //   // Once signed in, return the UserCredential
+
+  //   FirebaseAuth.instance
+  //       .signInWithCredential(facebookAuthCredential)
+  //       .then((value) {
+  //     Navigator.pushNamedAndRemoveUntil(
+  //         context, HomeScreen.screenId, (route) => false);
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         content: Text("Logged in!"),
+  //       ),
+  //     );
+  //   });
+  // }
+
+  //Facebook
+  Future<UserCredential> signInWithFacebook() async {
+    final LoginResult loginResult = await FacebookAuth.instance.login();
+    final OAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+    return await FirebaseAuth.instance
+        .signInWithCredential(facebookAuthCredential);
   }
 }

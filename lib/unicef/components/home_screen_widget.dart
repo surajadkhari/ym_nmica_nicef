@@ -85,7 +85,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           SearchWidget(),
           const Padding(
             padding: EdgeInsets.all(20.0),
-            child: Text("Choose Indicator"),
+            child: Text("Choose Cluster"),
           ),
           const SizedBox(height: 2),
           Expanded(
