@@ -8,6 +8,7 @@ import 'package:unicef/presentation/auth/login/login_screen.dart';
 import 'package:unicef/presentation/auth/registration/registration_screen.dart';
 import 'package:unicef/presentation/splash/splash_screen.dart';
 import 'package:unicef/unicef/screens/home_screen.dart';
+import 'package:unicef/unicef/screens/sync_screen.dart';
 
 class AppWidget extends StatelessWidget {
   // This widget is the root of your application.
@@ -29,6 +30,7 @@ class AppWidget extends StatelessWidget {
           RegistrationScreen.screenId: (context) => RegistrationScreen(),
           LoginScreen.screenId: (context) => LoginScreen(),
           HomeScreen.screenId: (context) => HomeScreen(),
+          SyncScreen.screenId: (context) => SyncScreen(),
         },
       ),
     );

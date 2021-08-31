@@ -25,12 +25,14 @@ class HomeScreenWidget extends StatefulWidget {
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   ClusterService _clusterService = ClusterService();
   Chart2Service _chart2service = Chart2Service();
+  Future? v;
 
   @override
   void initState() {
     super.initState();
 
     getClusters();
+
     NoificationService.initialize(context);
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null) {

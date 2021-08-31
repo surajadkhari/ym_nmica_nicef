@@ -19,11 +19,10 @@ void main() async {
 
   await Hive.initFlutter();
   await Firebase.initializeApp();
-  // var connection = await Connectivity().checkConnectivity();
-  // if (connection != ConnectivityResult.none) {
-  //   await FirebaseMessaging.instance.subscribeToTopic('all');
-
-  // }
+  var connection = await Connectivity().checkConnectivity();
+  if (connection != ConnectivityResult.none) {
+    await FirebaseMessaging.instance.subscribeToTopic('all');
+  }
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
   runApp(

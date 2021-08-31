@@ -6,6 +6,7 @@ import 'package:unicef/unicef/screens/credit_screen.dart';
 import 'package:unicef/unicef/screens/home_screen.dart';
 import 'package:unicef/unicef/screens/indicator_screen.dart';
 import 'package:unicef/unicef/screens/information_screen.dart';
+import 'package:unicef/unicef/screens/sync_screen.dart';
 import 'package:unicef/unicef/services/cluster_service.dart';
 import 'package:unicef/unicef/services/infomation_service.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -96,7 +97,20 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
               "NMICS",
               style: TextStyle(color: Colors.white),
             ),
-            accountEmail: const Text("version 1.0"),
+            accountEmail: Row(
+              children: [
+                Text("Sycn Data"),
+                IconButton(
+                    onPressed: () {
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, SyncScreen.screenId, (route) => false);
+                    },
+                    icon: Icon(
+                      Icons.refresh,
+                      color: Colors.white,
+                    ))
+              ],
+            ),
             currentAccountPicture: GestureDetector(
               child: CircleAvatar(
                 backgroundColor: Colors.white,

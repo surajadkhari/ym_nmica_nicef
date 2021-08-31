@@ -1,13 +1,15 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:unicef/unicef/repository/repository.dart';
+import 'package:unicef/unicef/models/version.dart';
 import 'package:unicef/unicef/services/cluster_service.dart';
 import 'package:unicef/unicef/services/indicator_services.dart';
 import 'package:unicef/unicef/services/infomation_service.dart';
 import 'package:open_settings/open_settings.dart';
+import 'package:unicef/unicef/services/version_service.dart';
 
 class SplashWidget extends StatefulWidget {
   const SplashWidget({Key? key}) : super(key: key);
@@ -20,7 +22,8 @@ class _SplashWidgetState extends State<SplashWidget> {
   ClusterService _clusterService = ClusterService();
   IndicatorServices _indicatorServices = IndicatorServices();
   InfomationService _infomationService = InfomationService();
-  Repository _repository = Repository();
+  VersionService _versionService = VersionService();
+  Future? v;
 
   Future<bool> _getBoolFromSharedPref() async {
     final prefs = await SharedPreferences.getInstance();
@@ -57,26 +60,49 @@ class _SplashWidgetState extends State<SplashWidget> {
         _infomationService.saveDemography();
         _infomationService.saveTerms();
         _infomationService.savePolicy();
+
         await prefs.setBool('isCached', true);
+        checkVersion();
       }
-    } else {
-      _repository.deleteAllData();
-      _clusterService.saveClusters();
-      _indicatorServices.saveIndicators();
-      // _chartService.saveCharts();
-      _infomationService.saveIntroduction();
-      _infomationService.saveSurvey();
-      _infomationService.saveDemography();
-      _infomationService.saveTerms();
-      _infomationService.savePolicy();
-      print("Hello");
-      await prefs.setBool('isCached', true);
     }
+
+    // } else {
+    //   checkVersion();
+
+    //   _repository.deleteAllData();
+    //   _clusterService.saveClusters();
+    //   _indicatorServices.saveIndicators();
+    //   // _chartService.saveCharts();
+    //   _infomationService.saveIntroduction();
+    //   _infomationService.saveSurvey();
+    //   _infomationService.saveDemography();
+    //   _infomationService.saveTerms();
+    //   _infomationService.savePolicy();
+    //   print("Hello");
+    //   await prefs.setBool('isCached', true);
+    // }
+  }
+
+  checkVersion() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    var result = await _versionService.getVersion();
+
+    var jsonResponse = json.decode(result.body);
+    // var data = jsonResponse.map((version) => Version.fromJson(version));
+    var model = new Version();
+    model.number = jsonResponse['number'];
+    model.name = jsonResponse['name'];
+    model.release_date = jsonResponse['release_date'];
+    model.description = jsonResponse['description'];
+    await prefs.setString('version', model.number!);
   }
 
   @override
   void initState() {
     super.initState();
+    v = _versionService.getVersion();
+
     checkIsCached();
   }
 

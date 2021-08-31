@@ -1,17 +1,15 @@
-import 'package:connectivity/connectivity.dart';
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:open_settings/open_settings.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unicef/presentation/auth/login/login_screen.dart';
 import 'package:unicef/unicef/components/drawer.dart';
 import 'package:unicef/unicef/components/home_screen_widget.dart';
-import 'package:unicef/unicef/repository/repository.dart';
+import 'package:unicef/unicef/models/version.dart';
 import 'package:unicef/unicef/screens/notifications.dart';
-import 'package:unicef/unicef/services/cluster_service.dart';
-import 'package:unicef/unicef/services/indicator_services.dart';
-import 'package:unicef/unicef/services/infomation_service.dart';
-
-import 'package:unicef/unicef/widgets/Progress.dart';
+import 'package:unicef/unicef/screens/sync_screen.dart';
+import 'package:unicef/unicef/services/version_service.dart';
 
 class HomeScreen extends StatefulWidget {
   static const screenId = "home";
@@ -23,106 +21,118 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  IndicatorServices _indicatorServices = IndicatorServices();
-  ClusterService _clusterService = ClusterService();
-  InfomationService _infomationService = InfomationService();
-  Repository _repository = Repository();
-  @override
-  void initState() {
-    super.initState();
-  }
+  VersionService _versionService = VersionService();
 
-  List indicator = [];
-  cacheAllData() async {
-    var connection = await Connectivity().checkConnectivity();
-    if (connection == ConnectivityResult.none) {
-      final snackBar = SnackBar(
-        content: Text('Turn on your internet connection!'),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      await Future.delayed(const Duration(seconds: 2), () {
-        OpenSettings.openWIFISetting();
+  bool isNew = false;
+  checkVersion() async {
+    final prefs = await SharedPreferences.getInstance();
+    var result = await _versionService.getVersion();
+
+    var jsonResponse = json.decode(result.body);
+    // var data = jsonResponse.map((version) => Version.fromJson(version));
+    var model = new Version();
+    model.number = jsonResponse['number'];
+    model.name = jsonResponse['name'];
+    model.release_date = jsonResponse['release_date'];
+    model.description = jsonResponse['description'];
+    final version = prefs.getString("version");
+
+    if (version != model.number) {
+      setState(() {
+        isNew = true;
       });
-    } else {
-      showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (BuildContext contect) {
-            return Progress(
-              message: "Retrieving Data",
-            );
-          });
-      _repository.deleteAllData();
-      _clusterService.saveClusters();
-      _indicatorServices.saveIndicators();
-      _infomationService.saveIntroduction();
-      _infomationService.saveSurvey();
-      _infomationService.saveDemography();
-      await Future.delayed(const Duration(seconds: 3), () {});
-      Navigator.pushNamedAndRemoveUntil(
-          context, HomeScreen.screenId, (route) => false);
     }
   }
 
   @override
+  void initState() {
+    super.initState();
+    checkVersion();
+  }
+
+  List indicator = [];
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Image.asset(
-              'assets/images/mic_logo.png',
-              fit: BoxFit.contain,
-              height: 20,
-            ),
-          ],
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.refresh,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              cacheAllData();
-            },
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.notifications,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => NotificationScreen(),
+    return isNew
+        ? Scaffold(
+            body: AlertDialog(
+              title: const Text('New Data Has been!'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: const <Widget>[
+                    Text('NMICS database has been updated!'),
+                  ],
                 ),
-              );
-            },
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.logout,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              final FirebaseAuth auth = FirebaseAuth.instance;
-              auth.signOut();
-              Navigator.pushNamedAndRemoveUntil(
-                  context, LoginScreen.screenId, (route) => false);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text("See you next time!"),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Async Data'),
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, SyncScreen.screenId, (route) => false);
+                  },
                 ),
-              );
-            },
-          ),
-        ],
-      ),
-      body: HomeScreenWidget(),
-      drawer: DrawerNavigation(),
-    );
+              ],
+            ),
+          )
+        : Scaffold(
+            appBar: AppBar(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Image.asset(
+                    'assets/images/mic_logo.png',
+                    fit: BoxFit.contain,
+                    height: 20,
+                  ),
+                ],
+              ),
+              actions: <Widget>[
+                // IconButton(
+                //   icon: Icon(
+                //     Icons.refresh,
+                //     color: Colors.black,
+                //   ),
+                //   onPressed: () {
+                //     cacheAllData();
+                //   },
+                // ),
+                IconButton(
+                  icon: Icon(
+                    Icons.notifications,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => NotificationScreen(),
+                      ),
+                    );
+                  },
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.logout,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    final FirebaseAuth auth = FirebaseAuth.instance;
+                    auth.signOut();
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, LoginScreen.screenId, (route) => false);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("See you next time!"),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+            body: HomeScreenWidget(),
+            drawer: DrawerNavigation(),
+          );
   }
 }

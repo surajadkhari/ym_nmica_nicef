@@ -884,6 +884,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  pushable_button:
+    dependency: "direct main"
+    description:
+      name: pushable_button
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
   quiver:
     dependency: transitive
     description:
