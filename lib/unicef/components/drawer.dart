@@ -8,6 +8,7 @@ import 'package:unicef/unicef/screens/indicator_screen.dart';
 import 'package:unicef/unicef/screens/information_screen.dart';
 import 'package:unicef/unicef/screens/sync_screen.dart';
 import 'package:unicef/unicef/services/cluster_service.dart';
+import 'package:unicef/unicef/services/credit_service.dart';
 import 'package:unicef/unicef/services/infomation_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -23,6 +24,7 @@ class DrawerNavigation extends StatefulWidget {
 class _DrawerNavigationState extends State<DrawerNavigation> {
   ClusterService _clusterService = ClusterService();
   InfomationService _informationService = InfomationService();
+  CreditService _creditService = CreditService();
 
   void initState() {
     super.initState();
@@ -40,6 +42,19 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
       MaterialPageRoute(
         builder: (context) => InfomationScreen(
           title: "Introduction",
+          information: data,
+        ),
+      ),
+    );
+  }
+
+  getCredits() async {
+    var data = await _creditService.getCredits();
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => CreditScreen(
+          title: "Credits",
           information: data,
         ),
       ),
@@ -145,7 +160,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
             },
           ),
           ListTile(
-            title: const Text("Survery Methodology"),
+            title: const Text("Survey Methodology"),
             leading: const Icon(
               FontAwesomeIcons.greaterThan,
               color: Colors.blue,
@@ -172,10 +187,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
               color: Colors.blue,
             ),
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => CreditScreen()));
+              getCredits();
             },
           ),
           ExpansionTile(

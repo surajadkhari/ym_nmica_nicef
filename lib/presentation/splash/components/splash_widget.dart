@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unicef/unicef/models/version.dart';
 import 'package:unicef/unicef/services/cluster_service.dart';
+import 'package:unicef/unicef/services/credit_service.dart';
 import 'package:unicef/unicef/services/indicator_services.dart';
 import 'package:unicef/unicef/services/infomation_service.dart';
 import 'package:open_settings/open_settings.dart';
@@ -22,6 +23,7 @@ class _SplashWidgetState extends State<SplashWidget> {
   ClusterService _clusterService = ClusterService();
   IndicatorServices _indicatorServices = IndicatorServices();
   InfomationService _infomationService = InfomationService();
+  CreditService _creditService = CreditService();
   VersionService _versionService = VersionService();
   Future? v;
 
@@ -60,6 +62,7 @@ class _SplashWidgetState extends State<SplashWidget> {
         _infomationService.saveDemography();
         _infomationService.saveTerms();
         _infomationService.savePolicy();
+        _creditService.saveCredits();
 
         await prefs.setBool('isCached', true);
         checkVersion();

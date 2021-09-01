@@ -16,7 +16,7 @@ class InfomationService {
     final res = await _api!.httpGet('introduction');
 
     var decodedJson = json.decode(res.body)['introduction'];
-    print(decodedJson);
+
     await _repository!.save('introduction', {"introduction": decodedJson});
   }
 
@@ -24,7 +24,6 @@ class InfomationService {
     final res = await _api!.httpGet('terms-and-conditions');
 
     var decodedJson = json.decode(res.body)['introduction'];
-    print(decodedJson);
     await _repository!.save('terms', {"terms": decodedJson});
   }
 

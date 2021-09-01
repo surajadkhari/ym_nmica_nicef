@@ -19,7 +19,7 @@ class DataBaseConnecton {
       "CREATE TABLE charts(id INTEGER PRIMARY KEY,indicator_id INTEGER,label TEXT,np DOUBLE,p1 DOUBLE,p2 DOUBLE,p3 DOUBLE,p4 DOUBLE,p5 DOUBLE,p6 DOUBLE,p7 DOUBLE,chart_type TEXT,name TEXT,description TEXT)",
     );
     await db.execute(
-      "CREATE TABLE credits(id INTEGER PRIMARY KEY,section TEXT,title TEXT,name TEXT,description TEXT,address TEXT,phone_number TEXT,email TEXT,website TEXT)",
+      "CREATE TABLE credits(id INTEGER PRIMARY KEY,section TEXT,title TEXT,description TEXT,address TEXT,phone_number TEXT,email TEXT,website TEXT)",
     );
     await db.execute(
       "CREATE TABLE introduction(introduction TEXT)",
