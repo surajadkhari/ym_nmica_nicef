@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return isNew
         ? Scaffold(
             body: AlertDialog(
-              title: const Text('New Data Has been!'),
+              title: const Text('New Data Has been Updated!'),
               content: SingleChildScrollView(
                 child: ListBody(
                   children: const <Widget>[

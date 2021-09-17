@@ -66,6 +66,7 @@ class Repository {
         batch.delete("charts");
         batch.delete("introduction");
         batch.delete("survey");
+        batch.delete("credits");
         batch.delete("demography");
         await batch.commit();
       });

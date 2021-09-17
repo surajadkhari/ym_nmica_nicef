@@ -30,37 +30,56 @@ class _SearchWidgetState extends State<SearchWidget> {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Container(
-              child: TextSelectionGestureDetector(
-                onTapDown: (bfm) async {
-                  var connection = await Connectivity().checkConnectivity();
-                  if (connection == ConnectivityResult.none) {
-                    final snackBar = SnackBar(
-                      content: Text(
-                          'Turn on your internet connection to use this feature!'),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    await Future.delayed(const Duration(seconds: 2), () {
-                      OpenSettings.openWIFISetting();
-                    });
-                  } else {
-                    showSearch(context: context, delegate: DataSearch());
-                  }
-                },
-                child: TextField(
-                  readOnly: true,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.search),
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.clear),
-                      onPressed: () {},
-                    ),
-                    hintText: "Search Indicator",
-                    border: const OutlineInputBorder(
-                      borderSide: BorderSide(width: 0.8),
-                    ),
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(width: 0.8, color: Colors.blue),
+            child: GestureDetector(
+              onTap: () async {
+                var connection = await Connectivity().checkConnectivity();
+                if (connection == ConnectivityResult.none) {
+                  final snackBar = SnackBar(
+                    content: Text(
+                        'Turn on your internet connection to use this feature!'),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  await Future.delayed(const Duration(seconds: 2), () {
+                    OpenSettings.openWIFISetting();
+                  });
+                } else {
+                  showSearch(context: context, delegate: DataSearch());
+                }
+              },
+              child: Container(
+                child: TextSelectionGestureDetector(
+                  onTapDown: (bfm) async {
+                    var connection = await Connectivity().checkConnectivity();
+                    if (connection == ConnectivityResult.none) {
+                      final snackBar = SnackBar(
+                        content: Text(
+                            'Turn on your internet connection to use this feature!'),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      await Future.delayed(const Duration(seconds: 2), () {
+                        OpenSettings.openWIFISetting();
+                      });
+                    } else {
+                      showSearch(context: context, delegate: DataSearch());
+                    }
+                  },
+                  child: TextField(
+                    readOnly: true,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.search),
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: () {
+                          print("ok");
+                        },
+                      ),
+                      hintText: "Search Indicator",
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide(width: 0.8),
+                      ),
+                      enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(width: 0.8, color: Colors.blue),
+                      ),
                     ),
                   ),
                 ),

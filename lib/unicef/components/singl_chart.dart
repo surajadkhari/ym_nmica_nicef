@@ -121,7 +121,7 @@ class _SingleChartState extends State<SingleChart> {
                                           domainFn: (BarGraph barGraph, _) =>
                                               barGraph.type.toString(),
                                           measureFn: (BarGraph barGraph, _) =>
-                                              barGraph.value,
+                                              barGraph.value!,
                                           id: label,
                                           data: allData[count],
                                         ),
@@ -375,7 +375,7 @@ class _SingleChartState extends State<SingleChart> {
                                           domainFn: (PieChart barGraph, _) =>
                                               barGraph.name!,
                                           measureFn: (PieChart barGraph, _) =>
-                                              barGraph.value,
+                                              barGraph.value!,
                                           labelAccessorFn:
                                               (PieChart pieChart, _) =>
                                                   '${pieChart.value}',
@@ -718,7 +718,7 @@ class _SingleChartState extends State<SingleChart> {
                                             domainFn: (BarGraph barGraph, _) =>
                                                 barGraph.type.toString(),
                                             measureFn: (BarGraph barGraph, _) =>
-                                                barGraph.value,
+                                                barGraph.value!,
                                             id: label,
                                             data: allData[count],
                                           ),

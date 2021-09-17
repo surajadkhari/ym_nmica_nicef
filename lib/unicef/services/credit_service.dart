@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:http/http.dart';
 import 'package:unicef/api/api.dart';
 import 'package:unicef/unicef/repository/repository.dart';
 

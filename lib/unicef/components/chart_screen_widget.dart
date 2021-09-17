@@ -140,7 +140,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                           domainFn: (BarGraph barGraph, _) =>
                                               barGraph.type.toString(),
                                           measureFn: (BarGraph barGraph, _) =>
-                                              barGraph.value,
+                                              barGraph.value!,
                                           id: label,
                                           data: allData[count],
                                         ),
@@ -415,7 +415,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                           domainFn: (PieChart barGraph, _) =>
                                               barGraph.name!,
                                           measureFn: (PieChart barGraph, _) =>
-                                              barGraph.value,
+                                              barGraph.value!,
                                           labelAccessorFn:
                                               (PieChart pieChart, _) =>
                                                   '${pieChart.value}',
@@ -766,7 +766,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                             domainFn: (BarGraph barGraph, _) =>
                                                 barGraph.type.toString(),
                                             measureFn: (BarGraph barGraph, _) =>
-                                                barGraph.value,
+                                                barGraph.value!,
                                             id: label,
                                             data: allData[count],
                                           ),
