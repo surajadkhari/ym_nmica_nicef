@@ -7,6 +7,8 @@ import 'package:unicef/application/auth/signin_form/signin_form_bloc.dart';
 import 'package:unicef/domain/auth/auth_failure.dart';
 import 'package:unicef/presentation/auth/registration/registration_screen.dart';
 import 'package:unicef/unicef/screens/home_screen.dart';
+import 'package:unicef/unicef/screens/introduction_screen.dart';
+import 'package:unicef/unicef/services/infomation_service.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({Key? key}) : super(key: key);
@@ -19,7 +21,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SigninFormBloc, SigninFormState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         state.authFailOrSuccessOption.fold(
             () {},
             (either) => either.fold(
@@ -41,9 +43,20 @@ class _LoginWidgetState extends State<LoginWidget> {
                     );
                     ScaffoldMessenger.of(context).showSnackBar(snackbar);
                   },
-                  (_) {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, HomeScreen.screenId, (route) => false);
+                  (_) async {
+                    InfomationService _informationService = InfomationService();
+
+                    var data = await _informationService.getIntroduction();
+
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => IntroductionScreen(
+                          title: "Introduction",
+                          information: data,
+                        ),
+                      ),
+                    );
+
                     context
                         .read<AuthBloc>()
                         .add(const AuthEvent.authCheckRequested());

@@ -141,6 +141,9 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                               barGraph.type.toString(),
                                           measureFn: (BarGraph barGraph, _) =>
                                               barGraph.value!,
+                                          labelAccessorFn:
+                                              (BarGraph barGraph, _) =>
+                                                  '${barGraph.value}',
                                           id: label,
                                           data: allData[count],
                                         ),
@@ -195,6 +198,9 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                         child: charts.BarChart(
                                                           _barSeriesData!,
                                                           animate: true,
+                                                          barRendererDecorator:
+                                                              new charts.BarLabelDecorator<
+                                                                  String>(),
                                                           animationDuration:
                                                               Duration(
                                                                   seconds: 5),

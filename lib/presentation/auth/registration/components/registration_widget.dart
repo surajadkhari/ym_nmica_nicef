@@ -3,8 +3,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:unicef/main.dart';
 import 'package:unicef/presentation/auth/login/login_screen.dart';
-import 'package:unicef/unicef/screens/home_screen.dart';
 import 'package:unicef/unicef/screens/information_screen.dart';
+import 'package:unicef/unicef/screens/introduction_screen.dart';
 import 'package:unicef/unicef/services/infomation_service.dart';
 import 'package:unicef/unicef/widgets/Progress.dart';
 
@@ -284,8 +284,20 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
           "phone": phoneTextEditingController.text.trim(),
         };
         userRefs.child(firebaseUser.uid).set(userMap);
-        Navigator.pushNamedAndRemoveUntil(
-            context, HomeScreen.screenId, (route) => false);
+        // Navigator.pushNamedAndRemoveUntil(
+        //     context, HomeScreen.screenId, (route) => false);
+        InfomationService _informationService = InfomationService();
+
+        var data = await _informationService.getIntroduction();
+
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => IntroductionScreen(
+              title: "Introduction",
+              information: data,
+            ),
+          ),
+        );
 
         displayMessage("Your account has been created!", context);
       } else {

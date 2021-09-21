@@ -4,7 +4,8 @@ import 'package:unicef/application/auth/auth_bloc.dart';
 import 'package:unicef/common/utils/size_configs.dart';
 import 'package:unicef/presentation/auth/login/login_screen.dart';
 import 'package:unicef/presentation/splash/components/splash_widget.dart';
-import 'package:unicef/unicef/screens/home_screen.dart';
+import 'package:unicef/unicef/screens/introduction_screen.dart';
+import 'package:unicef/unicef/services/infomation_service.dart';
 
 class SplashScreen extends StatelessWidget {
   static const screenId = "splash";
@@ -19,11 +20,19 @@ class SplashScreen extends StatelessWidget {
       listener: (context, state) {
         state.map(
           initial: (_) {},
-          authenticated: (_) async => {
-            await Future.delayed(const Duration(seconds: 4), () {
-              Navigator.pushNamedAndRemoveUntil(
-                  context, HomeScreen.screenId, (route) => false);
-            })
+          authenticated: (_) async {
+            InfomationService _informationService = InfomationService();
+
+            var data = await _informationService.getIntroduction();
+
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => IntroductionScreen(
+                  title: "Introduction",
+                  information: data,
+                ),
+              ),
+            );
           },
           unauthenticated: (_) async {
             await Future.delayed(const Duration(seconds: 4), () {
