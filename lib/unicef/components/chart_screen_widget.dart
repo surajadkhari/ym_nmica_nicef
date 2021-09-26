@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:unicef/common/utils/size_configs.dart';
 import 'package:unicef/unicef/models/chart.dart';
@@ -47,11 +48,26 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
 
   Chart2Service _chart2service = Chart2Service();
   Future<List<Chart>>? futureChart;
+  String data = 'all';
+
   @override
   void initState() {
     super.initState();
 
     futureChart = _chart2service.fetchCharts(this.widget.ids!);
+    getPrefrence();
+  }
+
+  getPrefrence() async {
+    final prefs = await SharedPreferences.getInstance();
+    final isCached = prefs.getString('data');
+    if (isCached == null) {
+      data = "all";
+    } else {
+      setState(() {
+        data = isCached;
+      });
+    }
   }
 
   @override
@@ -98,6 +114,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                               child: ListView.builder(
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (BuildContext context, int index) {
+                                  print(data);
                                   _barSeriesData =
                                       <charts.Series<BarGraph, String>>[];
                                   _pieSeriesData =
@@ -125,12 +142,20 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
 
                                       jsom.forEach((key, value) {
                                         if (key != 'label') {
-                                          // keys['color'] =  "red";'
+                                          // keys['color'] =  "red";']
+                                          print("-----------------");
+                                          print(key);
+                                          print(data);
+                                          print("-----------------");
 
-                                          chartsBarData.add(BarGraph(
-                                              key, double.parse(value)));
+                                          if (key == data) {
+                                            chartsBarData.add(BarGraph(
+                                                key, double.parse(value)));
+                                          }
                                         } else {
-                                          label = value;
+                                          if (key == data) {
+                                            label = value;
+                                          }
                                         }
                                       });
                                       allData.add(chartsBarData.toList());
@@ -192,9 +217,12 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                         height:
                                                             getProportionateScreenHeight(
                                                                 500),
-                                                        width:
-                                                            getProportionateScreenWidth(
-                                                                500),
+                                                        width: data ==
+                                                                "All Province"
+                                                            ? getProportionateScreenWidth(
+                                                                500)
+                                                            : getProportionateScreenWidth(
+                                                                100),
                                                         child: charts.BarChart(
                                                           _barSeriesData!,
                                                           animate: true,

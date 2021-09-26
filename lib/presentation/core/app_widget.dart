@@ -8,7 +8,7 @@ import 'package:unicef/presentation/auth/login/login_screen.dart';
 import 'package:unicef/presentation/auth/registration/registration_screen.dart';
 import 'package:unicef/presentation/splash/splash_screen.dart';
 import 'package:unicef/unicef/screens/home_screen.dart';
-import 'package:unicef/unicef/screens/introduction_screen.dart';
+import 'package:unicef/unicef/screens/map_screen.dart';
 import 'package:unicef/unicef/screens/sync_screen.dart';
 
 class AppWidget extends StatelessWidget {
@@ -31,6 +31,7 @@ class AppWidget extends StatelessWidget {
           RegistrationScreen.screenId: (context) => RegistrationScreen(),
           LoginScreen.screenId: (context) => LoginScreen(),
           HomeScreen.screenId: (context) => HomeScreen(),
+          MapScreen.screenId: (context) => MapScreen(),
           SyncScreen.screenId: (context) => SyncScreen(),
         },
       ),
