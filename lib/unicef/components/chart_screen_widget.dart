@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:unicef/common/utils/size_configs.dart';
 import 'package:unicef/unicef/models/chart.dart';
+import 'package:unicef/unicef/screens/home_screen.dart';
 import 'package:unicef/unicef/services/chart2_service.dart';
 
 // ignore: must_be_immutable
@@ -76,6 +77,18 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: IconButton(
+                icon: Icon(Icons.home),
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, HomeScreen.screenId, (route) => false);
+                },
+              ),
+            )
+          ],
           bottom: TabBar(
             // indicatorColor: Colors.red,
             unselectedLabelColor: Colors.blue,

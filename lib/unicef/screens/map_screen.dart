@@ -51,7 +51,7 @@ class _MapScreenState extends State<MapScreen> {
                   child: Image.asset(
                     'assets/images/new_map.png',
                     height: 500.0,
-                    width: 500.0,
+                    width: 300.0,
                   )),
             ),
             Text("Choose your prefrence"),
@@ -78,7 +78,7 @@ class _MapScreenState extends State<MapScreen> {
                     context, HomeScreen.screenId, (route) => false);
               },
               child: Text(
-                "Home",
+                "     NEXT     ",
                 style: TextStyle(color: Colors.white),
               ),
             )

@@ -3,14 +3,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:unicef/common/utils/size_configs.dart';
 import 'package:unicef/unicef/models/clusters.dart';
 import 'package:unicef/unicef/screens/credit_screen.dart';
-import 'package:unicef/unicef/screens/home_screen.dart';
 import 'package:unicef/unicef/screens/indicator_screen.dart';
 import 'package:unicef/unicef/screens/information_screen.dart';
+import 'package:unicef/unicef/screens/introduction_screen.dart';
 import 'package:unicef/unicef/screens/sync_screen.dart';
 import 'package:unicef/unicef/services/cluster_service.dart';
 import 'package:unicef/unicef/services/credit_service.dart';
 import 'package:unicef/unicef/services/infomation_service.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:unicef/unicef/screens/home_screen.dart';
 
 class DrawerNavigation extends StatefulWidget {
   final String? id;
@@ -28,10 +29,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
 
   void initState() {
     super.initState();
-    // Cluster newCluster = Cluster();
-    // newCluster.name = "Introduction";
-    // newCluster.id = 1;
-    // _clusterList.add(newCluster);
+
     getAllClusters();
   }
 
@@ -140,7 +138,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
           ListTile(
             title: const Text("Home"),
             leading: const Icon(
-              Icons.home,
+              FontAwesomeIcons.home,
               color: Colors.blue,
             ),
             onTap: () {
@@ -149,14 +147,25 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
             },
           ),
           ListTile(
-            title: const Text("Introduction"),
+            title: const Text("Preference"),
             leading: const Icon(
               FontAwesomeIcons.greaterThan,
               color: Colors.blue,
             ),
-            onTap: () {
-              getIntroduction();
-              Navigator.pop(context);
+            onTap: () async {
+              InfomationService _informationService = InfomationService();
+
+              var data = await _informationService.getIntroduction();
+              // Navigator.pushNamedAndRemoveUntil(
+              //     context, IntroductionScreen.screenId, (route) => false);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => IntroductionScreen(
+                    title: "Introduction",
+                    information: data,
+                  ),
+                ),
+              );
             },
           ),
           ListTile(
@@ -178,16 +187,6 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
             ),
             onTap: () {
               getDemography();
-            },
-          ),
-          ListTile(
-            title: const Text("Credits"),
-            leading: const Icon(
-              FontAwesomeIcons.greaterThan,
-              color: Colors.blue,
-            ),
-            onTap: () {
-              getCredits();
             },
           ),
           ExpansionTile(
@@ -227,6 +226,16 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                 ),
               ),
             ],
+          ),
+          ListTile(
+            title: const Text("Credits"),
+            leading: const Icon(
+              FontAwesomeIcons.greaterThan,
+              color: Colors.blue,
+            ),
+            onTap: () {
+              getCredits();
+            },
           ),
           const Divider(
             color: Colors.black,

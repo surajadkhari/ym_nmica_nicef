@@ -9,7 +9,7 @@ class IntroductionScreen extends StatefulWidget {
   var title;
   var information;
 
-  IntroductionScreen({Key? key, required this.title, required this.information})
+  IntroductionScreen({Key? key, this.title, this.information})
       : super(key: key);
 
   @override
@@ -33,18 +33,54 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(data);
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      appBar: AppBar(
+        title: Text(
+          "Introduction",
+          style: TextStyle(color: Colors.blue),
+        ),
+        automaticallyImplyLeading: false,
+      ),
+      // body: Column(
+      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //   children: [
+      //     SingleChildScrollView(
+      //       child: Padding(
+      //         padding: const EdgeInsets.all(8.0),
+      //         child: Html(data: widget.information),
+      //       ),
+      //     ),
+      //     Align(
+      //       alignment: Alignment.bottomCenter,
+      //       child: MaterialButton(
+      //         onPressed: () {
+      //           Navigator.pushNamedAndRemoveUntil(
+      //               context, MapScreen.screenId, (route) => false);
+      //         },
+      //         child: const Text('Select your preference',
+      //             style: TextStyle(fontSize: 20)),
+      //         color: Colors.blue,
+      //         textColor: Colors.white,
+      //         elevation: 5,
+      //       ),
+      //     ),
+      //   ],
+      // ),
+      body: Stack(
         children: [
           SingleChildScrollView(
+            child: Container(
+              height: 800,
               child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Html(data: widget.information),
-          )),
-          Align(
-            alignment: Alignment.bottomCenter,
+                padding: const EdgeInsets.all(20.0),
+                child: Html(data: widget.information),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0.0,
             child: MaterialButton(
               onPressed: () {
                 Navigator.pushNamedAndRemoveUntil(

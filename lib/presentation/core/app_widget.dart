@@ -8,11 +8,21 @@ import 'package:unicef/presentation/auth/login/login_screen.dart';
 import 'package:unicef/presentation/auth/registration/registration_screen.dart';
 import 'package:unicef/presentation/splash/splash_screen.dart';
 import 'package:unicef/unicef/screens/home_screen.dart';
+import 'package:unicef/unicef/screens/introduction_screen.dart';
 import 'package:unicef/unicef/screens/map_screen.dart';
 import 'package:unicef/unicef/screens/sync_screen.dart';
 
-class AppWidget extends StatelessWidget {
-  // This widget is the root of your application.
+class AppWidget extends StatefulWidget {
+  @override
+  State<AppWidget> createState() => _AppWidgetState();
+}
+
+class _AppWidgetState extends State<AppWidget> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -30,6 +40,7 @@ class AppWidget extends StatelessWidget {
         routes: {
           RegistrationScreen.screenId: (context) => RegistrationScreen(),
           LoginScreen.screenId: (context) => LoginScreen(),
+          IntroductionScreen.screenId: (context) => IntroductionScreen(),
           HomeScreen.screenId: (context) => HomeScreen(),
           MapScreen.screenId: (context) => MapScreen(),
           SyncScreen.screenId: (context) => SyncScreen(),

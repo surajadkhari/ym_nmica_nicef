@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "395717896372",
+    "firebase_url": "https://nmics-9cfad-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "nmics-9cfad",
+    "storage_bucket": "nmics-9cfad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395717896372:android:07a042ef52493e707e4fe1",
+        "android_client_info": {
+          "package_name": "nepal.unicef.nmics.unicef"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "395717896372-kt46e51f5neaanb9e332ot4fks8368ta.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaCPxN-z40e1UP5CWt9R8b-_pSm6uoAlc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "395717896372-kt46e51f5neaanb9e332ot4fks8368ta.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -81,7 +81,9 @@ class FirebasAuthFacade implements IauthFacade {
           email: emailAddressStr, password: passwordStr);
       return right(unit);
     } on PlatformException catch (e) {
-      if (e.code == "INVALID_EMAIL" || e.code == "USER-NOT-FOUND") {
+      if (e.code == "INVALID_EMAIL" ||
+          e.code == "USER-NOT-FOUND" ||
+          e.code == "TO_MANY_REQUEST") {
         return left(const AuthFailure.invalidEmailAndPasswordComination());
       }
       return left(const AuthFailure.serverError());
