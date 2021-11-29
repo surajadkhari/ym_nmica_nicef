@@ -63,6 +63,7 @@ class FirebasAuthFacade implements IauthFacade {
       );
 
       await _firebaseAuth.signInWithCredential(authCredenatial);
+
       return right(unit);
     } on PlatformException catch (_) {
       return left(const AuthFailure.serverError());

@@ -36,7 +36,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               'Email or password does not match to our records!',
                           emailAlreadyInUse:
                               (EmailAlreadyInUse<dynamic> value) {
-                            return "";
+                            return "Email Already in use!";
                           },
                         ),
                       ),

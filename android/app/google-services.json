@@ -8,18 +8,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:588741111611:android:47cc6f1a938abbe5ee911e",
+        "mobilesdk_app_id": "1:588741111611:android:15b0e0cc1a8da5d9ee911e",
         "android_client_info": {
           "package_name": "nepal.unicef.nmics.unicef"
         }
       },
       "oauth_client": [
         {
-          "client_id": "588741111611-1jcaloq0vq4ni3pnpc11d6158nk3pm97.apps.googleusercontent.com",
+          "client_id": "588741111611-nbgkj52hqv816mig8sem45fqaneib7ta.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "nepal.unicef.nmics.unicef",
-            "certificate_hash": "5d47dabf4807ce263722cd407ae77f0caa625ef3"
+            "certificate_hash": "47bbf8b2b7a4eb3c4368da5399e5da88dce422f2"
           }
         },
         {

@@ -41,31 +41,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
         ),
         automaticallyImplyLeading: false,
       ),
-      // body: Column(
-      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //   children: [
-      //     SingleChildScrollView(
-      //       child: Padding(
-      //         padding: const EdgeInsets.all(8.0),
-      //         child: Html(data: widget.information),
-      //       ),
-      //     ),
-      //     Align(
-      //       alignment: Alignment.bottomCenter,
-      //       child: MaterialButton(
-      //         onPressed: () {
-      //           Navigator.pushNamedAndRemoveUntil(
-      //               context, MapScreen.screenId, (route) => false);
-      //         },
-      //         child: const Text('Select your preference',
-      //             style: TextStyle(fontSize: 20)),
-      //         color: Colors.blue,
-      //         textColor: Colors.white,
-      //         elevation: 5,
-      //       ),
-      //     ),
-      //   ],
-      // ),
       body: Stack(
         children: [
           SingleChildScrollView(

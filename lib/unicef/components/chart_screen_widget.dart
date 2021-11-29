@@ -145,28 +145,23 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
 
                                   if (datar.chartType == "bar_graph") {
                                     var count = 0;
+                                    var label = "";
 
                                     while (count <
                                         snapshot.data![index].charts!.length) {
-                                      var label = "";
                                       var jsom = snapshot
                                           .data![index].charts![count]
                                           .toJson();
 
                                       jsom.forEach((key, value) {
                                         if (key != 'label') {
-                                          // keys['color'] =  "red";']
-                                          print("-----------------");
-                                          print(key);
-                                          print(data);
-                                          print("-----------------");
-
                                           if (key == data) {
                                             chartsBarData.add(BarGraph(
                                                 key, double.parse(value)));
                                           }
                                         } else {
-                                          if (key == data) {
+                                          if (value == "Men" ||
+                                              value == "Women") {
                                             label = value;
                                           }
                                         }
@@ -217,54 +212,59 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                 SingleChildScrollView(
                                                   scrollDirection:
                                                       Axis.horizontal,
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(snapshot
-                                                          .data![index].name!),
-                                                      Container(
-                                                        height:
-                                                            getProportionateScreenHeight(
-                                                                500),
-                                                        width: data ==
-                                                                "All Province"
-                                                            ? getProportionateScreenWidth(
-                                                                500)
-                                                            : getProportionateScreenWidth(
-                                                                100),
-                                                        child: charts.BarChart(
-                                                          _barSeriesData!,
-                                                          animate: true,
-                                                          barRendererDecorator:
-                                                              new charts.BarLabelDecorator<
-                                                                  String>(),
-                                                          animationDuration:
-                                                              Duration(
-                                                                  seconds: 5),
-                                                          barGroupingType: charts
-                                                              .BarGroupingType
-                                                              .grouped,
-                                                          behaviors: [
-                                                            new charts
-                                                                .SeriesLegend(
-                                                              position: charts
-                                                                  .BehaviorPosition
-                                                                  .end,
-                                                              outsideJustification: charts
-                                                                  .OutsideJustification
-                                                                  .startDrawArea,
-                                                              horizontalFirst:
-                                                                  false,
-                                                              desiredMaxRows: 2,
-                                                            )
-                                                          ],
+                                                  child: Container(
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(snapshot
+                                                            .data![index]
+                                                            .name!),
+                                                        Container(
+                                                          height:
+                                                              getProportionateScreenHeight(
+                                                                  500),
+                                                          width: data ==
+                                                                  "All Province"
+                                                              ? getProportionateScreenWidth(
+                                                                  500)
+                                                              : getProportionateScreenWidth(
+                                                                  100),
+                                                          child:
+                                                              charts.BarChart(
+                                                            _barSeriesData!,
+                                                            animate: true,
+                                                            barRendererDecorator:
+                                                                new charts.BarLabelDecorator<
+                                                                    String>(),
+                                                            animationDuration:
+                                                                Duration(
+                                                                    seconds: 5),
+                                                            barGroupingType: charts
+                                                                .BarGroupingType
+                                                                .grouped,
+                                                            behaviors: [
+                                                              new charts
+                                                                  .SeriesLegend(
+                                                                position: charts
+                                                                    .BehaviorPosition
+                                                                    .end,
+                                                                outsideJustification: charts
+                                                                    .OutsideJustification
+                                                                    .startDrawArea,
+                                                                horizontalFirst:
+                                                                    false,
+                                                                desiredMaxRows:
+                                                                    2,
+                                                              )
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ],
@@ -307,10 +307,8 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                 double.parse(value),
                                               ),
                                             );
-                                            // print(key);
                                           } else {
                                             label = value;
-                                            //  print(label);
                                           }
                                         },
                                       );
@@ -344,8 +342,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                         .withOpacity(0.1),
                                                     spreadRadius: 5,
                                                     blurRadius: 7,
-                                                    offset: Offset(0,
-                                                        3), // changes position of shadow
+                                                    offset: Offset(0, 3),
                                                   ),
                                                 ],
                                               ),
@@ -362,14 +359,10 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                       child: SfCartesianChart(
                                                         primaryXAxis:
                                                             CategoryAxis(),
-                                                        // Chart title
                                                         title: ChartTitle(
                                                             text: snapshot
                                                                 .data![index]
                                                                 .name!),
-                                                        // Enable legend
-
-                                                        // Enable tooltip
                                                         tooltipBehavior:
                                                             TooltipBehavior(
                                                                 enable: true),
@@ -432,9 +425,6 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                       ),
                                     );
                                   } else if (datar.chartType == "pie_chart") {
-                                    // List<ChartElement>? datas =
-                                    //     snapshot.data![index].charts;
-
                                     var count = 0;
 
                                     while (count <
@@ -446,17 +436,14 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
 
                                       jsom.forEach((key, chartper) {
                                         if (key != 'label') {
-                                          // keys['color'] =  "red";'
-
                                           chartsPieData.add(PieChart(
                                               key, double.parse(chartper)));
                                         } else {
                                           label = chartper;
-                                          // print(chartper);
                                         }
                                       });
                                       allPieData.add(chartsPieData.toList());
-                                      //print(chartsPieData);
+
                                       _pieSeriesData!.add(
                                         charts.Series(
                                           domainFn: (PieChart barGraph, _) =>
@@ -1104,7 +1091,6 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                               border: Border.all(
                                                   color: Colors.purple,
                                                   width: 2),
-                                              //  color: Colors.red,
                                             ),
                                             child: Padding(
                                               padding:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:unicef/unicef/components/custom_map.dart';
 import 'package:unicef/unicef/screens/home_screen.dart';
 
 class MapScreen extends StatefulWidget {
@@ -44,16 +45,15 @@ class _MapScreenState extends State<MapScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Align(
-                  alignment: Alignment.center,
-                  child: Image.asset(
-                    'assets/images/new_map.png',
-                    height: 500.0,
-                    width: 300.0,
-                  )),
+            //Add this CustomPaint widget to the Widget Tree
+            Container(
+              width: 1000,
+              child: CustomPaint(
+                size: Size(0, 100),
+                painter: RPSCustomPainter(),
+              ),
             ),
+
             Text("Choose your prefrence"),
             Expanded(
               child: DropdownButton(
