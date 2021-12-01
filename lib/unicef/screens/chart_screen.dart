@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:unicef/unicef/components/chart_screen_widget.dart';
-import 'package:unicef/unicef/components/drawer.dart';
 
 // ignore: must_be_immutable
 class ChartScreen extends StatelessWidget {
@@ -18,14 +17,10 @@ class ChartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(name),
-      ),
       body: ChartScreenWidget(
         ids: ids,
         name: name,
       ),
-      drawer: DrawerNavigation(),
     );
   }
 }

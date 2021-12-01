@@ -5,6 +5,8 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unicef/unicef/models/version.dart';
+import 'package:unicef/unicef/services/chart2_service.dart';
+import 'package:unicef/unicef/services/chart_service.dart';
 import 'package:unicef/unicef/services/cluster_service.dart';
 import 'package:unicef/unicef/services/credit_service.dart';
 import 'package:unicef/unicef/services/indicator_services.dart';
@@ -24,6 +26,7 @@ class _SplashWidgetState extends State<SplashWidget> {
   IndicatorServices _indicatorServices = IndicatorServices();
   InfomationService _infomationService = InfomationService();
   CreditService _creditService = CreditService();
+  Chart2Service _chartService = Chart2Service();
   VersionService _versionService = VersionService();
   Future? v;
 
@@ -42,6 +45,7 @@ class _SplashWidgetState extends State<SplashWidget> {
     final prefs = await SharedPreferences.getInstance();
 
     bool isCached = await _getBoolFromSharedPref();
+    // bool isCached = false;
 
     if (!isCached) {
       if (connection == ConnectivityResult.none) {
@@ -56,7 +60,7 @@ class _SplashWidgetState extends State<SplashWidget> {
       } else {
         _clusterService.saveClusters();
         _indicatorServices.saveIndicators();
-        // _chartService.saveCharts();
+        _chartService.cacheData();
         _infomationService.saveIntroduction();
         _infomationService.saveSurvey();
         _infomationService.saveDemography();

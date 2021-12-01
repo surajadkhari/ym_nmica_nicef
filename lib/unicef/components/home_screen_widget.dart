@@ -72,6 +72,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       var model = Cluster();
       model.id = data['id'];
       model.name = data['name'];
+      model.image = data['image'];
       setState(() {
         _clusterList.add(model);
       });
@@ -83,6 +84,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SearchWidget(),
           const Padding(
@@ -91,12 +93,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           ),
           const SizedBox(height: 2),
           Expanded(
-            child: GridView.builder(
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
               itemBuilder: (_, index) {
                 if (_clusterList.isNotEmpty) {
                   return CardComponent(
+                      image: _clusterList[index].image,
                       title: _clusterList[index].name ?? 'nothing',
                       press: () {
                         Navigator.push(

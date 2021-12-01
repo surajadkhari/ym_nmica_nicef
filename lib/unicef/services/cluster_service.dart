@@ -16,9 +16,13 @@ class ClusterService {
     final res = await _api!.httpGet('indicator-cluster');
 
     List decodedJson = json.decode(res.body);
+    print(decodedJson);
     decodedJson.forEach((element) async {
-      await _repository!
-          .save('clusters', {"name": element['name'], 'id': element['id']});
+      await _repository!.save('clusters', {
+        "name": element['name'],
+        'id': element['id'],
+        "image": element['image']
+      });
     });
   }
 

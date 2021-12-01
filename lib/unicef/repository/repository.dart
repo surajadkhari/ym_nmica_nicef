@@ -27,6 +27,8 @@ class Repository {
   Future getData(table) async {
     var conn = await database;
     var getData = await conn.query(table);
+
+    print(getData);
     return getData;
   }
 

@@ -12,7 +12,8 @@ class DataBaseConnecton {
   }
 
   _onCreatingDatabase(Database db, int version) async {
-    await db.execute("CREATE TABLE clusters(id INTEGER PRIMARY KEY,name TEXT)");
+    await db.execute(
+        "CREATE TABLE clusters(id INTEGER PRIMARY KEY,name TEXT,image TEXt)");
     await db.execute(
         "CREATE TABLE indicators(id INTEGER PRIMARY KEY,cluster_id INTEGER,name TEXT,chart_type TEXT,description TEXT)");
     await db.execute(
@@ -24,6 +25,7 @@ class DataBaseConnecton {
     await db.execute(
       "CREATE TABLE introduction(introduction TEXT)",
     );
+
     await db.execute(
       "CREATE TABLE survey(survey TEXT)",
     );
