@@ -27,6 +27,10 @@ class DataBaseConnecton {
     );
 
     await db.execute(
+      "CREATE TABLE descriptions(id INTEGER PRIMARY KEY,title TEXT,description TEXT,color TEXT)",
+    );
+
+    await db.execute(
       "CREATE TABLE survey(survey TEXT)",
     );
     await db.execute(

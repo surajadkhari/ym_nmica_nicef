@@ -160,10 +160,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
               //     context, IntroductionScreen.screenId, (route) => false);
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => IntroductionScreen(
-                    title: "Introduction",
-                    information: data,
-                  ),
+                  builder: (context) => IntroductionScreen(),
                 ),
               );
             },

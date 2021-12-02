@@ -23,14 +23,11 @@ class SplashScreen extends StatelessWidget {
           authenticated: (_) async {
             InfomationService _informationService = InfomationService();
 
-            var data = await _informationService.getIntroduction();
+            var data = await _informationService.getDescriptions();
 
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => IntroductionScreen(
-                  title: "Introduction",
-                  information: data,
-                ),
+                builder: (context) => IntroductionScreen(),
               ),
             );
           },

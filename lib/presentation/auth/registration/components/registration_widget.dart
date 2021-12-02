@@ -288,14 +288,11 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
         //     context, HomeScreen.screenId, (route) => false);
         InfomationService _informationService = InfomationService();
 
-        var data = await _informationService.getIntroduction();
+        var data = await _informationService.getDescriptions();
 
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => IntroductionScreen(
-              title: "Introduction",
-              information: data,
-            ),
+            builder: (context) => IntroductionScreen(),
           ),
         );
 

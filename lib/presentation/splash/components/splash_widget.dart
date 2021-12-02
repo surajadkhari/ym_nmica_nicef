@@ -62,6 +62,7 @@ class _SplashWidgetState extends State<SplashWidget> {
         _indicatorServices.saveIndicators();
         _chartService.cacheData();
         _infomationService.saveIntroduction();
+        _infomationService.saveDescriptions();
         _infomationService.saveSurvey();
         _infomationService.saveDemography();
         _infomationService.saveTerms();

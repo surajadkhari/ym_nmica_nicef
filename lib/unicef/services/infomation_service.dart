@@ -20,6 +20,23 @@ class InfomationService {
     await _repository!.save('introduction', {"introduction": decodedJson});
   }
 
+// New
+
+  Future saveDescriptions() async {
+    final res = await _api!.httpGet('descriptions');
+
+    List decodedJson = json.decode(res.body);
+
+    decodedJson.forEach((element) async {
+      await _repository!.save('descriptions', {
+        'id': element['id'],
+        "title": element['title'],
+        "description": element['description'],
+        "color": element['color'],
+      });
+    });
+  }
+
   Future saveTerms() async {
     final res = await _api!.httpGet('terms-and-conditions');
 
@@ -76,5 +93,11 @@ class InfomationService {
     var res = await _repository!.getData('demography');
 
     return res[0]!['demography'];
+  }
+
+  Future getDescriptions() async {
+    var res = await _repository!.getData('descriptions');
+    print(res);
+    return res;
   }
 }

@@ -28,7 +28,6 @@ class Repository {
     var conn = await database;
     var getData = await conn.query(table);
 
-    print(getData);
     return getData;
   }
 

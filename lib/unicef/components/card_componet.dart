@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class CardComponent extends StatelessWidget {
+class CardComponent extends StatefulWidget {
   final String? title;
   final String? image;
   final int? id;
@@ -14,6 +14,25 @@ class CardComponent extends StatelessWidget {
     required this.press,
     required this.id,
   }) : super(key: key);
+
+  @override
+  State<CardComponent> createState() => _CardComponentState();
+}
+
+class _CardComponentState extends State<CardComponent> {
+  bool isHover = false;
+  Color? hoverColor;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    bool isHover = false;
+    Color? hoverColor;
+  }
+
+  @override
+  void dispose() {}
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +47,22 @@ class CardComponent extends StatelessWidget {
         height: 100.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
+          color: isHover == true
+              ? hoverColor
+              : Colors.primaries[Random().nextInt(Colors.primaries.length)],
           border: Border.all(
             color: Colors.black,
           ),
         ),
         child: Align(
-          child: GestureDetector(
-            onTap: press,
+          child: InkWell(
+            onFocusChange: (object) {
+              setState(() {
+                isHover = true;
+                hoverColor = Colors.red;
+              });
+            },
+            onTap: widget.press,
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -45,7 +72,7 @@ class CardComponent extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Image.network(
-                        image.toString(),
+                        widget.image.toString(),
                         height: 50,
                       ),
                     ),
@@ -53,7 +80,7 @@ class CardComponent extends StatelessWidget {
                       child: Container(
                         decoration: const BoxDecoration(border: Border()),
                         child: Text(
-                          "${title!}",
+                          "${widget.title!}",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
