@@ -72,6 +72,8 @@ dependencies:
   pushable_button: ^0.0.2
   expansion_tile_card: ^2.0.0
   hexcolor: ^2.0.5
+  cached_network_image: ^3.2.0
+  blurhash: ^1.0.0
 
 
 

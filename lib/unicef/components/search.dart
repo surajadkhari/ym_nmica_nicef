@@ -29,7 +29,7 @@ class _SearchWidgetState extends State<SearchWidget> {
       child: ListView(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(30.0),
             child: GestureDetector(
               onTap: () async {
                 var connection = await Connectivity().checkConnectivity();
