@@ -3,9 +3,11 @@ import 'dart:math';
 import 'package:blurhash/blurhash.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class CardComponent extends StatefulWidget {
   final String? title;
+  final String? color;
   final String? image;
   final int? id;
   final VoidCallback? press;
@@ -13,6 +15,7 @@ class CardComponent extends StatefulWidget {
     Key? key,
     required this.title,
     required this.image,
+    required this.color,
     required this.press,
     required this.id,
   }) : super(key: key);
@@ -49,9 +52,8 @@ class _CardComponentState extends State<CardComponent> {
         height: 100.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: isHover == true
-              ? hoverColor
-              : Colors.primaries[Random().nextInt(Colors.primaries.length)],
+          color: HexColor(widget.color.toString()),
+          // Colors.primaries[Random().nextInt(Colors.primaries.length)],
           border: Border.all(
             color: Colors.black,
           ),

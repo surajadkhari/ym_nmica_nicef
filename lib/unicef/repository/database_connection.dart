@@ -13,7 +13,7 @@ class DataBaseConnecton {
 
   _onCreatingDatabase(Database db, int version) async {
     await db.execute(
-        "CREATE TABLE clusters(id INTEGER PRIMARY KEY,name TEXT,image TEXt)");
+        "CREATE TABLE clusters(id INTEGER PRIMARY KEY,name TEXT,image TEXT,color TEXT)");
     await db.execute(
         "CREATE TABLE indicators(id INTEGER PRIMARY KEY,cluster_id INTEGER,name TEXT,chart_type TEXT,description TEXT)");
     await db.execute(

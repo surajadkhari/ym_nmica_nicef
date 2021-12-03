@@ -73,6 +73,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       model.id = data['id'];
       model.name = data['name'];
       model.image = data['image'];
+      model.color = data['color'];
       setState(() {
         _clusterList.add(model);
       });
@@ -101,6 +102,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
               itemBuilder: (_, index) {
                 if (_clusterList.isNotEmpty) {
                   return CardComponent(
+                      color: _clusterList[index].color,
                       image: _clusterList[index].image,
                       title: _clusterList[index].name ?? 'nothing',
                       press: () {

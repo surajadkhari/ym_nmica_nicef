@@ -169,18 +169,90 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                         } else {
                                           if (_barSeriesData!.length == 1) {
                                             show = true;
-                                            width = 500.0;
-                                            width2 = 150.0;
+                                            if (value.length > 90) {
+                                              width = 800.0;
+                                              width2 = 400.0;
+                                            } else if (value.length > 50) {
+                                              width = 800.0;
+                                              width2 = 300.0;
+                                            } else if (value.length > 20) {
+                                              width = 600.0;
+                                              width2 = 200.0;
+                                            } else if (value.length > 14) {
+                                              width = 550.0;
+                                              width2 = 150.0;
+                                            } else if (value.length > 2) {
+                                              width = 500.0;
+                                              width2 = 150.0;
+                                            }
                                           }
                                           if (_barSeriesData!.length == 2) {
                                             show = true;
-                                            width = 650.0;
-                                            width2 = 200.0;
+                                            // width = 650.0;
+                                            // width2 = 200.0;
+                                            print(value.length);
+                                            if (value.length > 90) {
+                                              width = 800.0;
+                                              width2 = 400.0;
+                                            } else if (value.length > 50) {
+                                              width = 800.0;
+                                              width2 = 300.0;
+                                            } else if (value.length > 20) {
+                                              width = 600.0;
+                                              width2 = 200.0;
+                                            } else if (value.length > 14) {
+                                              width = 550.0;
+                                              width2 = 150.0;
+                                            } else if (value.length > 2) {
+                                              width = 500.0;
+                                              width2 = 150.0;
+                                            }
                                           }
                                           if (_barSeriesData!.length == 0) {
                                             show = false;
                                             width = 100.0;
                                             width2 = 80.0;
+                                          }
+
+                                          if (_barSeriesData!.length == 3) {
+                                            show = true;
+
+                                            if (value.length > 90) {
+                                              width = 800.0;
+                                              width2 = 400.0;
+                                            } else if (value.length > 50) {
+                                              width = 800.0;
+                                              width2 = 300.0;
+                                            } else if (value.length > 20) {
+                                              width = 600.0;
+                                              width2 = 200.0;
+                                            } else if (value.length > 14) {
+                                              width = 550.0;
+                                              width2 = 150.0;
+                                            } else if (value.length > 2) {
+                                              width = 500.0;
+                                              width2 = 150.0;
+                                            }
+                                          }
+                                          print(_barSeriesData!.length);
+                                          if (_barSeriesData!.length == 4) {
+                                            show = true;
+                                            if (value.length > 90) {
+                                              width = 800.0;
+                                              width2 = 400.0;
+                                            } else if (value.length > 50) {
+                                              width = 800.0;
+                                              width2 = 300.0;
+                                            } else if (value.length > 20) {
+                                              width = 600.0;
+                                              width2 = 200.0;
+                                            } else if (value.length > 14) {
+                                              width = 800.0;
+                                              width2 = 250.0;
+                                            } else if (value.length > 2) {
+                                              width = 500.0;
+                                              width2 = 150.0;
+                                            }
                                           }
 
                                           label = value;

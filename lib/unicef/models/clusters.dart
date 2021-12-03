@@ -2,6 +2,7 @@ class Cluster {
   int? id;
   String? name;
   String? image;
+  String? color;
 
   Cluster({this.id, this.name});
 
@@ -9,6 +10,7 @@ class Cluster {
     id = json['id'];
     name = json['name'];
     name = json['image'];
+    color = json['color'];
   }
 
   Map<String, dynamic> toJson() {
@@ -16,6 +18,7 @@ class Cluster {
     data['id'] = this.id;
     data['name'] = this.name;
     data['image'] = this.image;
+    data['color'] = this.color;
     return data;
   }
 }
