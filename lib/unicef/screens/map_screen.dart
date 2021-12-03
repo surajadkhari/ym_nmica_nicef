@@ -46,12 +46,15 @@ class _MapScreenState extends State<MapScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             //Add this CustomPaint widget to the Widget Tree
-            Container(
-              width: 1000,
-              child: CustomPaint(
-                size: Size(0, 100),
-                painter: RPSCustomPainter(),
-              ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Align(
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    'assets/images/new_map.png',
+                    height: 500.0,
+                    width: 500.0,
+                  )),
             ),
 
             Text("Choose your prefrence"),
