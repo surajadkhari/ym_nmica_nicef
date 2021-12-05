@@ -83,7 +83,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
           ),
           actions: [
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.only(right: 10),
               child: IconButton(
                 icon: Icon(Icons.home),
                 onPressed: () {
@@ -384,9 +384,15 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                     padding: const EdgeInsets
                                                             .symmetric(
                                                         horizontal: 10),
-                                                    child: Text(snapshot
-                                                        .data![index]
-                                                        .description!),
+                                                    child: Text(
+                                                      snapshot.data![index]
+                                                          .description!,
+                                                      style: TextStyle(
+                                                        color: Colors.grey,
+                                                      ),
+                                                      textAlign:
+                                                          TextAlign.justify,
+                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -626,9 +632,14 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
-                                                            Text(snapshot
-                                                                .data![index]
-                                                                .name!),
+                                                            Text(
+                                                                snapshot
+                                                                    .data![
+                                                                        index]
+                                                                    .name!,
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        20)),
                                                             SingleChildScrollView(
                                                               scrollDirection:
                                                                   Axis.horizontal,
@@ -928,8 +939,11 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Center(
-                                                    child: Text(snapshot
-                                                        .data![index].name!),
+                                                    child: Text(
+                                                        snapshot
+                                                            .data![index].name!,
+                                                        style: TextStyle(
+                                                            fontSize: 20)),
                                                   ),
                                                   Row(
                                                     mainAxisAlignment:
@@ -956,11 +970,6 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                             height: 500,
                                             width: getProportionateScreenWidth(
                                                 500),
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.purple,
-                                                  width: 2),
-                                            ),
                                             child: SingleChildScrollView(
                                               scrollDirection: Axis.horizontal,
                                               child: Container(
@@ -1088,11 +1097,6 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                             height: 500,
                                             width: getProportionateScreenWidth(
                                                 500),
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.purple,
-                                                  width: 2),
-                                            ),
                                             child: SingleChildScrollView(
                                               scrollDirection: Axis.horizontal,
                                               child: Container(
@@ -1165,91 +1169,85 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                       }
                                       chartsPieData.forEach((element) {});
                                       return Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: SingleChildScrollView(
-                                              scrollDirection: Axis.horizontal,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(snapshot
-                                                      .data![index].name!),
-                                                  Container(
-                                                    margin: EdgeInsets.only(
-                                                        left: 0.0),
-                                                    child: TextButton(
-                                                      onPressed: () {
-                                                        getBarCsv();
-                                                      },
-                                                      child: const Text(
-                                                          'Download'),
-                                                    ),
+                                          SingleChildScrollView(
+                                            scrollDirection: Axis.horizontal,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  snapshot.data![index].name!,
+                                                  style:
+                                                      TextStyle(fontSize: 20),
+                                                ),
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                      left: 0.0),
+                                                  child: TextButton(
+                                                    onPressed: () {
+                                                      getBarCsv();
+                                                    },
+                                                    child:
+                                                        const Text('Download'),
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(20.0),
-                                            child: Container(
-                                              height: 500,
-                                              width:
-                                                  getProportionateScreenWidth(
-                                                      500),
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.purple,
-                                                    width: 2),
-                                              ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(0.0),
-                                                child: SingleChildScrollView(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  child: Row(
-                                                    children: [
-                                                      Container(
-                                                        child: DataTable(
-                                                            columns: getBarColumns(
-                                                                barGraphLabels),
-                                                            rows: listConverter(
-                                                                    bargraph)
-                                                                .map(
-                                                                  (singleItem) => DataRow(
-                                                                      cells: singleItem.values
-                                                                          .map(
-                                                                            (value) =>
-                                                                                DataCell(
-                                                                              Text(value.toString()),
-                                                                              showEditIcon: false,
-                                                                              placeholder: false,
-                                                                            ),
-                                                                          )
-                                                                          .toList()),
-                                                                )
-                                                                .toList()),
-                                                      ),
-                                                    ],
-                                                  ),
+                                          Container(
+                                            height: 450,
+                                            width: getProportionateScreenWidth(
+                                                500),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(22.0),
+                                              child: SingleChildScrollView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                      child: DataTable(
+                                                          columns: getBarColumns(
+                                                              barGraphLabels),
+                                                          rows:
+                                                              listConverter(
+                                                                      bargraph)
+                                                                  .map(
+                                                                    (singleItem) => DataRow(
+                                                                        cells: singleItem.values
+                                                                            .map(
+                                                                              (value) => DataCell(
+                                                                                Text(value.toString()),
+                                                                                showEditIcon: false,
+                                                                                placeholder: false,
+                                                                              ),
+                                                                            )
+                                                                            .toList()),
+                                                                  )
+                                                                  .toList()),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ),
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.all(20.0),
-                                            child: Text(snapshot
-                                                .data![index].description!),
+                                            child: Text(
+                                              snapshot
+                                                  .data![index].description!,
+                                              textAlign: TextAlign.justify,
+                                              style:
+                                                  TextStyle(color: Colors.grey),
+                                            ),
                                           ),
                                           Divider(
                                             color: Colors.black,
-                                            height: 2,
-                                          ),
-                                          Divider(
-                                            height: 2,
-                                            color: Colors.black,
+                                            height: 1,
                                           ),
                                         ],
                                       );

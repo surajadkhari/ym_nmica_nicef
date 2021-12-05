@@ -1,7 +1,9 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
+import 'package:unicef/unicef/components/drawer.dart';
 import 'package:unicef/unicef/models/introduction.dart';
 import 'package:unicef/unicef/screens/map_screen.dart';
+import 'package:unicef/unicef/screens/notifications.dart';
 import 'package:unicef/unicef/services/infomation_service.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -51,45 +53,70 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Introduction",
-          style: TextStyle(color: Colors.blue),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.asset(
+              'assets/images/mic_logo.png',
+              fit: BoxFit.contain,
+              height: 20,
+            ),
+          ],
         ),
-        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.notifications,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => NotificationScreen(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Stack(
         children: [
           ListView.builder(
               itemCount: descriptionsList.length,
               itemBuilder: (context, index) {
-                return ExpansionTileCard(
-                  leading: CircleAvatar(
-                    child: Text(descriptionsList[index].title![0]),
-                    backgroundColor: HexColor(descriptionsList[index].color!),
-                  ),
-                  title: Text(descriptionsList[index].title!),
-                  children: <Widget>[
-                    Divider(
-                      thickness: 1.0,
-                      height: 10.0,
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ExpansionTileCard(
+                    baseColor: HexColor(descriptionsList[index].color!),
+                    expandedColor: Colors.purple,
+                    title: Text(
+                      descriptionsList[index].title!,
+                      style: TextStyle(color: Colors.white),
                     ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0,
-                          vertical: 8.0,
-                        ),
-                        child: Text(
-                          descriptionsList[index].description!,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText2!
-                              .copyWith(fontSize: 16),
+                    children: <Widget>[
+                      Divider(
+                        thickness: 1.0,
+                        height: 10.0,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                            vertical: 8.0,
+                          ),
+                          child: Text(
+                            descriptionsList[index].description!,
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               }),
           Positioned(
@@ -113,6 +140,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
           ),
         ],
       ),
+      drawer: DrawerNavigation(),
     );
   }
 }

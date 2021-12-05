@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:unicef/unicef/components/custom_map.dart';
+import 'package:unicef/unicef/components/drawer.dart';
+
 import 'package:unicef/unicef/screens/home_screen.dart';
 
 class MapScreen extends StatefulWidget {
@@ -39,13 +40,42 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Notifications",
+          style: TextStyle(color: Colors.blue),
+        ),
+        actions: <Widget>[
+          // IconButton(
+          //   icon: Icon(
+          //     Icons.notifications,
+          //     color: Colors.black,
+          //   ),
+          //   onPressed: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (BuildContext context) => NotificationScreen(),
+          //       ),
+          //     );
+          //   },
+          // ),
+
+          IconButton(
+            icon: Icon(Icons.home),
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, HomeScreen.screenId, (route) => false);
+            },
+          ),
+        ],
+      ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            //Add this CustomPaint widget to the Widget Tree
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Align(
@@ -56,7 +86,6 @@ class _MapScreenState extends State<MapScreen> {
                     width: 500.0,
                   )),
             ),
-
             Text("Choose your prefrence"),
             Expanded(
               child: DropdownButton(
@@ -88,6 +117,7 @@ class _MapScreenState extends State<MapScreen> {
           ],
         ),
       ),
+      drawer: DrawerNavigation(),
     );
   }
 }

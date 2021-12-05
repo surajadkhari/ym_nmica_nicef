@@ -5,7 +5,8 @@ import 'package:unicef/unicef/models/clusters.dart';
 import 'package:unicef/unicef/screens/credit_screen.dart';
 import 'package:unicef/unicef/screens/indicator_screen.dart';
 import 'package:unicef/unicef/screens/information_screen.dart';
-import 'package:unicef/unicef/screens/introduction_screen.dart';
+// import 'package:unicef/unicef/screens/introduction_screen.dart';
+import 'package:unicef/unicef/screens/map_screen.dart';
 import 'package:unicef/unicef/screens/sync_screen.dart';
 import 'package:unicef/unicef/services/cluster_service.dart';
 import 'package:unicef/unicef/services/credit_service.dart';
@@ -105,35 +106,87 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
     return Drawer(
       child: ListView(
         children: [
-          UserAccountsDrawerHeader(
-            accountName: const Text(
-              "NMICS",
-              style: TextStyle(color: Colors.white),
-            ),
-            accountEmail: Row(
-              children: [
-                Text("Sycn Data"),
-                IconButton(
-                    onPressed: () {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, SyncScreen.screenId, (route) => false);
-                    },
-                    icon: Icon(
-                      Icons.refresh,
-                      color: Colors.white,
-                    ))
-              ],
-            ),
-            currentAccountPicture: GestureDetector(
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Image.asset(
-                  'assets/images/mic_logo.png',
-                  height: 100.0,
+          Container(
+            height: 200,
+            child: DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.yellow[400],
+              ),
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("N",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.redAccent,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                                Text(
+                                  "M",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.redAccent,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "I",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.redAccent,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text("C",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.redAccent,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                                Text("S",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.redAccent,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                              ],
+                            ),
+                            Text("2020-21",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.redAccent,
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 6,
+                      child: Container(
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          radius: 200,
+                          child: Image.asset(
+                            'assets/images/new.png',
+                            height: 200.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            decoration: const BoxDecoration(color: Colors.blue),
           ),
           ListTile(
             title: const Text("Home"),
@@ -155,37 +208,33 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
             onTap: () async {
               InfomationService _informationService = InfomationService();
 
-              var data = await _informationService.getIntroduction();
-              // Navigator.pushNamedAndRemoveUntil(
-              //     context, IntroductionScreen.screenId, (route) => false);
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => IntroductionScreen(),
-                ),
-              );
+              var data = await _informationService.getDescriptions();
+
+              Navigator.pushNamedAndRemoveUntil(
+                  context, MapScreen.screenId, (route) => false);
             },
           ),
-          ListTile(
-            title: const Text("Survey Methodology"),
-            leading: const Icon(
-              FontAwesomeIcons.greaterThan,
-              color: Colors.blue,
-            ),
-            onTap: () {
-              getSurvey();
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: const Text("Demography"),
-            leading: const Icon(
-              FontAwesomeIcons.greaterThan,
-              color: Colors.blue,
-            ),
-            onTap: () {
-              getDemography();
-            },
-          ),
+          // ListTile(
+          //   title: const Text("Survey Methodology"),
+          //   leading: const Icon(
+          //     FontAwesomeIcons.greaterThan,
+          //     color: Colors.blue,
+          //   ),
+          //   onTap: () {
+          //     getSurvey();
+          //     Navigator.pop(context);
+          //   },
+          // ),
+          // ListTile(
+          //   title: const Text("Demography"),
+          //   leading: const Icon(
+          //     FontAwesomeIcons.greaterThan,
+          //     color: Colors.blue,
+          //   ),
+          //   onTap: () {
+          //     getDemography();
+          //   },
+          // ),
           ExpansionTile(
             leading: const Icon(
               FontAwesomeIcons.greaterThan,
@@ -195,31 +244,34 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
               "Clusters",
             ),
             children: <Widget>[
-              Container(
-                height: getProportionateScreenHeight(600),
-                child: ListView.builder(
-                  itemCount: _clusterList.length,
-                  physics: ClampingScrollPhysics(),
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                      title: Text(_clusterList[index].name),
-                      leading: const Icon(
-                        FontAwesomeIcons.greaterThan,
-                        color: Colors.blue,
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          new MaterialPageRoute(
-                            builder: (context) => IndicatorScreen(
-                              id: _clusterList[index].id!,
-                              name: _clusterList[index].name,
+              Padding(
+                padding: const EdgeInsets.only(left: 15),
+                child: Container(
+                  height: getProportionateScreenHeight(450),
+                  child: ListView.builder(
+                    itemCount: _clusterList.length,
+                    physics: ClampingScrollPhysics(),
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        title: Text(_clusterList[index].name),
+                        leading: const Icon(
+                          FontAwesomeIcons.greaterThan,
+                          color: Colors.blue,
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                              builder: (context) => IndicatorScreen(
+                                id: _clusterList[index].id!,
+                                name: _clusterList[index].name,
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    );
-                  },
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
             ],

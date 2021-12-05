@@ -49,14 +49,11 @@ class _CardComponentState extends State<CardComponent> {
       ),
       child: Container(
         width: double.infinity,
-        height: 100.0,
+        height: 65.0,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(5),
           color: HexColor(widget.color.toString()),
           // Colors.primaries[Random().nextInt(Colors.primaries.length)],
-          border: Border.all(
-            color: Colors.black,
-          ),
         ),
         child: Align(
           child: InkWell(
@@ -72,27 +69,23 @@ class _CardComponentState extends State<CardComponent> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      // child: Image.network(
-                      //   widget.image.toString(),
-                      //   height: 50,
-                      // ),
                       child: CachedNetworkImage(
                         imageUrl: widget.image.toString(),
-                        height: 50,
+                        height: 35,
                       ),
                     ),
                     Expanded(
                       child: Container(
-                        decoration: const BoxDecoration(border: Border()),
                         child: Text(
                           "${widget.title!}",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
-                            overflow: TextOverflow.ellipsis,
+                            overflow: TextOverflow.clip,
                           ),
                         ),
                       ),
