@@ -64,13 +64,13 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
                         data[index].value = true;
                         _checkBoxList.add(data[index].id!);
                         return ListTile(
-                          title: Text("$ind: $name"),
+                          title: Text("$ind. $name"),
                         );
                       }
 
                       return CheckboxListTile(
                         title: Text(
-                          "$ind: $name",
+                          "$ind. $name",
                           style: TextStyle(
                               fontSize: 15.0, fontFamily: "Brand-Bold"),
                         ),
@@ -125,7 +125,7 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
                 child: const Center(
                   child: Text(
                     "View Profile",
-                    style: TextStyle(fontSize: 18.0, fontFamily: "Brand-Bold"),
+                    style: TextStyle(fontSize: 15.0, fontFamily: "Brand-Bold"),
                   ),
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unicef/unicef/components/drawer.dart';
 import 'package:unicef/unicef/models/introduction.dart';
 import 'package:unicef/unicef/screens/map_screen.dart';
@@ -42,11 +43,17 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
     });
   }
 
+  cache() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('data', "Nepal");
+  }
+
   @override
   @override
   void initState() {
     super.initState();
     getDescriptions();
+    cache();
   }
 
   @override

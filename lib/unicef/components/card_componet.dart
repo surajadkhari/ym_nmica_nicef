@@ -65,6 +65,7 @@ class _CardComponentState extends State<CardComponent> {
             },
             onTap: widget.press,
             child: SingleChildScrollView(
+              physics: ClampingScrollPhysics(),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -75,7 +76,7 @@ class _CardComponentState extends State<CardComponent> {
                       padding: const EdgeInsets.all(8.0),
                       child: CachedNetworkImage(
                         imageUrl: widget.image.toString(),
-                        height: 35,
+                        height: 20,
                       ),
                     ),
                     Expanded(

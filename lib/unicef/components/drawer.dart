@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:unicef/common/utils/size_configs.dart';
@@ -95,6 +96,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
       var model = Cluster();
       model.id = data['id'];
       model.name = data['name'];
+      model.image = data['image'];
       setState(() {
         _clusterList.add(model);
       });
@@ -106,6 +108,36 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
     return Drawer(
       child: ListView(
         children: [
+          // UserAccountsDrawerHeader(
+          //   accountName: const Text(
+          //     "NMICS",
+          //     style: TextStyle(color: Colors.white),
+          //   ),
+          //   accountEmail: Row(
+          //     children: [
+          //       Text("Sycn Data"),
+          //       IconButton(
+          //           onPressed: () {
+          //             Navigator.pushNamedAndRemoveUntil(
+          //                 context, SyncScreen.screenId, (route) => false);
+          //           },
+          //           icon: Icon(
+          //             Icons.refresh,
+          //             color: Colors.white,
+          //           ))
+          //     ],
+          //   ),
+          //   currentAccountPicture: GestureDetector(
+          //     child: CircleAvatar(
+          //       backgroundColor: Colors.white,
+          //       child: Image.asset(
+          //         'assets/images/mic_logo.png',
+          //         height: 100.0,
+          //       ),
+          //     ),
+          //   ),
+          //   decoration: const BoxDecoration(color: Colors.blue),
+          // ),
           Container(
             height: 200,
             child: DrawerHeader(
@@ -202,7 +234,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
           ListTile(
             title: const Text("Preference"),
             leading: const Icon(
-              FontAwesomeIcons.greaterThan,
+              FontAwesomeIcons.checkCircle,
               color: Colors.blue,
             ),
             onTap: () async {
@@ -254,9 +286,17 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
                         title: Text(_clusterList[index].name),
-                        leading: const Icon(
-                          FontAwesomeIcons.greaterThan,
-                          color: Colors.blue,
+                        // leading: const Icon(
+                        //   FontAwesomeIcons.greaterThan,
+                        //   color: Colors.blue,
+                        // ),
+                        leading: CachedNetworkImage(
+                          imageUrl: _clusterList[index].image,
+                          height: 30,
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
                         onTap: () {
                           Navigator.push(
@@ -279,7 +319,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
           ListTile(
             title: const Text("Credits"),
             leading: const Icon(
-              FontAwesomeIcons.greaterThan,
+              FontAwesomeIcons.copyright,
               color: Colors.blue,
             ),
             onTap: () {
