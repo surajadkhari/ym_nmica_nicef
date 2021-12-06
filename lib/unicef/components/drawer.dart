@@ -6,6 +6,7 @@ import 'package:unicef/unicef/models/clusters.dart';
 import 'package:unicef/unicef/screens/credit_screen.dart';
 import 'package:unicef/unicef/screens/indicator_screen.dart';
 import 'package:unicef/unicef/screens/information_screen.dart';
+import 'package:unicef/unicef/screens/introduction_screen.dart';
 // import 'package:unicef/unicef/screens/introduction_screen.dart';
 import 'package:unicef/unicef/screens/map_screen.dart';
 import 'package:unicef/unicef/screens/sync_screen.dart';
@@ -229,6 +230,23 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
             onTap: () {
               Navigator.pushNamedAndRemoveUntil(
                   context, HomeScreen.screenId, (route) => false);
+            },
+          ),
+          ListTile(
+            title: const Text("Introduction"),
+            leading: const Icon(
+              FontAwesomeIcons.info,
+              color: Colors.blue,
+            ),
+            onTap: () {
+              // Navigator.pushNamedAndRemoveUntil(
+              //     context, IntroductionScreen.screenId, (route) => false);
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                  builder: (context) => IntroductionScreen(),
+                ),
+              );
             },
           ),
           ListTile(

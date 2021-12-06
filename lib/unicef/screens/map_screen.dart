@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unicef/unicef/components/drawer.dart';
 
 import 'package:unicef/unicef/screens/home_screen.dart';
+import 'package:unicef/unicef/screens/notifications.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
@@ -42,32 +43,34 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Notifications",
+          "Preference",
           style: TextStyle(color: Colors.blue),
         ),
         actions: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(
+              icon: Icon(
+                Icons.notifications,
+                color: Colors.grey,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => NotificationScreen(),
+                  ),
+                );
+              },
+            ),
+          ),
           // IconButton(
-          //   icon: Icon(
-          //     Icons.notifications,
-          //     color: Colors.black,
-          //   ),
+          //   icon: Icon(Icons.home),
           //   onPressed: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (BuildContext context) => NotificationScreen(),
-          //       ),
-          //     );
+          //     Navigator.pushNamedAndRemoveUntil(
+          //         context, HomeScreen.screenId, (route) => false);
           //   },
           // ),
-
-          IconButton(
-            icon: Icon(Icons.home),
-            onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(
-                  context, HomeScreen.screenId, (route) => false);
-            },
-          ),
         ],
       ),
       body: Container(

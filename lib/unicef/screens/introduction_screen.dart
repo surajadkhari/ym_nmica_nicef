@@ -71,19 +71,22 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
           ],
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.notifications,
-              color: Colors.black,
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(
+              icon: Icon(
+                Icons.notifications,
+                color: Colors.grey,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => NotificationScreen(),
+                  ),
+                );
+              },
             ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => NotificationScreen(),
-                ),
-              );
-            },
           ),
         ],
       ),

@@ -138,7 +138,6 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 2),
                       FutureBuilder<List<Chart>>(
                         future: futureChart,
                         builder: (context, snapshot) {
@@ -421,13 +420,12 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                         SizedBox(
                                           height: 2,
                                         ),
-                                        Divider(
-                                          height: 5,
-                                          color: Colors.black,
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
+                                        snapshot.data!.length > 1
+                                            ? Divider(
+                                                height: 1,
+                                                color: Colors.black,
+                                              )
+                                            : SizedBox.shrink(),
                                       ],
                                     );
                                   } else if (datar.chartType == "line_graph") {

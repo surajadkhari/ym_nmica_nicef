@@ -43,7 +43,7 @@ class _CardComponentState extends State<CardComponent> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        top: 7,
+        top: 5,
         left: 25,
         right: 25,
       ),
@@ -52,7 +52,9 @@ class _CardComponentState extends State<CardComponent> {
         height: 65.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: HexColor(widget.color.toString()),
+          color: HexColor(
+            widget.color.toString(),
+          ),
           // Colors.primaries[Random().nextInt(Colors.primaries.length)],
         ),
         child: Align(
@@ -76,7 +78,7 @@ class _CardComponentState extends State<CardComponent> {
                       padding: const EdgeInsets.all(8.0),
                       child: CachedNetworkImage(
                         imageUrl: widget.image.toString(),
-                        height: 20,
+                        height: 32,
                       ),
                     ),
                     Expanded(
