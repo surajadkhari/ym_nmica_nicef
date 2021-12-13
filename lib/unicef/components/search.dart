@@ -93,8 +93,8 @@ class _SearchWidgetState extends State<SearchWidget> {
 }
 
 class DataSearch extends SearchDelegate<String> {
-  var suggestionFor = ['abc', 'efg', 'hij'];
-  var suggestionAll = ['ghi', 'jl', 'hij'];
+  // var suggestionFor = ['abc', 'efg', 'hij'];
+  // var suggestionAll = ['ghi', 'jl', 'hij'];
 
   @override
   List<Widget> buildActions(BuildContext context) {

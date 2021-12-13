@@ -30,7 +30,6 @@ class _CardComponentState extends State<CardComponent> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     bool isHover = false;
     Color? hoverColor;

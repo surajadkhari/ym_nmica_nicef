@@ -22,10 +22,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   InfomationService _informationService = InfomationService();
 
   List<Introduction> descriptionsList = [];
-  // getDescriptions() async {
-  //   descriptions = await _informationService.getDescriptions();
-  //   print(descriptions);
-  // }
 
   getDescriptions() async {
     var descriptions = await _informationService.getDescriptions();
@@ -39,7 +35,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
       setState(() {
         descriptionsList.add(model);
       });
-      print(descriptionsList);
     });
   }
 

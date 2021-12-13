@@ -37,51 +37,6 @@ class _NotificationScreenWidgetState extends State<NotificationScreenWidget> {
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
-                            // return ExpansionPanelList(
-                            //   animationDuration: Duration(milliseconds: 500),
-                            //   dividerColor: Colors.red,
-                            //   elevation: 1,
-                            //   children: [
-                            //     ExpansionPanel(
-                            //       headerBuilder: (BuildContext context,
-                            //           bool isExpanded) {
-                            //         return Container(
-                            //           padding: EdgeInsets.all(10),
-                            //           child: Row(
-                            //             mainAxisAlignment:
-                            //                 MainAxisAlignment.spaceBetween,
-                            //             children: [
-                            //               Text(
-                            //                   data[index].notificationTitle!),
-                            //               Text(data[index].notificationDate!),
-                            //             ],
-                            //           ),
-                            //         );
-                            //       },
-                            //       isExpanded: data[index].data!,
-                            //       body: Container(
-                            //         padding: EdgeInsets.all(10),
-                            //         child: Column(
-                            //           mainAxisAlignment:
-                            //               MainAxisAlignment.spaceBetween,
-                            //           crossAxisAlignment:
-                            //               CrossAxisAlignment.start,
-                            //           children: [
-                            //             Text(data[index].notificationText!),
-                            //             SizedBox(
-                            //               height: 2,
-                            //             )
-                            //           ],
-                            //         ),
-                            //       ),
-                            //     )
-                            //   ],
-                            //   expansionCallback: (int item, bool status) {
-                            //     setState(() {
-                            //       data[index].data = !data[index].data!;
-                            //     });
-                            //   },
-                            // );
                             return Padding(
                               padding: const EdgeInsets.all(4.0),
                               child: ExpansionTileCard(

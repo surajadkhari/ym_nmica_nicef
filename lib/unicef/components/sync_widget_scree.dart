@@ -107,7 +107,6 @@ class _SyncScreenWidgetState extends State<SyncScreenWidget> {
       ),
       body: Container(
         width: double.infinity,
-        // height: double.infinity,r
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(horizontal: 35),
         child: Column(

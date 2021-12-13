@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_file_dialog/flutter_file_dialog.dart';
+// import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 
 import 'package:path_provider/path_provider.dart';
 
@@ -57,8 +59,15 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
   void initState() {
     super.initState();
 
-    futureChart = _chart2service.fetchCharts(this.widget.ids!);
+    futureChart = _chart2service.fetchNewCharts(this.widget.ids!);
     getPrefrence();
+  }
+
+  @override
+  void dispose() {
+    // Closes all Hive boxes
+    Hive.close();
+    super.dispose();
   }
 
   getPrefrence() async {
@@ -149,7 +158,6 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                               child: ListView.builder(
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  print(data);
                                   _barSeriesData =
                                       <charts.Series<BarGraph, String>>[];
                                   _pieSeriesData =
@@ -252,7 +260,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                               width2 = 150.0;
                                             }
                                           }
-                                          print(_barSeriesData!.length);
+
                                           if (_barSeriesData!.length == 4) {
                                             show = true;
                                             if (value.length > 90) {
@@ -820,7 +828,6 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                     final filePath =
                                         await FlutterFileDialog.saveFile(
                                             params: params);
-                                    print(filePath);
                                   }
 
                                   getLineCsv() async {
@@ -864,7 +871,6 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                   }
 
                                   getBarCsv() async {
-                                    print(barGraphLabels);
                                     var li = listConverter(bargraph);
                                     List<List<dynamic>> rows = [];
                                     rows.add(barGraphLabels);
@@ -898,7 +904,6 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                     final filePath =
                                         await FlutterFileDialog.saveFile(
                                             params: params);
-                                    print(filePath);
                                   }
 
                                   Chart datar = snapshot.data![index];
@@ -1043,10 +1048,12 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                             child: Text(snapshot
                                                 .data![index].description!),
                                           ),
-                                          Divider(
-                                            height: 5,
-                                            color: Colors.black,
-                                          )
+                                          snapshot.data!.length > 1
+                                              ? Divider(
+                                                  height: 1,
+                                                  color: Colors.black,
+                                                )
+                                              : SizedBox.shrink(),
                                         ],
                                       );
                                     } else if (datar.chartType ==
@@ -1171,7 +1178,10 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                         jsom.forEach((key, chartper) {
                                           if (key != 'label') {
                                             // keys['color'] =  "red";'
-
+                                            // if (key == data) {
+                                            //   bargraph.add(BarGraph2(
+                                            //       key, double.parse(chartper)));
+                                            // }
                                             bargraph.add(BarGraph2(
                                               key,
                                               double.parse(chartper),
@@ -1253,7 +1263,8 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                             ),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.all(20.0),
+                                            padding: const EdgeInsets.only(
+                                                left: 10.0, right: 10),
                                             child: Text(
                                               snapshot
                                                   .data![index].description!,
@@ -1262,10 +1273,12 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                   TextStyle(color: Colors.grey),
                                             ),
                                           ),
-                                          Divider(
-                                            color: Colors.black,
-                                            height: 1,
-                                          ),
+                                          snapshot.data!.length > 1
+                                              ? Divider(
+                                                  height: 1,
+                                                  color: Colors.black,
+                                                )
+                                              : SizedBox.shrink(),
                                         ],
                                       );
                                     } else {

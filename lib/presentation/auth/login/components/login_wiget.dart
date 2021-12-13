@@ -91,7 +91,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                     padding: const EdgeInsets.all(20.0),
                     child: Form(
                       // ignore: deprecated_member_use
-                      autovalidate: state.showErrorMessagec,
+
                       child: Column(
                         children: [
                           const SizedBox(height: 1.0),

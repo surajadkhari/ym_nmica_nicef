@@ -60,13 +60,6 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
                     itemBuilder: (BuildContext context, int index) {
                       var ind = index + 1;
                       var name = data[index].name!;
-                      if (r == ConnectivityResult.none) {
-                        data[index].value = true;
-                        _checkBoxList.add(data[index].id!);
-                        return ListTile(
-                          title: Text("$ind. $name"),
-                        );
-                      }
 
                       return CheckboxListTile(
                         title: Text(
@@ -76,20 +69,17 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
                         ),
                         value: data[index].value,
                         onChanged: (val) {
-                          if (r == ConnectivityResult.none) {
+                          var id = data[index].id;
+                          if (val!) {
+                            _checkBoxList.add(id!);
+                            setState(() {
+                              data[index].value = val;
+                            });
                           } else {
-                            var id = data[index].id;
-                            if (val!) {
-                              _checkBoxList.add(id!);
-                              setState(() {
-                                data[index].value = val;
-                              });
-                            } else {
-                              _checkBoxList.remove(id!);
-                              setState(() {
-                                data[index].value = val;
-                              });
-                            }
+                            _checkBoxList.remove(id!);
+                            setState(() {
+                              data[index].value = val;
+                            });
                           }
                         },
                       );

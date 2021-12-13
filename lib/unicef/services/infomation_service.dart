@@ -27,7 +27,6 @@ class InfomationService {
 
     List decodedJson = json.decode(res.body);
 
-    print(decodedJson);
     decodedJson.forEach((element) async {
       await _repository!.save('descriptions', {
         'id': element['id'],
@@ -98,7 +97,7 @@ class InfomationService {
 
   Future getDescriptions() async {
     var res = await _repository!.getData('descriptions');
-    print(res);
+
     return res;
   }
 }

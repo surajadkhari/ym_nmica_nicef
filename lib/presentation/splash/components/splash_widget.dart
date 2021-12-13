@@ -47,6 +47,7 @@ class _SplashWidgetState extends State<SplashWidget> {
     bool isCached = await _getBoolFromSharedPref();
     // bool isCached = false;
 
+    print("Is cached : $isCached");
     if (!isCached) {
       if (connection == ConnectivityResult.none) {
         final snackBar = SnackBar(
@@ -58,17 +59,18 @@ class _SplashWidgetState extends State<SplashWidget> {
           exit(0);
         });
       } else {
+        _infomationService.saveDescriptions();
         _clusterService.saveClusters();
         _indicatorServices.saveIndicators();
         _chartService.cacheData();
+        _chartService.saveCharts();
         _infomationService.saveIntroduction();
-        _infomationService.saveDescriptions();
         _infomationService.saveSurvey();
         _infomationService.saveDemography();
         _infomationService.saveTerms();
         _infomationService.savePolicy();
         _creditService.saveCredits();
-
+        _chartService.saveChartHive();
         await prefs.setBool('isCached', true);
         checkVersion();
       }

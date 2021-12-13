@@ -41,12 +41,62 @@ class Repository {
     return mapped;
   }
 
+  Future<List<Chart>> getDataByIndId(table, column_name, id) async {
+    var conn = await database;
+    print(table);
+    print(column_name);
+    print(column_name);
+
+    var data =
+        await conn.query(table, where: '$column_name=?', whereArgs: [id]);
+    var mapped = data.map((chart) => new Chart.fromJson(chart)).toList();
+    return mapped;
+  }
+
+  Future<List<Chart>> getDataByIds(table, column_name, ids) async {
+    var conn = await database;
+
+    // print(table);
+    // print(column_name);
+    // print(ids);
+
+    // var data = await conn.query(table, where: '$column_name=?', whereArgs: ids);
+    // print(data);
+    // var mapped = data.map((chart) => new Chart.fromJson(chart)).toList();
+    // return mapped;
+
+    List<Chart> li = [];
+
+    ids.forEach((element) async {
+      var value = await conn
+          .query(table, where: '$column_name=?', whereArgs: [element]);
+      print("--------------");
+      print(value[0]);
+      List<Chart> m = [];
+      value.forEach((element) {
+        print(element);
+        // Map<String, dynamic> data = {
+        //   "id": element.id,
+        // };
+        // m.add(data.map((chart) => new Chart.fromJson(chart)));
+        // Chart c = new Chart();
+        // ChartElement cl = new ChartElement();
+        // cl.bagmati = element.c.id = element.id;
+        // c.name = element.name;
+        // c.description = element.description;
+        // c.charts = c.description = element.description;
+      });
+
+      Chart mapped = value.map((chart) => new Chart.fromJson(chart)) as Chart;
+      li.add(mapped);
+    });
+
+    return li;
+  }
+
   Future<List> getCharts(table, column_name, ids) async {
     var conn = await database;
     List li = [];
-    // var data = await conn.query(table,
-    //     where: "indicator_id IN (${List.filled(ids.length, '?').join(',')})",
-    //     whereArgs: ids);
 
     ids.forEach((element) async {
       var value = await conn

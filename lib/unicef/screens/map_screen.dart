@@ -64,13 +64,6 @@ class _MapScreenState extends State<MapScreen> {
               },
             ),
           ),
-          // IconButton(
-          //   icon: Icon(Icons.home),
-          //   onPressed: () {
-          //     Navigator.pushNamedAndRemoveUntil(
-          //         context, HomeScreen.screenId, (route) => false);
-          //   },
-          // ),
         ],
       ),
       body: Container(

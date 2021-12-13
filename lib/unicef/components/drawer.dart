@@ -239,8 +239,6 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
               color: Colors.blue,
             ),
             onTap: () {
-              // Navigator.pushNamedAndRemoveUntil(
-              //     context, IntroductionScreen.screenId, (route) => false);
               Navigator.push(
                 context,
                 new MaterialPageRoute(
@@ -264,27 +262,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                   context, MapScreen.screenId, (route) => false);
             },
           ),
-          // ListTile(
-          //   title: const Text("Survey Methodology"),
-          //   leading: const Icon(
-          //     FontAwesomeIcons.greaterThan,
-          //     color: Colors.blue,
-          //   ),
-          //   onTap: () {
-          //     getSurvey();
-          //     Navigator.pop(context);
-          //   },
-          // ),
-          // ListTile(
-          //   title: const Text("Demography"),
-          //   leading: const Icon(
-          //     FontAwesomeIcons.greaterThan,
-          //     color: Colors.blue,
-          //   ),
-          //   onTap: () {
-          //     getDemography();
-          //   },
-          // ),
+
           ExpansionTile(
             leading: const Icon(
               FontAwesomeIcons.greaterThan,
@@ -304,10 +282,6 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
                         title: Text(_clusterList[index].name),
-                        // leading: const Icon(
-                        //   FontAwesomeIcons.greaterThan,
-                        //   color: Colors.blue,
-                        // ),
                         leading: CachedNetworkImage(
                           imageUrl: _clusterList[index].image,
                           height: 30,
