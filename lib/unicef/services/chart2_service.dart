@@ -48,24 +48,22 @@ class Chart2Service {
     }
   }
 
-  List da = [];
   Future<List<Chart>>? fetchNewCharts(List<int> ids) async {
-    // List<Chart> res =
-    //     await _repository!.getDataByIds('charts', "indicator_id", ids);
+    List dasss = [];
 
-    ids.forEach((element) async {
-      String data = "charts" + element.toString();
-      // var box = Hive.box(data);
-      // print(box);
-      // var name = box.get('data');
-      // da.add(name);
+    for (var i = 0; i < ids.length; i++) {
+      String data = "charts" + ids[i].toString();
+
       var cachedData = await APICacheManager().getCacheData(data);
 
-      // List jsonResponse = json.decode(cachedData.syncData);
-      da.add(json.decode(cachedData.syncData));
-    });
+      final jsonResponse = json.decode(cachedData.syncData);
 
-    return da.map((chart) => new Chart.fromJson(chart)).toList();
+      dasss.add(jsonResponse);
+    }
+
+    var xaa = dasss.map((chart) => new Chart.fromJson(chart)).toList();
+
+    return xaa;
 
     // return da.map((chart) => new Chart.fromJson(chart)).toList();
   }
@@ -77,12 +75,40 @@ class Chart2Service {
 
     decodedJson.forEach((element) async {
       String data = "charts" + element['id'].toString();
-      // await Hive.openBox(data);
-      // var box = Hive.box(data);
-      // box.put('data', element);
+      List xx = [];
+      List tt = element['charts'];
+
+      tt.forEach((element) {
+        var label = element['label'];
+        var Nepal = element['Nepal'];
+        var Province1 = element['Province 1'];
+        var Province2 = element['Province 2'];
+        var Bagmati = element['Bagmati'];
+        var Gandaki = element['Gandaki'];
+        var Lumbini = element['Lumbini'];
+        var Karnali = element['Karnali'];
+        var Sudurpashchim = element['Sudurpashchim'];
+
+        String cc =
+            '{"label":"$label","Nepal":"$Nepal","Province 1":"$Province1" ,"Province 2":"$Province2","Bagmati":"$Bagmati","Gandaki":"$Gandaki","Lumbini":"$Lumbini","Karnali":"$Karnali","Sudurpashchim":"$Sudurpashchim"}';
+        xx.add(cc);
+      });
+
+      var id = element["id"];
+      var indicatorClusterId = element["indicator_cluster_id"];
+      var indicatorCode = element["indicator_code"];
+      var chartType = element['chart_type'];
+      var name = element['name'];
+      var description = element['description'];
+      var module = element['module'];
+      var status = element['status'];
+      var displayOrder = element['display_order'];
+      var charts = xx;
+      String d =
+          '{"id":$id,"indicator_cluster_id":$indicatorClusterId,"indicator_code":"$indicatorCode","chart_type":"$chartType","name":"$name","description":"$description","module":"$module","status":"$status","display_order":$displayOrder,"charts":$charts}';
 
       APICacheDBModel cacheDBModel =
-          new APICacheDBModel(key: data, syncData: element);
+          new APICacheDBModel(key: data, syncData: d);
 
       await APICacheManager().addCacheData(cacheDBModel);
     });

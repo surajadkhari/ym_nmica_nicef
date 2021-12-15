@@ -295,3 +295,116 @@ class ChartElement {
 //         "Sudurpashchim": sudurpashchim,
 //       };
 // }
+
+// To parse this JSON data, do
+//
+//     final chart = chartFromJson(jsonString);
+
+// import 'dart:convert';
+
+// List<Chart> chartFromJson(String str) =>
+//     List<Chart>.from(json.decode(str).map((x) => Chart.fromJson(x)));
+
+// String chartToJson(List<Chart> data) =>
+//     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+// class Chart {
+//   Chart({
+//     this.id,
+//     this.indicatorClusterId,
+//     this.indicatorCode,
+//     this.chartType,
+//     this.name,
+//     this.description,
+//     this.module,
+//     this.status,
+//     this.displayOrder,
+//     this.charts,
+//   });
+
+//   int? id;
+//   int? indicatorClusterId;
+//   String? indicatorCode;
+//   String? chartType;
+//   String? name;
+//   String? description;
+//   String? module;
+//   String? status;
+//   String? displayOrder;
+//   List<ChartElement>? charts;
+
+//   factory Chart.fromJson(Map<String, dynamic> json) => Chart(
+//         id: json["id"],
+//         indicatorClusterId: json["indicatorClusterId"],
+//         indicatorCode: json["indicatorCode"],
+//         chartType: json["chartType"],
+//         name: json["name"],
+//         description: json["description"],
+//         module: json["module"],
+//         status: json["status"],
+//         displayOrder: json["displayOrder"],
+//         charts: List<ChartElement>.from(
+//             json["charts"].map((x) => ChartElement.fromJson(x))),
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "indicatorClusterId": indicatorClusterId,
+//         "indicatorCode": indicatorCode,
+//         "chartType": chartType,
+//         "name": name,
+//         "description": description,
+//         "module": module,
+//         "status": status,
+//         "displayOrder": displayOrder,
+//         "charts": List<dynamic>.from(charts!.map((x) => x.toJson())),
+//       };
+// }
+
+// class ChartElement {
+//   ChartElement({
+//     this.label,
+//     this.nepal,
+//     this.province1,
+//     this.province2,
+//     this.bagmati,
+//     this.gandaki,
+//     this.lumbini,
+//     this.karnali,
+//     this.sudurpashchim,
+//   });
+
+//   String? label;
+//   String? nepal;
+//   String? province1;
+//   String? province2;
+//   String? bagmati;
+//   String? gandaki;
+//   String? lumbini;
+//   String? karnali;
+//   String? sudurpashchim;
+
+//   factory ChartElement.fromJson(Map<String, dynamic> json) => ChartElement(
+//         label: json["label"],
+//         nepal: json["nepal"],
+//         province1: json["province1"],
+//         province2: json["province2"],
+//         bagmati: json["bagmati"],
+//         gandaki: json["gandaki"],
+//         lumbini: json["lumbini"],
+//         karnali: json["karnali"],
+//         sudurpashchim: json["sudurpashchim"],
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "label": label,
+//         "nepal": nepal,
+//         "province1": province1,
+//         "province2": province2,
+//         "bagmati": bagmati,
+//         "gandaki": gandaki,
+//         "lumbini": lumbini,
+//         "karnali": karnali,
+//         "sudurpashchim": sudurpashchim,
+//       };
+// }

@@ -59,6 +59,7 @@ class _SplashWidgetState extends State<SplashWidget> {
           exit(0);
         });
       } else {
+        _chartService.saveChartHive();
         _infomationService.saveDescriptions();
         _clusterService.saveClusters();
         _indicatorServices.saveIndicators();
@@ -70,7 +71,6 @@ class _SplashWidgetState extends State<SplashWidget> {
         _infomationService.saveTerms();
         _infomationService.savePolicy();
         _creditService.saveCredits();
-        _chartService.saveChartHive();
         await prefs.setBool('isCached', true);
         checkVersion();
       }
