@@ -42,18 +42,25 @@ class _CardComponentState extends State<CardComponent> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        top: 5,
+        top: 20,
         left: 25,
         right: 25,
       ),
       child: Container(
         width: double.infinity,
-        height: 65.0,
+        height: 72.0,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: HexColor(
-            widget.color.toString(),
-          ),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+                blurRadius: 20,
+                color: Color(0xFF013856).withAlpha(25),
+                offset: Offset(0, 10))
+          ],
+          // color: HexColor(
+          //   widget.color.toString(),
+          // ),
           // Colors.primaries[Random().nextInt(Colors.primaries.length)],
         ),
         child: Align(
@@ -85,7 +92,8 @@ class _CardComponentState extends State<CardComponent> {
                         child: Text(
                           "${widget.title!}",
                           style: TextStyle(
-                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF061735),
                             fontSize: 15,
                             overflow: TextOverflow.clip,
                           ),

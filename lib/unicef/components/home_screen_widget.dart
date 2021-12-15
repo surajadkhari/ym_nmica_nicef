@@ -127,6 +127,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           )
         ],
       ),
+      extendBody: true,
     );
   }
 }

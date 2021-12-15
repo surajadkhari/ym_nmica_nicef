@@ -92,35 +92,53 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ExpansionTileCard(
-                    baseColor: HexColor(descriptionsList[index].color!),
-                    expandedColor: Colors.purple,
-                    title: Text(
-                      descriptionsList[index].title!,
-                      style: TextStyle(color: Colors.white),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(
+                            blurRadius: 20,
+                            color: Color(0xFF013856).withAlpha(25),
+                            offset: Offset(0, 10))
+                      ],
+                      // color: HexColor(
+                      //   widget.color.toString(),
+                      // ),
+                      // Colors.primaries[Random().nextInt(Colors.primaries.length)],
                     ),
-                    children: <Widget>[
-                      Divider(
-                        thickness: 1.0,
-                        height: 10.0,
+                    child: ExpansionTileCard(
+                      baseColor: Colors.white,
+                      elevation: 0,
+                      expandedColor: Colors.white,
+                      title: Text(
+                        descriptionsList[index].title!,
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w600),
                       ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0,
-                            vertical: 8.0,
-                          ),
-                          child: Text(
-                            descriptionsList[index].description!,
-                            textAlign: TextAlign.justify,
-                            style: TextStyle(
-                              color: Colors.white,
+                      children: <Widget>[
+                        Divider(
+                          thickness: 1.0,
+                          height: 10.0,
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0,
+                              vertical: 8.0,
+                            ),
+                            child: Text(
+                              descriptionsList[index].description!,
+                              textAlign: TextAlign.justify,
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               }),

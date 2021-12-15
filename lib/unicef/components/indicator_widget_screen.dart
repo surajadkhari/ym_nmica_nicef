@@ -55,33 +55,56 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
                   var data = snapshot.data;
                   return ListView.builder(
                     controller: _scrollController,
-                    itemExtent: 40,
                     itemCount: data!.length,
                     itemBuilder: (BuildContext context, int index) {
                       var ind = index + 1;
                       var name = data[index].name!;
 
-                      return CheckboxListTile(
-                        title: Text(
-                          "$ind. $name",
-                          style: TextStyle(
-                              fontSize: 15.0, fontFamily: "Brand-Bold"),
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                          top: 20,
+                          left: 25,
+                          right: 25,
                         ),
-                        value: data[index].value,
-                        onChanged: (val) {
-                          var id = data[index].id;
-                          if (val!) {
-                            _checkBoxList.add(id!);
-                            setState(() {
-                              data[index].value = val;
-                            });
-                          } else {
-                            _checkBoxList.remove(id!);
-                            setState(() {
-                              data[index].value = val;
-                            });
-                          }
-                        },
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8),
+                            boxShadow: [
+                              BoxShadow(
+                                  blurRadius: 20,
+                                  color: Color(0xFF013856).withAlpha(25),
+                                  offset: Offset(0, 10))
+                            ],
+                            // color: HexColor(
+                            //   widget.color.toString(),
+                            // ),
+                            // Colors.primaries[Random().nextInt(Colors.primaries.length)],
+                          ),
+                          child: CheckboxListTile(
+                            title: Text(
+                              "$ind.  $name",
+                              style: TextStyle(
+                                  fontSize: 15.0, fontFamily: "Brand-Bold"),
+                            ),
+                            value: data[index].value,
+                            onChanged: (val) {
+                              var id = data[index].id;
+                              if (val!) {
+                                _checkBoxList.add(id!);
+                                setState(() {
+                                  data[index].value = val;
+                                });
+                              } else {
+                                _checkBoxList.remove(id!);
+                                setState(() {
+                                  data[index].value = val;
+                                });
+                              }
+                            },
+                          ),
+                        ),
                       );
                     },
                   );
@@ -93,8 +116,9 @@ class _IndicatorScreenWidgetState extends State<IndicatorScreenWidget> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(5),
+            padding: EdgeInsets.only(bottom: 10, right: 20, left: 20),
             child: Container(
+              height: 50,
               margin: EdgeInsets.only(top: 20),
               child: ElevatedButton(
                 onPressed: () {

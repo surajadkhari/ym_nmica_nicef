@@ -47,8 +47,22 @@ class _SearchWidgetState extends State<SearchWidget> {
                 }
               },
               child: Container(
-                child: TextSelectionGestureDetector(
-                  onTapDown: (bfm) async {
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                        blurRadius: 20,
+                        color: Color(0xFF013856).withAlpha(25),
+                        offset: Offset(0, 10))
+                  ],
+                  // color: HexColor(
+                  //   widget.color.toString(),
+                  // ),
+                  // Colors.primaries[Random().nextInt(Colors.primaries.length)],
+                ),
+                child: GestureDetector(
+                  onTap: () async {
                     var connection = await Connectivity().checkConnectivity();
                     if (connection == ConnectivityResult.none) {
                       final snackBar = SnackBar(
@@ -75,10 +89,10 @@ class _SearchWidgetState extends State<SearchWidget> {
                       ),
                       hintText: "Search Indicator",
                       border: const OutlineInputBorder(
-                        borderSide: BorderSide(width: 0.8),
+                        borderSide: BorderSide(width: 0.0),
                       ),
                       enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(width: 0.8, color: Colors.blue),
+                        borderSide: BorderSide(width: 0.0, color: Colors.white),
                       ),
                     ),
                   ),
