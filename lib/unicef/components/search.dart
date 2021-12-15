@@ -143,6 +143,7 @@ class DataSearch extends SearchDelegate<String> {
                       new MaterialPageRoute(
                         builder: (context) => SingleChart(
                           id: data[index].id,
+                          name: data[index].name,
                         ),
                       ),
                     );

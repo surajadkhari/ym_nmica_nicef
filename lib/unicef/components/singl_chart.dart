@@ -18,8 +18,9 @@ import 'package:unicef/unicef/services/serach_indicators.dart';
 // ignore: must_be_immutable
 class SingleChart extends StatefulWidget {
   final int? id;
+  final String? name;
 
-  SingleChart({Key? key, this.id}) : super(key: key);
+  SingleChart({Key? key, this.id, this.name}) : super(key: key);
 
   @override
   _SingleChartState createState() => _SingleChartState();
@@ -62,7 +63,7 @@ class _SingleChartState extends State<SingleChart> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            "",
+            widget.name!,
             style: TextStyle(color: Colors.blue, fontSize: 15),
           ),
           actions: <Widget>[
