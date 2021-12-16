@@ -128,6 +128,7 @@ class Repository {
         batch.delete("indicators");
         batch.delete("charts");
         batch.delete("introduction");
+        batch.delete("descriptions");
         batch.delete("survey");
         batch.delete("credits");
         batch.delete("demography");

@@ -40,12 +40,12 @@ class _NotificationScreenWidgetState extends State<NotificationScreenWidget> {
                             return Padding(
                               padding: const EdgeInsets.all(4.0),
                               child: ExpansionTileCard(
-                                baseColor: Colors.blue,
-                                expandedColor: Colors.purple,
-                                expandedTextColor: Colors.black,
+                                baseColor: Colors.white,
+                                elevation: 0,
+                                expandedColor: Colors.white,
                                 title: Text(
                                   data[index].notificationTitle!,
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: Colors.black),
                                 ),
                                 children: <Widget>[
                                   Divider(
@@ -61,7 +61,7 @@ class _NotificationScreenWidgetState extends State<NotificationScreenWidget> {
                                       ),
                                       child: Text(
                                         data[index].notificationText!,
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(color: Colors.black),
                                       ),
                                     ),
                                   ),

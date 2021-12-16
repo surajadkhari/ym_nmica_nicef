@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:open_settings/open_settings.dart';
 import 'package:unicef/unicef/components/singl_chart.dart';
 import 'package:unicef/unicef/models/Indicators.dart';
-import 'package:unicef/unicef/services/chart2_service.dart';
 import 'package:unicef/unicef/services/indicator_services.dart';
-
-import 'package:unicef/unicef/services/serach_indicators.dart';
 import 'package:unicef/unicef/widgets/CheckBoxState.dart';
 
 // ignore: must_be_immutable
@@ -34,19 +31,19 @@ class _SearchWidgetState extends State<SearchWidget> {
             padding: const EdgeInsets.all(30.0),
             child: GestureDetector(
               onTap: () async {
-                var connection = await Connectivity().checkConnectivity();
-                if (connection == ConnectivityResult.none) {
-                  final snackBar = SnackBar(
-                    content: Text(
-                        'Turn on your internet connection to use this feature!'),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  await Future.delayed(const Duration(seconds: 2), () {
-                    OpenSettings.openWIFISetting();
-                  });
-                } else {
+                // var connection = await Connectivity().checkConnectivity();
+                // if (connection == ConnectivityResult.none) {
+                //   final snackBar = SnackBar(
+                //     content: Text(
+                //         'Turn on your internet connection to use this feature!'),
+                //   );
+                //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                //   await Future.delayed(const Duration(seconds: 2), () {
+                //     OpenSettings.openWIFISetting();
+                //   });
+                // } else {
                   showSearch(context: context, delegate: DataSearch());
-                }
+                // }
               },
               child: Container(
                 decoration: BoxDecoration(

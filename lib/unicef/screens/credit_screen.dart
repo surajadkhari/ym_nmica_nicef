@@ -16,9 +16,10 @@ class CreditScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          title,
-          style: TextStyle(color: Colors.blue),
+        title: Image.asset(
+          'assets/images/mic_logo.png',
+          fit: BoxFit.contain,
+          height: 20,
         ),
         actions: <Widget>[
           Padding(

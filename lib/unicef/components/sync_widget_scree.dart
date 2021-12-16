@@ -107,7 +107,7 @@ class _SyncScreenWidgetState extends State<SyncScreenWidget> {
     return new Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Syn New data", style: TextStyle(color: Colors.white)),
+        title: Text("Sync New data", style: TextStyle(color: Colors.blue)),
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
@@ -116,35 +116,75 @@ class _SyncScreenWidgetState extends State<SyncScreenWidget> {
           },
         ),
       ),
-      body: Container(
-        width: double.infinity,
-        alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(horizontal: 35),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text("Version: $version"),
-            Text("Version Name: $name"),
-            Text("Version Description: $description"),
-            Text("Version release date: $releaseDate"),
-            SizedBox(height: 20),
-            PushableButton(
-              child: Text(
-                'Sync Data',
-                style: TextStyle(color: Colors.white, fontSize: 30),
-              ),
-              height: 40,
-              elevation: 8,
-              hslColor: HSLColor.fromAHSL(1.0, 120, 1.0, 0.37),
-              shadow: BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-              ),
-              onPressed: () {
-                cacheAllData();
-              },
-            )
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            width: double.infinity,
+            alignment: Alignment.center,
+            padding: EdgeInsets.symmetric(horizontal: 35),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text("Version: $version"),
+                Text("Version Name: $name"),
+                Text("Version Description: $description"),
+                Text("Version release date: $releaseDate"),
+                SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () {
+                    cacheAllData();
+                  },
+                  child: Container(
+                    width: 200,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.blue, Colors.blue],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          offset: Offset(5, 5),
+                          blurRadius: 10,
+                        )
+                      ],
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Sync New Data',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                // PushableButton(
+                //   child: Text(
+                //     'Sync Data',
+                //     style: TextStyle(color: Colors.white, fontSize: 30),
+                //   ),
+                //   height: 40,
+                //   elevation: 8,
+                //   hslColor: HSLColor.fromAHSL(1.0, 120, 1.0, 0.37),
+                //   shadow: BoxShadow(
+                //     color: Colors.grey.withOpacity(0.5),
+                //   ),
+                //   onPressed: () {
+                //     cacheAllData();
+                //   },
+                // )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

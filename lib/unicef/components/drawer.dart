@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:unicef/common/utils/size_configs.dart';
 import 'package:unicef/unicef/models/clusters.dart';
 import 'package:unicef/unicef/screens/credit_screen.dart';
@@ -140,92 +141,127 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
           //   decoration: const BoxDecoration(color: Colors.blue),
           // ),
           Container(
-            height: 200,
-            child: DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.yellow[400],
-              ),
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("N",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.redAccent,
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                                Text(
-                                  "M",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.redAccent,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  "I",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.redAccent,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text("C",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.redAccent,
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                                Text("S",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.redAccent,
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                              ],
-                            ),
-                            Text("2020-21",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.redAccent,
-                                )),
-                          ],
+            height: 190,
+            color: HexColor("#B0E0E6"),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Image.asset(
+                          'assets/images/mic_logo.png',
+                          width: double.infinity,
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 6,
-                      child: Container(
-                        child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 200,
-                          child: Image.asset(
-                            'assets/images/new.png',
-                            height: 200.0,
-                          ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          "2020-21",
+                          style: TextStyle(color: Colors.black, fontSize: 20),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
+                Expanded(
+                  flex: 1,
+                  child: Image.asset(
+                    'assets/images/ma.png',
+                    width: double.infinity,
+                    height: 220,
+                  ),
+                ),
+              ],
             ),
+            // child: Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            // Expanded(
+            //   flex: 2,
+            //   child: Container(
+            //     child: Column(
+            //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //       children: [
+            //         Column(
+            //           mainAxisAlignment: MainAxisAlignment.center,
+            //           children: [
+            //             Text("N",
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   color: Colors.redAccent,
+            //                   fontWeight: FontWeight.bold,
+            //                 )),
+            //             Text(
+            //               "M",
+            //               style: TextStyle(
+            //                 fontSize: 20,
+            //                 color: Colors.redAccent,
+            //                 fontWeight: FontWeight.bold,
+            //               ),
+            //             ),
+            //             Text(
+            //               "I",
+            //               style: TextStyle(
+            //                 fontSize: 20,
+            //                 color: Colors.redAccent,
+            //                 fontWeight: FontWeight.bold,
+            //               ),
+            //             ),
+            //             Text("C",
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   color: Colors.redAccent,
+            //                   fontWeight: FontWeight.bold,
+            //                 )),
+            //             Text("S",
+            //                 style: TextStyle(
+            //                   fontSize: 20,
+            //                   color: Colors.redAccent,
+            //                   fontWeight: FontWeight.bold,
+            //                 )),
+            //           ],
+            //         ),
+            //         Text("2020-21",
+            //             style: TextStyle(
+            //               fontSize: 20,
+            //               color: Colors.redAccent,
+            //             )),
+            //       ],
+            //     ),
+            //   ),
+            // ),
+            // Expanded(
+            //   child: Container(
+            //     width: double.infinity,
+            // child: CircleAvatar(
+            //   backgroundColor: Colors.white,
+            //   radius: 200,
+            //   child: Image.asset(
+            //     'assets/images/new.png',
+            //     height: 200.0,
+            //   ),
+            // ),
+            // child: Image.asset(
+            //   'assets/images/splash_main.png',
+            //   width: double.infinity,
+            // ),
+            //   ),
+            // ),
+            //   ],
+            // ),
           ),
           ListTile(
             title: const Text("Home"),
-            leading: const Icon(
-              FontAwesomeIcons.home,
-              color: Colors.blue,
+            leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: const Icon(
+                FontAwesomeIcons.home,
+                color: Colors.grey,
+              ),
             ),
             onTap: () {
               Navigator.pushNamedAndRemoveUntil(
@@ -234,9 +270,12 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
           ),
           ListTile(
             title: const Text("Introduction"),
-            leading: const Icon(
-              FontAwesomeIcons.info,
-              color: Colors.blue,
+            leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: const Icon(
+                FontAwesomeIcons.info,
+                color: Colors.grey,
+              ),
             ),
             onTap: () {
               Navigator.push(
@@ -249,9 +288,12 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
           ),
           ListTile(
             title: const Text("Preference"),
-            leading: const Icon(
-              FontAwesomeIcons.checkCircle,
-              color: Colors.blue,
+            leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: const Icon(
+                FontAwesomeIcons.checkCircle,
+                color: Colors.grey,
+              ),
             ),
             onTap: () async {
               InfomationService _informationService = InfomationService();
@@ -264,43 +306,51 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
           ),
 
           ExpansionTile(
-            leading: const Icon(
-              FontAwesomeIcons.greaterThan,
-              color: Colors.blue,
+            leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: const Icon(
+                FontAwesomeIcons.greaterThan,
+                color: Colors.grey,
+              ),
             ),
             title: Text(
               "Clusters",
             ),
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(left: 15),
+                padding: const EdgeInsets.only(left: 30),
                 child: Container(
                   height: getProportionateScreenHeight(450),
                   child: ListView.builder(
                     itemCount: _clusterList.length,
                     physics: ClampingScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        title: Text(_clusterList[index].name),
-                        leading: CachedNetworkImage(
-                          imageUrl: _clusterList[index].image,
-                          height: 30,
-                          placeholder: (context, url) =>
-                              CircularProgressIndicator(),
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            new MaterialPageRoute(
-                              builder: (context) => IndicatorScreen(
-                                id: _clusterList[index].id!,
-                                name: _clusterList[index].name,
-                              ),
+                      return Column(
+                        children: [
+                          ListTile(
+                            title: Text(_clusterList[index].name),
+                            leading: CachedNetworkImage(
+                              imageUrl: _clusterList[index].image,
+                              height: 30,
+                              placeholder: (context, url) =>
+                                  CircularProgressIndicator(),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
                             ),
-                          );
-                        },
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                new MaterialPageRoute(
+                                  builder: (context) => IndicatorScreen(
+                                    id: _clusterList[index].id!,
+                                    name: _clusterList[index].name,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          Divider()
+                        ],
                       );
                     },
                   ),
@@ -310,52 +360,123 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
           ),
           ListTile(
             title: const Text("Credits"),
-            leading: const Icon(
-              FontAwesomeIcons.copyright,
-              color: Colors.blue,
+            leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: const Icon(
+                FontAwesomeIcons.copyright,
+                color: Colors.grey,
+              ),
             ),
             onTap: () {
               getCredits();
             },
           ),
-          const Divider(
-            color: Colors.black,
-          ),
-          const Center(child: Text("Visit us at")),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IconButton(
-                onPressed: () async {
-                  await launch('https://www.facebook.com/unicefnepal');
-                },
-                icon: const Icon(
-                  Icons.facebook,
-                  color: Colors.blue,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                // child: Row(
+                //   children: [
+                //     Expanded(
+                //       flex: 1,
+                //       child: Padding(
+                //         padding: const EdgeInsets.all(50.0),
+                //         child: Image.asset("assets/images/gov.png"),
+                //       ),
+                //     ),
+                //     Expanded(
+                //       flex: 1,
+                //       child: Padding(
+                //         padding: const EdgeInsets.only(left: 16.0),
+                //         child: Column(
+                //           crossAxisAlignment: CrossAxisAlignment.start,
+                //           children: [
+                //             Padding(
+                //               padding: const EdgeInsets.all(8.0),
+                //               child: Image.asset("assets/images/un.png"),
+                //             ),
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+              ),
+              Divider(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset("assets/images/un.png"),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "United Nations Children's Fund",
+                              textAlign: TextAlign.justify,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              IconButton(
-                icon: const FaIcon(
-                  FontAwesomeIcons.instagram,
-                  size: 25,
-                  color: Colors.blue,
-                ),
-                onPressed: () async {
-                  await launch('https://www.instagram.com/unicefnepal/');
-                },
+              Padding(
+                padding: const EdgeInsets.only(left: 24.0),
+                child: Text("Visit us at"),
               ),
-              IconButton(
-                icon: const FaIcon(
-                  FontAwesomeIcons.twitter,
-                  size: 25,
-                  color: Colors.blue,
+              Padding(
+                padding: const EdgeInsets.only(left: 12.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      onPressed: () async {
+                        await launch('https://www.facebook.com/unicefnepal');
+                      },
+                      icon: const Icon(
+                        Icons.facebook,
+                        color: Colors.blue,
+                      ),
+                    ),
+                    IconButton(
+                      icon: const FaIcon(
+                        FontAwesomeIcons.instagram,
+                        size: 25,
+                        color: Colors.purple,
+                      ),
+                      onPressed: () async {
+                        await launch('https://www.instagram.com/unicefnepal/');
+                      },
+                    ),
+                    IconButton(
+                      icon: const FaIcon(
+                        FontAwesomeIcons.twitter,
+                        size: 25,
+                        color: Colors.blue,
+                      ),
+                      onPressed: () async {
+                        await launch(
+                            'https://twitter.com/unicef_nepal?lang=en');
+                      },
+                    ),
+                  ],
                 ),
-                onPressed: () async {
-                  await launch('https://twitter.com/unicef_nepal?lang=en');
-                },
-              ),
+              )
             ],
-          )
+          ),
         ],
       ),
     );
