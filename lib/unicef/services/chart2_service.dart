@@ -6,16 +6,20 @@ import 'package:excel/excel.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart';
 import 'package:unicef/api/api.dart';
+import 'package:unicef/unicef/models/Indicators.dart';
 import 'package:unicef/unicef/models/chart.dart';
 import 'package:unicef/unicef/repository/repository.dart';
+import 'package:unicef/unicef/services/indicator_services.dart';
 
 class Chart2Service {
   Api? _api;
   Repository? _repository;
+  IndicatorServices? _chart2service;
 
   Chart2Service() {
     _api = Api();
     _repository = Repository();
+    _chart2service = IndicatorServices();
   }
 
   Future<List<Chart>>? fetchCharts(List<int> ids) async {
@@ -46,6 +50,12 @@ class Chart2Service {
 
       return jsonResponse.map((chart) => new Chart.fromJson(chart)).toList();
     }
+  }
+
+  Future<List<Indicator>>? indicatorList(String name) async {
+    var xa = _chart2service!.fetchAllIndicators(name);
+
+    return xa;
   }
 
   Future<List<Chart>>? fetchNewCharts(List<int> ids) async {

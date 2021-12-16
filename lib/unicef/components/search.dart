@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:open_settings/open_settings.dart';
 import 'package:unicef/unicef/components/singl_chart.dart';
 import 'package:unicef/unicef/models/Indicators.dart';
+import 'package:unicef/unicef/services/chart2_service.dart';
+import 'package:unicef/unicef/services/indicator_services.dart';
 
 import 'package:unicef/unicef/services/serach_indicators.dart';
 import 'package:unicef/unicef/widgets/CheckBoxState.dart';
 
 // ignore: must_be_immutable
 class SearchWidget extends StatefulWidget {
-  static SearchIndicator _indicatorSearch = SearchIndicator();
+  static IndicatorServices _indicatorSearch = IndicatorServices();
 
   Future<List<CheckBoxState>>? futureData;
   SearchWidget({
@@ -61,21 +63,9 @@ class _SearchWidgetState extends State<SearchWidget> {
                   // ),
                   // Colors.primaries[Random().nextInt(Colors.primaries.length)],
                 ),
-                child: GestureDetector(
-                  onTap: () async {
-                    var connection = await Connectivity().checkConnectivity();
-                    if (connection == ConnectivityResult.none) {
-                      final snackBar = SnackBar(
-                        content: Text(
-                            'Turn on your internet connection to use this feature!'),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      await Future.delayed(const Duration(seconds: 2), () {
-                        OpenSettings.openWIFISetting();
-                      });
-                    } else {
-                      showSearch(context: context, delegate: DataSearch());
-                    }
+                child: TextSelectionGestureDetector(
+                  onTapDown: (bfm) async {
+                    showSearch(context: context, delegate: DataSearch());
                   },
                   child: TextField(
                     readOnly: true,
@@ -141,7 +131,7 @@ class DataSearch extends SearchDelegate<String> {
   @override
   Widget buildSuggestions(BuildContext context) =>
       FutureBuilder<List<Indicator>>(
-        future: SearchWidget._indicatorSearch.getSearch(name: query),
+        future: SearchWidget._indicatorSearch.fetchAllIndicators(query),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Indicator>? data = snapshot.data;
@@ -149,6 +139,8 @@ class DataSearch extends SearchDelegate<String> {
             return ListView.builder(
               itemCount: data!.length,
               itemBuilder: (BuildContext context, int index) {
+                print("---");
+                print(data[index].name);
                 return ListTile(
                   title: Text(data[index].name!),
                   onTap: () {

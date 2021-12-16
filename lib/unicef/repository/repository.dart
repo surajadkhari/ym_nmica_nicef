@@ -1,4 +1,5 @@
 import 'package:sqflite/sqflite.dart';
+import 'package:unicef/unicef/models/Indicators.dart';
 import 'package:unicef/unicef/models/chart.dart';
 import 'package:unicef/unicef/repository/database_connection.dart';
 import 'package:unicef/unicef/widgets/CheckBoxState.dart';
@@ -29,6 +30,17 @@ class Repository {
     var getData = await conn.query(table);
 
     return getData;
+  }
+
+  Future<List<Indicator>> getAll(table, name) async {
+    var conn = await database;
+
+    var getData =
+        await conn.query(table, where: "name LIKE ?", whereArgs: ['%$name%']);
+
+    var mapped = getData.map((chart) => new Indicator.fromJson(chart)).toList();
+
+    return mapped;
   }
 
   Future<List<CheckBoxState>> getDataById(table, column_name, id) async {

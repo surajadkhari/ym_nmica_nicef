@@ -37,6 +37,7 @@ class CreditService {
   Future getCredits() async {
     var res = await _repository!.getData('credits');
 
+    print(res);
     return res[0]!;
   }
 }

@@ -61,6 +61,7 @@ class _SplashWidgetState extends State<SplashWidget> {
       } else {
         _chartService.saveChartHive();
         _infomationService.saveDescriptions();
+        _creditService.saveCredits();
         _clusterService.saveClusters();
         _indicatorServices.saveIndicators();
         _chartService.cacheData();
@@ -70,7 +71,7 @@ class _SplashWidgetState extends State<SplashWidget> {
         _infomationService.saveDemography();
         _infomationService.saveTerms();
         _infomationService.savePolicy();
-        _creditService.saveCredits();
+
         await prefs.setBool('isCached', true);
         checkVersion();
       }

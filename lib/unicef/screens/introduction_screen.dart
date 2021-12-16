@@ -6,7 +6,7 @@ import 'package:unicef/unicef/models/introduction.dart';
 import 'package:unicef/unicef/screens/map_screen.dart';
 import 'package:unicef/unicef/screens/notifications.dart';
 import 'package:unicef/unicef/services/infomation_service.dart';
-import 'package:hexcolor/hexcolor.dart';
+// import 'package:hexcolor/hexcolor.dart';
 
 // ignore: must_be_immutable
 class IntroductionScreen extends StatefulWidget {

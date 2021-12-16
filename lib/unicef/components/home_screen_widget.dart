@@ -60,7 +60,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         );
       },
     );
-    _chart2service.cacheData();
+    // _chart2service.cacheData();
   }
 
   List<Cluster> _clusterList = [];

@@ -36,4 +36,10 @@ class IndicatorServices {
   Future<List<CheckBoxState>> fetchIndicators(int id) {
     return _repository!.getDataById('indicators', 'cluster_id', id);
   }
+
+  fetchAllIndicators(String name) {
+    var x = _repository!.getAll('indicators', name);
+
+    return x;
+  }
 }
