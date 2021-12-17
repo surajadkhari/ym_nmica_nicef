@@ -1,5 +1,6 @@
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unicef/unicef/components/drawer.dart';
 import 'package:unicef/unicef/models/introduction.dart';
@@ -66,6 +67,17 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
           ],
         ),
         actions: <Widget>[
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, MapScreen.screenId, (route) => false);
+            },
+            icon: FaIcon(
+              FontAwesomeIcons.globe,
+              color: Colors.grey,
+              size: 20,
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
@@ -142,25 +154,6 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                   ),
                 );
               }),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0.0,
-            child: Padding(
-              padding: const EdgeInsets.all(40.0),
-              child: MaterialButton(
-                onPressed: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, MapScreen.screenId, (route) => false);
-                },
-                child: Text('Select your preference',
-                    style: TextStyle(fontSize: 20)),
-                color: Colors.blue,
-                textColor: Colors.white,
-                elevation: 10,
-              ),
-            ),
-          ),
         ],
       ),
       drawer: DrawerNavigation(),

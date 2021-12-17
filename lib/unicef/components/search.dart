@@ -1,6 +1,4 @@
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
-import 'package:open_settings/open_settings.dart';
 import 'package:unicef/unicef/components/singl_chart.dart';
 import 'package:unicef/unicef/models/Indicators.dart';
 import 'package:unicef/unicef/services/indicator_services.dart';
@@ -23,28 +21,16 @@ class SearchWidget extends StatefulWidget {
 class _SearchWidgetState extends State<SearchWidget> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 120,
-      child: ListView(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: GestureDetector(
-              onTap: () async {
-                // var connection = await Connectivity().checkConnectivity();
-                // if (connection == ConnectivityResult.none) {
-                //   final snackBar = SnackBar(
-                //     content: Text(
-                //         'Turn on your internet connection to use this feature!'),
-                //   );
-                //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                //   await Future.delayed(const Duration(seconds: 2), () {
-                //     OpenSettings.openWIFISetting();
-                //   });
-                // } else {
-                  showSearch(context: context, delegate: DataSearch());
-                // }
-              },
+    return GestureDetector(
+      onTap: () {
+        showSearch(context: context, delegate: DataSearch());
+      },
+      child: SizedBox(
+        height: 120,
+        child: ListView(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(30.0),
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -55,48 +41,39 @@ class _SearchWidgetState extends State<SearchWidget> {
                         color: Color(0xFF013856).withAlpha(25),
                         offset: Offset(0, 10))
                   ],
-                  // color: HexColor(
-                  //   widget.color.toString(),
-                  // ),
-                  // Colors.primaries[Random().nextInt(Colors.primaries.length)],
                 ),
-                child: TextSelectionGestureDetector(
-                  onTapDown: (bfm) async {
+                child: TextField(
+                  onTap: () {
                     showSearch(context: context, delegate: DataSearch());
                   },
-                  child: TextField(
-                    readOnly: true,
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.search),
-                      suffixIcon: IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: () {
-                          print("ok");
-                        },
-                      ),
-                      hintText: "Search Indicator",
-                      border: const OutlineInputBorder(
-                        borderSide: BorderSide(width: 0.0),
-                      ),
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(width: 0.0, color: Colors.white),
-                      ),
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.search),
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.clear),
+                      onPressed: () {
+                        print("ok");
+                      },
+                    ),
+                    hintText: "Search Indicator",
+                    border: const OutlineInputBorder(
+                      borderSide: BorderSide(width: 0.0),
+                    ),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(width: 0.0, color: Colors.white),
                     ),
                   ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
 }
 
 class DataSearch extends SearchDelegate<String> {
-  // var suggestionFor = ['abc', 'efg', 'hij'];
-  // var suggestionAll = ['ghi', 'jl', 'hij'];
-
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -113,6 +90,7 @@ class DataSearch extends SearchDelegate<String> {
     return IconButton(
       icon: Icon(
         Icons.arrow_back,
+        color: Colors.grey,
       ),
       onPressed: () {
         close(context, '');
@@ -136,8 +114,6 @@ class DataSearch extends SearchDelegate<String> {
             return ListView.builder(
               itemCount: data!.length,
               itemBuilder: (BuildContext context, int index) {
-                print("---");
-                print(data[index].name);
                 return ListTile(
                   title: Text(data[index].name!),
                   onTap: () {

@@ -23,11 +23,11 @@ void main() async {
   Hive.init(directory.path);
 
   await Firebase.initializeApp();
-  // var connection = await Connectivity().checkConnectivity();
-  // if (connection != ConnectivityResult.none) {
-  //   await FirebaseMessaging.instance.subscribeToTopic('all');
-  // }
-  // FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  var connection = await Connectivity().checkConnectivity();
+  if (connection != ConnectivityResult.none) {
+    await FirebaseMessaging.instance.subscribeToTopic('all');
+  }
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
   runApp(
     AppWidget(),

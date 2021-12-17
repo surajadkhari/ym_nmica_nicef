@@ -157,13 +157,6 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                           width: double.infinity,
                         ),
                       ),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          "2020-21",
-                          style: TextStyle(color: Colors.black, fontSize: 20),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -254,19 +247,22 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
             //   ],
             // ),
           ),
-          ListTile(
-            title: const Text("Home"),
-            leading: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: const Icon(
-                FontAwesomeIcons.home,
-                color: Colors.grey,
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: ListTile(
+              title: const Text("Home"),
+              leading: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: const Icon(
+                  FontAwesomeIcons.home,
+                  color: Colors.grey,
+                ),
               ),
+              onTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, HomeScreen.screenId, (route) => false);
+              },
             ),
-            onTap: () {
-              Navigator.pushNamedAndRemoveUntil(
-                  context, HomeScreen.screenId, (route) => false);
-            },
           ),
           ListTile(
             title: const Text("Introduction"),
@@ -327,27 +323,43 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                     itemBuilder: (BuildContext context, int index) {
                       return Column(
                         children: [
-                          ListTile(
-                            title: Text(_clusterList[index].name),
-                            leading: CachedNetworkImage(
-                              imageUrl: _clusterList[index].image,
-                              height: 30,
-                              placeholder: (context, url) =>
-                                  CircularProgressIndicator(),
-                              errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 20,
+                                    color: Color(0xFF013856).withAlpha(25),
+                                    offset: Offset(0, 10))
+                              ],
+                              // color: HexColor(
+                              //   widget.color.toString(),
+                              // ),
+                              // Colors.primaries[Random().nextInt(Colors.primaries.length)],
                             ),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                new MaterialPageRoute(
-                                  builder: (context) => IndicatorScreen(
-                                    id: _clusterList[index].id!,
-                                    name: _clusterList[index].name,
+                            child: ListTile(
+                              title: Text(_clusterList[index].name),
+                              leading: CachedNetworkImage(
+                                imageUrl: _clusterList[index].image,
+                                height: 30,
+                                placeholder: (context, url) =>
+                                    CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  new MaterialPageRoute(
+                                    builder: (context) => IndicatorScreen(
+                                      id: _clusterList[index].id!,
+                                      name: _clusterList[index].name,
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
+                                );
+                              },
+                            ),
                           ),
                           Divider()
                         ],
