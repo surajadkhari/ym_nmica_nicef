@@ -99,6 +99,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
       model.id = data['id'];
       model.name = data['name'];
       model.image = data['image'];
+      model.color = data['color'];
       setState(() {
         _clusterList.add(model);
       });
@@ -313,58 +314,53 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
               "Clusters",
             ),
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: Container(
-                  height: getProportionateScreenHeight(450),
-                  child: ListView.builder(
-                    itemCount: _clusterList.length,
-                    physics: ClampingScrollPhysics(),
-                    itemBuilder: (BuildContext context, int index) {
-                      return Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                    blurRadius: 20,
-                                    color: Color(0xFF013856).withAlpha(25),
-                                    offset: Offset(0, 10))
-                              ],
-                              // color: HexColor(
-                              //   widget.color.toString(),
-                              // ),
-                              // Colors.primaries[Random().nextInt(Colors.primaries.length)],
-                            ),
-                            child: ListTile(
-                              title: Text(_clusterList[index].name),
-                              leading: CachedNetworkImage(
-                                imageUrl: _clusterList[index].image,
-                                height: 30,
-                                placeholder: (context, url) =>
-                                    CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    Icon(Icons.error),
+              Container(
+                color: Color(0xFFF8FCFF),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 30, right: 20),
+                  child: Container(
+                    height: getProportionateScreenHeight(450),
+                    child: ListView.builder(
+                      itemCount: _clusterList.length,
+                      physics: ClampingScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) {
+                        return Column(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                color: HexColor(_clusterList[index].color),
+                                borderRadius: BorderRadius.circular(8),
+
+                                // Colors.primaries[Random().nextInt(Colors.primaries.length)],
                               ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  new MaterialPageRoute(
-                                    builder: (context) => IndicatorScreen(
-                                      id: _clusterList[index].id!,
-                                      name: _clusterList[index].name,
+                              child: ListTile(
+                                title: Text(_clusterList[index].name),
+                                leading: CachedNetworkImage(
+                                  imageUrl: _clusterList[index].image,
+                                  height: 30,
+                                  placeholder: (context, url) =>
+                                      CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    new MaterialPageRoute(
+                                      builder: (context) => IndicatorScreen(
+                                        id: _clusterList[index].id!,
+                                        name: _clusterList[index].name,
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
+                                  );
+                                },
+                              ),
                             ),
-                          ),
-                          Divider()
-                        ],
-                      );
-                    },
+                            Divider()
+                          ],
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),

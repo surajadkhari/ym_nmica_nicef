@@ -29,16 +29,6 @@ class _CardComponentState extends State<CardComponent> {
   Color? hoverColor;
 
   @override
-  void initState() {
-    super.initState();
-    bool isHover = false;
-    Color? hoverColor;
-  }
-
-  @override
-  void dispose() {}
-
-  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
@@ -50,7 +40,7 @@ class _CardComponentState extends State<CardComponent> {
         width: double.infinity,
         height: 72.0,
         decoration: BoxDecoration(
-          color: Colors.white,
+          // color: Colors.white,
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
@@ -58,9 +48,9 @@ class _CardComponentState extends State<CardComponent> {
                 color: Color(0xFF013856).withAlpha(25),
                 offset: Offset(0, 10))
           ],
-          // color: HexColor(
-          //   widget.color.toString(),
-          // ),
+          color: HexColor(
+            widget.color.toString(),
+          ),
           // Colors.primaries[Random().nextInt(Colors.primaries.length)],
         ),
         child: Align(

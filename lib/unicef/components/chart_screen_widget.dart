@@ -1365,8 +1365,9 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                          left: 10.0,
-                                                          right: 10),
+                                                          left: 15.0,
+                                                          right: 15,
+                                                          bottom: 15),
                                                   child: Text(
                                                     snapshot.data![index]
                                                         .description!,
