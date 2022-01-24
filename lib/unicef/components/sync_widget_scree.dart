@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:open_settings/open_settings.dart';
-import 'package:pushable_button/pushable_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unicef/unicef/models/version.dart';
 import 'package:unicef/unicef/repository/repository.dart';
@@ -125,7 +124,7 @@ class _SyncScreenWidgetState extends State<SyncScreenWidget> {
             alignment: Alignment.center,
             padding: EdgeInsets.symmetric(horizontal: 35),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text("Version: $version"),
                 Text("Version Name: $name"),
@@ -166,21 +165,6 @@ class _SyncScreenWidgetState extends State<SyncScreenWidget> {
                     ),
                   ),
                 ),
-                // PushableButton(
-                //   child: Text(
-                //     'Sync Data',
-                //     style: TextStyle(color: Colors.white, fontSize: 30),
-                //   ),
-                //   height: 40,
-                //   elevation: 8,
-                //   hslColor: HSLColor.fromAHSL(1.0, 120, 1.0, 0.37),
-                //   shadow: BoxShadow(
-                //     color: Colors.grey.withOpacity(0.5),
-                //   ),
-                //   onPressed: () {
-                //     cacheAllData();
-                //   },
-                // )
               ],
             ),
           ),

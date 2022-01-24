@@ -10,7 +10,6 @@ import 'package:unicef/unicef/screens/information_screen.dart';
 import 'package:unicef/unicef/screens/introduction_screen.dart';
 // import 'package:unicef/unicef/screens/introduction_screen.dart';
 import 'package:unicef/unicef/screens/map_screen.dart';
-import 'package:unicef/unicef/screens/sync_screen.dart';
 import 'package:unicef/unicef/services/cluster_service.dart';
 import 'package:unicef/unicef/services/credit_service.dart';
 import 'package:unicef/unicef/services/infomation_service.dart';

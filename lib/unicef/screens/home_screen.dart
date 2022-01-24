@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:unicef/presentation/auth/login/login_screen.dart';
 import 'package:unicef/unicef/components/drawer.dart';
 import 'package:unicef/unicef/components/home_screen_widget.dart';
 import 'package:unicef/unicef/models/version.dart';

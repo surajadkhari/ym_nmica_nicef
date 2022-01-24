@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unicef/unicef/models/version.dart';
 import 'package:unicef/unicef/services/chart2_service.dart';
-import 'package:unicef/unicef/services/chart_service.dart';
 import 'package:unicef/unicef/services/cluster_service.dart';
 import 'package:unicef/unicef/services/credit_service.dart';
 import 'package:unicef/unicef/services/indicator_services.dart';

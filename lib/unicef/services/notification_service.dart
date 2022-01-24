@@ -49,7 +49,9 @@ class NoificationService {
         message.notification!.body,
         notificationDetails,
       );
-    } on Exception catch (e) {}
+    } on Exception catch (e) {
+      print(e.toString());
+    }
   }
 
   Future<List<NotificationModel>>? getAllNotifications() async {

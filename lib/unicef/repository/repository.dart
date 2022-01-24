@@ -34,12 +34,9 @@ class Repository {
 
   Future<List<Indicator>> getAll(table, name) async {
     var conn = await database;
-
     var getData =
         await conn.query(table, where: "name LIKE ?", whereArgs: ['%$name%']);
-
     var mapped = getData.map((chart) => new Indicator.fromJson(chart)).toList();
-
     return mapped;
   }
 
@@ -55,9 +52,6 @@ class Repository {
 
   Future<List<Chart>> getDataByIndId(table, column_name, id) async {
     var conn = await database;
-    print(table);
-    print(column_name);
-    print(column_name);
 
     var data =
         await conn.query(table, where: '$column_name=?', whereArgs: [id]);
@@ -68,36 +62,26 @@ class Repository {
   Future<List<Chart>> getDataByIds(table, column_name, ids) async {
     var conn = await database;
 
-    // print(table);
-    // print(column_name);
-    // print(ids);
-
-    // var data = await conn.query(table, where: '$column_name=?', whereArgs: ids);
-    // print(data);
-    // var mapped = data.map((chart) => new Chart.fromJson(chart)).toList();
-    // return mapped;
-
     List<Chart> li = [];
 
     ids.forEach((element) async {
       var value = await conn
           .query(table, where: '$column_name=?', whereArgs: [element]);
-      print("--------------");
-      print(value[0]);
-      List<Chart> m = [];
-      value.forEach((element) {
-        print(element);
-        // Map<String, dynamic> data = {
-        //   "id": element.id,
-        // };
-        // m.add(data.map((chart) => new Chart.fromJson(chart)));
-        // Chart c = new Chart();
-        // ChartElement cl = new ChartElement();
-        // cl.bagmati = element.c.id = element.id;
-        // c.name = element.name;
-        // c.description = element.description;
-        // c.charts = c.description = element.description;
-      });
+
+      // List<Chart> m = [];
+      // value.forEach((element) {
+      //   print(element);
+      //   // Map<String, dynamic> data = {
+      //   //   "id": element.id,
+      //   // };
+      //   // m.add(data.map((chart) => new Chart.fromJson(chart)));
+      //   // Chart c = new Chart();
+      //   // ChartElement cl = new ChartElement();
+      //   // cl.bagmati = element.c.id = element.id;
+      //   // c.name = element.name;
+      //   // c.description = element.description;
+      //   // c.charts = c.description = element.description;
+      // });
 
       Chart mapped = value.map((chart) => new Chart.fromJson(chart)) as Chart;
       li.add(mapped);

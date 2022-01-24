@@ -13,7 +13,6 @@ import 'package:unicef/unicef/components/drawer.dart';
 import 'package:unicef/unicef/models/chart.dart';
 import 'package:unicef/unicef/screens/notifications.dart';
 import 'package:unicef/unicef/services/chart2_service.dart';
-import 'package:unicef/unicef/services/serach_indicators.dart';
 
 // ignore: must_be_immutable
 class SingleChart extends StatefulWidget {

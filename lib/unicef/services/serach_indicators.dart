@@ -6,7 +6,6 @@ import 'package:unicef/api/api.dart';
 import 'package:unicef/unicef/models/Indicators.dart';
 import 'package:unicef/unicef/models/chart.dart';
 import 'package:unicef/unicef/repository/repository.dart';
-import 'package:unicef/unicef/widgets/CheckBoxState.dart';
 
 class SearchIndicator {
   Api? _api;

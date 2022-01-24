@@ -5,7 +5,6 @@ import 'package:unicef/unicef/components/search.dart';
 import 'package:unicef/unicef/models/clusters.dart';
 import 'package:unicef/unicef/screens/indicator_screen.dart';
 import 'package:unicef/unicef/screens/notifications.dart';
-import 'package:unicef/unicef/services/chart2_service.dart';
 import 'package:unicef/unicef/services/cluster_service.dart';
 
 import 'package:unicef/unicef/services/notification_service.dart';
@@ -24,7 +23,6 @@ class HomeScreenWidget extends StatefulWidget {
 
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   ClusterService _clusterService = ClusterService();
-  Chart2Service _chart2service = Chart2Service();
   Future? v;
 
   @override
