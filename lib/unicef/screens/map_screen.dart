@@ -126,23 +126,33 @@ class _MapScreenState extends State<MapScreen> {
             ),
           ),
           Text("Select province on the map by taping on province name"),
+          SizedBox(
+            height: 10,
+          ),
           Text("Or"),
+          SizedBox(
+            height: 10,
+          ),
           Text("Choose your prefrence"),
-          Expanded(
-            child: DropdownButton(
-              value: dropdownvalue,
-              icon: Icon(Icons.keyboard_arrow_down),
-              items: items.map((String items) {
-                return DropdownMenuItem(value: items, child: Text(items));
-              }).toList(),
-              onChanged: (newValue) async {
-                final prefs = await SharedPreferences.getInstance();
-                await prefs.setString('data', newValue.toString());
-                setState(() {
-                  dropdownvalue = newValue.toString();
-                });
-              },
-            ),
+          SizedBox(
+            height: 10,
+          ),
+          DropdownButton(
+            value: dropdownvalue,
+            icon: Icon(Icons.keyboard_arrow_down),
+            items: items.map((String items) {
+              return DropdownMenuItem(value: items, child: Text(items));
+            }).toList(),
+            onChanged: (newValue) async {
+              final prefs = await SharedPreferences.getInstance();
+              await prefs.setString('data', newValue.toString());
+              setState(() {
+                dropdownvalue = newValue.toString();
+              });
+            },
+          ),
+          SizedBox(
+            height: 20,
           ),
           MaterialButton(
             color: Colors.blue,
@@ -164,7 +174,7 @@ class _MapScreenState extends State<MapScreen> {
     return <MapModel>[
       MapModel('Province1', '', Colors.amber),
       MapModel('Province2', '', Colors.cyan),
-      MapModel('Bagmati', '', Colors.amber),
+      MapModel('Bagmati', '', Colors.blue),
       MapModel('Gandaki', '', Colors.red),
       MapModel('Lumbini', '', Colors.purple),
       MapModel('Karnali', '', Colors.lightGreenAccent),
