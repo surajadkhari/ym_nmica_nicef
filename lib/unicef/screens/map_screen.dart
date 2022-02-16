@@ -23,7 +23,7 @@ class _MapScreenState extends State<MapScreen> {
   var items = [
     'Nepal',
     'Province 1',
-    'Province 2',
+    'Madhesh',
     'Bagmati',
     'Gandaki',
     'Lumbini',
@@ -90,7 +90,7 @@ class _MapScreenState extends State<MapScreen> {
                       await prefs.setString('data', "Province 1");
                     }
                     if (e == 1) {
-                      await prefs.setString('data', "Province 2");
+                      await prefs.setString('data', "Madhesh");
                     }
                     if (e == 2) {
                       await prefs.setString('data', "Bagmati");
@@ -167,13 +167,14 @@ class _MapScreenState extends State<MapScreen> {
           )
         ],
       ),
+      drawer: DrawerNavigation(),
     );
   }
 
   static List<MapModel> _getMapData() {
     return <MapModel>[
       MapModel('Province1', '', Colors.amber),
-      MapModel('Province2', '', Colors.cyan),
+      MapModel('Madhesh', '', Colors.cyan),
       MapModel('Bagmati', '', Colors.blue),
       MapModel('Gandaki', '', Colors.red),
       MapModel('Lumbini', '', Colors.purple),

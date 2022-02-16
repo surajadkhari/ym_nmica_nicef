@@ -90,7 +90,7 @@ class Chart2Service {
         var label = element['label'];
         var Nepal = element['Nepal'];
         var Province1 = element['Province 1'];
-        var Province2 = element['Province 2'];
+        var Province2 = element['Madhesh'];
         var Bagmati = element['Bagmati'];
         var Gandaki = element['Gandaki'];
         var Lumbini = element['Lumbini'];
@@ -98,7 +98,7 @@ class Chart2Service {
         var Sudurpashchim = element['Sudurpashchim'];
 
         String cc =
-            '{"label":"$label","Nepal":"$Nepal","Province 1":"$Province1" ,"Province 2":"$Province2","Bagmati":"$Bagmati","Gandaki":"$Gandaki","Lumbini":"$Lumbini","Karnali":"$Karnali","Sudurpashchim":"$Sudurpashchim"}';
+            '{"label":"$label","Nepal":"$Nepal","Province 1":"$Province1" ,"Madhesh":"$Province2","Bagmati":"$Bagmati","Gandaki":"$Gandaki","Lumbini":"$Lumbini","Karnali":"$Karnali","Sudurpashchim":"$Sudurpashchim"}';
         xx.add(cc);
       });
 
