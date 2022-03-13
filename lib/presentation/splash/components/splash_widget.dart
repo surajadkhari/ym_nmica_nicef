@@ -44,9 +44,11 @@ class _SplashWidgetState extends State<SplashWidget> {
     final prefs = await SharedPreferences.getInstance();
 
     bool isCached = await _getBoolFromSharedPref();
+
     // bool isCached = false;
 
     print("Is cached : $isCached");
+    await Future.delayed(const Duration(seconds: 66), () {});
     if (!isCached) {
       if (connection == ConnectivityResult.none) {
         final snackBar = SnackBar(

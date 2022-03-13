@@ -141,20 +141,36 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
           //   decoration: const BoxDecoration(color: Colors.blue),
           // ),
           Container(
-            height: 190,
+            height: 210,
             color: HexColor("#B0E0E6"),
             child: Row(
               children: [
                 Expanded(
                   flex: 1,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Expanded(
-                        flex: 2,
-                        child: Image.asset(
-                          'assets/images/mic_logo.png',
-                          width: double.infinity,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Nepal Multiple Indicator Cluster Survey",
+                              textAlign: TextAlign.center,
+                              style:
+                                  TextStyle(color: Colors.blue[600], fontSize: 19),
+                            ),
+                            Divider(
+                              height: 2,
+                            ),
+                            Text(
+                              "Monitoring the situation of women and children",
+                              textAlign: TextAlign.center,
+                              style:
+                                  TextStyle(color: Colors.blue[600], fontSize: 12),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -162,10 +178,18 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                 ),
                 Expanded(
                   flex: 1,
-                  child: Image.asset(
-                    'assets/images/ma.png',
-                    width: double.infinity,
-                    height: 220,
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        'assets/images/ma.png',
+                        width: double.infinity,
+                        height: 180,
+                      ),
+                      Image.asset(
+                        'assets/images/mic_logo.png',
+                        width: 100,
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -310,7 +334,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
               ),
             ),
             title: Text(
-              "Clusters",
+              "Contents",
             ),
             children: <Widget>[
               Container(
@@ -419,6 +443,13 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                       flex: 1,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
+                        child: Image.asset("assets/images/gov.png"),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
                         child: Image.asset("assets/images/un.png"),
                       ),
                     ),
@@ -430,7 +461,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "United Nations Children's Fund",
+                              "",
                               textAlign: TextAlign.justify,
                             ),
                           ],

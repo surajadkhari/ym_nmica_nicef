@@ -73,7 +73,8 @@ class ChartElement {
     this.gandaki,
     this.lumbini,
     this.karnali,
-    this.sudurpashchim,
+    this.sudoorpashchim,
+    this.data_2014,
   });
 
   String? label;
@@ -84,7 +85,8 @@ class ChartElement {
   String? gandaki;
   String? lumbini;
   String? karnali;
-  String? sudurpashchim;
+  String? sudoorpashchim;
+  String? data_2014;
 
   factory ChartElement.fromJson(Map<String, dynamic> json) => ChartElement(
         label: json["label"],
@@ -95,7 +97,8 @@ class ChartElement {
         gandaki: json["Gandaki"],
         lumbini: json["Lumbini"],
         karnali: json["Karnali"],
-        sudurpashchim: json["Sudurpashchim"],
+        sudoorpashchim : json["Sudoorpashchim"],
+        data_2014: json["data_2014"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -107,7 +110,8 @@ class ChartElement {
         "Gandaki": gandaki,
         "Lumbini": lumbini,
         "Karnali": karnali,
-        "Sudurpashchim": sudurpashchim,
+        "Sudoorpashchim": sudoorpashchim,
+        "data_2014": data_2014,
       };
 }
 

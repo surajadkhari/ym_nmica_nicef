@@ -34,7 +34,7 @@ class Chart2Service {
             new APICacheDBModel(key: 'chart$ids', syncData: response.body);
 
         await APICacheManager().addCacheData(cacheDBModel);
-        print(cacheDBModel);
+   
         var mapped =
             jsonResponse.map((chart) => new Chart.fromJson(chart)).toList();
         return mapped;
@@ -65,7 +65,7 @@ class Chart2Service {
       var cachedData = await APICacheManager().getCacheData(data);
 
       final jsonResponse = json.decode(cachedData.syncData);
-
+        print(jsonResponse);
       dasss.add(jsonResponse);
     }
 
@@ -79,8 +79,10 @@ class Chart2Service {
   saveChartHive() async {
     final res = await _api!.httpGet('indicators/charts');
 
-    List decodedJson = json.decode(res.body);
 
+    List decodedJson = json.decode(res.body);
+    print("Decodeded josn");
+    print(decodedJson);
     decodedJson.forEach((element) async {
       String data = "charts" + element['id'].toString();
       List xx = [];
@@ -95,10 +97,11 @@ class Chart2Service {
         var Gandaki = element['Gandaki'];
         var Lumbini = element['Lumbini'];
         var Karnali = element['Karnali'];
-        var Sudurpashchim = element['Sudurpashchim'];
+        var Sudoorpashchim = element['Sudoorpashchim'];
+        var Data2014 = element['data_2014'];
 
         String cc =
-            '{"label":"$label","Nepal":"$Nepal","Province 1":"$Province1" ,"Madhesh":"$Province2","Bagmati":"$Bagmati","Gandaki":"$Gandaki","Lumbini":"$Lumbini","Karnali":"$Karnali","Sudurpashchim":"$Sudurpashchim"}';
+            '{"label":"$label","Nepal":"$Nepal","Province 1":"$Province1" ,"Madhesh":"$Province2","Bagmati":"$Bagmati","Gandaki":"$Gandaki","Lumbini":"$Lumbini","Karnali":"$Karnali","Sudoorpashchim":"$Sudoorpashchim","data_2014":"$Data2014"}';
         xx.add(cc);
       });
 

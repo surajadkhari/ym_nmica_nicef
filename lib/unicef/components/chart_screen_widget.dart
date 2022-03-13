@@ -48,6 +48,8 @@ class ChartScreenWidget extends StatefulWidget {
 class _ChartScreenWidgetState extends State<ChartScreenWidget> {
   // List<charts.Series<dynamic, num>>? _seriesLineData;
   List<charts.Series<BarGraph, String>>? _barSeriesData;
+  List<charts.Series<BarGraph, String>>? _barSeries2014Data;
+  List<charts.Series<BarGraph, String>>? _barSeriesNepalData;
   List<charts.Series<PieChart, String>>? _pieSeriesData;
 
   Chart2Service _chart2service = Chart2Service();
@@ -171,15 +173,24 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                           (BuildContext context, int index) {
                                         _barSeriesData =
                                             <charts.Series<BarGraph, String>>[];
+                                        _barSeries2014Data =
+                                            <charts.Series<BarGraph, String>>[];
+
+                                        _barSeriesNepalData =
+                                            <charts.Series<BarGraph, String>>[];
                                         _pieSeriesData =
                                             <charts.Series<PieChart, String>>[];
 
                                         List<LineChartDraw> chartsData = [];
                                         List<BarGraph> chartsBarData = [];
+                                        List<BarGraph> charts2014BarData = [];
+                                        List<BarGraph> chartsNepalBarData = [];
                                         List<PieChart> chartsPieData = [];
                                         List<LineChartDraw> _lineChart = [];
 
                                         List<List<BarGraph>> allData = [];
+                                        List<List<BarGraph>> all2014Data = [];
+                                        List<List<BarGraph>> allNepalData = [];
                                         List<List<PieChart>> allPieData = [];
 
                                         Chart datar = snapshot.data![index];
@@ -199,122 +210,311 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                 .toJson();
 
                                             jsom.forEach((key, value) {
-                                              if (key != 'label') {
-                                                if (key == data) {
+                                              if (key != 'label' &&
+                                                  key != 'data_2014' &&
+                                                  key != 'Nepal') {
+                                                if (data == "Nepal") {
                                                   chartsBarData.add(BarGraph(
                                                       key,
                                                       double.parse(value)));
+                                                  if (_barSeriesData!.length ==
+                                                      1) {
+                                                    show = true;
+                                                    if (value.length > 90) {
+                                                      width = 800.0;
+                                                      width2 = 400.0;
+                                                    } else if (value.length >
+                                                        50) {
+                                                      width = 800.0;
+                                                      width2 = 300.0;
+                                                    } else if (value.length >
+                                                        20) {
+                                                      width = 600.0;
+                                                      width2 = 200.0;
+                                                    } else if (value.length >
+                                                        14) {
+                                                      width = 550.0;
+                                                      width2 = 150.0;
+                                                    } else if (value.length >
+                                                        2) {
+                                                      width = 500.0;
+                                                      width2 = 150.0;
+                                                    }
+                                                  }
+                                                  if (_barSeriesData!.length ==
+                                                      2) {
+                                                    show = true;
+
+                                                    if (value.length > 90) {
+                                                      width = 800.0;
+                                                      width2 = 400.0;
+                                                    } else if (value.length >
+                                                        50) {
+                                                      width = 800.0;
+                                                      width2 = 300.0;
+                                                    } else if (value.length >
+                                                        20) {
+                                                      width = 600.0;
+                                                      width2 = 200.0;
+                                                    } else if (value.length >
+                                                        14) {
+                                                      width = 550.0;
+                                                      width2 = 150.0;
+                                                    } else if (value.length >
+                                                        2) {
+                                                      width = 1500.0;
+                                                      width2 = 1500.0;
+                                                    }
+                                                  }
+                                                  if (_barSeriesData!.length ==
+                                                      0) {
+                                                    show = false;
+                                                    width = 600.0;
+                                                    width2 = 500.0;
+                                                    if (value.length == 4) {
+                                                      width = 800.0;
+                                                      width2 = 200.0;
+                                                    }
+                                                  }
+
+                                                  if (_barSeriesData!.length ==
+                                                      3) {
+                                                    show = true;
+
+                                                    if (value.length > 90) {
+                                                      width = 800.0;
+                                                      width2 = 400.0;
+                                                    } else if (value.length >
+                                                        50) {
+                                                      width = 800.0;
+                                                      width2 = 300.0;
+                                                    } else if (value.length >
+                                                        20) {
+                                                      width = 600.0;
+                                                      width2 = 200.0;
+                                                    } else if (value.length >
+                                                        14) {
+                                                      width = 550.0;
+                                                      width2 = 150.0;
+                                                    } else if (value.length ==
+                                                        4) {
+                                                      width = 1500.0;
+                                                      width2 = 1500.0;
+                                                    } else if (value.length >
+                                                        2) {
+                                                      width = 1500.0;
+                                                      width2 = 800.0;
+                                                    }
+                                                  }
+
+                                                  if (_barSeriesData!.length ==
+                                                      4) {
+                                                    show = true;
+                                                    if (value.length > 90) {
+                                                      width = 1500.0;
+                                                      width2 = 800.0;
+                                                    } else if (value.length >
+                                                        50) {
+                                                      width = 800.0;
+                                                      width2 = 300.0;
+                                                    } else if (value.length >
+                                                        20) {
+                                                      width = 600.0;
+                                                      width2 = 200.0;
+                                                    } else if (value.length >
+                                                        14) {
+                                                      width = 800.0;
+                                                      width2 = 250.0;
+                                                    } else if (value.length ==
+                                                        4) {
+                                                      width = 1500.0;
+                                                      width2 = 1500.0;
+                                                    } else if (value.length ==
+                                                        3) {
+                                                      width = 1500.0;
+                                                      width2 = 1500.0;
+                                                    } else if (value.length >
+                                                        2) {
+                                                      width = 500.0;
+                                                      width2 = 150.0;
+                                                    }
+                                                  }
+
+                                                  if (_barSeriesData!.length ==
+                                                      1) {
+                                                    show = true;
+                                                    if (value.length > 90) {
+                                                      width = 1500.0;
+                                                      width2 = 800.0;
+                                                    } else if (value.length >
+                                                        50) {
+                                                      width = 800.0;
+                                                      width2 = 300.0;
+                                                    } else if (value.length >
+                                                        20) {
+                                                      width = 600.0;
+                                                      width2 = 200.0;
+                                                    } else if (value.length >
+                                                        14) {
+                                                      width = 800.0;
+                                                      width2 = 250.0;
+                                                    } else if (value.length >
+                                                        2) {
+                                                      width = 1500.0;
+                                                      width2 = 500.0;
+                                                    } else if (value.length ==
+                                                        0) {
+                                                      width = 800.0;
+                                                      width2 = 200.0;
+                                                    }
+                                                  }
+                                                } else {
+                                                  if (key == data) {
+                                                    chartsBarData.add(BarGraph(
+                                                        key,
+                                                        double.parse(value)));
+                                                    if (_barSeriesData!
+                                                            .length ==
+                                                        1) {
+                                                      show = true;
+                                                      if (value.length > 90) {
+                                                        width = 800.0;
+                                                        width2 = 400.0;
+                                                      } else if (value.length >
+                                                          50) {
+                                                        width = 800.0;
+                                                        width2 = 300.0;
+                                                      } else if (value.length >
+                                                          20) {
+                                                        width = 600.0;
+                                                        width2 = 200.0;
+                                                      } else if (value.length >
+                                                          14) {
+                                                        width = 550.0;
+                                                        width2 = 150.0;
+                                                      } else if (value.length >
+                                                          2) {
+                                                        width = 500.0;
+                                                        width2 = 150.0;
+                                                      }
+                                                    }
+                                                    if (_barSeriesData!
+                                                            .length ==
+                                                        2) {
+                                                      show = true;
+                                                      // width = 650.0;
+                                                      // width2 = 200.0;
+                                                      print(value.length);
+                                                      if (value.length > 90) {
+                                                        width = 800.0;
+                                                        width2 = 400.0;
+                                                      } else if (value.length >
+                                                          50) {
+                                                        width = 800.0;
+                                                        width2 = 300.0;
+                                                      } else if (value.length >
+                                                          20) {
+                                                        width = 600.0;
+                                                        width2 = 200.0;
+                                                      } else if (value.length >
+                                                          14) {
+                                                        width = 550.0;
+                                                        width2 = 150.0;
+                                                      } else if (value.length >
+                                                          2) {
+                                                        width = 500.0;
+                                                        width2 = 150.0;
+                                                      }
+                                                    }
+                                                    if (_barSeriesData!
+                                                            .length ==
+                                                        0) {
+                                                      show = false;
+                                                      width = 100.0;
+                                                      width2 = 80.0;
+                                                    }
+
+                                                    if (_barSeriesData!
+                                                            .length ==
+                                                        3) {
+                                                      show = true;
+
+                                                      if (value.length > 90) {
+                                                        width = 800.0;
+                                                        width2 = 400.0;
+                                                      } else if (value.length >
+                                                          50) {
+                                                        width = 800.0;
+                                                        width2 = 300.0;
+                                                      } else if (value.length >
+                                                          20) {
+                                                        width = 600.0;
+                                                        width2 = 200.0;
+                                                      } else if (value.length >
+                                                          14) {
+                                                        width = 550.0;
+                                                        width2 = 150.0;
+                                                      } else if (value.length >
+                                                          2) {
+                                                        width = 500.0;
+                                                        width2 = 150.0;
+                                                      }
+                                                    }
+
+                                                    if (_barSeriesData!
+                                                            .length ==
+                                                        4) {
+                                                      show = true;
+                                                      if (value.length > 90) {
+                                                        width = 800.0;
+                                                        width2 = 400.0;
+                                                      } else if (value.length >
+                                                          50) {
+                                                        width = 800.0;
+                                                        width2 = 300.0;
+                                                      } else if (value.length >
+                                                          20) {
+                                                        width = 600.0;
+                                                        width2 = 200.0;
+                                                      } else if (value.length >
+                                                          14) {
+                                                        width = 800.0;
+                                                        width2 = 250.0;
+                                                      } else if (value.length >
+                                                          2) {
+                                                        width = 500.0;
+                                                        width2 = 150.0;
+                                                      }
+                                                    }
+                                                  }
                                                 }
                                               } else {
-                                                if (_barSeriesData!.length ==
-                                                    1) {
-                                                  show = true;
-                                                  if (value.length > 90) {
-                                                    width = 800.0;
-                                                    width2 = 400.0;
-                                                  } else if (value.length >
-                                                      50) {
-                                                    width = 800.0;
-                                                    width2 = 300.0;
-                                                  } else if (value.length >
-                                                      20) {
-                                                    width = 600.0;
-                                                    width2 = 200.0;
-                                                  } else if (value.length >
-                                                      14) {
-                                                    width = 550.0;
-                                                    width2 = 150.0;
-                                                  } else if (value.length > 2) {
-                                                    width = 500.0;
-                                                    width2 = 150.0;
-                                                  }
-                                                }
-                                                if (_barSeriesData!.length ==
-                                                    2) {
-                                                  show = true;
-                                                  // width = 650.0;
-                                                  // width2 = 200.0;
-                                                  print(value.length);
-                                                  if (value.length > 90) {
-                                                    width = 800.0;
-                                                    width2 = 400.0;
-                                                  } else if (value.length >
-                                                      50) {
-                                                    width = 800.0;
-                                                    width2 = 300.0;
-                                                  } else if (value.length >
-                                                      20) {
-                                                    width = 600.0;
-                                                    width2 = 200.0;
-                                                  } else if (value.length >
-                                                      14) {
-                                                    width = 550.0;
-                                                    width2 = 150.0;
-                                                  } else if (value.length > 2) {
-                                                    width = 500.0;
-                                                    width2 = 150.0;
-                                                  }
-                                                }
-                                                if (_barSeriesData!.length ==
-                                                    0) {
-                                                  show = false;
-                                                  width = 100.0;
-                                                  width2 = 80.0;
-                                                }
+                                                if (key != "data_2014" &&
+                                                    key != "Nepal") {
+                                                  if (jsom['data_2014'] !=
+                                                      0.0) {
+                                                    charts2014BarData.add(
+                                                        BarGraph(
+                                                            key,
+                                                            double.parse(jsom[
+                                                                'data_2014'])));
 
-                                                if (_barSeriesData!.length ==
-                                                    3) {
-                                                  show = true;
-
-                                                  if (value.length > 90) {
-                                                    width = 800.0;
-                                                    width2 = 400.0;
-                                                  } else if (value.length >
-                                                      50) {
-                                                    width = 800.0;
-                                                    width2 = 300.0;
-                                                  } else if (value.length >
-                                                      20) {
-                                                    width = 600.0;
-                                                    width2 = 200.0;
-                                                  } else if (value.length >
-                                                      14) {
-                                                    width = 550.0;
-                                                    width2 = 150.0;
-                                                  } else if (value.length > 2) {
-                                                    width = 500.0;
-                                                    width2 = 150.0;
+                                                    chartsNepalBarData.add(
+                                                        BarGraph(
+                                                            key,
+                                                            double.parse(jsom[
+                                                                'Nepal'])));
                                                   }
+                                                  label = value;
                                                 }
-
-                                                if (_barSeriesData!.length ==
-                                                    4) {
-                                                  show = true;
-                                                  if (value.length > 90) {
-                                                    width = 800.0;
-                                                    width2 = 400.0;
-                                                  } else if (value.length >
-                                                      50) {
-                                                    width = 800.0;
-                                                    width2 = 300.0;
-                                                  } else if (value.length >
-                                                      20) {
-                                                    width = 600.0;
-                                                    width2 = 200.0;
-                                                  } else if (value.length >
-                                                      14) {
-                                                    width = 800.0;
-                                                    width2 = 250.0;
-                                                  } else if (value.length > 2) {
-                                                    width = 500.0;
-                                                    width2 = 150.0;
-                                                  }
-                                                }
-
-                                                label = value;
                                               }
                                             });
+
                                             allData.add(chartsBarData.toList());
+                                            all2014Data.add(
+                                                charts2014BarData.toList());
+                                            allNepalData.add(
+                                                chartsNepalBarData.toList());
 
                                             _barSeriesData!.add(
                                               charts.Series(
@@ -329,6 +529,38 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                         '${barGraph.value}',
                                                 id: label,
                                                 data: allData[count],
+                                              ),
+                                            );
+
+                                            _barSeries2014Data!.add(
+                                              charts.Series(
+                                                domainFn: (BarGraph barGraph,
+                                                        _) =>
+                                                    barGraph.type.toString(),
+                                                measureFn:
+                                                    (BarGraph barGraph, _) =>
+                                                        barGraph.value!,
+                                                labelAccessorFn:
+                                                    (BarGraph barGraph, _) =>
+                                                        '${barGraph.value}',
+                                                id: label,
+                                                data: all2014Data[count],
+                                              ),
+                                            );
+
+                                            _barSeriesNepalData!.add(
+                                              charts.Series(
+                                                domainFn: (BarGraph barGraph,
+                                                        _) =>
+                                                    barGraph.type.toString(),
+                                                measureFn:
+                                                    (BarGraph barGraph, _) =>
+                                                        barGraph.value!,
+                                                labelAccessorFn:
+                                                    (BarGraph barGraph, _) =>
+                                                        '${barGraph.value}',
+                                                id: label,
+                                                data: allNepalData[count],
                                               ),
                                             );
 
@@ -459,6 +691,217 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                   ),
                                                 ),
                                               ),
+
+                                          
+
+// Nepal Data
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Container(
+                                                  width:
+                                                      getProportionateScreenWidth(
+                                                          200),
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10)),
+                                                    border: Border.all(
+                                                        color: Colors.white),
+                                                    // boxShadow: [
+                                                    //   BoxShadow(
+                                                    //     color: Colors.grey
+                                                    //         .withOpacity(0.1),
+                                                    //     spreadRadius: 5,
+                                                    //     blurRadius: 7,
+                                                    //     // changes position of shadow
+                                                    //   ),
+                                                    // ],
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            20.0),
+                                                    child: Column(
+                                                      children: [
+                                                        Text(
+                                                          "${snapshot.data![index].name!} (2019)",
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        ),
+                                                        SingleChildScrollView(
+                                                          scrollDirection:
+                                                              Axis.horizontal,
+                                                          child: Container(
+                                                            width:
+                                                                getProportionateScreenWidth(
+                                                                    200),
+                                                            child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Container(
+                                                                  height:
+                                                                      getProportionateScreenHeight(
+                                                                          200),
+                                                                  width: data ==
+                                                                          "All Province"
+                                                                      ? getProportionateScreenWidth(
+                                                                          400)
+                                                                      : 200,
+                                                                  child: show ==
+                                                                          true
+                                                                      ? charts
+                                                                          .BarChart(
+                                                                          _barSeriesNepalData!,
+                                                                          animate:
+                                                                              true,
+                                                                          barRendererDecorator:
+                                                                              new charts.BarLabelDecorator<String>(),
+                                                                          barGroupingType: charts
+                                                                              .BarGroupingType
+                                                                              .grouped,
+                                                                          behaviors: [
+                                                                            new charts.SeriesLegend(
+                                                                              position: charts.BehaviorPosition.end,
+                                                                              outsideJustification: charts.OutsideJustification.start,
+                                                                              horizontalFirst: false,
+                                                                              desiredMaxRows: 4,
+                                                                            )
+                                                                          ],
+                                                                        )
+                                                                      : charts
+                                                                          .BarChart(
+                                                                          _barSeriesNepalData!,
+                                                                          animate:
+                                                                              true,
+                                                                          barRendererDecorator:
+                                                                              new charts.BarLabelDecorator<String>(),
+                                                                          barGroupingType: charts
+                                                                              .BarGroupingType
+                                                                              .grouped,
+                                                                        ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                                  // 2014 Data
+
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Container(
+                                                  width:
+                                                      getProportionateScreenWidth(
+                                                          200),
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10)),
+                                                    border: Border.all(
+                                                        color: Colors.white),
+                                                    // boxShadow: [
+                                                    //   BoxShadow(
+                                                    //     color: Colors.grey
+                                                    //         .withOpacity(0.1),
+                                                    //     spreadRadius: 5,
+                                                    //     blurRadius: 7,
+                                                    //     // changes position of shadow
+                                                    //   ),
+                                                    // ],
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            20.0),
+                                                    child: Column(
+                                                      children: [
+                                                        Text(
+                                                          "${snapshot.data![index].name!} (2014)",
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        ),
+                                                        SingleChildScrollView(
+                                                          scrollDirection:
+                                                              Axis.horizontal,
+                                                          child: Container(
+                                                            width:
+                                                                getProportionateScreenWidth(
+                                                                    200),
+                                                            child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Container(
+                                                                  height:
+                                                                      getProportionateScreenHeight(
+                                                                          200),
+                                                                  width: data ==
+                                                                          "All Province"
+                                                                      ? getProportionateScreenWidth(
+                                                                          400)
+                                                                      : 200,
+                                                                  child: show ==
+                                                                          true
+                                                                      ? charts
+                                                                          .BarChart(
+                                                                          _barSeries2014Data!,
+                                                                          animate:
+                                                                              true,
+                                                                          barRendererDecorator:
+                                                                              new charts.BarLabelDecorator<String>(),
+                                                                          barGroupingType: charts
+                                                                              .BarGroupingType
+                                                                              .grouped,
+                                                                          behaviors: [
+                                                                            new charts.SeriesLegend(
+                                                                              position: charts.BehaviorPosition.end,
+                                                                              outsideJustification: charts.OutsideJustification.start,
+                                                                              horizontalFirst: false,
+                                                                              desiredMaxRows: 4,
+                                                                            )
+                                                                          ],
+                                                                        )
+                                                                      : charts
+                                                                          .BarChart(
+                                                                          _barSeries2014Data!,
+                                                                          animate:
+                                                                              true,
+                                                                          barRendererDecorator:
+                                                                              new charts.BarLabelDecorator<String>(),
+                                                                          barGroupingType: charts
+                                                                              .BarGroupingType
+                                                                              .grouped,
+                                                                        ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+
                                               SizedBox(
                                                 height: 2,
                                               ),
@@ -986,7 +1429,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                   .toJson();
 
                                               jsom.forEach((key, value) {
-                                                if (key != 'label') {
+                                                if (key != 'label' ) {
                                                   // keys['color'] =  "red";'
 
                                                   chartsBarData.add(BarGraph(
@@ -1204,7 +1647,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                   ),
                                                 ),
                                                 Container(
-                                                  height: 500,
+                                                  height: 600,
                                                   width:
                                                       getProportionateScreenWidth(
                                                           500),
@@ -1268,7 +1711,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                               var jsom = snapshot
                                                   .data![index].charts![count]
                                                   .toJson();
-
+              print(jsom);
                                               jsom.forEach((key, chartper) {
                                                 if (key != 'label') {
                                                   // keys['color'] =  "red";'
@@ -1276,13 +1719,17 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                   //   bargraph.add(BarGraph2(
                                                   //       key, double.parse(chartper)));
                                                   // }
+                                                    if(key !="data_2014" && key !="Nepal" ){    
                                                   bargraph.add(BarGraph2(
                                                     key,
                                                     double.parse(chartper),
                                                   ));
+                                                    }
                                                 } else {
                                                   label = chartper;
+                                                                                                
                                                   barGraphLabels.add(label);
+                                                  
                                                 }
                                               });
 
@@ -1427,6 +1874,8 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
     barValueLabels.map((String column) {
       columns.add(DataColumn(label: Text(column)));
     }).toList();
+    print("------------");
+    print(columns);
     return columns;
   }
 

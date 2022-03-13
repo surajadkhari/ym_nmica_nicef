@@ -28,7 +28,7 @@ class _MapScreenState extends State<MapScreen> {
     'Gandaki',
     'Lumbini',
     'Karnali',
-    'Sudurpashchim',
+    'Sudoorpashchim',
   ];
 
   cache() async {
@@ -106,7 +106,7 @@ class _MapScreenState extends State<MapScreen> {
                       await prefs.setString('data', "Karnali");
                     }
                     if (e == 6) {
-                      await prefs.setString('data', "Sudurpashchim");
+                      await prefs.setString('data', "Sudoorpashchim");
                     }
                     Navigator.pushNamedAndRemoveUntil(
                         context, HomeScreen.screenId, (route) => false);
@@ -179,7 +179,7 @@ class _MapScreenState extends State<MapScreen> {
       MapModel('Gandaki', '', Colors.red),
       MapModel('Lumbini', '', Colors.purple),
       MapModel('Karnali', '', Colors.lightGreenAccent),
-      MapModel('Sudurpaschim', '', Colors.indigo),
+      MapModel('Sudoorpashchim', '', Colors.indigo),
     ];
   }
 }
