@@ -19,6 +19,7 @@ class _MapScreenState extends State<MapScreen> {
   List<MapModel>? _mapData;
 
   String dropdownvalue = 'Nepal';
+  String value = '2019';
 
   var items = [
     'Nepal',
@@ -31,9 +32,17 @@ class _MapScreenState extends State<MapScreen> {
     'Sudoorpashchim',
   ];
 
+  
+  var years = [
+    '2019',
+    '2014',
+    
+  ];
+
   cache() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('data', "Nepal");
+    await prefs.setString('year', "2019");
   }
 
   @override
@@ -45,7 +54,7 @@ class _MapScreenState extends State<MapScreen> {
         shapeDataField: 'TARGET',
         dataCount: _mapData!.length,
         primaryValueMapper: (int index) => _mapData![index].state,
-        dataLabelMapper: (int index) => _mapData![index].state,
+    
         shapeColorValueMapper: (int index) => _mapData![index].color);
   }
 
@@ -125,7 +134,10 @@ class _MapScreenState extends State<MapScreen> {
               ],
             ),
           ),
-          Text("Select province on the map by taping on province name"),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("Select province on the map by taping on province name"),
+          ),
           SizedBox(
             height: 10,
           ),
@@ -148,6 +160,27 @@ class _MapScreenState extends State<MapScreen> {
               await prefs.setString('data', newValue.toString());
               setState(() {
                 dropdownvalue = newValue.toString();
+              });
+            },
+          ),
+
+            Text("Choose year"),
+          SizedBox(
+            height: 10,
+          ),
+          DropdownButton(
+            value: value,
+            icon: Icon(Icons.keyboard_arrow_down),
+            items: years.map((String years) {
+              return DropdownMenuItem(value: years, child: Text(years));
+            }).toList(),
+            onChanged: (newValue) async {
+              print("-------");
+              print(newValue);
+              final prefs = await SharedPreferences.getInstance();
+              await prefs.setString('year', newValue.toString());
+              setState(() {
+                value = newValue.toString();
               });
             },
           ),

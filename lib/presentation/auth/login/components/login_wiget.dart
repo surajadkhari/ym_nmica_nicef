@@ -196,7 +196,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     color: Colors.blue),
                                 onPressed: () {
                                   signInWithFacebook()
-                                      .then((UserCredential value) {
+                                      .then(( value) {
                                     Navigator.pushNamedAndRemoveUntil(context,
                                         HomeScreen.screenId, (route) => false);
                                     context.read<AuthBloc>().add(
@@ -259,12 +259,17 @@ class _LoginWidgetState extends State<LoginWidget> {
   // }
 
   //Facebook
-  Future<UserCredential> signInWithFacebook() async {
+  Future signInWithFacebook() async {
+    try{
     final LoginResult loginResult = await FacebookAuth.instance.login();
     final OAuthCredential facebookAuthCredential =
         FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
     return await FirebaseAuth.instance
         .signInWithCredential(facebookAuthCredential);
+    }catch(e){
+      return 
+          print(e);     
+    }
   }
 }

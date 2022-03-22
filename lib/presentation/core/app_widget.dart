@@ -9,6 +9,7 @@ import 'package:unicef/presentation/auth/registration/registration_screen.dart';
 import 'package:unicef/presentation/splash/splash_screen.dart';
 import 'package:unicef/unicef/screens/home_screen.dart';
 import 'package:unicef/unicef/screens/introduction_screen.dart';
+import 'package:unicef/unicef/screens/main_screen.dart';
 import 'package:unicef/unicef/screens/map_screen.dart';
 import 'package:unicef/unicef/screens/sync_screen.dart';
 
@@ -44,6 +45,7 @@ class _AppWidgetState extends State<AppWidget> {
           HomeScreen.screenId: (context) => HomeScreen(),
           MapScreen.screenId: (context) => MapScreen(),
           SyncScreen.screenId: (context) => SyncScreen(),
+          MainScreen.screenId: (context) => MainScreen(),
         },
       ),
     );

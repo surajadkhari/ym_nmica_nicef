@@ -48,7 +48,7 @@ class _SplashWidgetState extends State<SplashWidget> {
     // bool isCached = false;
 
     print("Is cached : $isCached");
-    await Future.delayed(const Duration(seconds: 66), () {});
+    
     if (!isCached) {
       if (connection == ConnectivityResult.none) {
         final snackBar = SnackBar(
@@ -60,6 +60,7 @@ class _SplashWidgetState extends State<SplashWidget> {
           exit(0);
         });
       } else {
+  
         _chartService.saveChartHive();
         _infomationService.saveDescriptions();
         _creditService.saveCredits();
@@ -117,6 +118,9 @@ class _SplashWidgetState extends State<SplashWidget> {
 
     checkIsCached();
   }
+
+ 
+
 
   @override
   Widget build(BuildContext context) {
@@ -207,7 +211,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                   const Padding(
                     padding: EdgeInsets.only(top: 10.0),
                     child: Text(
-                      "NMICS v1.0 2021",
+                      "NMICS v1.0 2022",
                       style: TextStyle(color: Colors.grey, fontSize: 10.0),
                     ),
                   ),

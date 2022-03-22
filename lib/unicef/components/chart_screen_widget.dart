@@ -55,6 +55,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
   Chart2Service _chart2service = Chart2Service();
   Future<List<Chart>>? futureChart;
   String data = 'all';
+  String year = '2019';
 
   @override
   void initState() {
@@ -74,11 +75,14 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
   getPrefrence() async {
     final prefs = await SharedPreferences.getInstance();
     final isCached = prefs.getString('data');
+    final isYear = prefs.getString('year');
     if (isCached == null) {
       data = "all";
+      year = "2019";
     } else {
       setState(() {
         data = isCached;
+        year = isYear!;
       });
     }
   }
@@ -208,7 +212,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                             var jsom = snapshot
                                                 .data![index].charts![count]
                                                 .toJson();
-
+print(year);
                                             jsom.forEach((key, value) {
                                               if (key != 'label' &&
                                                   key != 'data_2014' &&
@@ -694,8 +698,8 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
 
                                           
 
-// Nepal Data
-                                              Padding(
+
+                                             year == "2019" ? Padding(
                                                 padding:
                                                     const EdgeInsets.all(10.0),
                                                 child: Container(
@@ -796,10 +800,10 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                     ),
                                                   ),
                                                 ),
-                                              ),
+                                              ) : SizedBox.expand(),
                                                   // 2014 Data
 
-                                              Padding(
+                                             year == "2014" ? Padding(
                                                 padding:
                                                     const EdgeInsets.all(10.0),
                                                 child: Container(
@@ -900,7 +904,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                     ),
                                                   ),
                                                 ),
-                                              ),
+                                              ) : SizedBox.shrink(),
 
                                               SizedBox(
                                                 height: 2,

@@ -25,17 +25,14 @@ class SplashScreen extends StatelessWidget {
 
             var data = await _informationService.getDescriptions();
 
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //     builder: (context) => IntroductionScreen(),
-            //   ),
-            // );
-
-            Navigator.pushNamedAndRemoveUntil(
-                context, IntroductionScreen.screenId, (route) => false);
+        
+            await Future.delayed(const Duration(seconds: 5), () {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, IntroductionScreen.screenId, (route) => false);
+            });
           },
           unauthenticated: (_) async {
-            await Future.delayed(const Duration(seconds: 4), () {
+            await Future.delayed(const Duration(seconds:5), () {
               Navigator.pushNamedAndRemoveUntil(
                   context, LoginScreen.screenId, (route) => false);
             });

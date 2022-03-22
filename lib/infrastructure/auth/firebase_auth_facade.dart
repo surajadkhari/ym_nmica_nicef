@@ -80,11 +80,16 @@ class FirebasAuthFacade implements IauthFacade {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: emailAddressStr, password: passwordStr);
+          print("unit");
+          print(unit);
       return right(unit);
     } on PlatformException catch (e) {
+
+   
+      print(e.code);
       if (e.code == "INVALID_EMAIL" ||
           e.code == "USER-NOT-FOUND" ||
-          e.code == "TO_MANY_REQUEST") {
+          e.code == "TO_MANY_REQUEST" || e.code=="account-exists-with-different-credential") {
         return left(const AuthFailure.invalidEmailAndPasswordComination());
       }
       return left(const AuthFailure.serverError());
