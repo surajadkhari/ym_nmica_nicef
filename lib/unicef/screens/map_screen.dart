@@ -36,6 +36,7 @@ class _MapScreenState extends State<MapScreen> {
   var years = [
     '2019',
     '2014',
+    'Trend',
     
   ];
 

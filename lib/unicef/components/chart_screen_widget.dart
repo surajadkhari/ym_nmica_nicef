@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:csv/csv.dart';
@@ -212,12 +213,10 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                             var jsom = snapshot
                                                 .data![index].charts![count]
                                                 .toJson();
-print(year);
                                             jsom.forEach((key, value) {
                                               if (key != 'label' &&
-                                                  key != 'data_2014' &&
-                                                  key != 'Nepal') {
-                                                if (data == "Nepal") {
+                                                  key != 'data_2014') {
+                                                if (data == "Nepal" ) {
                                                   chartsBarData.add(BarGraph(
                                                       key,
                                                       double.parse(value)));
@@ -277,7 +276,7 @@ print(year);
                                                     width2 = 500.0;
                                                     if (value.length == 4) {
                                                       width = 800.0;
-                                                      width2 = 200.0;
+                                                      width2 = 600.0;
                                                     }
                                                   }
 
@@ -372,8 +371,12 @@ print(year);
                                                       width2 = 200.0;
                                                     }
                                                   }
-                                                } else {
+                                                }  else {
+                                                  
                                                   if (key == data) {
+                                                   
+
+
                                                     chartsBarData.add(BarGraph(
                                                         key,
                                                         double.parse(value)));
@@ -493,23 +496,42 @@ print(year);
                                                   }
                                                 }
                                               } else {
+                                             print("------------");
+                                             print(value.length);
+                                             print(value.length);
+                                         print(width2);
+                                                    print("------------");
                                                 if (key != "data_2014" &&
                                                     key != "Nepal") {
                                                   if (jsom['data_2014'] !=
                                                       0.0) {
+
                                                     charts2014BarData.add(
                                                         BarGraph(
-                                                            key,
+                                                            "Nepal",
                                                             double.parse(jsom[
                                                                 'data_2014'])));
 
                                                     chartsNepalBarData.add(
                                                         BarGraph(
-                                                            key,
+                                                            'Nepal',
                                                             double.parse(jsom[
                                                                 'Nepal'])));
                                                   }
                                                   label = value;
+                                                }else if(year =="Trend"){
+                                                   charts2014BarData=[];
+                                                     charts2014BarData.add(
+                                                        BarGraph(
+                                                           "2014",
+                                                            double.parse(jsom[
+                                                                'data_2014'])));
+
+                                                    charts2014BarData.add(
+                                                        BarGraph(
+                                                            '2019',
+                                                            double.parse(jsom[
+                                                                'Nepal'])));
                                                 }
                                               }
                                             });
@@ -573,338 +595,324 @@ print(year);
 
                                           return Column(
                                             children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
-                                                child: Container(
-                                                  width:
-                                                      getProportionateScreenHeight(
-                                                          500),
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10)),
-                                                    border: Border.all(
-                                                        color: Colors.white),
-                                                    // boxShadow: [
-                                                    //   BoxShadow(
-                                                    //     color: Colors.grey
-                                                    //         .withOpacity(0.1),
-                                                    //     spreadRadius: 5,
-                                                    //     blurRadius: 7,
-                                                    //     // changes position of shadow
-                                                    //   ),
-                                                    // ],
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            20.0),
-                                                    child: Column(
-                                                      children: [
-                                                        Text(
-                                                          snapshot.data![index]
-                                                              .name!,
-                                                          style: TextStyle(
-                                                              fontSize: 20),
+                                              year == "2019"
+                                                  ? Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: Container(
+                                                        width:
+                                                            getProportionateScreenHeight(
+                                                                500),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10)),
+                                                          border: Border.all(
+                                                              color:
+                                                                  Colors.white),
+                                                          // boxShadow: [
+                                                          //   BoxShadow(
+                                                          //     color: Colors.grey
+                                                          //         .withOpacity(0.1),
+                                                          //     spreadRadius: 5,
+                                                          //     blurRadius: 7,
+                                                          //     // changes position of shadow
+                                                          //   ),
+                                                          // ],
                                                         ),
-                                                        SingleChildScrollView(
-                                                          scrollDirection:
-                                                              Axis.horizontal,
-                                                          child: Container(
-                                                            width:
-                                                                getProportionateScreenHeight(
-                                                                    width),
-                                                            child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Container(
-                                                                  height:
-                                                                      getProportionateScreenHeight(
-                                                                          200),
-                                                                  width: data ==
-                                                                          "All Province"
-                                                                      ? getProportionateScreenWidth(
-                                                                          400)
-                                                                      : getProportionateScreenWidth(
-                                                                          width2),
-                                                                  child: show ==
-                                                                          true
-                                                                      ? charts
-                                                                          .BarChart(
-                                                                          _barSeriesData!,
-                                                                          animate:
-                                                                              true,
-                                                                          barRendererDecorator:
-                                                                              new charts.BarLabelDecorator<String>(),
-                                                                          barGroupingType: charts
-                                                                              .BarGroupingType
-                                                                              .grouped,
-                                                                          behaviors: [
-                                                                            new charts.SeriesLegend(
-                                                                              position: charts.BehaviorPosition.end,
-                                                                              outsideJustification: charts.OutsideJustification.start,
-                                                                              horizontalFirst: false,
-                                                                              desiredMaxRows: 4,
-                                                                            )
-                                                                          ],
-                                                                        )
-                                                                      : charts
-                                                                          .BarChart(
-                                                                          _barSeriesData!,
-                                                                          animate:
-                                                                              true,
-                                                                          barRendererDecorator:
-                                                                              new charts.BarLabelDecorator<String>(),
-                                                                          barGroupingType: charts
-                                                                              .BarGroupingType
-                                                                              .grouped,
-                                                                        ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Padding(
+                                                        child: Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .symmetric(
-                                                                  horizontal:
-                                                                      10),
-                                                          child: Text(
-                                                            snapshot
-                                                                .data![index]
-                                                                .description!,
-                                                            style: TextStyle(
+                                                                  .all(20.0),
+                                                          child: Column(
+                                                            children: [
+                                                              Text(
+                                                                "${snapshot.data![index].name!} (2019)",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        20),
+                                                              ),
+                                                              SingleChildScrollView(
+                                                                scrollDirection:
+                                                                    Axis.horizontal,
+                                                                child:
+                                                                    Container(
+                                                                  width:
+                                                                      getProportionateScreenHeight(
+                                                                          width),
+                                                                  child: Column(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Container(
+                                                                        height:
+                                                                            getProportionateScreenHeight(200),
+                                                                        width: data ==
+                                                                                "All Province"
+                                                                            ? getProportionateScreenWidth(400)
+                                                                            : getProportionateScreenWidth(width2),
+                                                                        child: show ==
+                                                                                true
+                                                                            ? charts.BarChart(
+                                                                                _barSeriesData!,
+                                                                                animate: true,
+                                                                                barRendererDecorator: new charts.BarLabelDecorator<String>(),
+                                                                                barGroupingType: charts.BarGroupingType.grouped,
+                                                                                behaviors: [
+                                                                                  new charts.SeriesLegend(
+                                                                                    position: charts.BehaviorPosition.end,
+                                                                                    outsideJustification: charts.OutsideJustification.start,
+                                                                                    horizontalFirst: false,
+                                                                                    desiredMaxRows: 4,
+                                                                                  )
+                                                                                ],
+                                                                              )
+                                                                            : charts.BarChart(
+                                                                                _barSeriesData!,
+                                                                                animate: true,
+                                                                                barRendererDecorator: new charts.BarLabelDecorator<String>(),
+                                                                                barGroupingType: charts.BarGroupingType.grouped,
+                                                                              ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                    horizontal:
+                                                                        10),
+                                                                child: Text(
+                                                                  snapshot
+                                                                      .data![
+                                                                          index]
+                                                                      .description!,
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: Colors
+                                                                        .grey,
+                                                                  ),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .justify,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : SizedBox(),
+
+                                              // 2014 Data
+                                            year == "2014"
+                                                  ? Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: Container(
+                                                        width:
+                                                            getProportionateScreenWidth(
+                                                                200),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10)),
+                                                          border: Border.all(
                                                               color:
-                                                                  Colors.grey,
+                                                                  Colors.white),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Colors.grey
+                                                                  .withOpacity(
+                                                                      0.1),
+                                                              spreadRadius: 5,
+                                                              blurRadius: 7,
+                                                              // changes position of shadow
                                                             ),
-                                                            textAlign: TextAlign
-                                                                .justify,
-                                                          ),
+                                                          ],
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-
-                                          
-
-
-                                             year == "2019" ? Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
-                                                child: Container(
-                                                  width:
-                                                      getProportionateScreenWidth(
-                                                          200),
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10)),
-                                                    border: Border.all(
-                                                        color: Colors.white),
-                                                    // boxShadow: [
-                                                    //   BoxShadow(
-                                                    //     color: Colors.grey
-                                                    //         .withOpacity(0.1),
-                                                    //     spreadRadius: 5,
-                                                    //     blurRadius: 7,
-                                                    //     // changes position of shadow
-                                                    //   ),
-                                                    // ],
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            20.0),
-                                                    child: Column(
-                                                      children: [
-                                                        Text(
-                                                          "${snapshot.data![index].name!} (2019)",
-                                                          style: TextStyle(
-                                                              fontSize: 20),
-                                                        ),
-                                                        SingleChildScrollView(
-                                                          scrollDirection:
-                                                              Axis.horizontal,
-                                                          child: Container(
-                                                            width:
-                                                                getProportionateScreenWidth(
-                                                                    200),
-                                                            child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Container(
-                                                                  height:
-                                                                      getProportionateScreenHeight(
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(20.0),
+                                                          child: Column(
+                                                            children: [
+                                                              Text(
+                                                                "${snapshot.data![index].name!} (2014)",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        20),
+                                                              ),
+                                                              SingleChildScrollView(
+                                                                scrollDirection:
+                                                                    Axis.horizontal,
+                                                                child:
+                                                                    Container(
+                                                                  width:
+                                                                      getProportionateScreenWidth(
                                                                           200),
-                                                                  width: data ==
-                                                                          "All Province"
-                                                                      ? getProportionateScreenWidth(
-                                                                          400)
-                                                                      : 200,
-                                                                  child: show ==
-                                                                          true
-                                                                      ? charts
-                                                                          .BarChart(
-                                                                          _barSeriesNepalData!,
-                                                                          animate:
-                                                                              true,
-                                                                          barRendererDecorator:
-                                                                              new charts.BarLabelDecorator<String>(),
-                                                                          barGroupingType: charts
-                                                                              .BarGroupingType
-                                                                              .grouped,
-                                                                          behaviors: [
-                                                                            new charts.SeriesLegend(
-                                                                              position: charts.BehaviorPosition.end,
-                                                                              outsideJustification: charts.OutsideJustification.start,
-                                                                              horizontalFirst: false,
-                                                                              desiredMaxRows: 4,
-                                                                            )
-                                                                          ],
-                                                                        )
-                                                                      : charts
-                                                                          .BarChart(
-                                                                          _barSeriesNepalData!,
-                                                                          animate:
-                                                                              true,
-                                                                          barRendererDecorator:
-                                                                              new charts.BarLabelDecorator<String>(),
-                                                                          barGroupingType: charts
-                                                                              .BarGroupingType
-                                                                              .grouped,
-                                                                        ),
+                                                                  child: Column(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Container(
+                                                                        height:
+                                                                            getProportionateScreenHeight(200),
+                                                                        width: data ==
+                                                                                "All Province"
+                                                                            ? getProportionateScreenWidth(400)
+                                                                            : 200,
+                                                                        child: show ==
+                                                                                true
+                                                                            ? charts.BarChart(
+                                                                                _barSeries2014Data!,
+                                                                                animate: true,
+                                                                                barRendererDecorator: new charts.BarLabelDecorator<String>(),
+                                                                                barGroupingType: charts.BarGroupingType.grouped,
+                                                                                behaviors: [
+                                                                                  new charts.SeriesLegend(
+                                                                                    position: charts.BehaviorPosition.end,
+                                                                                    outsideJustification: charts.OutsideJustification.start,
+                                                                                    horizontalFirst: false,
+                                                                                    desiredMaxRows: 4,
+                                                                                  )
+                                                                                ],
+                                                                              )
+                                                                            : charts.BarChart(
+                                                                                _barSeries2014Data!,
+                                                                                animate: true,
+                                                                                barRendererDecorator: new charts.BarLabelDecorator<String>(),
+                                                                                barGroupingType: charts.BarGroupingType.grouped,
+                                                                              ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
                                                                 ),
-                                                              ],
-                                                            ),
+                                                              ),
+                                                            ],
                                                           ),
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ) : SizedBox.expand(),
-                                                  // 2014 Data
-
-                                             year == "2014" ? Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
-                                                child: Container(
-                                                  width:
-                                                      getProportionateScreenWidth(
-                                                          200),
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10)),
-                                                    border: Border.all(
-                                                        color: Colors.white),
-                                                    // boxShadow: [
-                                                    //   BoxShadow(
-                                                    //     color: Colors.grey
-                                                    //         .withOpacity(0.1),
-                                                    //     spreadRadius: 5,
-                                                    //     blurRadius: 7,
-                                                    //     // changes position of shadow
-                                                    //   ),
-                                                    // ],
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            20.0),
-                                                    child: Column(
-                                                      children: [
-                                                        Text(
-                                                          "${snapshot.data![index].name!} (2014)",
-                                                          style: TextStyle(
-                                                              fontSize: 20),
+                                                      ),
+                                                    )
+                                                  : SizedBox.shrink(),
+                                              year == "Trend"
+                                                  ? Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: Container(
+                                                        width:
+                                                            getProportionateScreenWidth(
+                                                                200),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10)),
+                                                          border: Border.all(
+                                                              color:
+                                                                  Colors.white),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Colors.grey
+                                                                  .withOpacity(
+                                                                      0.1),
+                                                              spreadRadius: 5,
+                                                              blurRadius: 7,
+                                                              // changes position of shadow
+                                                            ),
+                                                          ],
                                                         ),
-                                                        SingleChildScrollView(
-                                                          scrollDirection:
-                                                              Axis.horizontal,
-                                                          child: Container(
-                                                            width:
-                                                                getProportionateScreenWidth(
-                                                                    200),
-                                                            child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Container(
-                                                                  height:
-                                                                      getProportionateScreenHeight(
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(20.0),
+                                                          child: Column(
+                                                            children: [
+                                                              Text(
+                                                                "${snapshot.data![index].name!} (2014 and 2019)",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        20),
+                                                              ),
+                                                              SingleChildScrollView(
+                                                                scrollDirection:
+                                                                    Axis.horizontal,
+                                                                child:
+                                                                    Container(
+                                                                  width:
+                                                                      getProportionateScreenWidth(
                                                                           200),
-                                                                  width: data ==
-                                                                          "All Province"
-                                                                      ? getProportionateScreenWidth(
-                                                                          400)
-                                                                      : 200,
-                                                                  child: show ==
-                                                                          true
-                                                                      ? charts
-                                                                          .BarChart(
-                                                                          _barSeries2014Data!,
-                                                                          animate:
-                                                                              true,
-                                                                          barRendererDecorator:
-                                                                              new charts.BarLabelDecorator<String>(),
-                                                                          barGroupingType: charts
-                                                                              .BarGroupingType
-                                                                              .grouped,
-                                                                          behaviors: [
-                                                                            new charts.SeriesLegend(
-                                                                              position: charts.BehaviorPosition.end,
-                                                                              outsideJustification: charts.OutsideJustification.start,
-                                                                              horizontalFirst: false,
-                                                                              desiredMaxRows: 4,
-                                                                            )
-                                                                          ],
-                                                                        )
-                                                                      : charts
-                                                                          .BarChart(
-                                                                          _barSeries2014Data!,
-                                                                          animate:
-                                                                              true,
-                                                                          barRendererDecorator:
-                                                                              new charts.BarLabelDecorator<String>(),
-                                                                          barGroupingType: charts
-                                                                              .BarGroupingType
-                                                                              .grouped,
-                                                                        ),
+                                                                  child: Column(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Container(
+                                                                        height:
+                                                                            getProportionateScreenHeight(200),
+                                                                        width: data ==
+                                                                                "All Province"
+                                                                            ? getProportionateScreenWidth(400)
+                                                                            : width,
+                                                                        child: show ==
+                                                                                true
+                                                                            ? charts.BarChart(
+                                                                                _barSeries2014Data!,
+                                                                                animate: true,
+                                                                                barRendererDecorator: new charts.BarLabelDecorator<String>(),
+                                                                                barGroupingType: charts.BarGroupingType.grouped,
+                                                                                behaviors: [
+                                                                                  new charts.SeriesLegend(
+                                                                                    position: charts.BehaviorPosition.end,
+                                                                                    outsideJustification: charts.OutsideJustification.start,
+                                                                                    horizontalFirst: false,
+                                                                                    desiredMaxRows: 4,
+                                                                                  )
+                                                                                ],
+                                                                              )
+                                                                            : charts.BarChart(
+                                                                                _barSeries2014Data!,
+                                                                                animate: true,
+                                                                                barRendererDecorator: new charts.BarLabelDecorator<String>(),
+                                                                                barGroupingType: charts.BarGroupingType.grouped,
+                                                                              ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
                                                                 ),
-                                                              ],
-                                                            ),
+                                                              ),
+                                                            ],
                                                           ),
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ) : SizedBox.shrink(),
+                                                      ),
+                                                    )
+                                                  : SizedBox.shrink(),
 
                                               SizedBox(
                                                 height: 2,
@@ -1286,6 +1294,7 @@ print(year);
                                         List<List<BarGraph>> allData = [];
 
                                         var bargraph = <BarGraph2>[];
+                                        var bargraph2014 = <BarGraph2>[];
 
                                         var piechart = <PieChart>[];
                                         var linechart = <LineChartDraw>[];
@@ -1433,7 +1442,7 @@ print(year);
                                                   .toJson();
 
                                               jsom.forEach((key, value) {
-                                                if (key != 'label' ) {
+                                                if (key != 'label') {
                                                   // keys['color'] =  "red";'
 
                                                   chartsBarData.add(BarGraph(
@@ -1511,7 +1520,7 @@ print(year);
                                                   ),
                                                 ),
                                                 Container(
-                                                  height: 500,
+                                                  height: 1000,
                                                   width:
                                                       getProportionateScreenWidth(
                                                           500),
@@ -1715,25 +1724,52 @@ print(year);
                                               var jsom = snapshot
                                                   .data![index].charts![count]
                                                   .toJson();
-              print(jsom);
                                               jsom.forEach((key, chartper) {
                                                 if (key != 'label') {
-                                                  // keys['color'] =  "red";'
-                                                  // if (key == data) {
-                                                  //   bargraph.add(BarGraph2(
-                                                  //       key, double.parse(chartper)));
-                                                  // }
-                                                    if(key !="data_2014" && key !="Nepal" ){    
-                                                  bargraph.add(BarGraph2(
-                                                    key,
-                                                    double.parse(chartper),
-                                                  ));
+                                                  if (year == "2019") {
+                                                    if (key != "data_2014") {
+                                                      if(key == data){
+                                                      bargraph.add(BarGraph2(
+                                                        key,
+                                                        double.parse(jsom[data]),
+                                                      ));
+                                                      }else if(data == 'Nepal'){
+                                                          bargraph.add(BarGraph2(
+                                                        key,
+                                                        double.parse(chartper),
+                                                      ));
+                                                      }
                                                     }
+                                                  } else if(year =="Trend"){
+
+                                                      if(key == "data_2014"){
+                                                          bargraph.add(BarGraph2(
+                                                      "2014",
+                                                        double.parse(jsom['data_2014']),
+                                                      ));
+
+                                                      }
+                                                        if(key == "Nepal"){
+                                                           bargraph.add(BarGraph2(
+                                                      "2019",
+                                                        double.parse(chartper),
+                                                      ));
+
+                                                      }
+                                                      
+                                                      
+                                                  } else if(year =="2014")  {
+                                                    if (key == "data_2014") {
+                                                      bargraph.add(BarGraph2(
+                                                        "Nepal",
+                                                        double.parse(
+                                                            jsom['data_2014']),
+                                                      ));
+                                                    }
+                                                  }
                                                 } else {
-                                                  label = chartper;
-                                                                                                
-                                                  barGraphLabels.add(label);
-                                                  
+                                              
+                                                  barGraphLabels.add(chartper);
                                                 }
                                               });
 
@@ -1747,13 +1783,13 @@ print(year);
                                                 SingleChildScrollView(
                                                   scrollDirection:
                                                       Axis.horizontal,
-                                                  child: Row(
+                                                  child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
                                                     children: [
                                                       Text(
-                                                        snapshot
-                                                            .data![index].name!,
+                                                        "${snapshot
+                                                            .data![index].name!} ($year)",
                                                         style: TextStyle(
                                                             fontSize: 20),
                                                       ),
@@ -1768,65 +1804,153 @@ print(year);
                                                               'Download'),
                                                         ),
                                                       ),
+                                                      SizedBox(
+                                                        width: 300,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 2.0,
+                                                                  right: 2,
+                                                                  bottom: 2),
+                                                          child: Text(
+                                                            snapshot
+                                                                .data![index]
+                                                                .description!,
+                                                            textAlign: TextAlign
+                                                                .justify,
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .grey),
+                                                          ),
+                                                        ),
+                                                      ),
                                                     ],
                                                   ),
                                                 ),
-                                                Container(
-                                                  height: 450,
-                                                  width:
-                                                      getProportionateScreenWidth(
-                                                          500),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            22.0),
-                                                    child:
-                                                        SingleChildScrollView(
-                                                      scrollDirection:
-                                                          Axis.horizontal,
-                                                      child: Row(
-                                                        children: [
-                                                          Container(
-                                                            child: DataTable(
-                                                                columns:
-                                                                    getBarColumns(
-                                                                        barGraphLabels),
-                                                                rows: listConverter(
-                                                                        bargraph)
-                                                                    .map(
-                                                                      (singleItem) => DataRow(
-                                                                          cells: singleItem.values
-                                                                              .map(
-                                                                                (value) => DataCell(
-                                                                                  Text(value.toString()),
-                                                                                  showEditIcon: false,
-                                                                                  placeholder: false,
-                                                                                ),
-                                                                              )
-                                                                              .toList()),
-                                                                    )
-                                                                    .toList()),
+                                                year == "2019" 
+                                                    ? Container(
+                                                        height: data =="Nepal" ? 500 :200,
+                                                        width:
+                                                            getProportionateScreenWidth(
+                                                                500),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(22.0),
+                                                          child:
+                                                              SingleChildScrollView(
+                                                            scrollDirection:
+                                                                Axis.horizontal,
+                                                            child: Row(
+                                                              children: [
+                                                                Container(
+                                                                  child: DataTable(
+                                                                      columnSpacing: 0,
+                                                                      columns: getBarColumns(barGraphLabels),
+                                                                      rows: listConverter(bargraph)
+                                                                          .map(
+                                                                            (singleItem) => DataRow(
+                                                                                cells: singleItem.values
+                                                                                    .map(
+                                                                                      (value) => DataCell(
+                                                                                        Text(value.toString()),
+                                                                                        showEditIcon: false,
+                                                                                        placeholder: false,
+                                                                                      ),
+                                                                                    )
+                                                                                    .toList()),
+                                                                          )
+                                                                          .toList()),
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 15.0,
-                                                          right: 15,
-                                                          bottom: 15),
-                                                  child: Text(
-                                                    snapshot.data![index]
-                                                        .description!,
-                                                    textAlign:
-                                                        TextAlign.justify,
-                                                    style: TextStyle(
-                                                        color: Colors.grey),
-                                                  ),
-                                                ),
+                                                        ),
+                                                      )
+                                                    : SizedBox(),
+                                                year == "2014"
+                                                    ? Container(
+                                                        height: 200,
+                                                        width:
+                                                            getProportionateScreenWidth(
+                                                                500),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(22.0),
+                                                          child:
+                                                              SingleChildScrollView(
+                                                            scrollDirection:
+                                                                Axis.horizontal,
+                                                            child: Row(
+                                                              children: [
+                                                                Container(
+                                                                  child: DataTable(
+                                                                      columnSpacing: 0,
+                                                                      columns: getBarColumns(barGraphLabels),
+                                                                      rows: listConverter(bargraph)
+                                                                          .map(
+                                                                            (singleItem) => DataRow(
+                                                                                cells: singleItem.values
+                                                                                    .map(
+                                                                                      (value) => DataCell(
+                                                                                        Text(value.toString()),
+                                                                                        showEditIcon: false,
+                                                                                        placeholder: false,
+                                                                                      ),
+                                                                                    )
+                                                                                    .toList()),
+                                                                          )
+                                                                          .toList()),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      )
+                                                    : SizedBox(),
+                                                    year == "Trend"
+                                                    ? Container(
+                                                        height: 200,
+                                                        width:
+                                                            getProportionateScreenWidth(
+                                                                500),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(22.0),
+                                                          child:
+                                                              SingleChildScrollView(
+                                                            scrollDirection:
+                                                                Axis.horizontal,
+                                                            child: Row(
+                                                              children: [
+                                                                Container(
+                                                                  child: DataTable(
+                                                                      columnSpacing: 0,
+                                                                      columns: getBarColumns(barGraphLabels),
+                                                                      rows: listConverter(bargraph)
+                                                                          .map(
+                                                                            (singleItem) => DataRow(
+                                                                                cells: singleItem.values
+                                                                                    .map(
+                                                                                      (value) => DataCell(
+                                                                                        Text(value.toString()),
+                                                                                        showEditIcon: false,
+                                                                                        placeholder: false,
+                                                                                      ),
+                                                                                    )
+                                                                                    .toList()),
+                                                                          )
+                                                                          .toList()),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      )
+                                                    : SizedBox(),
                                                 snapshot.data!.length > 1
                                                     ? Divider(
                                                         height: 1,
@@ -1876,10 +2000,17 @@ print(year);
     List<DataColumn> columns = <DataColumn>[];
 
     barValueLabels.map((String column) {
-      columns.add(DataColumn(label: Text(column)));
+      columns.add(DataColumn(
+          label: SizedBox(
+              width: 150,
+              child: Text(
+                column,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 15,
+                style: TextStyle(fontSize: 10),
+              ))));
     }).toList();
-    print("------------");
-    print(columns);
+
     return columns;
   }
 

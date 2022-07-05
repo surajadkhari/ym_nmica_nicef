@@ -402,6 +402,19 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
               getCredits();
             },
           ),
+            ListTile(
+            title: const Text("Report"),
+            leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: const Icon(
+                FontAwesomeIcons.stickyNote,
+                color: Colors.grey,
+              ),
+            ),
+            onTap: () async {
+             await launch('https://www.unicef.org/nepal/media/11081/file/Nepal%20MICS%202019%20Final%20Report.pdf');
+            },
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

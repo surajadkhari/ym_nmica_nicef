@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class Api {
-  final String _baseUrl = 'http://teamym.com/projects/unicef/public/api';
+  final String _baseUrl = 'http://103.140.1.142/api';
 
   // ignore: type_annotate_public_apis
 
