@@ -216,6 +216,13 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                             jsom.forEach((key, value) {
                                               if (key != 'label' &&
                                                   key != 'data_2014') {
+                                                  print("Series length ---------");
+                                                  print(_barSeriesData!.length);
+                                                  print("----------");
+                                                    print("------value length");
+                                                  print(value.length);
+                                                  print("------value length");
+
                                                 if (data == "Nepal" ) {
                                                   chartsBarData.add(BarGraph(
                                                       key,
@@ -300,8 +307,12 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                       width = 550.0;
                                                       width2 = 150.0;
                                                     } else if (value.length ==
-                                                        4) {
+                                                        3) {
                                                       width = 1500.0;
+                                                      width2 = 1500.0;
+                                                    } else if (value.length ==
+                                                        4) {
+                                                      width = 2400.0;
                                                       width2 = 1500.0;
                                                     } else if (value.length >
                                                         2) {
@@ -330,11 +341,11 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                       width2 = 250.0;
                                                     } else if (value.length ==
                                                         4) {
-                                                      width = 1500.0;
-                                                      width2 = 1500.0;
+                                                      width = 2400.0;
+                                                      width2 = 1800.0;
                                                     } else if (value.length ==
                                                         3) {
-                                                      width = 1500.0;
+                                                      width = 2400.0;
                                                       width2 = 1500.0;
                                                     } else if (value.length >
                                                         2) {
@@ -373,6 +384,10 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                   }
                                                 }  else {
                                                   
+                                                  print("------value length");
+                                                  print(value.length);
+                                                  print("------value length");
+
                                                   if (key == data) {
                                                    
 
@@ -399,6 +414,14 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                           14) {
                                                         width = 550.0;
                                                         width2 = 150.0;
+                                                      } else if (value.length ==
+                                                          4) {
+                                                        width = 1500.0;
+                                                        width2 = 400.0;
+                                                      }  else if (value.length ==
+                                                          3) {
+                                                        width = 1500.0;
+                                                        width2 = 700.0;
                                                       } else if (value.length >
                                                           2) {
                                                         width = 500.0;
@@ -411,7 +434,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                       show = true;
                                                       // width = 650.0;
                                                       // width2 = 200.0;
-                                                      print(value.length);
+
                                                       if (value.length > 90) {
                                                         width = 800.0;
                                                         width2 = 400.0;
@@ -427,6 +450,14 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                           14) {
                                                         width = 550.0;
                                                         width2 = 150.0;
+                                                      }else if (value.length ==3
+                                                         ) {
+                                                        width = 1000.0;
+                                                        width2 = 250.0;
+                                                      } else if (value.length ==4
+                                                         ) {
+                                                        width = 1100.0;
+                                                        width2 = 600.0;
                                                       } else if (value.length >
                                                           2) {
                                                         width = 500.0;
@@ -461,12 +492,16 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                           14) {
                                                         width = 550.0;
                                                         width2 = 150.0;
-                                                      } else if (value.length >
+                                                      } else if (value.length ==4
+                                                          ) {
+                                                        width = 1000.0;
+                                                        width2 = 400.0;
+                                                      }else if (value.length >
                                                           2) {
                                                         width = 500.0;
                                                         width2 = 150.0;
                                                       }
-                                                    }
+       
 
                                                     if (_barSeriesData!
                                                             .length ==
@@ -487,20 +522,28 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                           14) {
                                                         width = 800.0;
                                                         width2 = 250.0;
-                                                      } else if (value.length >
+                                                      }
+                                                      else if (value.length ==
+                                                          3) {
+                                                        width = 1800.0;
+                                                        width2 = 400.0;
+                                                      } else if (value.length ==
+                                                          4) {
+                                                            print("-------------value length") ;                                            }
+print(value.length);
+   print("-------------") ;
+                                                        width = 1800.0;
+                                                        width2 = 400.0;
+                                                      }  else if (value.length >
                                                           2) {
-                                                        width = 500.0;
-                                                        width2 = 150.0;
+                                                        width = 1800.0;
+                                                        width2 = 400.0;
                                                       }
                                                     }
                                                   }
                                                 }
                                               } else {
-                                             print("------------");
-                                             print(value.length);
-                                             print(value.length);
-                                         print(width2);
-                                                    print("------------");
+                                         
                                                 if (key != "data_2014" &&
                                                     key != "Nepal") {
                                                   if (jsom['data_2014'] !=
@@ -780,7 +823,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                         width: data ==
                                                                                 "All Province"
                                                                             ? getProportionateScreenWidth(400)
-                                                                            : 200,
+                                                                            : getProportionateScreenWidth(width2),
                                                                         child: show ==
                                                                                 true
                                                                             ? charts.BarChart(
@@ -864,7 +907,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                     Container(
                                                                   width:
                                                                       getProportionateScreenWidth(
-                                                                          200),
+                                                                          35000),
                                                                   child: Column(
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
@@ -879,7 +922,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                         width: data ==
                                                                                 "All Province"
                                                                             ? getProportionateScreenWidth(400)
-                                                                            : width,
+                                                                            : getProportionateScreenWidth(width2),
                                                                         child: show ==
                                                                                 true
                                                                             ? charts.BarChart(
