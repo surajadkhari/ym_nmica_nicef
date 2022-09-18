@@ -76,6 +76,9 @@ dependencies:
   blurhash: ^1.0.0
   flutter_math_fork: ^0.5.0
   syncfusion_flutter_maps: ^19.4.52-beta
+dependency_overrides:
+  firebase_messaging_platform_interface: 3.1.6
+
 
 
 
