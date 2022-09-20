@@ -50,7 +50,7 @@ dependencies:
   sqflite: ^2.0.0+3
   path: ^1.8.0
   firebase_database: ^7.1.0
-  charts_flutter: ^0.10.0
+  charts_flutter: ^0.11.0
   syncfusion_flutter_charts: ^19.2.47+1
   screenshot: ^1.2.3
   # image_gallery_saver: '^1.6.9'
@@ -76,8 +76,8 @@ dependencies:
   blurhash: ^1.0.0
   flutter_math_fork: ^0.5.0
   syncfusion_flutter_maps: ^19.4.52-beta
-dependency_overrides:
-  firebase_messaging_platform_interface: 3.1.6
+  d_chart: ^0.0.2
+
 
 
 

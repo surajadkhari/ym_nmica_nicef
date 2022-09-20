@@ -110,22 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                 ),
-                // IconButton(
-                //   icon: Icon(
-                //     Icons.logout,
-                //     color: Colors.black,
-                //   ),
-                //   onPressed: () {
-                //     final FirebaseAuth auth = FirebaseAuth.instance;
-                //     auth.signOut();
-                //     Navigator.pushNamedAndRemoveUntil(
-                //         context, LoginScreen.screenId, (route) => false);
-                //     ScaffoldMessenger.of(context).showSnackBar(
-                //       const SnackBar(
-                //         content: Text("See you next time!"),
-                //       ),
-                //     );
-                //   },
+
                 // ),
                 IconButton(
                   onPressed: () {

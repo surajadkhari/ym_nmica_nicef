@@ -683,6 +683,15 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                           border: Border.all(
                                                               color:
                                                                   Colors.white),
+                                                          // boxShadow: [
+                                                          //   BoxShadow(
+                                                          //     color: Colors.grey
+                                                          //         .withOpacity(0.1),
+                                                          //     spreadRadius: 5,
+                                                          //     blurRadius: 7,
+                                                          //     // changes position of shadow
+                                                          //   ),
+                                                          // ],
                                                         ),
                                                         child: Padding(
                                                           padding:
@@ -839,7 +848,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                         width: data ==
                                                                                 "All Province"
                                                                             ? getProportionateScreenWidth(400)
-                                                                            : getProportionateScreenWidth(double.infinity),
+                                                                            : getProportionateScreenWidth(width2),
                                                                         child: show ==
                                                                                 true
                                                                             ? charts.BarChart(
@@ -849,10 +858,10 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                                 barGroupingType: charts.BarGroupingType.grouped,
                                                                                 behaviors: [
                                                                                   new charts.SeriesLegend(
-                                                                                    position: charts.BehaviorPosition.top,
+                                                                                    position: charts.BehaviorPosition.end,
                                                                                     outsideJustification: charts.OutsideJustification.start,
                                                                                     horizontalFirst: false,
-                                                                                    desiredMaxRows: 6,
+                                                                                    desiredMaxRows: 4,
                                                                                   )
                                                                                 ],
                                                                               )
@@ -983,6 +992,323 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                     )
                                                   : SizedBox.shrink(),
                                             ],
+                                          );
+                                        } else if (datar.chartType ==
+                                            "line_graph") {
+                                          var count = 0;
+
+                                          while (count <
+                                              snapshot.data![index].charts!
+                                                  .length) {
+                                            var label = "";
+                                            var jsom = snapshot
+                                                .data![index].charts![count]
+                                                .toJson();
+
+                                            jsom.forEach(
+                                              (key, value) {
+                                                if (key != 'label') {
+                                                  _lineChart.add(
+                                                    LineChartDraw(
+                                                      key,
+                                                      double.parse(value),
+                                                    ),
+                                                  );
+                                                } else {
+                                                  label = value;
+                                                }
+                                              },
+                                            );
+
+                                            count++;
+                                          }
+                                          chartsData.forEach((element) {});
+                                          return Padding(
+                                            padding: const EdgeInsets.all(2.0),
+                                            child: SingleChildScrollView(
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    height: 700,
+                                                    width:
+                                                        getProportionateScreenWidth(
+                                                            500),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10)),
+                                                      border: Border.all(
+                                                          color: Colors.blue),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.grey
+                                                              .withOpacity(0.1),
+                                                          spreadRadius: 5,
+                                                          blurRadius: 7,
+                                                          offset: Offset(0, 3),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    child: Column(
+                                                      children: [
+                                                        SingleChildScrollView(
+                                                          scrollDirection:
+                                                              Axis.horizontal,
+                                                          child: Container(
+                                                            height: 540,
+                                                            width:
+                                                                getProportionateScreenWidth(
+                                                                    900),
+                                                            child:
+                                                                SfCartesianChart(
+                                                              primaryXAxis:
+                                                                  CategoryAxis(),
+                                                              title: ChartTitle(
+                                                                  text: snapshot
+                                                                      .data![
+                                                                          index]
+                                                                      .name!),
+                                                              tooltipBehavior:
+                                                                  TooltipBehavior(
+                                                                      enable:
+                                                                          true),
+                                                              series: <
+                                                                  ChartSeries<
+                                                                      LineChartDraw,
+                                                                      String>>[
+                                                                LineSeries<
+                                                                    LineChartDraw,
+                                                                    String>(
+                                                                  dataSource:
+                                                                      _lineChart,
+                                                                  xValueMapper:
+                                                                      (LineChartDraw sales,
+                                                                              _) =>
+                                                                          sales
+                                                                              .type,
+                                                                  yValueMapper:
+                                                                      (LineChartDraw sales,
+                                                                              _) =>
+                                                                          sales
+                                                                              .value,
+                                                                  name: snapshot
+                                                                      .data![
+                                                                          index]
+                                                                      .name!,
+                                                                  // Enable data label
+                                                                  dataLabelSettings:
+                                                                      DataLabelSettings(
+                                                                          isVisible:
+                                                                              true),
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text(snapshot
+                                                        .data![index]
+                                                        .description!),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 2,
+                                                  ),
+                                                  Divider(
+                                                    height: 5,
+                                                    color: Colors.black,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        } else if (datar.chartType ==
+                                            "pie_chart") {
+                                          var count = 0;
+
+                                          while (count <
+                                              snapshot.data![index].charts!
+                                                  .length) {
+                                            var label = "";
+                                            var jsom = snapshot
+                                                .data![index].charts![count]
+                                                .toJson();
+
+                                            jsom.forEach((key, chartper) {
+                                              if (key != 'label') {
+                                                chartsPieData.add(PieChart(key,
+                                                    double.parse(chartper)));
+                                              } else {
+                                                label = chartper;
+                                              }
+                                            });
+                                            allPieData
+                                                .add(chartsPieData.toList());
+
+                                            _pieSeriesData!.add(
+                                              charts.Series(
+                                                domainFn:
+                                                    (PieChart barGraph, _) =>
+                                                        barGraph.name!,
+                                                measureFn:
+                                                    (PieChart barGraph, _) =>
+                                                        barGraph.value!,
+                                                labelAccessorFn:
+                                                    (PieChart pieChart, _) =>
+                                                        '${pieChart.value}',
+                                                id: label,
+                                                data: chartsPieData,
+                                              ),
+                                            );
+
+                                            count++;
+                                          }
+                                          chartsPieData.forEach((element) {});
+                                          return SingleChildScrollView(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Flexible(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Container(
+                                                      height: 500,
+                                                      width:
+                                                          getProportionateScreenWidth(
+                                                              500),
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10)),
+                                                        border: Border.all(
+                                                            color: Colors.blue),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: Colors.grey
+                                                                .withOpacity(
+                                                                    0.1),
+                                                            spreadRadius: 5,
+                                                            blurRadius: 7,
+                                                            offset: Offset(0,
+                                                                3), // changes position of shadow
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(15.0),
+                                                        child: Column(
+                                                          children: [
+                                                            SingleChildScrollView(
+                                                              scrollDirection:
+                                                                  Axis.vertical,
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                      snapshot
+                                                                          .data![
+                                                                              index]
+                                                                          .name!,
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              20)),
+                                                                  SingleChildScrollView(
+                                                                    scrollDirection:
+                                                                        Axis.horizontal,
+                                                                    child:
+                                                                        Padding(
+                                                                      padding:
+                                                                          const EdgeInsets.all(
+                                                                              4.0),
+                                                                      child:
+                                                                          Container(
+                                                                              color: Colors
+                                                                                  .white,
+                                                                              height:
+                                                                                  400,
+                                                                              width: getProportionateScreenWidth(
+                                                                                  176),
+                                                                              child: charts.PieChart(
+                                                                                  _pieSeriesData!,
+                                                                                  animate:
+                                                                                      true,
+                                                                                  animationDuration: Duration(
+                                                                                      seconds:
+                                                                                          5),
+                                                                                  behaviors: [
+                                                                                    new charts.DatumLegend(
+                                                                                      outsideJustification: charts.OutsideJustification.startDrawArea,
+                                                                                      horizontalFirst: false,
+                                                                                      desiredMaxRows: 2,
+                                                                                      cellPadding: new EdgeInsets.only(right: 4.0, bottom: 4.0),
+                                                                                      entryTextStyle: charts.TextStyleSpec(color: charts.MaterialPalette.black, fontFamily: 'Georgia', fontSize: 6),
+                                                                                    )
+                                                                                  ],
+                                                                                  defaultRenderer: new charts.ArcRendererConfig(arcWidth: 100, arcRendererDecorators: [
+                                                                                    new charts.ArcLabelDecorator(labelPosition: charts.ArcLabelPosition.inside)
+                                                                                  ]))),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Text(snapshot
+                                                      .data![index]
+                                                      .description!),
+                                                ),
+                                                SizedBox(
+                                                  height: 2,
+                                                ),
+                                                Divider(
+                                                  height: 5,
+                                                  color: Colors.black,
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                              ],
+                                            ),
                                           );
                                         } else {
                                           return Center(
