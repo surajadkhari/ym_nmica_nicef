@@ -32,7 +32,7 @@ dependencies:
   url_launcher: ^6.0.8
   http: ^0.13.3
   equatable: ^2.0.3
-  connectivity: ^3.0.6
+
   flutter_bloc: ^7.0.1
   dartz: ^0.10.0-nullsafety.0
   freezed_annotation: ^0.14.2
@@ -77,8 +77,11 @@ dependencies:
   flutter_math_fork: ^0.5.0
   syncfusion_flutter_maps: ^19.4.52-beta
   d_chart: ^0.0.2
+  connectivity_plus: ^2.2.0
 
 
+dependency_overrides:
+  firebase_messaging_platform_interface: 3.1.6
 
 
 

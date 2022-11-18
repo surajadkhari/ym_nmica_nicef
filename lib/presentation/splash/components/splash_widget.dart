@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unicef/unicef/models/version.dart';
@@ -48,7 +48,7 @@ class _SplashWidgetState extends State<SplashWidget> {
     // bool isCached = false;
 
     print("Is cached : $isCached");
-    
+
     if (!isCached) {
       if (connection == ConnectivityResult.none) {
         final snackBar = SnackBar(
@@ -60,7 +60,6 @@ class _SplashWidgetState extends State<SplashWidget> {
           exit(0);
         });
       } else {
-  
         _chartService.saveChartHive();
         _infomationService.saveDescriptions();
         _creditService.saveCredits();
@@ -118,9 +117,6 @@ class _SplashWidgetState extends State<SplashWidget> {
 
     checkIsCached();
   }
-
- 
-
 
   @override
   Widget build(BuildContext context) {

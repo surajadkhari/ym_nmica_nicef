@@ -373,8 +373,6 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                       width2 = 150.0;
                                                     }
                                                   }
-                                                  print(width);
-                                                  print(width2);
 
                                                   if (_barSeriesData!.length ==
                                                       1) {
@@ -416,6 +414,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                     if (_barSeriesData!
                                                             .length ==
                                                         1) {
+                                                      print("object");
                                                       show = true;
                                                       if (value.length > 90) {
                                                         width = 800.0;
@@ -670,7 +669,7 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                               10.0),
                                                       child: Container(
                                                         width:
-                                                            getProportionateScreenHeight(
+                                                            getProportionateScreenWidth(
                                                                 500),
                                                         decoration:
                                                             BoxDecoration(
@@ -689,6 +688,12 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                               const EdgeInsets
                                                                   .all(20.0),
                                                           child: Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
                                                             children: [
                                                               Text(
                                                                 "${snapshot.data![index].name!} (2019)",
@@ -701,13 +706,15 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                     Axis.horizontal,
                                                                 child:
                                                                     Container(
-                                                                  width:
-                                                                      getProportionateScreenHeight(
-                                                                          width),
+                                                                  width: getProportionateScreenWidth(
+                                                                      MediaQuery.of(context)
+                                                                              .size
+                                                                              .width /
+                                                                          2),
                                                                   child: Column(
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
-                                                                            .center,
+                                                                            .start,
                                                                     crossAxisAlignment:
                                                                         CrossAxisAlignment
                                                                             .start,
@@ -717,8 +724,10 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                             getProportionateScreenHeight(200),
                                                                         width: data ==
                                                                                 "All Province"
-                                                                            ? getProportionateScreenWidth(400)
-                                                                            : getProportionateScreenWidth(width2),
+                                                                            ? getProportionateScreenWidth(
+                                                                                400)
+                                                                            : getProportionateScreenWidth(width /
+                                                                                0.9),
                                                                         child: show ==
                                                                                 true
                                                                             ? charts.BarChart(
@@ -726,12 +735,17 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                                 animate: true,
                                                                                 barRendererDecorator: new charts.BarLabelDecorator<String>(),
                                                                                 barGroupingType: charts.BarGroupingType.grouped,
+                                                                                defaultRenderer: new charts.BarRendererConfig(
+                                                                                  maxBarWidthPx: 40,
+                                                                                  minBarLengthPx: 40,
+                                                                                  barRendererDecorator: charts.BarLabelDecorator(labelPosition: charts.BarLabelPosition.outside, labelAnchor: charts.BarLabelAnchor.start),
+                                                                                ),
                                                                                 behaviors: [
                                                                                   new charts.SeriesLegend(
-                                                                                    position: charts.BehaviorPosition.end,
+                                                                                    position: charts.BehaviorPosition.top,
                                                                                     outsideJustification: charts.OutsideJustification.start,
                                                                                     horizontalFirst: false,
-                                                                                    desiredMaxRows: 4,
+                                                                                    desiredMaxRows: 6,
                                                                                   )
                                                                                 ],
                                                                               )
@@ -740,6 +754,11 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                                 animate: true,
                                                                                 barRendererDecorator: new charts.BarLabelDecorator<String>(),
                                                                                 barGroupingType: charts.BarGroupingType.grouped,
+                                                                                defaultRenderer: new charts.BarRendererConfig(
+                                                                                  maxBarWidthPx: 40,
+                                                                                  minBarLengthPx: 40,
+                                                                                  barRendererDecorator: charts.BarLabelDecorator(labelPosition: charts.BarLabelPosition.outside, labelAnchor: charts.BarLabelAnchor.start),
+                                                                                ),
                                                                               ),
                                                                       ),
                                                                     ],
@@ -782,7 +801,10 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                       child: Container(
                                                         width:
                                                             getProportionateScreenWidth(
-                                                                200),
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width),
                                                         decoration:
                                                             BoxDecoration(
                                                           color: Colors.white,
@@ -822,24 +844,24 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                     Axis.horizontal,
                                                                 child:
                                                                     Container(
-                                                                  width:
-                                                                      getProportionateScreenWidth(
-                                                                          200),
+                                                                  width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
                                                                   child: Column(
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
-                                                                            .center,
+                                                                            .start,
                                                                     crossAxisAlignment:
                                                                         CrossAxisAlignment
-                                                                            .center,
+                                                                            .start,
                                                                     children: [
                                                                       Container(
                                                                         height:
                                                                             getProportionateScreenHeight(200),
-                                                                        width: data ==
-                                                                                "All Province"
-                                                                            ? getProportionateScreenWidth(400)
-                                                                            : getProportionateScreenWidth(double.infinity),
+                                                                        width: getProportionateScreenWidth(MediaQuery.of(context)
+                                                                            .size
+                                                                            .width),
                                                                         child: show ==
                                                                                 true
                                                                             ? charts.BarChart(
@@ -850,17 +872,27 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                                 behaviors: [
                                                                                   new charts.SeriesLegend(
                                                                                     position: charts.BehaviorPosition.top,
-                                                                                    outsideJustification: charts.OutsideJustification.start,
+                                                                                    outsideJustification: charts.OutsideJustification.end,
                                                                                     horizontalFirst: false,
                                                                                     desiredMaxRows: 6,
                                                                                   )
                                                                                 ],
+                                                                                defaultRenderer: new charts.BarRendererConfig(
+                                                                                  maxBarWidthPx: 40,
+                                                                                  minBarLengthPx: 40,
+                                                                                  barRendererDecorator: charts.BarLabelDecorator(labelPosition: charts.BarLabelPosition.outside, labelAnchor: charts.BarLabelAnchor.middle),
+                                                                                ),
                                                                               )
                                                                             : charts.BarChart(
                                                                                 _barSeries2014Data!,
                                                                                 animate: true,
                                                                                 barRendererDecorator: new charts.BarLabelDecorator<String>(),
                                                                                 barGroupingType: charts.BarGroupingType.grouped,
+                                                                                defaultRenderer: new charts.BarRendererConfig(
+                                                                                  maxBarWidthPx: 40,
+                                                                                  minBarLengthPx: 40,
+                                                                                  barRendererDecorator: charts.BarLabelDecorator(labelPosition: charts.BarLabelPosition.outside, labelAnchor: charts.BarLabelAnchor.middle),
+                                                                                ),
                                                                               ),
                                                                       ),
                                                                     ],
@@ -879,9 +911,12 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                           const EdgeInsets.all(
                                                               10.0),
                                                       child: Container(
-                                                        width:
-                                                            getProportionateScreenWidth(
-                                                                width2),
+                                                        width: getProportionateScreenWidth(
+                                                            MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                0.9),
                                                         decoration:
                                                             BoxDecoration(
                                                           color: Colors.white,
@@ -921,9 +956,10 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                     Axis.horizontal,
                                                                 child:
                                                                     Container(
-                                                                  width:
-                                                                      getProportionateScreenWidth(
-                                                                          width2),
+                                                                  width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
                                                                   child: Column(
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
@@ -935,10 +971,9 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                       Container(
                                                                         height:
                                                                             getProportionateScreenHeight(200),
-                                                                        width: data ==
-                                                                                "All Province"
-                                                                            ? getProportionateScreenWidth(400)
-                                                                            : getProportionateScreenWidth(width2),
+                                                                        width: getProportionateScreenWidth(MediaQuery.of(context)
+                                                                            .size
+                                                                            .width),
                                                                         child: show ==
                                                                                 true
                                                                             ? charts.BarChart(
@@ -946,12 +981,16 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                                 animate: true,
                                                                                 barRendererDecorator: new charts.BarLabelDecorator<String>(),
                                                                                 barGroupingType: charts.BarGroupingType.grouped,
+                                                                                defaultRenderer: new charts.BarRendererConfig(
+                                                                                  maxBarWidthPx: 40,
+                                                                                  minBarLengthPx: 40,
+                                                                                  barRendererDecorator: charts.BarLabelDecorator(labelPosition: charts.BarLabelPosition.auto, labelAnchor: charts.BarLabelAnchor.start),
+                                                                                ),
                                                                                 behaviors: [
                                                                                   new charts.SeriesLegend(
-                                                                                    position: charts.BehaviorPosition.end,
-                                                                                    outsideJustification: charts.OutsideJustification.start,
+                                                                                    position: charts.BehaviorPosition.top,
                                                                                     horizontalFirst: false,
-                                                                                    desiredMaxRows: 6,
+                                                                                    desiredMaxColumns: 6,
                                                                                   )
                                                                                 ],
                                                                               )
@@ -960,6 +999,11 @@ class _ChartScreenWidgetState extends State<ChartScreenWidget> {
                                                                                 animate: true,
                                                                                 barRendererDecorator: new charts.BarLabelDecorator<String>(),
                                                                                 barGroupingType: charts.BarGroupingType.grouped,
+                                                                                defaultRenderer: new charts.BarRendererConfig(
+                                                                                  maxBarWidthPx: 40,
+                                                                                  minBarLengthPx: 40,
+                                                                                  barRendererDecorator: charts.BarLabelDecorator(labelPosition: charts.BarLabelPosition.outside, labelAnchor: charts.BarLabelAnchor.middle),
+                                                                                ),
                                                                               ),
                                                                       ),
                                                                     ],

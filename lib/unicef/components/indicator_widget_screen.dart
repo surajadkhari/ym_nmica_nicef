@@ -1,4 +1,4 @@
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:unicef/unicef/screens/chart_screen.dart';
 import 'package:unicef/unicef/services/indicator_services.dart';
